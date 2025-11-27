@@ -4,46 +4,338 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polaris - 目標達成のためのロードマップ管理アプリ | 株式会社レベルアップ</title>
+    <meta name="description" content="情報過多な時代の「導きの星」。Polarisは、目標達成のためのロードマップ管理アプリです。ロードマップを作成し、ステップごとにTo Doを管理。パートナーと進捗を共有して、一緒に成長しましょう。">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="apple-touch-icon" href="images/icon.png">
 </head>
 <body class="bg-gray-900 text-white min-h-screen">
     <!-- ヒーロー -->
-    <header class="container mx-auto px-4 py-16 text-center">
-        <h1 class="text-5xl font-bold mb-4">⭐ Polaris</h1>
-        <p class="text-xl text-gray-300 mb-8">目標達成のためのロードマップ管理アプリ</p>
-        <p class="text-gray-400 max-w-2xl mx-auto">
-            情報過多な時代の「導きの星」として、あなたの目標達成をサポートします。
-            ロードマップを作成し、ステップごとにTo Doを管理。パートナーと進捗を共有して、一緒に成長しましょう。
+    <header class="container mx-auto px-4 py-20 text-center">
+        <div class="mb-8">
+            <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-32 h-32 mx-auto rounded-3xl shadow-2xl mb-6">
+            <h1 class="text-6xl font-bold mb-4">Polaris</h1>
+        </div>
+        <p class="text-3xl text-gray-200 mb-4">スマホに北極星を</p>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+            夜空の北極星が旅人の道しるべとなるように。<br>
+            Polarisが、あなたの進むべき道を照らします。
         </p>
+
+        <!-- CTAボタン -->
+        <!-- リンクを追加する場合は、下記のコメントアウトを解除してURLを設定してください -->
+        <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="APP_STORE_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
+                <p class="text-gray-400 text-sm">App Store</p>
+                <p class="text-white font-bold">ダウンロード</p>
+            </a>
+            <a href="GOOGLE_PLAY_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
+                <p class="text-gray-400 text-sm">Google Play</p>
+                <p class="text-white font-bold">ダウンロード</p>
+            </a>
+        </div> -->
+
+        <!-- 準備中の表示（リリース後は上記のコメントアウトを解除） -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
+                <p class="text-gray-400 text-sm">App Store</p>
+                <p class="text-white font-bold">準備中</p>
+            </div>
+            <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
+                <p class="text-gray-400 text-sm">Google Play</p>
+                <p class="text-white font-bold">準備中</p>
+            </div>
+        </div>
     </header>
 
-    <!-- 機能紹介 -->
-    <section class="container mx-auto px-4 py-12">
-        <div class="grid md:grid-cols-3 gap-8 text-center">
-            <div class="bg-gray-800 p-6 rounded-lg">
-                <h3 class="text-xl font-bold mb-2">🗺️ ロードマップ作成</h3>
-                <p class="text-gray-400">理想の状態から逆算してステップを設計</p>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-lg">
-                <h3 class="text-xl font-bold mb-2">✅ To Do管理</h3>
-                <p class="text-gray-400">各ステップのタスクを細かく管理</p>
-            </div>
-            <div class="bg-gray-800 p-6 rounded-lg">
-                <h3 class="text-xl font-bold mb-2">🤝 パートナー機能</h3>
-                <p class="text-gray-400">コーチや仲間と進捗を共有</p>
+    <!-- 問題提起セクション -->
+    <section class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">こんな悩みはありませんか？</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-gray-900 p-8 rounded-lg text-center">
+                    <div class="text-5xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold mb-3">情報が多すぎて<br>動けない…</h3>
+                    <p class="text-gray-400">やりたいことはあるのに、情報に溺れて何から始めればいいか分からない</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg text-center">
+                    <div class="text-5xl mb-4">😔</div>
+                    <h3 class="text-xl font-bold mb-3">他人と比べて<br>落ち込んでしまう…</h3>
+                    <p class="text-gray-400">SNSを見ては他人と比較して、自信をなくしてしまう</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg text-center">
+                    <div class="text-5xl mb-4">🤔</div>
+                    <h3 class="text-xl font-bold mb-3">自分がどこに向かって<br>いるのか分からない…</h3>
+                    <p class="text-gray-400">毎日頑張っているのに、<br>ゴールが見えず不安になる</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 会社情報 -->
+    <!-- ソリューションセクション -->
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-4xl font-bold text-center mb-4">Polarisが解決します</h2>
+        <p class="text-center text-gray-400 mb-12 text-xl">3つのメリットで、あなたの目標達成をサポート</p>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+            <div class="bg-gray-800 p-8 rounded-lg text-center">
+                <div class="text-5xl mb-4">✂️</div>
+                <h3 class="text-2xl font-bold mb-4 text-blue-400">削る</h3>
+                <p class="text-gray-300 leading-relaxed">
+                    自分の理想をもとに選んだロードマップ→ステップ→今日のToDoに集中できるから、<span class="text-white font-semibold">迷わず前に進めます</span>。
+                </p>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-lg text-center">
+                <div class="text-5xl mb-4">🤝</div>
+                <h3 class="text-2xl font-bold mb-4 text-blue-400">支える</h3>
+                <p class="text-gray-300 leading-relaxed">
+                    信頼できるパートナーと支え合うことで、<span class="text-white font-semibold">困難な道のりも乗り越えられます</span>。
+                </p>
+            </div>
+            <div class="bg-gray-800 p-8 rounded-lg text-center">
+                <div class="text-5xl mb-4">📈</div>
+                <h3 class="text-2xl font-bold mb-4 text-blue-400">積み上げる</h3>
+                <p class="text-gray-300 leading-relaxed">
+                    ToDoを完了させ、ステップを達成し、ロードマップを完走することで、<span class="text-white font-semibold">目指す場所へたどり着けます</span>。
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center bg-gradient-to-r from-blue-900 to-purple-900 p-8 rounded-lg max-w-4xl mx-auto">
+            <p class="text-2xl mb-4">情報過多で疲弊していた毎日から、</p>
+            <p class="text-3xl font-bold text-blue-300">スマホの中にあなただけの輝く星がある毎日へ。</p>
+        </div>
+    </section>
+
+    <!-- Growthモード紹介 -->
+    <section class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">Growth モード</span>
+                    <h2 class="text-4xl font-bold mt-4 mb-4">自分の成長を管理したい方へ</h2>
+                    <p class="text-xl text-gray-400">自己投資して成長したいあなたをサポート</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-2">
+                    <div class="bg-gray-900 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">📱 Polaris画面</h3>
+                            <p class="text-gray-400">選択したロードマップ→ステップ→今日やるべきToDoだけを表示します。</p>
+                        </div>
+                        <img src="images/growth1.png" alt="Polaris画面 - 今日のToDoを管理" class="w-full h-auto">
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">🗺️ ロードマップ画面</h3>
+                            <p class="text-gray-400">ロードマップとステップを管理。理想の状態から逆算して、進むべき道を設計します。</p>
+                        </div>
+                        <img src="images/growth2.png" alt="ToDo画面 - 全タスクを確認" class="w-full h-auto">
+                    </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">🤝 パートナー画面</h3>
+                            <p class="text-gray-400">信頼できるパートナーと進捗を共有。一緒に支え合いながら目標達成を目指します。</p>
+                        </div>
+                        <img src="images/growth3.png" alt="パートナー画面 - 進捗共有" class="w-full h-auto">
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-500 text-sm mb-8">※画面はイメージです</p>
+
+                <div class="bg-gray-900 p-6 rounded-lg">
+                    <h4 class="font-bold mb-3 text-lg">主な機能</h4>
+                    <ul class="grid md:grid-cols-2 gap-3 text-gray-300">
+                        <li>• ロードマップ・ステップ作成</li>
+                        <li>• ToDo管理・繰り返しToDo設定</li>
+                        <li>• パートナー申請・進捗共有</li>
+                        <li>• テンプレート検索・利用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supportモード紹介 -->
+    <section class="bg-gray-900 py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold">Support モード</span>
+                    <h2 class="text-4xl font-bold mt-4 mb-4">パートナーの成長をサポートしたい方へ</h2>
+                    <p class="text-xl text-gray-400">コンテンツ販売者・講師の方向け</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-2">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">📊 ダッシュボード</h3>
+                            <p class="text-gray-400">パートナーの進捗を一覧で確認。パートナー数、完走率、アクティビティを可視化。</p>
+                        </div>
+                        <img src="images/support1.png" alt="ダッシュボード画面 - 進捗を一覧管理" class="w-full h-auto">
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">📈 分析画面</h3>
+                            <p class="text-gray-400">ロードマップを多角的に分析。ファネル分析、離脱リスク検知でコンテンツを改善。</p>
+                        </div>
+                        <img src="images/support2.png" alt="分析画面 - データで改善" class="w-full h-auto">
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">🗂️ ロードマップ管理</h3>
+                            <p class="text-gray-400">パートナーのロードマップ詳細を確認。未来・過去のToDoも把握。</p>
+                        </div>
+                        <img src="images/support3.png" alt="ロードマップ画面 - 詳細確認" class="w-full h-auto">
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-500 text-sm mb-8">※画面はイメージです</p>
+
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h4 class="font-bold mb-3 text-lg">主な機能</h4>
+                    <ul class="grid md:grid-cols-2 gap-3 text-gray-300">
+                        <li>• パートナー管理</li>
+                        <li>• ダッシュボードで進捗可視化</li>
+                        <li>• ファネル分析・離脱リスク検知</li>
+                        <li>• テンプレート作成・共有</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金プラン -->
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-4xl font-bold text-center mb-4">料金プラン</h2>
+        <p class="text-center text-gray-400 mb-12 text-xl">あなたの目的に合わせてお選びください</p>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Freeプラン -->
+            <div class="bg-gray-800 rounded-lg p-8 border-2 border-gray-700">
+                <h3 class="text-2xl font-bold mb-2">Free</h3>
+                <p class="text-4xl font-bold mb-4">無料</p>
+                <p class="text-gray-400 mb-6">まずは試してみたい方向け</p>
+                <ul class="space-y-3 mb-8 text-gray-300">
+                    <li>✓ ロードマップ作成: 3件まで</li>
+                    <li>✓ パートナー申請: 3件まで</li>
+                    <li>✓ パートナー承認: 3件まで</li>
+                    <li class="text-gray-500">✗ 繰り返しToDo機能</li>
+                </ul>
+            </div>
+
+            <!-- Growthプラン -->
+            <div class="bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg p-8 border-2 border-blue-500 relative">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                    おすすめ
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Growth</h3>
+                <p class="text-4xl font-bold mb-4">¥500<span class="text-lg text-gray-300">/月</span></p>
+                <p class="text-gray-200 mb-6">自己投資したい方向け</p>
+                <ul class="space-y-3 mb-8 text-gray-100">
+                    <li>✓ ロードマップ作成: 30件まで</li>
+                    <li>✓ パートナー申請: 30件まで</li>
+                    <li>✓ パートナー承認: 30件まで</li>
+                    <li>✓ 繰り返しToDo機能</li>
+                </ul>
+            </div>
+
+            <!-- Supportプラン -->
+            <div class="bg-gradient-to-b from-purple-900 to-purple-800 rounded-lg p-8 border-2 border-purple-500">
+                <h3 class="text-2xl font-bold mb-2">Support</h3>
+                <p class="text-4xl font-bold mb-4">¥2,980<span class="text-lg text-gray-300">/月</span></p>
+                <p class="text-gray-200 mb-6">事業投資したい方向け</p>
+                <ul class="space-y-3 mb-8 text-gray-100">
+                    <li>✓ ロードマップ作成: 100件まで</li>
+                    <li>✓ パートナー申請: 100件まで</li>
+                    <li>✓ パートナー承認: 100件まで</li>
+                    <li>✓ 繰り返しToDo機能</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube操作ガイド -->
+    <section class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-4">📺 使い方ガイド</h2>
+                <p class="text-xl text-gray-400 mb-8">動画でPolarisの使い方をわかりやすく解説</p>
+
+                <div class="bg-gray-900 p-8 rounded-lg">
+                    <div class="aspect-video bg-gray-800 rounded-lg mb-6 flex items-center justify-center">
+                        <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Polaris 操作ガイド</h3>
+                    <p class="text-gray-400 mb-6">
+                        アプリの基本的な使い方から、便利な機能まで、<br>
+                        YouTubeで詳しく解説しています。
+                    </p>
+                    <a href="https://www.youtube.com/playlist?list=PLkM-crNhnY-cFd-BNLr_Slwu8ti16AIWu"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-lg transition transform hover:scale-105">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            YouTubeで見る
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">今すぐPolarisを始めましょう</h2>
+            <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                情報に溺れる日々から、自分だけの道を照らす毎日へ。<br>
+                Polarisが、あなたの目標達成をサポートします。
+            </p>
+
+            <!-- リンクを追加する場合は、下記のコメントアウトを解除してURLを設定してください -->
+            <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="APP_STORE_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
+                    <p class="text-gray-400 text-sm">App Store</p>
+                    <p class="text-white font-bold">ダウンロード</p>
+                </a>
+                <a href="GOOGLE_PLAY_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
+                    <p class="text-gray-400 text-sm">Google Play</p>
+                    <p class="text-white font-bold">ダウンロード</p>
+                </a>
+            </div> -->
+
+            <!-- 準備中の表示（リリース後は上記のコメントアウトを解除） -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
+                    <p class="text-gray-400 text-sm">App Store</p>
+                    <p class="text-white font-bold">準備中</p>
+                </div>
+                <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
+                    <p class="text-gray-400 text-sm">Google Play</p>
+                    <p class="text-white font-bold">準備中</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
     <footer class="container mx-auto px-4 py-16 border-t border-gray-700">
         <div class="text-center">
             <h2 class="text-xl font-bold mb-4">運営会社</h2>
             <p class="text-gray-300">株式会社レベルアップ / LEVEL UP, K.K.</p>
-            <p class="text-gray-400 mt-2">お問い合わせ: <a href="mailto:info@polaris-app.jp" class="text-blue-400">info@polaris-app.jp</a></p>
+            <p class="text-gray-400 mt-2">お問い合わせ: <a href="mailto:hello.polaris.app@gmail.com" class="text-blue-400 hover:text-blue-300">hello.polaris.app@gmail.com</a></p>
             <div class="mt-6">
-                <a href="/privacy" class="text-gray-400 hover:text-white mx-2">プライバシーポリシー</a>
-                <a href="/terms" class="text-gray-400 hover:text-white mx-2">利用規約</a>
+                <a href="terms.html" class="text-gray-400 hover:text-white mx-2">利用規約</a>
+                <a href="privacy.html" class="text-gray-400 hover:text-white mx-2">プライバシーポリシー</a>
+                <a href="tokutei.html" class="text-gray-400 hover:text-white mx-2">特定商取引法に基づく表記</a>
             </div>
             <p class="text-gray-500 mt-8">© 2025 LEVEL UP, K.K. All rights reserved.</p>
         </div>
