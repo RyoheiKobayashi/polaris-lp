@@ -1,0 +1,24 @@
+{
+  "name": "Polaris - 目標達成のためのロードマップ管理アプリ",
+  "short_name": "Polaris",
+  "description": "情報過多な時代の「導きの星」。目標達成をサポートするロードマップ管理アプリ。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#1f2937",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
