@@ -74,7 +74,7 @@ URL: https://forms.gle/mCiuPh65JQmhwe5E6
 ### 運営会社情報
 ```
 会社名: 株式会社レベルアップ / LEVEL UP, K.K.
-メールアドレス: info@polaris-app.jp（参考情報として記載）
+メールアドレス: hello.polaris.app@gmail.com（参考情報として記載）
 ```
 
 ## 🎨 デザインシステム
