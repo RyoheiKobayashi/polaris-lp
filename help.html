@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ヘルプ | Polaris - 株式会社レベルアップ</title>
+    <meta name="description" content="Polarisの使い方ガイド。アプリの機能や操作方法、よくある質問について詳しく解説します。">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ファビコン -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icon.png">
+    <meta name="theme-color" content="#1f2937">
+
+    <style>
+        /* アコーディオンのカスタムスタイル */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary {
+            list-style: none;
+        }
+        details summary::after {
+            content: '+';
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        details[open] summary::after {
+            content: '-';
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- ヘッダー -->
+    <header class="container mx-auto px-4 py-8 border-b border-gray-700">
+        <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Polaris</h1>
+            <a href="index.html" class="text-blue-400 hover:text-blue-300">トップに戻る</a>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <h1 class="text-4xl font-bold mb-8">ヘルプ</h1>
+
+        <div class="space-y-4">
+            <!-- Polarisについて -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    Polarisについて
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">
+                        「情報が多すぎて動けない…」<br><br>
+                        「他人と比べて落ち込んでしまう…」<br><br>
+                        「自分がどこに向かっているのか分からない…」<br><br>
+                        そんな経験はありませんか？
+                    </p>
+
+                    <p class="mb-4">
+                        Polarisはそんな悩みを優しく照らすロードマップ管理アプリです。
+                    </p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">3つのメリット</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li><strong>削る</strong><br>自分の理想をもとに選んだロードマップ→ステップ→今日のToDoに集中できるから、迷わず前に進めます。</li>
+                        <li><strong>支える</strong><br>信頼できるパートナーと支え合うことで、困難な道のりも乗り越えられます。</li>
+                        <li><strong>積み上げる</strong><br>ToDoを完了させ、ステップを達成し、ロードマップを完走することで、目指す場所へたどり着けます。</li>
+                    </ul>
+
+                    <p class="mb-4">
+                        情報過多で疲弊していた毎日から、<br>スマホの中にあなただけの輝く星がある毎日へ。
+                    </p>
+
+                    <p>
+                        夜空の北極星が旅人の道しるべとなるように。<br>Polarisが、あなたの進むべき道を照らします。
+                    </p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- 2つのモード -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    2つのモード
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <ul class="space-y-2 mb-4">
+                        <li><strong>Growthモード:</strong> 自分の成長を管理</li>
+                        <li><strong>Supportモード:</strong> パートナーの成長を管理</li>
+                    </ul>
+                    <p>設定画面からモードを切り替えることができます。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- Polaris画面（Growth） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    Polaris画面（Growth）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">Polarisに選択したロードマップ・ステップの今日のToDoを表示します。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1">
+                        <li>• ToDo作成・編集・完了</li>
+                        <li>• 右スワイプで削除・複製・繰り返しToDo作成</li>
+                        <li>• 長押しで並べ替え</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ToDo画面（Growth） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ToDo画面（Growth）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">Polarisに選択したロードマップの全ステップのToDoを確認できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ToDo作成・編集・完了</li>
+                        <li>• 右スワイプで削除・複製・繰り返しToDo作成</li>
+                        <li>• 長押しで並べ替え</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">インボックスとは</h3>
+                    <p>ロードマップには紐付いているけれど、ステップには紐付いていないToDoです。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ロードマップ画面（Growth） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ロードマップ画面（Growth）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">ロードマップの作成・編集・削除ができます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ロードマップ作成</li>
+                        <li>• 右スワイプで削除・Polaris設定・編集</li>
+                        <li>• 編集画面でテンプレート設定</li>
+                        <li>• タップで理想の状態とステップ管理</li>
+                        <li>• 長押しで並べ替え</li>
+                    </ul>
+
+                    <p>全てのステップが完了すると、完走タブに移動します。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- パートナー画面（Growth） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    パートナー画面（Growth）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">自分のロードマップを誰かに見守ってもらうことができます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• パートナー申請</li>
+                        <li>• 申請が承認されるとパートナー関係が成立</li>
+                        <li>• パートナー関係の取り消し</li>
+                    </ul>
+
+                    <p>先生や家族、友達にサポートしてもらうことで、一人でくじけそうな時も頑張れます。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ダッシュボード画面（Support） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ダッシュボード画面（Support）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">パートナーの進捗を一覧で確認できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">パートナー状況</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• パートナー: パートナーの合計人数</li>
+                        <li>• 完走: ロードマップを完走したパートナー数</li>
+                        <li>• 途中: 現在進行中のパートナー数</li>
+                        <li>• 7日以内活動: 過去7日間にToDoまたはステップを完了したパートナー数</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">実績</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 今月/今年/全期間で完走ロードマップ・達成ステップ・完了TODOを確認</li>
+                        <li>• 今月/今年: 期間内の達成件数を表示</li>
+                        <li>• 全期間: 進捗率を表示</li>
+                        <li>• 集計基準: UTC（世界標準時）*</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">最近のアクティビティ</h3>
+                    <p>パートナーが最近完了したステップを時系列で確認</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- 分析画面（Support） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    分析画面（Support）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">パートナーのロードマップを多角的に分析できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">分析対象</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• パートナーの自作ロードマップ</li>
+                        <li>• 自分のテンプレート</li>
+                        <li>• 他人のテンプレート</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">全体指標</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 使用者数: 分析対象のロードマップを使用しているパートナー数</li>
+                        <li>• 達成数: 完了したステップの合計数</li>
+                        <li>• 完走率: ロードマップを完走したパートナーの割合（%）</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ステップ別完了者数</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ファネル分析: 各ステップの完了者数を可視化</li>
+                        <li>• どのステップで離脱が多いかを確認できます</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ステップ別平均滞在日数</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 各ステップの平均所要日数を確認</li>
+                        <li>• ボトルネックとなっているステップを特定できます</li>
+                        <li>• 集計基準: UTC（世界標準時）*</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">離脱リスクTOP5</h3>
+                    <ul class="space-y-1">
+                        <li>• 現在のステップ滞在日数が長いパートナーを表示</li>
+                        <li>• タップするとパートナーのロードマップ画面に遷移</li>
+                        <li>• 集計基準: UTC（世界標準時）*</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ロードマップ画面（Support） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ロードマップ画面（Support）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">共有されたロードマップの進捗詳細を確認できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1">
+                        <li>• 右スワイプで未来のToDo・過去のToDo・内容参照</li>
+                        <li>• タップでロードマップの内容を確認</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- パートナー画面（Support） -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    パートナー画面（Support）
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">パートナー申請の承認とパートナー関係の管理ができます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">できること</h3>
+                    <ul class="space-y-1">
+                        <li>• パートナー申請の承認</li>
+                        <li>• パートナー関係の取り消し</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- 設定画面 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    設定画面
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <h3 class="font-bold text-blue-400 mb-2">プロフィール</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ニックネーム変更</li>
+                        <li>• アバター画像変更</li>
+                        <li>• 下スワイプ更新（パートナー件数・プロファイル情報を再取得）</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">プラン</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 現在のプラン表示（Free / Growth / Support）</li>
+                        <li>• タップでプラン変更モーダルを表示</li>
+                        <li>• アップグレード・ダウングレード可能</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">モード</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• Growth / Support モード切り替え（Switch形式）</li>
+                        <li>• パートナー申請件数（タップでGrowth画面へ遷移）</li>
+                        <li>• パートナー承認件数（タップでSupport画面へ遷移）</li>
+                    </ul>
+                    <p class="text-gray-400 text-sm mb-4">※他モード時はモード切り替え確認ダイアログが表示されます</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">テンプレート</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• テンプレート有効化（Switch形式）<br>　オンにするとテンプレートが作成できるようになります</li>
+                        <li>• テンプレート検索<br>　テンプレートIDを入力してロードマップを自動作成できます</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">セキュリティ</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• メールアドレス変更<br>　登録メールアドレスを変更できます</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">サポート</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 操作ガイド<br>　YouTube再生リストで使い方動画を確認できます</li>
+                        <li>• お問い合わせ<br>　カテゴリー選択式のメール作成画面が開きます</li>
+                        <li>• 利用規約</li>
+                        <li>• プライバシーポリシー</li>
+                        <li>• 特定商取引法に基づく表記</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">その他</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ログアウト<br>　確認ダイアログが表示され、ログアウトできます</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">危険な操作</h3>
+                    <ul class="space-y-1">
+                        <li>• アカウント削除<br>
+                            　削除したアカウントは復元できません<br>
+                            　同じメールアドレスでの再登録はできません<br>
+                            　別のメールアドレスで新規登録してください<br>
+                            　「delete」と入力して確認</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- サブメニュー -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    サブメニュー
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <h3 class="font-bold text-blue-400 mb-2">開き方</h3>
+                    <p class="mb-4">画面左上の3本線（ハンバーガーメニュー）をタップすると、サブメニューが開きます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ホーム</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• メインのタブ画面に戻ります</li>
+                        <li>• Growth/Supportモードで表示される画面が切り替わります</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">インボックス</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• どのロードマップにも紐づかないToDo</li>
+                        <li>• メモやアイデアの一時保存に便利</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">未来のToDo</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 予定日が明日以降のToDo</li>
+                        <li>• Growthモードでのみ表示</li>
+                        <li>• パートナーのロードマップからも表示可能</li>
+                        <li>• 予定日はToDo作成・編集時に指定</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">過去のToDo</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 過去に完了したToDo</li>
+                        <li>• Growthモードでのみ表示</li>
+                        <li>• パートナーのロードマップからも表示可能</li>
+                        <li>• 振り返りに便利</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">繰り返しToDo</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 定期的に繰り返すToDoの一覧</li>
+                        <li>• Growthモードでのみ表示</li>
+                        <li>• 作成方法: ToDoを右スワイプ→「繰り返し」</li>
+                        <li>• 繰り返しパターン: 毎日/毎週/毎月</li>
+                        <li>• 習慣化に便利</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ヘルプ</h3>
+                    <ul class="space-y-1">
+                        <li>• このヘルプページ</li>
+                        <li>• アプリの使い方を確認できます</li>
+                    </ul>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ToDo機能 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ToDo機能
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">ToDoフォーム下部のアイコンバーで、各機能の表示/非表示を切り替えられます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">タイトル</h3>
+                    <p class="mb-4">ToDoのタイトルを入力します。必須項目です。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">メモ</h3>
+                    <p class="mb-4">ToDoに関する詳細なメモを追加できます。アイコンをタップでメモ欄の表示/非表示を切り替えます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">URL</h3>
+                    <p class="mb-4">関連するWebページのURLを添付できます。参考リンクや関連資料へのリンクに便利です。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">予定日</h3>
+                    <p class="mb-4">ToDoを実行する予定日を設定します。カレンダーから日付を選択できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">期日</h3>
+                    <p class="mb-4">ToDoの締め切り日を設定します。期日を過ぎると視覚的に強調表示されます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ロードマップ</h3>
+                    <p class="mb-4">ToDoを特定のロードマップに紐づけます。ToDo画面から呼び出した時のみ表示されます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">ステップ</h3>
+                    <p>ToDoをロードマップ内の特定のステップに紐づけます。ロードマップ選択後に表示されます。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- テンプレート機能 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    テンプレート機能
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <h3 class="font-bold text-blue-400 mb-2">テンプレート有効化</h3>
+                    <p class="mb-4">設定画面でテンプレートを有効化すると、Growthモードのロードマップ画面でテンプレート機能が使えるようになります。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">テンプレート作成</h3>
+                    <p class="mb-4">
+                        ロードマップ編集画面でテンプレート有効化ボタンをタップすると、ロードマップをテンプレートとして公開できます。<br><br>
+                        注意:<br>
+                        • テンプレート作成後は更新できません<br>
+                        • ステップに紐づいているToDoも共有されます
+                    </p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">テンプレートの検索</h3>
+                    <p class="mb-4">テンプレートIDを入力すると、そのテンプレートをもとにロードマップとToDoを自動で作成できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">自動パートナー申請</h3>
+                    <p>テンプレートを使用すると、テンプレート作成者に自動でパートナー申請が送られます。</p>
+
+                    <!-- 画像追加用 -->
+                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
+                </div>
+            </details>
+
+            <!-- ネットワーク接続 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    ネットワーク接続
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <h3 class="font-bold text-blue-400 mb-2">オンライン環境での利用を推奨</h3>
+                    <p class="mb-4">Polarisは、安定したネット環境でのご利用を推奨しています。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">データの同期について</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ロードマップ・パートナー・設定<br>→ データベースへの保存は同期処理を行なっています</li>
+                        <li>• ToDo<br>→ データベースへの保存は非同期処理を行なっています</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">オフラインやネット環境が不安定の動作</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ToDoの作成・編集は可能です</li>
+                        <li>• ただし、データベースへの保存はされない可能性があります</li>
+                        <li>• ネット復帰後、スマホのデータがデータベースのデータで上書きされる可能性があります</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">今後の対応</h3>
+                    <p>オフライン対応の改善については、ユーザーの皆様からのご要望を参考に検討します。</p>
+                </div>
+            </details>
+
+            <!-- トラブルシューティング -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    トラブルシューティング
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <h3 class="font-bold text-blue-400 mb-2">データの不整合が発生した場合</h3>
+                    <p class="mb-4">
+                        稀に以下のような現象が発生する場合があります:<br>
+                        • 削除したロードマップの情報が残っている<br>
+                        • エラーが頻繁に表示される<br>
+                        • 画面の表示が正しくない
+                    </p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">対処法</h3>
+                    <ol class="list-decimal list-inside space-y-1 mb-4">
+                        <li>設定画面を開く</li>
+                        <li>「ログアウト」をタップ</li>
+                        <li>再度ログイン</li>
+                    </ol>
+                    <p class="mb-4">これにより、データベースの最新データと同期され、正常な状態に戻ります。</p>
+
+                    <p class="text-gray-400 text-sm">注意: オンライン環境での操作を推奨します。</p>
+                </div>
+            </details>
+
+            <!-- アカウント削除 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    アカウント削除
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">設定画面の「危険な操作」セクションから、アカウントを削除できます。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">削除されるデータ</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ロードマップ</li>
+                        <li>• TODO</li>
+                        <li>• パートナー情報</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">注意事項</h3>
+                    <ul class="space-y-1">
+                        <li>• この操作は取り消せません</li>
+                        <li>• 削除したアカウントは復元できません</li>
+                        <li>• 同じメールアドレスでの再登録はできません</li>
+                        <li>• 別のメールアドレスで新規登録してください</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- データ制限 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    データ制限
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">Polarisでは、快適に利用いただくため各データの取得上限を1000件に設定しています。</p>
+
+                    <h3 class="font-bold text-blue-400 mb-2">対象データ</h3>
+                    <ul class="space-y-1 mb-4">
+                        <li>• ToDo（種類ごとに最大1000件）</li>
+                        <li>• ロードマップ（最大1000件）</li>
+                        <li>• パートナー（最大1000件）</li>
+                    </ul>
+
+                    <h3 class="font-bold text-blue-400 mb-2">今後の対応</h3>
+                    <p>今後、データ制限の改善については、ユーザーの皆様からのご要望を参考に検討します。</p>
+                </div>
+            </details>
+
+            <!-- お問い合わせ -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    お問い合わせ
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">ご要望や不具合がございましたら、お気軽にお問い合わせください。</p>
+
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <p class="mb-2"><strong>お問い合わせ方法</strong></p>
+                        <ul class="space-y-2">
+                            <li>• アプリ内: 設定画面の「お問い合わせ」</li>
+                            <li>• Web: <a href="https://forms.gle/mCiuPh65JQmhwe5E6" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">お問い合わせフォーム</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="container mx-auto px-4 py-8 mt-12 border-t border-gray-700">
+        <div class="text-center">
+            <div class="mb-4">
+                <a href="terms.html" class="text-gray-400 hover:text-white mx-2">利用規約</a>
+                <a href="privacy.html" class="text-gray-400 hover:text-white mx-2">プライバシーポリシー</a>
+                <a href="tokutei.html" class="text-gray-400 hover:text-white mx-2">特定商取引法に基づく表記</a>
+                <a href="help.html" class="text-gray-400 hover:text-white mx-2">ヘルプ</a>
+            </div>
+            <p class="text-gray-500">© 2025 LEVEL UP, K.K. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
