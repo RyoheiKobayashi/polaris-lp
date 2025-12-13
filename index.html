@@ -21,9 +21,9 @@
     <header class="container mx-auto px-4 py-20 text-center">
         <div class="mb-8">
             <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-32 h-32 mx-auto rounded-3xl shadow-2xl mb-6">
-            <h1 class="text-6xl font-bold mb-4">Polaris</h1>
+            <h1 class="text-6xl font-bold mb-2">Polaris</h1>
+            <p class="text-xl text-gray-400">ロードマップ管理</p>
         </div>
-        <p class="text-3xl text-gray-200 mb-4">スマホに北極星を</p>
         <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
             夜空の北極星が旅人の道しるべとなるように。<br>
             Polarisが、あなたの進むべき道を照らします。
@@ -42,16 +42,16 @@
             </a>
         </div> -->
 
-        <!-- 準備中の表示（リリース後は上記のコメントアウトを解除） -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
-                <p class="text-gray-400 text-sm">App Store</p>
-                <p class="text-white font-bold">準備中</p>
-            </div>
-            <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
-                <p class="text-gray-400 text-sm">Google Play</p>
-                <p class="text-white font-bold">準備中</p>
-            </div>
+        <!-- App Store バッジ -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
+            <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer">
+                <img src="images/Download_on_the_App_Store_Badge_JP_RGB_wht_100317.svg" alt="App Storeからダウンロード" class="h-12">
+            </a>
+        </div>
+        <!-- Google Play 準備中 -->
+        <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 inline-block">
+            <p class="text-gray-400 text-sm">Google Play</p>
+            <p class="text-white font-bold">準備中</p>
         </div>
     </header>
 
@@ -86,7 +86,7 @@
 
         <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
             <div class="bg-gray-800 p-8 rounded-lg text-center">
-                <div class="text-5xl mb-4">✂️</div>
+                <div class="text-5xl mb-4">🎯</div>
                 <h3 class="text-2xl font-bold mb-4 text-blue-400">絞る</h3>
                 <p class="text-gray-300 leading-relaxed">
                     自分の理想をもとに選んだロードマップ→ステップ→今日のToDoに集中できるから、<span class="text-white font-semibold">迷わず前に進めます</span>。
@@ -109,8 +109,16 @@
         </div>
 
         <div class="text-center bg-gradient-to-r from-blue-900 to-purple-900 p-8 rounded-lg max-w-4xl mx-auto">
-            <p class="text-2xl mb-4">情報過多で疲弊していた毎日から、</p>
-            <p class="text-3xl font-bold text-blue-300">スマホの中にあなただけの輝く星がある毎日へ。</p>
+            <p class="text-2xl mb-4">情報の海に溺れる日々から、</p>
+            <p class="text-3xl font-bold text-blue-300">北極星に導かれる日々へ。</p>
+        </div>
+    </section>
+
+    <!-- 2つのモード導入 -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="text-center max-w-4xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4">2つのモード</h2>
+            <p class="text-xl text-gray-400">Polarisは、あなたの目的に合わせて2つのモードをご用意しています</p>
         </div>
     </section>
 
@@ -281,8 +289,7 @@
                         YouTubeで詳しく解説しています。
                     </p>
 
-                    <!-- リンクを追加する場合は、下記のコメントアウトを解除してください -->
-                    <!-- <a href="https://www.youtube.com/playlist?list=PLkM-crNhnY-cFd-BNLr_Slwu8ti16AIWu"
+                    <a href="https://www.youtube.com/playlist?list=PLkM-crNhnY-cFd-BNLr_Slwu8ti16AIWu"
                        target="_blank"
                        rel="noopener noreferrer"
                        class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-lg transition transform hover:scale-105">
@@ -292,13 +299,7 @@
                             </svg>
                             YouTubeで見る
                         </span>
-                    </a> -->
-
-                    <!-- 準備中の表示（公開後は上記のコメントアウトを解除） -->
-                    <div class="inline-block bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
-                        <p class="text-gray-400 text-sm">YouTube操作ガイド</p>
-                        <p class="text-white font-bold">準備中</p>
-                    </div>
+                    </a>
 
                     <div class="mt-6">
                         <a href="help.html" class="inline-block text-blue-400 hover:text-blue-300 font-bold">
@@ -313,7 +314,7 @@
     <!-- CTA -->
     <section class="bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 py-20">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6">今すぐPolarisを始めましょう</h2>
+            <h2 class="text-4xl font-bold mb-6">スマホに北極星を</h2>
             <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
                 情報に溺れる日々から、自分だけの道を照らす毎日へ。<br>
                 Polarisが、あなたの目標達成をサポートします。
@@ -331,16 +332,16 @@
                 </a>
             </div> -->
 
-            <!-- 準備中の表示（リリース後は上記のコメントアウトを解除） -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
-                    <p class="text-gray-400 text-sm">App Store</p>
-                    <p class="text-white font-bold">準備中</p>
-                </div>
-                <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700">
-                    <p class="text-gray-400 text-sm">Google Play</p>
-                    <p class="text-white font-bold">準備中</p>
-                </div>
+            <!-- App Store バッジ -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
+                <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer">
+                    <img src="images/Download_on_the_App_Store_Badge_JP_RGB_wht_100317.svg" alt="App Storeからダウンロード" class="h-12">
+                </a>
+            </div>
+            <!-- Google Play 準備中 -->
+            <div class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 inline-block">
+                <p class="text-gray-400 text-sm">Google Play</p>
+                <p class="text-white font-bold">準備中</p>
             </div>
         </div>
     </section>
