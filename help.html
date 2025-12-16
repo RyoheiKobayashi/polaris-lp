@@ -48,6 +48,144 @@
 
         <div class="space-y-4">
 
+
+            <!-- AIプロンプト集 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    AIプロンプト集
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">ChatGPTやClaudeにコピペして使えるプロンプトです。<br>「ここに記入」の部分を自分用に書き換えてください。<br>出力後、Polarisに転記してください。</p>
+                    <p class="text-sm text-gray-400 mb-4">※AIの出力結果は参考情報です。内容の正確性や効果を保証するものではありません。</p>
+
+                    <!-- プロンプト①：ロードマップ作成 -->
+                    <h3 class="font-bold text-blue-400 mb-2">① ロードマップ作成</h3>
+                    <p class="text-sm text-gray-400 mb-2">理想と現実からロードマップを設計してもらえます</p>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
+                        <pre id="prompt1" class="whitespace-pre-wrap text-sm">
+あなたは「目標達成のプロフェッショナルコーチ」です。
+クライアントの理想と現実のギャップを分析し、最短で到達できるロードマップを設計してください。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【STEP 1】まず、以下の情報を教えてください
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ 叶えたい理想（具体的に）
+→
+
+■ 今の現実（正直に）
+→
+
+■ いつまでに達成したい？
+→
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【STEP 2】以下の形式で出力してください
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## ロードマップ概要
+- タイトル：（20文字以内、ワクワクする表現で）
+- 目標達成日：YYYY年MM月DD日
+
+## ステップ一覧（3〜6個）
+
+### ステップ1：◯◯◯（20文字以内）
+- なぜこのステップが必要か：
+- 完了の基準：
+- 想定期間：◯週間
+- つまずきやすいポイント：
+
+### ステップ2：◯◯◯
+（以下同様）
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【重要な設計ルール】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 各ステップは「完了した／してない」が明確に判断できること
+2. ステップの順番は依存関係を考慮すること（前のステップが終わらないと次に進めない）
+3. 最初のステップは「今週中に完了できる」難易度にすること
+4. 「頑張る」「継続する」などの曖昧な表現は使わない
+                        </pre>
+                    </div>
+                    <button onclick="copyToClipboard('prompt1', this)" class="mb-6 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
+                        コピーする
+                    </button>
+
+                    <!-- プロンプト②：TODO作成 -->
+                    <h3 class="font-bold text-blue-400 mb-2">② ToDo作成</h3>
+                    <p class="text-sm text-gray-400 mb-2">現在のステップで何をすべきかToDoを提案してもらえます</p>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
+                        <pre id="prompt2" class="whitespace-pre-wrap text-sm">
+あなたは「実行のプロフェッショナル」です。
+私の現在のステップを、今日から実行できる具体的なTODOに分解してください。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【現在地を教えてください】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ ロードマップ名
+→
+
+■ 現在のステップ
+→
+
+■ このステップのゴール（何ができたら完了？）
+→
+
+■ 今週使える時間
+→
+
+■ 今つまずいていること（あれば）
+→
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【以下の形式でTODOを10個作成】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 今日やること（3個）
+- [ ] TODO内容
+- [ ] TODO内容
+- [ ] TODO内容
+
+## 今週やること（4個）
+- [ ] TODO内容
+- [ ] TODO内容
+- [ ] TODO内容
+- [ ] TODO内容
+
+## ステップ完了に向けて（3個）
+- [ ] TODO内容
+- [ ] TODO内容
+- [ ] TODO内容
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【TODOの品質基準】
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 良いTODO
+- 「Canvaでサムネイル3枚作成」（具体的）
+- 「競合チャンネル5つをリストアップ」（数値あり）
+- 「1本目の台本を800字で書く」（完了基準明確）
+
+❌ ダメなTODO
+- 「動画について考える」（曖昧）
+- 「勉強する」（終わりがない）
+- 「頑張る」（行動じゃない）
+
+【追加ルール】
+- 1つのTODOは15分〜90分で完了できるサイズ
+- 「調べる」で終わらせず「〇〇を決める」まで含める
+- 順番通りにやれば自然と進む流れにする
+- つまずきポイントがある場合、それを解消するTODOを最初に入れる
+                        </pre>
+                    </div>
+                    <button onclick="copyToClipboard('prompt2', this)" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
+                        コピーする
+                    </button>
+                </div>
+            </details>
+
             <!-- 2つのモード -->
             <details class="bg-gray-800 rounded-lg">
                 <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
@@ -567,69 +705,6 @@
                 </div>
             </details>
 
-            <!-- AIプロンプト集 -->
-            <details class="bg-gray-800 rounded-lg">
-                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
-                    AIプロンプト集
-                </summary>
-                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
-                    <p class="mb-4">ChatGPTやClaudeにコピペして使えるプロンプトです。<br>「ここに記入」の部分を自分用に書き換えてください。</p>
-                    <p class="text-sm text-gray-400 mb-4">※AIの出力結果は参考情報です。内容の正確性や効果を保証するものではありません。</p>
-
-                    <!-- プロンプト①：ロードマップ作成 -->
-                    <h3 class="font-bold text-blue-400 mb-2">① ロードマップ作成</h3>
-                    <p class="text-sm text-gray-400 mb-2">理想と現実からロードマップを設計してもらえます</p>
-                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
-                        <pre id="prompt1" class="whitespace-pre-wrap text-sm">あなたは目標達成の専門家です。私の理想と現実を聞いて、ロードマップを作成してください。
-
-【私の情報】
-・叶えたい理想：（ここに記入）
-・現在の状況：（ここに記入）
-・達成したい期限：（ここに記入）
-
-【出力形式】
-・ロードマップ名：（20文字以内）
-・目標達成日：YYYY/MM/DD
-・ステップ数：3〜6個
-
-各ステップ：
-1. ステップタイトル（20文字以内）
-2. ステップタイトル（20文字以内）
-3. ...
-
-※各ステップは具体的で達成可能なものにしてください</pre>
-                    </div>
-                    <button onclick="copyToClipboard('prompt1', this)" class="mb-6 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
-                        コピー
-                    </button>
-
-                    <!-- プロンプト②：TODO作成 -->
-                    <h3 class="font-bold text-blue-400 mb-2">② ToDo作成</h3>
-                    <p class="text-sm text-gray-400 mb-2">現在のステップで何をすべきかToDoを提案してもらえます</p>
-                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
-                        <pre id="prompt2" class="whitespace-pre-wrap text-sm">私は以下のロードマップに取り組んでいます。今のステップで何をすべきかToDoを10個考えてください。
-
-【私の情報】
-・ロードマップ名：（ここに記入）
-・現在のステップ：（ここに記入）
-・叶えたい理想：（ここに記入）
-・現在の状況：（ここに記入）
-
-【出力形式】
-TODO：
-1.
-2.
-3.
-...（10個）
-
-※すぐに実行できる具体的なアクションにしてください</pre>
-                    </div>
-                    <button onclick="copyToClipboard('prompt2', this)" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
-                        コピー
-                    </button>
-                </div>
-            </details>
-
             <!-- お問い合わせ -->
             <details class="bg-gray-800 rounded-lg">
                 <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
@@ -668,7 +743,7 @@ TODO：
         const text = document.getElementById(elementId).innerText;
         navigator.clipboard.writeText(text).then(() => {
             const originalText = button.innerText;
-            button.innerText = '✅ コピーしました！';
+            button.innerText = 'コピーしました';
             button.classList.remove('bg-blue-600', 'hover:bg-blue-500');
             button.classList.add('bg-green-600');
             setTimeout(() => {
