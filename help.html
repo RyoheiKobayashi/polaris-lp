@@ -47,42 +47,6 @@
         <h1 class="text-4xl font-bold mb-8">ヘルプ</h1>
 
         <div class="space-y-4">
-            <!-- Polarisについて -->
-            <details class="bg-gray-800 rounded-lg">
-                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
-                    Polarisについて
-                </summary>
-                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
-                    <p class="mb-4">
-                        「情報が多すぎて動けない…」<br><br>
-                        「他人と比べて落ち込んでしまう…」<br><br>
-                        「自分がどこに向かっているのか分からない…」<br><br>
-                        そんな経験はありませんか？
-                    </p>
-
-                    <p class="mb-4">
-                        Polarisはそんな悩みを優しく照らすロードマップ管理アプリです。
-                    </p>
-
-                    <h3 class="font-bold text-blue-400 mb-2">3つのメリット</h3>
-                    <ul class="space-y-2 mb-4">
-                        <li><strong>絞る</strong><br>自分の理想をもとに選んだロードマップ→ステップ→今日のToDoに集中できるから、迷わず前に進めます。</li>
-                        <li><strong>支える</strong><br>信頼できるパートナーと支え合うことで、困難な道のりも乗り越えられます。</li>
-                        <li><strong>積み上げる</strong><br>ToDoを完了させ、ステップを達成し、ロードマップを完走することで、目指す場所へたどり着けます。</li>
-                    </ul>
-
-                    <p class="mb-4">
-                        情報過多で疲弊していた毎日から、<br>スマホの中にあなただけの輝く星がある毎日へ。
-                    </p>
-
-                    <p>
-                        夜空の北極星が旅人の道しるべとなるように。<br>Polarisが、あなたの進むべき道を照らします。
-                    </p>
-
-                    <!-- 画像追加用 -->
-                    <!-- <img src="images/xxx.png" alt="説明" class="my-4 rounded-lg w-full"> -->
-                </div>
-            </details>
 
             <!-- 2つのモード -->
             <details class="bg-gray-800 rounded-lg">
@@ -348,6 +312,7 @@
 
                     <h3 class="font-bold text-blue-400 mb-2">サポート</h3>
                     <ul class="space-y-1 mb-4">
+                        <li>• ヘルプ</li>
                         <li>• 操作ガイド<br>　YouTube再生リストで使い方動画を確認できます</li>
                         <li>• お問い合わせ<br>　カテゴリー選択式のメール作成画面が開きます</li>
                         <li>• 利用規約</li>
@@ -602,6 +567,69 @@
                 </div>
             </details>
 
+            <!-- AIプロンプト集 -->
+            <details class="bg-gray-800 rounded-lg">
+                <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
+                    AIプロンプト集
+                </summary>
+                <div class="px-6 pb-6 text-gray-300 leading-relaxed">
+                    <p class="mb-4">ChatGPTやClaudeにコピペして使えるプロンプトです。<br>「ここに記入」の部分を自分用に書き換えてください。</p>
+                    <p class="text-sm text-gray-400 mb-4">※AIの出力結果は参考情報です。内容の正確性や効果を保証するものではありません。</p>
+
+                    <!-- プロンプト①：ロードマップ作成 -->
+                    <h3 class="font-bold text-blue-400 mb-2">① ロードマップ作成</h3>
+                    <p class="text-sm text-gray-400 mb-2">理想と現実からロードマップを設計してもらえます</p>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
+                        <pre id="prompt1" class="whitespace-pre-wrap text-sm">あなたは目標達成の専門家です。私の理想と現実を聞いて、ロードマップを作成してください。
+
+【私の情報】
+・叶えたい理想：（ここに記入）
+・現在の状況：（ここに記入）
+・達成したい期限：（ここに記入）
+
+【出力形式】
+・ロードマップ名：（20文字以内）
+・目標達成日：YYYY/MM/DD
+・ステップ数：3〜6個
+
+各ステップ：
+1. ステップタイトル（20文字以内）
+2. ステップタイトル（20文字以内）
+3. ...
+
+※各ステップは具体的で達成可能なものにしてください</pre>
+                    </div>
+                    <button onclick="copyToClipboard('prompt1', this)" class="mb-6 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
+                        コピー
+                    </button>
+
+                    <!-- プロンプト②：TODO作成 -->
+                    <h3 class="font-bold text-blue-400 mb-2">② ToDo作成</h3>
+                    <p class="text-sm text-gray-400 mb-2">現在のステップで何をすべきかToDoを提案してもらえます</p>
+                    <div class="bg-gray-900 p-4 rounded-lg mb-2 relative">
+                        <pre id="prompt2" class="whitespace-pre-wrap text-sm">私は以下のロードマップに取り組んでいます。今のステップで何をすべきかToDoを10個考えてください。
+
+【私の情報】
+・ロードマップ名：（ここに記入）
+・現在のステップ：（ここに記入）
+・叶えたい理想：（ここに記入）
+・現在の状況：（ここに記入）
+
+【出力形式】
+TODO：
+1.
+2.
+3.
+...（10個）
+
+※すぐに実行できる具体的なアクションにしてください</pre>
+                    </div>
+                    <button onclick="copyToClipboard('prompt2', this)" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm transition-colors">
+                        コピー
+                    </button>
+                </div>
+            </details>
+
             <!-- お問い合わせ -->
             <details class="bg-gray-800 rounded-lg">
                 <summary class="p-6 cursor-pointer text-xl font-bold hover:bg-gray-750">
@@ -634,5 +662,22 @@
             <p class="text-gray-500">© 2025 LEVEL UP, K.K. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+    function copyToClipboard(elementId, button) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = button.innerText;
+            button.innerText = '✅ コピーしました！';
+            button.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+            button.classList.add('bg-green-600');
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove('bg-green-600');
+                button.classList.add('bg-blue-600', 'hover:bg-blue-500');
+            }, 2000);
+        });
+    }
+    </script>
 </body>
 </html>
