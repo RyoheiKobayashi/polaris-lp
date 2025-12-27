@@ -62,6 +62,8 @@
                             <li>デバイス識別子（例：IDFV、Android ID等）</li>
                             <li>IPアドレス、リクエストヘッダ、アクセスログ</li>
                             <li>クラッシュレポート、通信エラー情報、パフォーマンス測定情報</li>
+                            <li>プッシュ通知トークン（通知配信のため）</li>
+                            <li>通知許可状態</li>
                             <li>その他、セキュリティ確保および不正防止のために取得される技術的情報</li>
                         </ul>
                         <p class="text-sm text-gray-400 mt-2">※GPSやBluetoothなどの高精度位置情報は取得しておりません。</p>
@@ -81,6 +83,7 @@
                             <li>Supabase Inc.（米国）：データベース、ユーザー認証、ストレージ、アクセスログ等</li>
                             <li>Expo：アプリ配信プラットフォームによるアプリビルド・配信データ</li>
                             <li>Apple Inc. / Google LLC：アプリ内課金処理および課金履歴の取得</li>
+                            <li>Apple Inc.（米国）：Sign in with Appleによるユーザー認証（Apple IDに紐づくメールアドレス（Hide My Emailを選択した場合はリレーアドレス）、ユーザー識別子、氏名（ユーザーが共有を許可した場合、初回認証時のみ））</li>
                         </ul>
                     </div>
                 </div>
@@ -97,6 +100,8 @@
                             <li>ユーザーの本人確認、アカウント管理、ログイン認証、パスワード再設定等</li>
                             <li>登録・設定情報の保存、再表示機能の実装</li>
                             <li>課金処理および有料サービスの利用管理</li>
+                            <li>プッシュ通知によるリマインド機能の提供</li>
+                            <li>アプリアイコンバッジによる未完了ToDo件数の表示</li>
                         </ul>
                     </div>
                     <div>
@@ -156,7 +161,7 @@
                         <ul class="list-disc list-inside ml-4 space-y-1">
                             <li>(1) Supabase Inc.（米国）：ユーザー認証、データベース管理、ストレージ、API提供</li>
                             <li>(2) Expo（米国）：アプリ開発および配信基盤</li>
-                            <li>(3) Apple Inc. / Google LLC：アプリ内課金処理（決済処理情報の管理等）</li>
+                            <li>(3) Apple Inc. / Google LLC：アプリ内課金処理（決済処理情報の管理等）、Sign in with Appleによる認証</li>
                         </ul>
                     </div>
                     <p>3. 上記委託先のうち、国外（日本国外）に所在する事業者に対して個人情報を取り扱わせる場合には、当社は、個人情報保護法その他の関連法令に基づき、委託先における個人情報の取り扱い体制の確認、契約上の保護措置の整備等、適切な監督を実施します。</p>
@@ -324,7 +329,7 @@
 
             <section class="bg-gray-800 p-4 rounded-lg">
                 <p class="text-sm text-gray-400">附則</p>
-                <p class="text-sm text-gray-400">2025年12月1日　施行</p>
+                <p class="text-sm text-gray-400">2025年12月27日　改定</p>
             </section>
         </div>
     </main>
