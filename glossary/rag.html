@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAGとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="RAG（Retrieval-Augmented Generation）を、アニメーションで3秒で理解。AIが外部情報を検索して回答する仕組みを動きで解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .rag-stage {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        @media (min-width: 600px) {
+            .rag-stage { grid-template-columns: 1fr 1fr; gap: 24px; }
+        }
+        .rag-box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px;
+            transition: border-color .3s ease, background .3s ease;
+        }
+        .rag-box.active {
+            border-color: var(--ink);
+            background: var(--bg-warm);
+        }
+        .rag-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--ink-mute);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .rag-content {
+            font-size: 13px;
+            color: var(--ink-warm);
+            min-height: 3em;
+            line-height: 1.6;
+        }
+        .doc-item {
+            padding: 6px 10px;
+            margin: 4px 0;
+            background: var(--bg-warm);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            transition: background .3s ease, color .3s ease;
+        }
+        .doc-item.hit {
+            background: #fdecc8;
+            color: var(--ink);
+            font-weight: 500;
+        }
+        .arrow {
+            text-align: center;
+            color: var(--ink-mute);
+            font-size: 18px;
+            padding: 4px 0;
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+        .arrow.in { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">10 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Retrieval-Augmented Generation</div>
+            <h1 class="detail-title">RAG</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="rag-stage">
+                <div class="rag-box" id="box-q" style="grid-column: 1 / -1;">
+                    <div class="rag-label">① 質問</div>
+                    <div class="rag-content" id="content-q">「うちの商品Xの返金ポリシーは？」</div>
+                </div>
+
+                <div class="arrow" id="arrow-1" style="grid-column: 1 / -1;">↓</div>
+
+                <div class="rag-box" id="box-search">
+                    <div class="rag-label">② 外部データベース検索</div>
+                    <div class="rag-content">
+                        <div class="doc-item" id="doc-1">doc_001.pdf 会社概要</div>
+                        <div class="doc-item" id="doc-2">doc_042.pdf 返金ポリシー</div>
+                        <div class="doc-item" id="doc-3">doc_108.pdf 採用情報</div>
+                    </div>
+                </div>
+
+                <div class="rag-box" id="box-retrieved">
+                    <div class="rag-label">③ 関連文書を取得</div>
+                    <div class="rag-content" id="content-retrieved" style="color: var(--ink-mute); font-style: italic;">待機中…</div>
+                </div>
+
+                <div class="arrow" id="arrow-2" style="grid-column: 1 / -1;">↓</div>
+
+                <div class="rag-box" id="box-answer" style="grid-column: 1 / -1;">
+                    <div class="rag-label">④ 回答生成</div>
+                    <div class="rag-content" id="content-answer" style="color: var(--ink-mute); font-style: italic;">待機中…</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でRAGの流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">質問 → 検索 → 関連情報取得 → 情報を使って回答生成。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">"R" の検索、"A" の強化、"G" の生成</h2>
+            <p>
+                RAGは <strong>R</strong>etrieval（検索）・<strong>A</strong>ugmented（強化）・<strong>G</strong>eneration（生成）の頭文字。
+                AIは学習済みの知識だけで答えるのではなく、<span class="mark">質問に関連する資料をまず検索し、その内容を見ながら答える</span>。
+                これにより、学習していない社内資料・最新ニュース・独自データをAIが扱えるようになります。
+                「<span class="mark">ナレッジを渡す</span>」という普段の作業は、実は手動版のRAGです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 図書館で調べ物をする人</h3>
+                    <p>
+                        知らないことを聞かれたとき、図書館で関連書籍を探して、必要な箇所だけ読んで答える。
+                        この<span class="mark">「調べてから答える」プロセス</span>がRAG。
+                        一方、頭の中の知識だけで答えるのが普通のLLMです。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 専属秘書が資料を持ってくる</h3>
+                    <p>
+                        社長室に居る社長が、秘書に「先月の売上資料持ってきて」と頼んで、資料を見ながら意思決定する。
+                        RAGの<span class="mark">"Retrieval" は秘書の役割</span>で、LLMが社長。
+                        秘書（検索）が有能なほど、社長（回答）の質が上がります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    RAGは<span class="mark">「AIに最新・独自情報を使わせる仕組み」</span>。
+                    普段「関連資料を貼り付けて質問する」のも、広義のRAG。
+                    業務や発信でAIを使うなら、<span class="mark">「何を検索させるか」の設計</span>が品質を決めます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="multimodal.html" class="nav-link">← 前の用語：マルチモーダル</a>
+            <a href="memory.html" class="nav-link">次の用語：メモリ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const boxQ = document.getElementById('box-q');
+        const boxSearch = document.getElementById('box-search');
+        const boxRetrieved = document.getElementById('box-retrieved');
+        const boxAnswer = document.getElementById('box-answer');
+        const docs = [document.getElementById('doc-1'), document.getElementById('doc-2'), document.getElementById('doc-3')];
+        const contentRetrieved = document.getElementById('content-retrieved');
+        const contentAnswer = document.getElementById('content-answer');
+        const arrow1 = document.getElementById('arrow-1');
+        const arrow2 = document.getElementById('arrow-2');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function reset() {
+            [boxQ, boxSearch, boxRetrieved, boxAnswer].forEach(b => b.classList.remove('active'));
+            docs.forEach(d => d.classList.remove('hit'));
+            arrow1.classList.remove('in');
+            arrow2.classList.remove('in');
+            contentRetrieved.textContent = '待機中…';
+            contentRetrieved.style.fontStyle = 'italic';
+            contentRetrieved.style.color = 'var(--ink-mute)';
+            contentAnswer.textContent = '待機中…';
+            contentAnswer.style.fontStyle = 'italic';
+            contentAnswer.style.color = 'var(--ink-mute)';
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            reset();
+
+            await wait(300);
+            boxQ.classList.add('active');
+            status.textContent = 'ユーザーが質問を投げる…';
+            await wait(900);
+
+            arrow1.classList.add('in');
+            await wait(400);
+
+            boxSearch.classList.add('active');
+            status.textContent = '外部データベースを検索中…';
+            await wait(1000);
+
+            docs[1].classList.add('hit');
+            status.innerHTML = '関連ドキュメント発見 → <strong>doc_042.pdf</strong>';
+            await wait(800);
+
+            boxRetrieved.classList.add('active');
+            contentRetrieved.style.fontStyle = 'normal';
+            contentRetrieved.style.color = 'var(--ink-warm)';
+            contentRetrieved.textContent = '「商品Xは到着後7日以内に未開封であれば全額返金」（doc_042.pdfより）';
+            status.textContent = '関連情報を取得完了';
+            await wait(1300);
+
+            arrow2.classList.add('in');
+            await wait(400);
+
+            boxAnswer.classList.add('active');
+            contentAnswer.style.fontStyle = 'normal';
+            contentAnswer.style.color = 'var(--ink-warm)';
+            contentAnswer.textContent = '商品Xの返金ポリシーは、到着後7日以内に未開封の状態であれば全額返金対応です。';
+            status.innerHTML = '✓ 取得した情報を使って、<strong>正確な回答</strong>を生成';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

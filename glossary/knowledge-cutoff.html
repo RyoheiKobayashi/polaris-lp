@@ -275,32 +275,10 @@
 
         <!-- タイトル -->
         <header class="mb-14">
-            <div class="cat-label mb-3">03 · AI用語</div>
+            <div class="cat-label mb-3">03 · A. AIの基本概念</div>
             <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Knowledge Cutoff</div>
             <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">ナレッジ<br>カットオフ</h1>
         </header>
-
-        <!-- 結論 -->
-        <div class="callout callout-blue mb-10">
-            <span class="callout-icon">💡</span>
-            <div>
-                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">結論</div>
-                <p class="text-lg" style="color: var(--ink-warm);">
-                    AIには、<span class="mark">「ここまでの出来事しか知らない」という日付の線</span>があります。
-                    それより新しい情報は、<span class="mark">あなたが教えないとAIは知りません</span>。
-                </p>
-            </div>
-        </div>
-
-        <!-- 理由 -->
-        <section class="mb-12">
-            <h2 class="text-2xl mb-4">AIには「学習の締め切り日」がある</h2>
-            <p style="color: var(--ink-warm);">
-                AIは、学習時点までの文章を読んで作られます。その<span class="mark">「学習の締め切り日」がナレッジカットオフ</span>です。
-                締め切り日以降の出来事は、AIにとって<span class="mark">まだ存在しない世界</span>。
-                だから最新のニュースや、あなたの会社の社内資料を知らないのは当たり前。<span class="mark">「知らない」のではなく「渡されていない」</span>だけなんです。
-            </p>
-        </section>
 
         <!-- アニメーション主役 -->
         <section class="card p-8 md:p-10 mb-12 overflow-hidden">
@@ -374,6 +352,16 @@
             <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">あなたが渡す最新情報で、AIは進化する。</p>
         </section>
 
+        <!-- 理由 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIには「学習の締め切り日」がある</h2>
+            <p style="color: var(--ink-warm);">
+                AIは、学習時点までの文章を読んで作られます。その<span class="mark">「学習の締め切り日」がナレッジカットオフ</span>です。
+                締め切り日以降の出来事は、AIにとって<span class="mark">まだ存在しない世界</span>。
+                だから最新のニュースや、あなたの会社の社内資料を知らないのは当たり前。<span class="mark">「知らない」のではなく「渡されていない」</span>だけなんです。
+            </p>
+        </section>
+
         <!-- 具体例 -->
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
@@ -412,30 +400,10 @@
             </div>
         </div>
 
-        <!-- LINE CTA -->
-        <div class="cta-box mb-12">
-            <div class="flex items-start gap-4">
-                <div class="text-2xl flex-shrink-0">💬</div>
-                <div class="flex-1">
-                    <h3 class="text-xl mb-2" style="font-weight: 500;">こういう「動きで見るAI用語」、<br>LINEで新着配信中。</h3>
-                    <p class="mb-6" style="color: var(--ink-soft);">
-                        オープンチャットなので匿名OK・無料・通知オフ可。
-                    </p>
-                    <a href="https://line.me/ti/g2/Q_wc2e9Avaj3sf4YM0J2z81UMdpQ_2AqmNOp8g"
-                       target="_blank" rel="noopener noreferrer"
-                       onclick="gtag('event', 'click', {event_category: 'line_oc', event_label: 'cutoff_cta'});"
-                       class="btn btn-line">
-                        LINEオープンチャットに参加
-                        <span>→</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <!-- ページナビ -->
-        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm">
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
             <a href="ai-model.html" class="nav-link">← 前の用語：AIモデル</a>
-            <span></span>
+            <a href="hallucination.html" class="nav-link">次の用語：ハルシネーション →</a>
             <a href="index.html" class="nav-link">他の用語一覧 →</a>
         </nav>
 

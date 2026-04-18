@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ハルシネーションとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="ハルシネーション（AIの幻覚）を、アニメーションで3秒で理解。AIが自信満々に嘘をつく現象の正体とは？">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .chat-q, .chat-a, .fact-check {
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .visible { opacity: 1; transform: translateY(0); }
+        .fact-fail {
+            text-decoration: line-through;
+            color: #dc2626;
+            position: relative;
+        }
+        .fact-fail::after {
+            content: '✗';
+            color: #dc2626;
+            margin-left: 4px;
+            font-weight: 700;
+        }
+        .fact-pass {
+            background: linear-gradient(transparent 60%, #bbf7d0 60%);
+        }
+        .thinking {
+            display: inline-block;
+            animation: thinking 1.4s infinite;
+        }
+        @keyframes thinking {
+            0%, 100% { opacity: 0.3; }
+            50%      { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">04 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Hallucination</div>
+            <h1 class="detail-title">ハルシネーション</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIの幻覚</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="max-w-md mx-auto space-y-3 mb-6" id="chat">
+                <div class="chat-q flex justify-end" id="q1">
+                    <div class="rounded-2xl rounded-tr-sm px-4 py-2 text-sm" style="background: var(--bg-warm); color: var(--ink);">
+                        日本の初代内閣総理大臣は？
+                    </div>
+                </div>
+                <div class="chat-a flex justify-start" id="a1">
+                    <div class="rounded-2xl rounded-tl-sm px-4 py-2 text-sm max-w-[85%]" style="background: var(--ink); color: #fff;">
+                        <span id="answer-text">板垣退助</span>です。自由民権運動で有名ですよね！
+                    </div>
+                </div>
+                <div class="fact-check flex justify-center" id="fact">
+                    <div class="rounded-lg px-4 py-2 text-xs" style="background: var(--callout-yellow); color: var(--ink-warm);">
+                        🔍 ファクトチェック中…
+                    </div>
+                </div>
+                <div class="fact-check flex justify-center" id="verdict">
+                    <div class="rounded-lg px-4 py-2 text-sm" style="background: #fee2e2; color: #991b1b;">
+                        ✗ 誤り。正解は <strong>伊藤博文</strong>（1885年〜）
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」を押してみてください</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">AIは「知らない」と言わず、それっぽい答えを作ってしまう。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">なぜAIは堂々と嘘をつくのか</h2>
+            <p>
+                LLMは「次の単語を確率で予測する」マシンです。<span class="mark">知っているか/知らないかを判断する仕組みは持っていません</span>。
+                だから学習データに答えがなくても、それっぽい単語を並べて文章を作ってしまう。
+                本人（AI）は嘘をついている意識はなく、<span class="mark">「一番ありそうな答え」を生成した結果</span>がハルシネーションです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 知ったかぶりの友達</h3>
+                    <p>
+                        何を聞いても「知らない」と言わず、必ずそれっぽい答えを返す友達。
+                        9割は合っているけど、<span class="mark">1割はスラスラと嘘をつく</span>。しかも本人は嘘をついている自覚がない。
+                        AIのハルシネーションはまさにこれです。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② テストで空欄を埋めたい生徒</h3>
+                    <p>
+                        分からない問題でも、空欄にはせず「それっぽい答え」を書いてしまう生徒を想像してください。
+                        AIも<span class="mark">「答えられない」を答えられない設計</span>なので、無理やり文章を生成します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    AIの回答は<span class="mark">必ずファクトチェック</span>する、これが鉄則です。
+                    特に「数字・固有名詞・日付」は要注意。
+                    発信や業務資料に使う前には、必ず公式情報で裏取りしましょう。
+                    ハルシネーションを前提に付き合えば、AIは強力な相棒になります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="knowledge-cutoff.html" class="nav-link">← 前の用語：ナレッジカットオフ</a>
+            <a href="token.html" class="nav-link">次の用語：トークン →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const q1 = document.getElementById('q1');
+        const a1 = document.getElementById('a1');
+        const fact = document.getElementById('fact');
+        const verdict = document.getElementById('verdict');
+        const answerText = document.getElementById('answer-text');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function reset() {
+            q1.classList.remove('visible');
+            a1.classList.remove('visible');
+            fact.classList.remove('visible');
+            verdict.classList.remove('visible');
+            answerText.classList.remove('fact-fail');
+            status.textContent = '';
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            reset();
+
+            await wait(200);
+            q1.classList.add('visible');
+            status.textContent = '質問を入力…';
+            await wait(900);
+
+            status.innerHTML = 'AI が<span class="thinking">考え中</span>…';
+            await wait(1200);
+
+            a1.classList.add('visible');
+            status.textContent = '自信満々に回答';
+            await wait(1600);
+
+            fact.classList.add('visible');
+            status.textContent = 'ファクトチェック中…';
+            await wait(1800);
+
+            answerText.classList.add('fact-fail');
+            verdict.classList.add('visible');
+            status.innerHTML = '✗ ハルシネーション検出！もっともらしい嘘を堂々と語った';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI（人工知能）とは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="AI（人工知能）を、アニメーションで3秒で理解。AI・機械学習・ディープラーニング・LLMの関係を動きで解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .layer {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--ink);
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 14px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .layer.in { opacity: 1; transform: scale(1); }
+        .layer-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            background: var(--bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .circle-stage {
+            position: relative;
+            width: 360px;
+            height: 360px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .l1 { inset: 0;         background: #fef3c7; }
+        .l2 { inset: 40px;      background: #fed7aa; }
+        .l3 { inset: 80px;      background: #fecaca; }
+        .l4 { inset: 120px;     background: #e0e7ff; }
+        @media (max-width: 420px) {
+            .circle-stage { width: 300px; height: 300px; }
+            .l2 { inset: 34px; }
+            .l3 { inset: 68px; }
+            .l4 { inset: 102px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">06 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Artificial Intelligence</div>
+            <h1 class="detail-title">AI<span style="font-size: 0.6em;">（人工知能）</span></h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="circle-stage" id="stage">
+                <div class="layer l1" id="layer-1"><span class="layer-label">AI（人工知能）</span></div>
+                <div class="layer l2" id="layer-2"><span class="layer-label">機械学習</span></div>
+                <div class="layer l3" id="layer-3"><span class="layer-label">深層学習</span></div>
+                <div class="layer l4" id="layer-4"><span class="layer-label">LLM</span></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で入れ子構造を可視化</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">外側から内側に、どんどん専門化していく構造。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AI・機械学習・LLMの関係</h2>
+            <p>
+                AIは大きな傘のような言葉で、中には<span class="mark">機械学習（ML）→ 深層学習（DL）→ LLM</span>という入れ子構造があります。
+                「AI」と聞くと ChatGPT を想像しがちですが、画像認識・異常検知・翻訳・レコメンドなども全部AI。
+                今の世の中で話題になっているのは <span class="mark">"AI" の中の "生成AI" の中の "LLM"</span> という、かなり内側の話です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 「乗り物」という大きなくくり</h3>
+                    <p>
+                        「乗り物 ＞ 自動車 ＞ 電気自動車 ＞ テスラ Model 3」という入れ子構造。
+                        AIも同じで、<span class="mark">AI ＞ 機械学習 ＞ 深層学習 ＞ LLM（ChatGPTなど）</span>。
+                        「AIが流行ってる！」の多くは、一番内側のLLMの話をしています。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② スポーツ → 球技 → 野球 → プロ野球</h3>
+                    <p>
+                        「AI」という総称の中に、さまざまな技術が含まれます。
+                        画像認識AI、音声認識AI、将棋AI、チャットAI…<span class="mark">全部AIだけど、できることは全然違う</span>。
+                        「AIで◯◯できる？」と聞かれたら、どの種類のAIかで答えが変わります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    「AI」は広すぎる言葉。会話の中で<span class="mark">「どのAI？」</span>を意識するだけで解像度が上がります。
+                    この用語集の他の用語（LLM・生成AI・マルチモーダル）は、すべてAIという傘の中の話です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="token.html" class="nav-link">← 前の用語：トークン</a>
+            <a href="generative-ai.html" class="nav-link">次の用語：生成AI →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const layers = [
+            { el: document.getElementById('layer-1'), text: 'AI = 人間の知的作業をコンピュータに任せる総称' },
+            { el: document.getElementById('layer-2'), text: '機械学習 = データから自動で学ぶAIの手法' },
+            { el: document.getElementById('layer-3'), text: '深層学習 = 脳の構造を真似たMLの一種' },
+            { el: document.getElementById('layer-4'), text: 'LLM = 言語特化の深層学習。今話題の主役' },
+        ];
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            layers.forEach(l => l.el.classList.remove('in'));
+            await wait(300);
+
+            for (const layer of layers) {
+                layer.el.classList.add('in');
+                status.textContent = layer.text;
+                await wait(1100);
+            }
+
+            status.textContent = '✓ 外側から内側へ、どんどん専門化していく入れ子構造';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

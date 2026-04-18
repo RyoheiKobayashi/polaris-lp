@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AIとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="生成AI（Generative AI）を、アニメーションで3秒で理解。テキスト・画像・動画を生み出すAIの正体を動きで解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .prompt-box {
+            border: 1px solid var(--line);
+            background: var(--bg-warm);
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--ink-warm);
+            min-height: 3em;
+        }
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--ink);
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .output-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 12px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .output-card.in { opacity: 1; transform: translateY(0); }
+        .output-icon { font-size: 2rem; }
+        .output-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-top: 6px;
+            letter-spacing: 0.05em;
+        }
+        .output-sample {
+            font-size: 10px;
+            color: var(--ink-mute);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--line);
+            border-top-color: var(--ink);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">07 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Generative AI</div>
+            <h1 class="detail-title">生成AI</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="max-w-md mx-auto">
+                <div class="cat-label mb-2" style="color: var(--ink-soft);">Prompt</div>
+                <div class="prompt-box" id="prompt"></div>
+
+                <div class="text-center my-5" id="status-area">
+                    <p class="text-sm" style="color: var(--ink-soft);">
+                        <span class="spinner" id="spinner" style="display: none;"></span>
+                        <span id="status">「再生」を押して、生成を見てみよう</span>
+                    </p>
+                </div>
+
+                <div class="cat-label mb-2" style="color: var(--ink-soft);">Generated Outputs</div>
+                <div class="output-grid" id="outputs">
+                    <div class="output-card" data-idx="0">
+                        <div class="output-icon">📝</div>
+                        <div class="output-label">TEXT</div>
+                        <div class="output-sample">「湖畔で微笑む白猫、静かな午後…」</div>
+                    </div>
+                    <div class="output-card" data-idx="1">
+                        <div class="output-icon">🎨</div>
+                        <div class="output-label">IMAGE</div>
+                        <div class="output-sample">油絵調の白猫イラスト</div>
+                    </div>
+                    <div class="output-card" data-idx="2">
+                        <div class="output-icon">🎬</div>
+                        <div class="output-label">VIDEO</div>
+                        <div class="output-sample">10秒の動画クリップ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">同じプロンプトから、異なる形式の「新しいもの」が生まれる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「分類」ではなく「生成」できるのが違い</h2>
+            <p>
+                従来のAIは主に<span class="mark">「分類・予測」</span>が仕事でした（スパムメール判定、株価予測など）。
+                生成AIは一歩進んで、<span class="mark">「ゼロから作る」</span>ことができるAIです。
+                ChatGPT（文章）・Midjourney/DALL-E（画像）・Sora（動画）・Suno（音楽）などがすべて生成AIに分類されます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 万能なクリエイター</h3>
+                    <p>
+                        文章も書けるし、絵も描けるし、動画も作れる万能クリエイター。
+                        しかも<span class="mark">注文してから数秒で納品</span>してくれる。
+                        生成AIは、そういうスーパー外注先だと思うとイメージしやすいです。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② オーダーメイドのお店</h3>
+                    <p>
+                        「こんな感じのものが欲しい」と伝えると、<span class="mark">世界に一つのアウトプット</span>が返ってくる。
+                        既製品（従来のAIの「分類」）ではなく、オーダーメイド（生成）が生成AIの特徴です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    生成AIは<span class="mark">「ゼロから何かを作れる」AI</span>の総称。
+                    ChatGPT・Gemini・Claude・Midjourney・Sora、全部これに入ります。
+                    文章だけでなく、画像・動画・音声も同じ発想で作れる、という広がりを覚えておきましょう。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="ai.html" class="nav-link">← 前の用語：AI</a>
+            <a href="context-window.html" class="nav-link">次の用語：コンテキストウィンドウ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const PROMPT = '湖畔で微笑む白猫の絵を描いて';
+        const btn = document.getElementById('play-btn');
+        const promptEl = document.getElementById('prompt');
+        const statusEl = document.getElementById('status');
+        const spinner = document.getElementById('spinner');
+        const cards = document.querySelectorAll('.output-card');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function reset() {
+            promptEl.innerHTML = '<span class="cursor"></span>';
+            cards.forEach(c => c.classList.remove('in'));
+            spinner.style.display = 'none';
+            statusEl.textContent = '「再生」を押して、生成を見てみよう';
+        }
+
+        async function typeText(target, text, delay) {
+            target.innerHTML = '';
+            for (let i = 0; i < text.length; i++) {
+                target.innerHTML = text.slice(0, i + 1) + '<span class="cursor"></span>';
+                await wait(delay);
+            }
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            reset();
+
+            await wait(300);
+            await typeText(promptEl, PROMPT, 60);
+            promptEl.innerHTML = PROMPT;
+
+            await wait(300);
+            spinner.style.display = 'inline-block';
+            statusEl.textContent = '生成AIが同じプロンプトから複数の形式を作成中…';
+            await wait(1400);
+
+            spinner.style.display = 'none';
+            statusEl.textContent = '完成 → 異なる形式のアウトプット';
+
+            for (const card of cards) {
+                card.classList.add('in');
+                await wait(450);
+            }
+
+            statusEl.innerHTML = '✓ テキスト・画像・動画、形式は違っても<strong>すべて「新しく生成」</strong>されたもの';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+        reset();
+    })();
+    </script>
+
+</body>
+</html>
