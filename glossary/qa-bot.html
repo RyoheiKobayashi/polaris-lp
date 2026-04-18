@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&Aボットとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="Q&Aボットを、アニメーションで3秒で理解。FAQをナレッジ化してAIに自動応答させる仕組み。受講生対応やカスタマーサポートに。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .qa-stage { max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .qa-turn { display: flex; gap: 8px; align-items: flex-start; opacity: 0; transform: translateY(6px); transition: opacity .5s ease, transform .5s ease; }
+        .qa-turn.in { opacity: 1; transform: translateY(0); }
+        .qa-badge {
+            width: 26px; height: 26px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        .qa-turn.q .qa-badge { background: var(--ink); color: #fff; }
+        .qa-turn.a .qa-badge { background: var(--mark); color: var(--ink); }
+        .qa-bubble {
+            flex: 1;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--ink);
+        }
+        .qa-turn.a .qa-bubble { background: var(--bg-warm); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">43 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Q&A Bot</div>
+            <h1 class="detail-title">Q&Aボット</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">FAQを自動応答に</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="qa-stage">
+                <div class="qa-turn q" id="qa-1"><div class="qa-badge">Q</div><div class="qa-bubble">返金は何日以内ですか？</div></div>
+                <div class="qa-turn a" id="qa-2"><div class="qa-badge">A</div><div class="qa-bubble">商品到着後7日以内、未開封で全額返金対応です。</div></div>
+                <div class="qa-turn q" id="qa-3"><div class="qa-badge">Q</div><div class="qa-bubble">分割払いはできますか？</div></div>
+                <div class="qa-turn a" id="qa-4"><div class="qa-badge">A</div><div class="qa-bubble">3回・6回・12回の分割払いに対応しています。</div></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でボットが自動応答する流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">FAQをナレッジ化しておけば、応答は全自動。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「よくある質問」への対応をAIに渡す</h2>
+            <p>
+                Q&Aボットとは、<span class="mark">よくある質問とその回答をナレッジとして持たせ、自動で応答できるようにしたAIの仕組み</span>。
+                GPTsやGEMで作成でき、受講生対応やカスタマーサポートの効率化に活用できます。
+                回答の精度は<span class="mark">ナレッジの質に直結</span>するため、
+                FAQ情報を正確・網羅的に整理しておくことが重要です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新人コールセンターの台本</h3>
+                    <p>
+                        新人でも台本があれば9割の問い合わせに答えられる。
+                        Q&Aボットは、<span class="mark">AI版「応答台本」</span>。24時間・疲れ知らずで動いてくれます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 受付のFAQファイル</h3>
+                    <p>
+                        受付に置いてあるFAQ冊子と同じ発想。<span class="mark">よく聞かれる質問に機械的に答える</span>部分を、AIに丸投げします。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Q&Aボット＝<span class="mark">FAQを渡したAIの自動応答機能</span>。
+                    受講生対応・カスタマーサポートの1次窓口として、工数削減のインパクトが大きい。
+                    ナレッジの質がそのまま応答品質になります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="ai-ghostwriting.html" class="nav-link">← 前の用語：AIゴーストライティング</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const turns = ['qa-1','qa-2','qa-3','qa-4'].map(id => document.getElementById(id));
+        const labels = ['受講生から質問', 'ナレッジを参照して自動応答', '次の質問にも対応', '継続的に応対'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            turns.forEach(t => t.classList.remove('in'));
+            for (let i = 0; i < turns.length; i++) {
+                await wait(500);
+                turns[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>24時間稼働するサポート窓口</strong>の完成';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

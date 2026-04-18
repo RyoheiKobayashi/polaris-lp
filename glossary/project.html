@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロジェクト機能とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="AIのプロジェクト機能を、アニメーションで3秒で理解。案件単位で会話・ナレッジ・プロンプトをまとめて管理。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pj-stage { max-width: 480px; margin: 0 auto; }
+        .pj-folder {
+            background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 10px;
+            padding: 28px 22px 22px;
+            position: relative;
+        }
+        .pj-folder::before {
+            content: '';
+            position: absolute;
+            top: -16px; left: 20px;
+            width: 100px; height: 20px;
+            background: var(--ink);
+            border-radius: 6px 6px 0 0;
+        }
+        .pj-folder .pj-name {
+            position: absolute;
+            top: -12px; left: 26px;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            z-index: 1;
+        }
+        .pj-assets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .pj-asset {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease, background .3s ease;
+        }
+        .pj-asset.in { opacity: 1; transform: translateY(0); }
+        .pj-asset.hl { background: var(--mark); }
+        .pj-asset .chip { font-size: 9px; color: var(--ink-mute); letter-spacing: 0.06em; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">34 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Project</div>
+            <h1 class="detail-title">プロジェクト機能</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">案件単位で管理する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pj-stage">
+                <div class="pj-folder">
+                    <span class="pj-name">PROJECT</span>
+                    <div class="pj-assets">
+                        <div class="pj-asset" id="p-1"><span class="chip">NAV</span>台本ナレッジ</div>
+                        <div class="pj-asset" id="p-2"><span class="chip">NAV</span>プロフィール</div>
+                        <div class="pj-asset" id="p-3"><span class="chip">PROMPT</span>システム指示</div>
+                        <div class="pj-asset" id="p-4"><span class="chip">CHAT</span>会話履歴</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で資料がプロジェクトに集約される様子</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">ナレッジ・プロンプト・会話を1つのフォルダに束ねる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">案件ごとに「まとめ箱」を作る</h2>
+            <p>
+                プロジェクト機能とは、ChatGPTやGeminiが提供する、<span class="mark">案件単位で会話・ナレッジ・プロンプトを管理できる機能</span>。
+                毎回同じ情報を渡し直す手間がなくなり、
+                プロジェクト内の会話はすべて<span class="mark">登録されたナレッジとプロンプトを自動で参照</span>します。
+                「プロジェクトの質は、プロンプトとナレッジの質で決まる」と言われる所以です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 顧客ごとのファイル</h3>
+                    <p>
+                        顧客A様の案件はAフォルダ、B様はBフォルダに資料を集約するのが仕事の基本。
+                        プロジェクト機能は、<span class="mark">AIに対しても同じ整理整頓</span>を可能にします。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② Slackのチャンネル</h3>
+                    <p>
+                        プロジェクトごとにチャンネルを作ると、関連情報が集約されて見つけやすい。
+                        AIのプロジェクトも同じで、<span class="mark">文脈が閉じ込められる</span>ことで精度が上がります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プロジェクト機能＝<span class="mark">会話・ナレッジ・プロンプトの集約箱</span>。
+                    複数案件を並行するなら、必ずプロジェクト単位で分けて運用しましょう。
+                    <span class="mark">プロンプトの質 × ナレッジの質</span>がそのままアウトプット品質に効いてきます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="gem.html" class="nav-link">← 前の用語：GEM</a>
+            <a href="knowledge-building.html" class="nav-link">次の用語：ナレッジ構築 →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const assets = ['p-1','p-2','p-3','p-4'].map(id => document.getElementById(id));
+        const labels = ['ナレッジを追加', '別のナレッジを追加', 'システム指示を登録', '会話履歴も同じ箱に集約'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            assets.forEach(a => { a.classList.remove('in'); a.classList.remove('hl'); });
+            for (let i = 0; i < assets.length; i++) {
+                await wait(400);
+                assets[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            assets.forEach(a => a.classList.add('hl'));
+            status.innerHTML = '✓ <strong>案件単位で全情報を集約</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

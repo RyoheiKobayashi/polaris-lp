@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロダクトナレッジとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロダクトナレッジを、アニメーションで3秒で理解。商品・サービスの詳細情報をAIに渡してLP・セールス文の精度を上げる。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pd-stage { max-width: 500px; margin: 0 auto; display: flex; gap: 20px; align-items: flex-start; }
+        .pd-box {
+            width: 140px; height: 140px;
+            background: var(--ink);
+            border-radius: 10px;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .pd-box::before, .pd-box::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.25);
+        }
+        .pd-box::before {
+            top: 50%; left: 0; right: 0;
+            height: 1.5px;
+        }
+        .pd-box::after {
+            left: 50%; top: 0; bottom: 0;
+            width: 1.5px;
+        }
+        .pd-box .pd-tape {
+            position: absolute;
+            top: -6px; left: 50%;
+            transform: translateX(-50%);
+            width: 50px; height: 14px;
+            background: var(--mark);
+            border-radius: 2px;
+        }
+        .pd-fields { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .pd-field {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .pd-field.in { opacity: 1; transform: translateX(0); }
+        .pd-field .label { color: var(--ink-mute); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+        .pd-field .val { color: var(--ink-warm); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">37 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Product Knowledge</div>
+            <h1 class="detail-title">プロダクトナレッジ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">商品・サービスの詳細情報</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pd-stage">
+                <div class="pd-box"><div class="pd-tape"></div></div>
+                <div class="pd-fields">
+                    <div class="pd-field" id="pd-1"><span class="label">価格</span><span class="val">¥29,800</span></div>
+                    <div class="pd-field" id="pd-2"><span class="label">特徴</span><span class="val">動画＋添削</span></div>
+                    <div class="pd-field" id="pd-3"><span class="label">ターゲット</span><span class="val">副業初心者</span></div>
+                    <div class="pd-field" id="pd-4"><span class="label">競合差別</span><span class="val">1on1付き</span></div>
+                    <div class="pd-field" id="pd-5"><span class="label">FAQ</span><span class="val">返金は7日</span></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でプロダクト情報が揃う様子</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">価格・特徴・ターゲット・FAQを揃えれば、LP・セールスの精度が激変。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">売る商品の「スペックシート」</h2>
+            <p>
+                プロダクトナレッジとは、自分が販売する<span class="mark">商品・サービスの詳細情報</span>をまとめたナレッジ。
+                価格・特徴・ターゲット・競合との違い・よくある質問などを整理します。
+                LP作成やセールス文の生成時にAIに渡すことで、<span class="mark">正確な商品訴求</span>ができるようになります。
+                AIが勝手に作った「それっぽい説明」ではなく、事実に基づいた正確なコピーが生まれます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 家電のスペックシート</h3>
+                    <p>
+                        家電量販店の店員は、<span class="mark">各機種のスペックを全部暗記</span>しているから、顧客に合った提案ができる。
+                        AIも同じで、プロダクトナレッジを渡すほど「売れる提案」ができるようになります。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 新人営業への商品研修</h3>
+                    <p>
+                        研修で商品を徹底的に教えるから、新人でも初日から売れる。
+                        AIへの研修が<span class="mark">プロダクトナレッジの整備</span>です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プロダクトナレッジ＝<span class="mark">商品の全情報を書き出したドキュメント</span>。
+                    価格・特徴・ターゲット・競合差別化・FAQの5点セットを整えれば、
+                    LP・セールスメール・SNS投稿すべての精度が跳ね上がります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="personal-knowledge.html" class="nav-link">← 前の用語：パーソナルナレッジ</a>
+            <a href="content-knowledge.html" class="nav-link">次の用語：コンテンツナレッジ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const fields = ['pd-1','pd-2','pd-3','pd-4','pd-5'].map(id => document.getElementById(id));
+        const labels = ['価格を登録', '特徴を明記', 'ターゲットを定義', '競合との違い', 'FAQを追加'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            fields.forEach(f => f.classList.remove('in'));
+            for (let i = 0; i < fields.length; i++) {
+                await wait(400);
+                fields[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>商品の全情報がAIに渡る</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パーソナルナレッジとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="パーソナルナレッジを、アニメーションで3秒で理解。発信者自身の経歴・実績・文体をAIに学習させるための個人情報ナレッジ。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pk-stage { max-width: 500px; margin: 0 auto; }
+        .pk-profile {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 12px;
+            padding: 20px 22px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .pk-avatar {
+            width: 64px; height: 64px;
+            background: var(--bg-warm);
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .pk-avatar::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 50%;
+            transform: translateX(-50%);
+            width: 22px; height: 22px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+        .pk-avatar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 36px; height: 18px;
+            background: var(--ink);
+            border-radius: 18px 18px 0 0;
+        }
+        .pk-info { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+        .pk-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .pk-row.in { opacity: 1; transform: translateX(0); }
+        .pk-chip {
+            background: var(--mark);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            color: var(--ink);
+        }
+        .pk-val { color: var(--ink-warm); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">36 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Personal Knowledge</div>
+            <h1 class="detail-title">パーソナルナレッジ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">発信者自身の情報</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pk-stage">
+                <div class="pk-profile">
+                    <div class="pk-avatar"></div>
+                    <div class="pk-info">
+                        <div class="pk-row" id="pk-1"><span class="pk-chip">経歴</span><span class="pk-val">元編集者 10年</span></div>
+                        <div class="pk-row" id="pk-2"><span class="pk-chip">実績</span><span class="pk-val">月商 ¥3M</span></div>
+                        <div class="pk-row" id="pk-3"><span class="pk-chip">価値観</span><span class="pk-val">本質主義</span></div>
+                        <div class="pk-row" id="pk-4"><span class="pk-chip">口癖</span><span class="pk-val">「要は〜」</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でパーソナルナレッジが埋まる流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">経歴・実績・価値観・口癖まで。個人のカルテがAIの土台になる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「あなたらしさ」の核になる情報</h2>
+            <p>
+                パーソナルナレッジとは、発信者自身の<span class="mark">経歴・実績・価値観・文体</span>などをまとめた個人情報ナレッジ。
+                AIに「自分らしい文章」を書かせるための土台になります。
+                プロフィール、過去の実績数値、口癖や表現の癖まで含めるほど、精度が上がります。
+                <span class="mark">「あなたらしさ」がテキストでAIに渡せる形</span>になっているか、がカギです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 芸能人のプロフィール帳</h3>
+                    <p>
+                        テレビ局のAD用の資料には、出演者の<span class="mark">経歴・趣味・NGワードまで</span>まとまっている。
+                        パーソナルナレッジは、<span class="mark">AIのための自分の取り扱い説明書</span>です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 転職用の職務経歴書</h3>
+                    <p>
+                        「誰に何を提供できるか」が明文化された書類。
+                        AIにも同じように、<span class="mark">自分のスペック</span>を渡すことで、あなたに合った回答が返ってきます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    パーソナルナレッジ＝<span class="mark">自分のカルテ</span>。
+                    「経歴・実績・価値観・文体・口癖」の5軸を埋めれば、AIは一気にあなた色に染まります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="knowledge-building.html" class="nav-link">← 前の用語：ナレッジ構築</a>
+            <a href="product-knowledge.html" class="nav-link">次の用語：プロダクトナレッジ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const rows = ['pk-1','pk-2','pk-3','pk-4'].map(id => document.getElementById(id));
+        const labels = ['経歴を登録', '実績を追加', '価値観を共有', '口癖・文体まで'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            rows.forEach(r => r.classList.remove('in'));
+            for (let i = 0; i < rows.length; i++) {
+                await wait(500);
+                rows[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>「あなたらしさ」がAIに伝わる</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

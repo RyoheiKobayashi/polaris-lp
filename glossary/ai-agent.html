@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIエージェントとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="AIエージェント（AI Agent）を、アニメーションで3秒で理解。特定業務に特化したAIの単位。役割分業で業務効率を最大化。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ag-stage {
+            max-width: 520px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .ag-agent {
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            padding: 18px 14px;
+            text-align: center;
+            transition: border-color .3s ease, background .3s ease, transform .3s ease;
+        }
+        .ag-agent.active {
+            border-color: var(--ink);
+            background: var(--bg-warm);
+            transform: translateY(-4px);
+        }
+        .ag-icon {
+            width: 44px; height: 44px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .ag-name {
+            font-family: var(--font-serif);
+            font-size: 15px;
+            color: var(--ink-warm);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .ag-desc {
+            font-size: 11px;
+            color: var(--ink-soft);
+            line-height: 1.55;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">30 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">AI Agent</div>
+            <h1 class="detail-title">AIエージェント</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">特定業務に特化したAIの単位</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ag-stage">
+                <div class="ag-agent" id="ag-1">
+                    <div class="ag-icon">R</div>
+                    <div class="ag-name">リサーチャー</div>
+                    <div class="ag-desc">情報収集・検証を<br>ひたすら行う</div>
+                </div>
+                <div class="ag-agent" id="ag-2">
+                    <div class="ag-icon">W</div>
+                    <div class="ag-name">ライター</div>
+                    <div class="ag-desc">集めた素材で<br>文章を書く</div>
+                </div>
+                <div class="ag-agent" id="ag-3">
+                    <div class="ag-icon">E</div>
+                    <div class="ag-name">エディター</div>
+                    <div class="ag-desc">校正・改善・<br>トーン統一</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で役割ごとのエージェントを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">1つで全部やらせず、役割ごとに分業するのが勝ち筋。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">1つのAIに全部やらせる時代は終わり</h2>
+            <p>
+                AIエージェントとは、<span class="mark">特定の業務に特化したAIの単位</span>。
+                リサーチ専用、ライティング専用、校正専用など、それぞれに役割を持たせて使います。
+                ChatGPTのGPTs、GeminiのGEM、ClaudeのProjectsも、実質的にはAIエージェントを作る機能。
+                一人のAIに全部やらせるより、<span class="mark">役割を分けて分業</span>させた方が品質もスピードも上がります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 会社の部署</h3>
+                    <p>
+                        営業・マーケ・経理・開発。<span class="mark">役割を分けるから専門性が上がる</span>のは会社の基本。
+                        AIエージェントは、<span class="mark">AIチームの部署分け</span>と考えると直感的です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 映画制作のスタッフ</h3>
+                    <p>
+                        監督・脚本・カメラ・編集、それぞれプロがいる。
+                        1人で全部やる映画より、<span class="mark">分業した作品の方が完成度が高い</span>。
+                        AIも同じ発想で運用するのが、今のAI活用の主流です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    AIエージェント＝<span class="mark">役割特化型のAI</span>。
+                    GPTsやGEMでそれぞれ作り、業務ごとに呼び出す使い方が定石。
+                    次の「オーケストレーション」は、これらを束ねて連携させる仕組みです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="dry.html" class="nav-link">← 前の用語：DRY原則</a>
+            <a href="orchestration.html" class="nav-link">次の用語：オーケストレーション →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const agents = ['ag-1','ag-2','ag-3'].map(id => document.getElementById(id));
+        const labels = ['リサーチャー：情報収集を担当', 'ライター：文章生成を担当', 'エディター：校正・改善を担当'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            agents.forEach(a => a.classList.remove('active'));
+            for (let i = 0; i < agents.length; i++) {
+                await wait(400);
+                agents.forEach(a => a.classList.remove('active'));
+                agents[i].classList.add('active');
+                status.textContent = labels[i];
+                await wait(1100);
+            }
+            agents.forEach(a => a.classList.add('active'));
+            status.innerHTML = '✓ <strong>役割分業でチーム化</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

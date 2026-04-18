@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字起こしとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="文字起こし（Transcript）を、アニメーションで3秒で理解。動画・音声をテキストに変換してナレッジの素材にする。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ts-stage { max-width: 500px; margin: 0 auto; display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; }
+        .ts-wave-box {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 18px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+        .ts-bar {
+            width: 4px;
+            background: var(--ink);
+            border-radius: 2px;
+            animation: ts-wave 1.2s ease-in-out infinite;
+        }
+        .ts-bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .ts-bar:nth-child(2) { height: 50px; animation-delay: .08s; }
+        .ts-bar:nth-child(3) { height: 80px; animation-delay: .16s; }
+        .ts-bar:nth-child(4) { height: 40px; animation-delay: .24s; }
+        .ts-bar:nth-child(5) { height: 70px; animation-delay: .32s; }
+        .ts-bar:nth-child(6) { height: 30px; animation-delay: .40s; }
+        .ts-bar:nth-child(7) { height: 60px; animation-delay: .48s; }
+        .ts-bar:nth-child(8) { height: 20px; animation-delay: .56s; }
+        @keyframes ts-wave {
+            0%, 100% { transform: scaleY(.3); }
+            50%      { transform: scaleY(1); }
+        }
+        .ts-arrow { text-align: center; font-size: 20px; color: var(--ink-mute); }
+        .ts-text-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 18px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            line-height: 1.75;
+            min-height: 150px;
+        }
+        .ts-line {
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .ts-line.in { opacity: 1; transform: translateX(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">41 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Transcript</div>
+            <h1 class="detail-title">文字起こし</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">音声・動画をテキスト化する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ts-stage">
+                <div class="ts-wave-box">
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                    <div class="ts-bar"></div>
+                </div>
+                <div class="ts-arrow">→</div>
+                <div class="ts-text-box">
+                    <div class="ts-line" id="ts-1">00:12 こんにちは、</div>
+                    <div class="ts-line" id="ts-2">00:15 今日のテーマは</div>
+                    <div class="ts-line" id="ts-3">00:18 副業の始め方です。</div>
+                    <div class="ts-line" id="ts-4">00:24 まず最初に…</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で音声→テキスト化を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">Geminiのマルチモーダルなら、動画を直接AIに渡すこともできる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">音声・動画コンテンツの「入口」</h2>
+            <p>
+                文字起こしとは、動画や音声の内容を<span class="mark">テキストに変換する作業</span>。
+                YouTube動画やセミナー録画を文字起こしすることで、AIに読み込ませる<span class="mark">ナレッジの素材</span>になります。
+                Geminiなどのマルチモーダル機能を使えば、動画を直接AIに渡して文字起こしさせることも可能。
+                音声資産が多い発信者ほど、文字起こし→ナレッジ化の効率が効いてきます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 講演録の書き起こし</h3>
+                    <p>
+                        講演の肉声は会場だけのもの。<span class="mark">書き起こされて初めて</span>書籍・ブログ・教材として活用できる。
+                        文字起こしは、音声を<span class="mark">流通可能な形</span>に変換する作業です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 議事録</h3>
+                    <p>
+                        会議の録音だけでは後から検索できない。議事録として残すから参照できる。
+                        AIへの入力も同じで、<span class="mark">テキスト化して初めてAIが参照できる</span>状態になります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    文字起こし＝<span class="mark">音声・動画をAIの入力素材に変える作業</span>。
+                    自分の過去動画・セミナー録画は<span class="mark">眠れる資産</span>。
+                    文字起こし → ナレッジ化で、再利用可能なAI素材に生まれ変わります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="knowledge-transform.html" class="nav-link">← 前の用語：ナレッジ化</a>
+            <a href="ai-ghostwriting.html" class="nav-link">次の用語：AIゴーストライティング →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const lines = ['ts-1','ts-2','ts-3','ts-4'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            lines.forEach(l => l.classList.remove('in'));
+            status.textContent = '音声を解析中…';
+            await wait(700);
+            for (let i = 0; i < lines.length; i++) {
+                await wait(500);
+                lines[i].classList.add('in');
+                status.textContent = 'テキスト化 ' + (i + 1) + '/' + lines.length;
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>ナレッジ素材</strong>に変換完了';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

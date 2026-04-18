@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナレッジ化とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="ナレッジ化を、アニメーションで3秒で理解。散在する情報をAIが読める形に変換・整理する作業。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .kt-stage { max-width: 500px; margin: 0 auto; display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; }
+        .kt-raw, .kt-clean {
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 14px;
+            min-height: 150px;
+            position: relative;
+        }
+        .kt-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+        .kt-raw .kt-scatter span {
+            position: absolute;
+            height: 3px;
+            background: var(--ink-soft);
+            border-radius: 2px;
+            opacity: .6;
+        }
+        .kt-raw .kt-scatter span:nth-child(1) { width: 60px; top: 40px; left: 14px; transform: rotate(-12deg); }
+        .kt-raw .kt-scatter span:nth-child(2) { width: 80px; top: 60px; left: 28px; transform: rotate(15deg); }
+        .kt-raw .kt-scatter span:nth-child(3) { width: 50px; top: 90px; left: 18px; transform: rotate(-6deg); }
+        .kt-raw .kt-scatter span:nth-child(4) { width: 40px; top: 110px; left: 40px; transform: rotate(20deg); }
+        .kt-raw .kt-scatter span:nth-child(5) { width: 70px; top: 130px; left: 10px; transform: rotate(-8deg); }
+        .kt-arrow { text-align: center; font-size: 20px; color: var(--ink-mute); }
+        .kt-clean.active { border-color: var(--ink); background: var(--bg-warm); }
+        .kt-md {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.65;
+            color: var(--ink);
+        }
+        .kt-md .hash { color: var(--ink-mute); margin-right: 4px; }
+        .kt-md .head { font-weight: 600; }
+        .kt-md .sub { padding-left: 10px; opacity: .8; }
+        .kt-md .item { padding-left: 18px; opacity: .7; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">40 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Knowledge Transformation</div>
+            <h1 class="detail-title">ナレッジ化</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIが読める形に変換する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="kt-stage">
+                <div class="kt-raw">
+                    <div class="kt-label">散在情報</div>
+                    <div class="kt-scatter">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="kt-arrow">→</div>
+                <div class="kt-clean" id="kt-clean">
+                    <div class="kt-label">ナレッジ化後</div>
+                    <div class="kt-md">
+                        <div class="head"><span class="hash">#</span>自己紹介</div>
+                        <div class="sub"><span class="hash">##</span>経歴</div>
+                        <div class="item"><span class="hash">-</span>編集者10年</div>
+                        <div class="item"><span class="hash">-</span>月商¥2M</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で散在情報→構造化の流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">情報は持っているだけではダメ。AIに読める形に変換して初めて武器になる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">変換しないと「持っている」だけ</h2>
+            <p>
+                ナレッジ化とは、散在する情報（動画・音声・メモなど）を<span class="mark">AIが読み取れるテキスト形式に変換・整理すること</span>。
+                文字起こしをした後にマークダウン形式で構造化するのが典型的な流れです。
+                情報は<span class="mark">持っているだけでは価値がなく、AIに渡せる形にして初めて武器になる</span>──
+                これがナレッジ時代の大原則です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 家のモノを整理する</h3>
+                    <p>
+                        倉庫の奥の箱は<span class="mark">「あるけど使えない」</span>。棚に並べ替えて初めて使えるようになります。
+                        情報も整理して整形しないと、AIは探せず・使えません。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 食材を仕込む</h3>
+                    <p>
+                        野菜をそのまま冷蔵庫に入れても料理はできない。
+                        <span class="mark">洗って・切って・下味をつけて</span>初めて使える食材になります。
+                        ナレッジ化はAIに渡す「仕込み」の作業です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ナレッジ化＝<span class="mark">散在情報をAIが読める形に変換する作業</span>。
+                    文字起こし → マークダウン整形 → 階層化 の流れが鉄板。
+                    「情報がある＝使える」ではなく、「整形して渡せる＝使える」が正解です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="primary-info.html" class="nav-link">← 前の用語：一次情報</a>
+            <a href="transcript.html" class="nav-link">次の用語：文字起こし →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const clean = document.getElementById('kt-clean');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            clean.classList.remove('active');
+            status.textContent = '散在した情報はAIに渡せない…';
+            await wait(1100);
+            status.textContent = '文字起こし→構造化して整形';
+            await wait(800);
+            clean.classList.add('active');
+            status.innerHTML = '✓ <strong>AIが読み取れる形</strong>に変換完了';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

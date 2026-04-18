@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEM（Gemini Gems）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="GEM（Gemini Gems）を、アニメーションで3秒で理解。Geminiで作れるカスタム指示機能。GPTsのGemini版。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .gm-stage { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .gm-diamond {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, var(--ink) 0%, var(--ink-warm) 100%);
+            transform: rotate(45deg);
+            position: relative;
+            animation: gm-spin 8s linear infinite;
+        }
+        .gm-diamond::after {
+            content: '';
+            position: absolute;
+            inset: 14px;
+            border: 1px solid #fff;
+            opacity: .3;
+        }
+        .gm-diamond::before {
+            content: 'GEM';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-45deg);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            animation: gm-counter 8s linear infinite;
+        }
+        @keyframes gm-spin {
+            0%   { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+        @keyframes gm-counter {
+            0%   { transform: rotate(-45deg); }
+            100% { transform: rotate(-405deg); }
+        }
+        .gm-caps {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gm-cap {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 5px 10px;
+            border-radius: 99px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .gm-cap.in { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">33 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Gemini Gems</div>
+            <h1 class="detail-title">GEM</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">Geminiのカスタム指示機能</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="gm-stage">
+                <div class="gm-diamond"></div>
+                <div class="gm-caps">
+                    <div class="gm-cap" id="g-1">ロール定義</div>
+                    <div class="gm-cap" id="g-2">ナレッジ連携</div>
+                    <div class="gm-cap" id="g-3">呼び出しで即起動</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でGEMの特性を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">自分専用の「分身AI」を Gemini で作れる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">Gemini版の「分身AI」</h2>
+            <p>
+                GEMは、Geminiで作れる<span class="mark">カスタム指示機能</span>。
+                ChatGPTのGPTs相当で、自分専用のAI設定を保存して繰り返し使えます。
+                講座では<span class="mark">「GEMの機能による分身AIの構築」</span>と呼び、
+                特定業務に特化したエージェントをGeminiネイティブで作るアプローチが紹介されます。
+                Google Docs・Gmail・Drive との連携が強いのがGemini系の強みです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① プロ用機材の「プリセット」</h3>
+                    <p>
+                        カメラの設定を毎回いじるプロはいない。
+                        <span class="mark">「いつものプリセット」</span>を呼び出して即撮影に入る。GEMもそれと同じ発想です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 自分仕様のアシスタント</h3>
+                    <p>
+                        「あなたの癖・好み・業務」を覚えさせたアシスタントが<span class="mark">ワンクリックで呼び出せる</span>状態。
+                        それが分身AIであり、GEMの本質です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    GEM＝<span class="mark">Geminiの分身AI</span>。
+                    GPTsと同じ考え方で、用途別に作ってストックしておくと日々の業務が劇的に速くなります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="gpts.html" class="nav-link">← 前の用語：GPTs</a>
+            <a href="project.html" class="nav-link">次の用語：プロジェクト機能 →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const caps = ['g-1','g-2','g-3'].map(id => document.getElementById(id));
+        const labels = ['ロール（役割）を設定', 'ナレッジを紐付け', '一度設定すれば呼び出すだけ'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            caps.forEach(c => c.classList.remove('in'));
+            for (let i = 0; i < caps.length; i++) {
+                await wait(500);
+                caps[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>分身AI</strong> の完成';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

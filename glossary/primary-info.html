@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一次情報とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="一次情報を、アニメーションで3秒で理解。自分の体験・実績・データ。AIの学習データに含まれない、最も価値の高い情報。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pr-stage { max-width: 500px; margin: 0 auto; display: flex; gap: 20px; align-items: stretch; }
+        .pr-col {
+            flex: 1;
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 16px;
+            transition: border-color .3s ease, background .3s ease;
+        }
+        .pr-col.active { border-color: var(--ink); background: var(--bg-warm); }
+        .pr-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            color: var(--ink-mute);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .pr-list { display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: var(--ink-warm); line-height: 1.55; }
+        .pr-item {
+            padding: 4px 0;
+            border-bottom: 1px dashed var(--line);
+        }
+        .pr-item:last-child { border-bottom: 0; }
+        .pr-value {
+            margin-top: 14px;
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--ink);
+            animation: pr-pulse 2.5s ease-in-out infinite;
+        }
+        .pr-col.gen .pr-value { color: var(--ink-mute); }
+        @keyframes pr-pulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">39 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Primary Information</div>
+            <h1 class="detail-title">一次情報</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">自分しか持たないオリジナル情報</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pr-stage">
+                <div class="pr-col gen" id="col-gen">
+                    <div class="pr-title">誰でも書ける情報</div>
+                    <div class="pr-list">
+                        <div class="pr-item">・ChatGPTの使い方</div>
+                        <div class="pr-item">・AIの基本概念</div>
+                        <div class="pr-item">・一般的なTips</div>
+                    </div>
+                    <div class="pr-value">低</div>
+                </div>
+                <div class="pr-col" id="col-prim">
+                    <div class="pr-title">あなたの一次情報</div>
+                    <div class="pr-list">
+                        <div class="pr-item">・月商¥2M達成の流れ</div>
+                        <div class="pr-item">・受講生50名の変化</div>
+                        <div class="pr-item">・自分が失敗した話</div>
+                    </div>
+                    <div class="pr-value">高</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で一次情報の価値を比較</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">具体的な数字や体験談は、AIには真似できない差別化要素。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIには絶対マネできない情報</h2>
+            <p>
+                一次情報とは、<span class="mark">自分自身の体験・実績・データ</span>など、他の誰も持っていないオリジナルの情報。
+                AIの学習データには含まれていないため、ナレッジとして渡す価値が最も高い情報です。
+                「売上が〇〇万円達成」「〇〇人に指導した経験」など、<span class="mark">具体的な数字や体験</span>が一次情報にあたります。
+                AIを使うからこそ、人間にしか書けない一次情報の価値が相対的に上がります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新聞記者のスクープ</h3>
+                    <p>
+                        どの記者も取材できる話は価値が薄い。<span class="mark">自分しか取材できない話がスクープ</span>。
+                        一次情報は、あなたにしか書けない「発信のスクープ」そのものです。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 私小説の力</h3>
+                    <p>
+                        「自分の体験をそのまま書いた私小説」は、AIには絶対書けない。
+                        一次情報は、AI時代に<span class="mark">最後まで人間が勝てる領域</span>です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    一次情報＝<span class="mark">あなた固有のオリジナル情報</span>。
+                    AIを使うなら、<span class="mark">一次情報を「具体的な数字・体験」として書き出してナレッジ化</span>する習慣を。
+                    これがAI時代の差別化の核になります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="content-knowledge.html" class="nav-link">← 前の用語：コンテンツナレッジ</a>
+            <a href="knowledge-transform.html" class="nav-link">次の用語：ナレッジ化 →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const gen = document.getElementById('col-gen');
+        const prim = document.getElementById('col-prim');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            gen.classList.remove('active');
+            prim.classList.remove('active');
+            status.textContent = 'AIに書かせれば手に入る情報…';
+            await wait(1000);
+            gen.classList.add('active');
+            await wait(1200);
+            status.textContent = '一方、あなたにしか書けない情報は…';
+            gen.classList.remove('active');
+            await wait(600);
+            prim.classList.add('active');
+            status.innerHTML = '✓ <strong>AIが真似できない</strong>差別化要素';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
