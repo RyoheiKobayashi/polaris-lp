@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アシスタントプロンプトとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="アシスタントプロンプト（Assistant Prompt）を、アニメーションで3秒で理解。AIの応答例を先に見せて出力形式を揃えるテクニック。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ap-stage { max-width: 520px; margin: 0 auto; }
+        .ap-example {
+            background: #fff;
+            border: 1px dashed var(--ink-mute);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--ink);
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+        }
+        .ap-example-tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--ink-mute);
+            margin-bottom: 6px;
+        }
+        .ap-arrow { text-align: center; color: var(--ink-mute); font-size: 18px; margin: 10px 0; }
+        .ap-result {
+            background: var(--ink);
+            color: #fff;
+            border-radius: 14px;
+            border-top-left-radius: 3px;
+            padding: 12px 16px;
+            font-size: 13px;
+            line-height: 1.8;
+            font-family: var(--font-mono);
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .ap-result.in { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">16 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Assistant Prompt</div>
+            <h1 class="detail-title">アシスタントプロンプト</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIの応答例を先に見せる</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ap-stage">
+                <div class="ap-example">
+                    <span class="ap-example-tag">ASSISTANT（例として渡す応答形式）</span>
+                    <div>▶ 結論：〜〜〜</div>
+                    <div>▶ 理由：〜〜〜</div>
+                    <div>▶ 具体例：〜〜〜</div>
+                </div>
+                <div class="ap-arrow">↓</div>
+                <div class="ap-result" id="ap-out">
+                    <div>▶ 結論：毎朝の運動が効果的</div>
+                    <div>▶ 理由：代謝が上がるため</div>
+                    <div>▶ 具体例：15分のウォーキング</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で形式が揃う様子を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">見本を渡すと、AIは自動的にその形式に寄せてくる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「こう返してね」という見本を先に渡す</h2>
+            <p>
+                アシスタントプロンプトは、<span class="mark">AIの応答例（出力の見本）をあらかじめ示しておく</span>プロンプト。
+                「こういう形式で答えてほしい」という見本を渡すことで、本番の回答が同じフォーマットに揃います。
+                ChatGPTやClaudeのAPIでは、`role: "assistant"` として過去のやり取りを渡し、会話の流れや形式を引き継がせる使い方をします。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新人に渡すテンプレート</h3>
+                    <p>
+                        議事録のフォーマットを<span class="mark">白紙で渡す</span>のと、
+                        過去の議事録を「こんな感じで書いてね」と<span class="mark">見本として渡す</span>のでは、仕上がりがまるで違う。
+                        アシスタントプロンプトは、AIに渡す「記入例付きフォーマット」です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 料理のレシピ写真</h3>
+                    <p>
+                        完成写真があるレシピと、文字だけのレシピでは出来上がりの精度が違う。
+                        AIも<span class="mark">「ゴールイメージ」が画像＝応答例として渡される</span>と、その通りに近づけようとします。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    アシスタントプロンプト＝<span class="mark">出力形式の「見本」</span>。
+                    次の用語「RTF」の「F（Format）」とも相性が良く、
+                    文章で形式を伝えるのが難しいときは、<span class="mark">実際の例を貼り付ける</span>のが一番早いです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="user-prompt.html" class="nav-link">← 前の用語：ユーザープロンプト</a>
+            <a href="rtf.html" class="nav-link">次の用語：RTF →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const out = document.getElementById('ap-out');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            out.classList.remove('in');
+
+            await wait(400);
+            status.textContent = '応答例のフォーマットを渡す…';
+            await wait(800);
+            status.textContent = 'AIが形式を真似て回答';
+            await wait(700);
+            out.classList.add('in');
+            status.innerHTML = '✓ <strong>見本に揃った形式</strong>で出力';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

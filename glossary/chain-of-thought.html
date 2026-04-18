@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain of Thought（思考の連鎖）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="Chain of Thought（CoT / 思考の連鎖）を、アニメーションで3秒で理解。「段階的に考えて」と指示して推論精度を上げるテクニック。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .cot-stage { max-width: 520px; margin: 0 auto; }
+        .cot-q {
+            background: var(--ink);
+            color: #fff;
+            border-radius: 14px 14px 3px 14px;
+            padding: 10px 14px;
+            font-size: 13px;
+            max-width: 85%;
+            margin-left: auto;
+            margin-bottom: 14px;
+        }
+        .cot-steps { display: flex; flex-direction: column; gap: 10px; }
+        .cot-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .cot-step.in { opacity: 1; transform: translateY(0); }
+        .cot-num {
+            flex-shrink: 0;
+            width: 28px; height: 28px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .cot-final .cot-num { background: var(--ink); color: #fff; }
+        .cot-body {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--ink);
+            flex: 1;
+            line-height: 1.55;
+        }
+        .cot-final .cot-body {
+            background: var(--mark);
+            border-color: var(--mark);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">25 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Chain of Thought（CoT）</div>
+            <h1 class="detail-title">Chain of Thought</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">思考の連鎖</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="cot-stage">
+                <div class="cot-q">商品A・Bどちらを優先投資すべき？ <strong>ステップごとに考えて</strong>。</div>
+                <div class="cot-steps">
+                    <div class="cot-step" id="cs-1"><div class="cot-num">1</div><div class="cot-body">まず、判断基準を定義（粗利率・市場規模・再現性）</div></div>
+                    <div class="cot-step" id="cs-2"><div class="cot-num">2</div><div class="cot-body">次に、商品A／Bを各基準で採点</div></div>
+                    <div class="cot-step" id="cs-3"><div class="cot-num">3</div><div class="cot-body">最後に、合計点と定性的な追加要素を統合</div></div>
+                    <div class="cot-step cot-final" id="cs-4"><div class="cot-num">✓</div><div class="cot-body">結論：まずBを優先。Aは3ヶ月後に再評価。</div></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で段階推論の流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">途中の思考を言語化させると、結論の筋が通りやすい。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「段階的に考えて」の一言が効く</h2>
+            <p>
+                Chain of Thought（CoT／思考の連鎖）は、AIに<span class="mark">「ステップごとに考えて」と指示することで、推論の精度を上げるテクニック</span>。
+                複雑な分析や比較、計算、意思決定タスクで特に有効です。
+                「まず〇〇を考え、次に〇〇を検討し、最後に結論…」のように<span class="mark">思考プロセスを明示させる</span>ことで、
+                論理の飛躍・早とちりを防ぎ、ハルシネーションも減ります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 計算の途中式を書かせる</h3>
+                    <p>
+                        学校のテストで「途中式を書くと部分点が出る」のは、<span class="mark">思考の跡を残すほうがミスが減る</span>から。
+                        AIも同じで、途中の思考を書かせると、計算・推論の精度が上がります。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② プレゼンのストーリーライン</h3>
+                    <p>
+                        いきなり結論だけ言う人より、「前提→課題→仮説→検証→結論」と段階的に話す人のほうが説得力がある。
+                        CoTは、AIに<span class="mark">論理の階段を一段ずつ踏ませる</span>テクニックです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Chain of Thought＝<span class="mark">「ステップごとに考えて」と明示する</span>だけ。
+                    複雑なタスク・数学的思考・意思決定では効果抜群。
+                    プロンプトの最後に一文足すだけで、論理の飛躍をぐっと減らせます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="few-shot.html" class="nav-link">← 前の用語：Few-shot / Zero-shot</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const steps = ['cs-1','cs-2','cs-3','cs-4'].map(id => document.getElementById(id));
+        const labels = ['ステップ1：判断基準を定義', 'ステップ2：各基準で採点', 'ステップ3：統合して考察', '✓ 結論に到達'];
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            steps.forEach(s => s.classList.remove('in'));
+
+            for (let i = 0; i < steps.length; i++) {
+                await wait(600);
+                steps[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>段階を踏んだ推論</strong>で結論の筋が通る';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

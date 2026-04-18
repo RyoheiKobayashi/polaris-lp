@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプトとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプト（Prompt）を、アニメーションで3秒で理解。AIに与える指示文そのもの。プロンプトの書き方でAIの出力は大きく変わります。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pm-stage {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .pm-box {
+            background: var(--surface);
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--ink);
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pm-prefix { color: var(--ink-mute); }
+        .pm-caret {
+            display: inline-block;
+            width: 2px;
+            height: 18px;
+            background: var(--ink);
+            animation: blink-caret 0.8s step-end infinite;
+            margin-left: 2px;
+        }
+        @keyframes blink-caret {
+            50% { opacity: 0; }
+        }
+        .pm-typed { white-space: pre; }
+        .pm-arrow {
+            text-align: center;
+            font-size: 18px;
+            color: var(--ink-mute);
+            margin: 12px 0;
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+        .pm-arrow.in { opacity: 1; }
+        .pm-out {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: var(--ink);
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .pm-out.in { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">12 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Prompt</div>
+            <h1 class="detail-title">プロンプト</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIに与える指示文</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pm-stage">
+                <div class="pm-box">
+                    <span class="pm-prefix">&gt;</span>
+                    <span class="pm-typed" id="typed"></span>
+                    <span class="pm-caret"></span>
+                </div>
+                <div class="pm-arrow" id="arrow">↓</div>
+                <div class="pm-out" id="output">AI：「わかりました。以下に要約します…」</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でプロンプト入力→応答を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">入力された「指示文」がプロンプト。これ一本でAIの出力が決まる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">プロンプト＝AIへの「指示文」</h2>
+            <p>
+                プロンプトとは、AIに対して入力する<span class="mark">「指示文」そのもの</span>。
+                「何をしてほしいか」「どんな形式で出力してほしいか」をテキストで伝えます。
+                ChatGPTに投げるメッセージも、Geminiへの質問も、Claudeへの依頼も、すべてプロンプト。
+                AIを使う上で最も基本であり、最も多く使われる用語です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 料理人への注文</h3>
+                    <p>
+                        レストランで「美味しいもの」とだけ頼むのと、「辛さ控えめ・塩分少なめで、30分以内に出せるパスタ」と頼むのでは、
+                        出てくる料理がまるで違う。
+                        プロンプトは<span class="mark">注文書</span>であり、書き方次第で料理（出力）の品質が大きく変わります。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 部下への指示</h3>
+                    <p>
+                        「資料作って」だけの上司より、「誰向け・何のため・何ページ・いつまで」まで伝える上司のほうが良いアウトプットを得られる。
+                        AIも<span class="mark">具体的な指示ほど質の高い返答を出す</span>のは人間と同じです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プロンプト＝<span class="mark">AIに渡すテキストの指示文</span>。
+                    AI活用の第一歩であり、全ての始まり。
+                    次の「プロンプトエンジニアリング」では、このプロンプトを<span class="mark">「どう書けば精度が上がるか」</span>を扱います。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="memory.html" class="nav-link">← 前の用語：メモリ</a>
+            <a href="prompt-engineering.html" class="nav-link">次の用語：プロンプトエンジニアリング →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const typed = document.getElementById('typed');
+        const arrow = document.getElementById('arrow');
+        const output = document.getElementById('output');
+        const text = 'この記事を300字で要約して';
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            typed.textContent = '';
+            arrow.classList.remove('in');
+            output.classList.remove('in');
+
+            status.textContent = 'プロンプトを入力中…';
+            for (let i = 0; i <= text.length; i++) {
+                typed.textContent = text.slice(0, i);
+                await wait(70);
+            }
+            await wait(500);
+
+            arrow.classList.add('in');
+            status.textContent = 'AIに送信';
+            await wait(600);
+
+            output.classList.add('in');
+            status.innerHTML = '✓ プロンプトを受けて <strong>AIが応答</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

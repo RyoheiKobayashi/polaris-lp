@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザープロンプトとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="ユーザープロンプト（User Prompt）を、アニメーションで3秒で理解。チャット画面で自分が入力するメッセージの正体。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .up-stage { max-width: 520px; margin: 0 auto; }
+        .up-chat { display: flex; flex-direction: column; gap: 10px; }
+        .up-bubble {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            max-width: 85%;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .up-bubble.in { opacity: 1; transform: translateY(0); }
+        .up-usr {
+            background: var(--ink);
+            color: #fff;
+            margin-left: auto;
+            border-top-right-radius: 3px;
+        }
+        .up-ai {
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            margin-right: auto;
+            border-top-left-radius: 3px;
+        }
+        .up-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-mute);
+            letter-spacing: 0.08em;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">15 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">User Prompt</div>
+            <h1 class="detail-title">ユーザープロンプト</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ユーザーがAIに投げる具体的な依頼</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="up-stage">
+                <div class="up-chat">
+                    <div class="up-label">USER</div>
+                    <div class="up-bubble up-usr" id="u1">ダイエットの動画台本を考えて</div>
+                    <div class="up-bubble up-ai" id="a1">以下の構成でご提案します…</div>
+                    <div class="up-bubble up-usr" id="u2">導入部をもっとインパクトのある表現に</div>
+                    <div class="up-bubble up-ai" id="a2">承知しました。こちらで…</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で会話の流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">黒い吹き出しが全部「ユーザープロンプト」。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">チャット画面で入力する、あれ</h2>
+            <p>
+                ユーザープロンプトとは、<span class="mark">ユーザーがAIに投げる具体的な質問や依頼</span>のこと。
+                ChatGPT・Claude・Geminiのチャット画面で、自分が入力するメッセージがこれにあたります。
+                システムプロンプトで<span class="mark">「役割を定義したAI」に対して、実際に何をしてほしいかを伝える</span>のがユーザープロンプトの仕事です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 上司への相談</h3>
+                    <p>
+                        職務が決まっている上司に「今日はこの件を相談したい」と話しかける行為が、ユーザープロンプト。
+                        AIの役割（システムプロンプト）はすでに決まっていて、そこに<span class="mark">毎回の個別依頼を流し込む</span>のがユーザー側の仕事です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② レストランで料理を注文する</h3>
+                    <p>
+                        メニューと料理人（システム）は決まっていて、あなたは「今日はこれにします」と注文する。
+                        この<span class="mark">注文がユーザープロンプト</span>。毎回具体的に伝えるのはユーザーの責務です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ユーザープロンプト＝<span class="mark">毎回AIに投げる「個別の依頼文」</span>。
+                    システムで役割を固め、ユーザーで具体的にお願いする──これが基本のセットです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="system-prompt.html" class="nav-link">← 前の用語：システムプロンプト</a>
+            <a href="assistant-prompt.html" class="nav-link">次の用語：アシスタントプロンプト →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const els = ['u1','a1','u2','a2'].map(id => document.getElementById(id));
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            els.forEach(e => e.classList.remove('in'));
+
+            await wait(300);
+            els[0].classList.add('in');
+            status.textContent = '1通目のユーザープロンプト';
+            await wait(900);
+            els[1].classList.add('in');
+            status.textContent = 'AI応答';
+            await wait(1100);
+            els[2].classList.add('in');
+            status.textContent = '2通目のユーザープロンプト（続きの依頼）';
+            await wait(900);
+            els[3].classList.add('in');
+            status.innerHTML = '✓ 黒い吹き出しが <strong>全てユーザープロンプト</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

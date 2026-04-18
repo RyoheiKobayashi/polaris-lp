@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプトエンジニアリングとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプトエンジニアリング（Prompt Engineering）を、アニメーションで3秒で理解。同じAIでもプロンプト次第で出力品質が大きく変わる。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pe-stage {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) {
+            .pe-stage { grid-template-columns: 1fr 1fr; gap: 20px; }
+        }
+        .pe-side {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 16px 18px;
+            min-height: 170px;
+            transition: border-color .3s ease, background .3s ease;
+        }
+        .pe-side.active { border-color: var(--ink); background: var(--bg-warm); }
+        .pe-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-mute);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .pe-prompt {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.55;
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            background: var(--bg-warm);
+            border-radius: 6px;
+            border: 1px solid var(--line);
+        }
+        .pe-side.active .pe-prompt { background: #fff; }
+        .pe-result {
+            font-size: 12px;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .pe-result.in { opacity: 1; transform: translateY(0); color: var(--ink-warm); }
+        .pe-grade {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity .4s ease;
+        }
+        .pe-grade.in { opacity: 1; }
+        .pe-grade.low { background: #fee2e2; color: #991b1b; }
+        .pe-grade.high { background: #d1fae5; color: #065f46; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">13 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Prompt Engineering</div>
+            <h1 class="detail-title">プロンプトエンジニアリング</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="pe-stage">
+                <div class="pe-side" id="side-bad">
+                    <div class="pe-tag">Before</div>
+                    <div class="pe-prompt">文章書いて</div>
+                    <div class="pe-result" id="result-bad">ふわっとした一般的な文章が出力される</div>
+                    <span class="pe-grade low" id="grade-bad">品質：低</span>
+                </div>
+                <div class="pe-side" id="side-good">
+                    <div class="pe-tag">After</div>
+                    <div class="pe-prompt"><span class="mark">あなたは編集者。</span>30代女性向けに<span class="mark">300字で要約</span>してください。</div>
+                    <div class="pe-result" id="result-good">ターゲットと分量に沿った、狙い通りの文章が出力される</div>
+                    <span class="pe-grade high" id="grade-good">品質：高</span>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で同じAI・別プロンプトの差を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">AIは同じでも、プロンプト次第で出力は大きく変わる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">同じAIでも「指示書」の差が出力の差</h2>
+            <p>
+                プロンプトエンジニアリングとは、<span class="mark">プロンプトの書き方を工夫してAIの出力品質を高める技術</span>のこと。
+                エンジニアと名前が付いていますが、コードは書きません。書くのは「指示文」です。
+                役割・文脈・制約・出力形式をきちんと盛り込むだけで、同じモデルでも回答の精度・実用度が段違いに変わります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ブリーフィングが上手い人</h3>
+                    <p>
+                        外注デザイナーに「いい感じで作って」と丸投げする人と、参考URL・ターゲット・トーン・締切まで伝える人。
+                        同じデザイナーに頼んでも、<span class="mark">ブリーフ次第で成果物の質が変わる</span>のと同じです。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② レシピに沿って料理する</h3>
+                    <p>
+                        「美味しく作って」と言われるより、「2人分・塩分控えめ・30分以内」と具体的な指示があるほうが、料理人は失敗しません。
+                        プロンプトエンジニアリングは、<span class="mark">レシピを正確に書く技術</span>に近いものです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プロンプトエンジニアリング＝<span class="mark">プロンプトを最適化する作業</span>。
+                    RTF（Role・Task・Format）やコンテキスト、3C原則など、次に出てくる用語はすべて「より良いプロンプトを作る」ための道具箱です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="prompt.html" class="nav-link">← 前の用語：プロンプト</a>
+            <a href="system-prompt.html" class="nav-link">次の用語：システムプロンプト →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const sideBad = document.getElementById('side-bad');
+        const sideGood = document.getElementById('side-good');
+        const resBad = document.getElementById('result-bad');
+        const resGood = document.getElementById('result-good');
+        const grBad = document.getElementById('grade-bad');
+        const grGood = document.getElementById('grade-good');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function reset() {
+            [sideBad, sideGood].forEach(s => s.classList.remove('active'));
+            [resBad, resGood, grBad, grGood].forEach(e => e.classList.remove('in'));
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            reset();
+
+            await wait(300);
+            sideBad.classList.add('active');
+            status.textContent = 'ざっくりプロンプトを投入…';
+            await wait(900);
+            resBad.classList.add('in');
+            grBad.classList.add('in');
+            status.textContent = '→ 期待外れ。やり直し';
+            await wait(1400);
+
+            sideBad.classList.remove('active');
+            sideGood.classList.add('active');
+            status.textContent = '役割・対象・形式を明示したプロンプトへ';
+            await wait(900);
+            resGood.classList.add('in');
+            grGood.classList.add('in');
+            status.innerHTML = '✓ 同じAIでも <strong>出力の質が激変</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
