@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナレッジ構築とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="ナレッジ構築を、アニメーションで3秒で理解。AIに渡す情報を体系的に整理・作成するプロセス全体。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .kb-stage { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column-reverse; gap: 6px; align-items: center; }
+        .kb-block {
+            height: 34px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .kb-block.in { opacity: 1; transform: translateY(0); }
+        .kb-block.b1 { width: 280px; background: var(--ink); }
+        .kb-block.b2 { width: 240px; background: var(--ink-warm); }
+        .kb-block.b3 { width: 200px; background: var(--ink-soft); }
+        .kb-block.b4 { width: 160px; background: var(--ink-mute); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">35 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Knowledge Building</div>
+            <h1 class="detail-title">ナレッジ構築</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">情報を体系的に積み上げる</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="kb-stage">
+                <div class="kb-block b1" id="kb-1">土台：パーソナル</div>
+                <div class="kb-block b2" id="kb-2">プロダクト</div>
+                <div class="kb-block b3" id="kb-3">コンテンツ</div>
+                <div class="kb-block b4" id="kb-4">完成</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で積み上げの流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">3種類のナレッジを順に積むと、AI活用基盤が完成する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">3種類のナレッジを順番に積む</h2>
+            <p>
+                ナレッジ構築とは、AIに渡すための情報を<span class="mark">体系的に整理・作成するプロセス全体</span>のこと。
+                講座では <strong>パーソナルナレッジ</strong>（自分の情報）、<strong>プロダクトナレッジ</strong>（商品情報）、
+                <strong>コンテンツナレッジ</strong>（発信情報）の3種類に分けて構築します。
+                ナレッジの質がAI出力の質を直接左右するため、<span class="mark">講座の最重要パートの一つ</span>です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 家の基礎工事</h3>
+                    <p>
+                        基礎がしっかりしていないと、柱も屋根も意味がない。
+                        ナレッジも<span class="mark">土台（パーソナル）→柱（プロダクト）→屋根（コンテンツ）</span>の順に積むのが基本です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 辞書の編纂</h3>
+                    <p>
+                        語彙カードを分類・整理・索引化して初めて使える辞書になる。
+                        ナレッジも<span class="mark">整理された状態</span>で初めて「AIの道具」として機能します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ナレッジ構築＝<span class="mark">パーソナル→プロダクト→コンテンツの順に積む作業</span>。
+                    ここで手を抜くと、どれだけプロンプトを磨いても「自分らしい」AIにはなりません。
+                    AIゴーストライティングなど応用の手前にある最重要ステップです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="project.html" class="nav-link">← 前の用語：プロジェクト機能</a>
+            <a href="personal-knowledge.html" class="nav-link">次の用語：パーソナルナレッジ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const blocks = ['kb-1','kb-2','kb-3','kb-4'].map(id => document.getElementById(id));
+        const labels = ['① 土台：パーソナルナレッジ', '② プロダクトナレッジ', '③ コンテンツナレッジ', '✓ 完成'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            blocks.forEach(b => b.classList.remove('in'));
+            for (let i = 0; i < blocks.length; i++) {
+                await wait(500);
+                blocks[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>AI活用の基盤</strong>が完成';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

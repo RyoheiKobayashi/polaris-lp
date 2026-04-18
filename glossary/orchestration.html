@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オーケストレーションとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="オーケストレーション（Orchestration）を、アニメーションで3秒で理解。複数のAIエージェントを指揮者のように束ねて連携させる仕組み。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .or-stage {
+            max-width: 420px;
+            margin: 0 auto;
+            position: relative;
+            height: 260px;
+        }
+        .or-conductor {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 88px; height: 88px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+        }
+        .or-conductor strong { font-size: 18px; margin-bottom: 2px; }
+        .or-satellite {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 10px 8px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            transition: background .3s ease, color .3s ease;
+        }
+        .or-satellite.active { background: var(--mark); }
+        .or-satellite.s1 { left: 0; }
+        .or-satellite.s2 { left: 50%; transform: translateX(-50%); }
+        .or-satellite.s3 { right: 0; }
+        .or-link {
+            position: absolute;
+            top: 88px;
+            left: 50%;
+            width: 2px;
+            height: 60px;
+            background: var(--ink-mute);
+            transform-origin: top;
+            animation: or-flash 3s ease-in-out infinite;
+            opacity: .35;
+        }
+        .or-link.a1 { transform: rotate(-35deg); animation-delay: 0s; }
+        .or-link.a2 { transform: rotate(0); animation-delay: .3s; }
+        .or-link.a3 { transform: rotate(35deg); animation-delay: .6s; }
+        @keyframes or-flash {
+            0%, 100% { opacity: .3; }
+            50%      { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">31 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Orchestration</div>
+            <h1 class="detail-title">オーケストレーション</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIエージェントの指揮者</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="or-stage">
+                <div class="or-conductor"><strong>指揮者</strong>CONDUCTOR</div>
+                <div class="or-link a1"></div>
+                <div class="or-link a2"></div>
+                <div class="or-link a3"></div>
+                <div class="or-satellite s1" id="s1">リサーチャー</div>
+                <div class="or-satellite s2" id="s2">ライター</div>
+                <div class="or-satellite s3" id="s3">エディター</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で指揮者がエージェントを呼ぶ流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">各エージェントに指示を出す「指揮者役」がオーケストレーション。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">オーケストラの指揮者のように</h2>
+            <p>
+                オーケストレーションとは、複数のAIエージェントを<span class="mark">束ねて連携させる仕組み</span>。
+                オーケストラの指揮者が弦・管・打楽器それぞれを統括するように、
+                <span class="mark">各AIエージェントに役割を振り、順番と結果を管理する</span>のが指揮者役AIです。
+                1つのタスクを複数のエージェントで分担・リレーさせることで、
+                単体では到達できない品質・複雑度の成果物が作れるようになります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① プロジェクトマネージャー</h3>
+                    <p>
+                        PMは自分で手を動かすより、<span class="mark">メンバーに仕事を振って全体を動かす</span>のが仕事。
+                        オーケストレーションは、AIチームのPMにあたる層です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② レストランの厨房</h3>
+                    <p>
+                        シェフは調理担当者に「前菜は彼、メインは彼女」と<span class="mark">タクトを振る</span>。
+                        AIエージェントがシェフ陣、オーケストレーションが総料理長の役割です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    オーケストレーション＝<span class="mark">複数のAIを束ねる指揮者</span>。
+                    エージェント単体 → 連携 → オーケストレーションへと進化することで、
+                    より複雑なワークフローを自動化できるようになります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="ai-agent.html" class="nav-link">← 前の用語：AIエージェント</a>
+            <a href="gpts.html" class="nav-link">次の用語：GPTs →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const sats = ['s1','s2','s3'].map(id => document.getElementById(id));
+        const labels = ['① リサーチャーを指揮', '② ライターに引き継ぎ', '③ エディターで仕上げ'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            sats.forEach(s => s.classList.remove('active'));
+            for (let i = 0; i < sats.length; i++) {
+                await wait(400);
+                sats.forEach(s => s.classList.remove('active'));
+                sats[i].classList.add('active');
+                status.textContent = labels[i];
+                await wait(1100);
+            }
+            sats.forEach(s => s.classList.add('active'));
+            status.innerHTML = '✓ <strong>指揮者がAI陣を統括</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

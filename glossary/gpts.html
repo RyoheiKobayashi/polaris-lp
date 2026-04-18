@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPTs（カスタムGPT）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="GPTs（Custom GPT）を、アニメーションで3秒で理解。ChatGPT上で作れる特定用途のカスタムAI。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .gp-stage { max-width: 500px; margin: 0 auto; display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; }
+        .gp-parts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .gp-part {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .gp-part.in { opacity: 1; transform: translateX(0); }
+        .gp-part .chip { background: var(--mark); font-size: 10px; padding: 2px 6px; border-radius: 3px; flex-shrink: 0; }
+        .gp-arrow { text-align: center; font-size: 18px; color: var(--ink-mute); }
+        .gp-product {
+            background: var(--ink);
+            color: #fff;
+            border-radius: 14px;
+            padding: 22px 18px;
+            text-align: center;
+        }
+        .gp-product .badge { background: #fff; color: var(--ink); font-family: var(--font-mono); font-weight: 600; font-size: 14px; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 8px; }
+        .gp-product .name { font-family: var(--font-serif); font-size: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">32 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Custom GPT</div>
+            <h1 class="detail-title">GPTs</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ChatGPT上のカスタムAI</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="gp-stage">
+                <div class="gp-parts">
+                    <div class="gp-part" id="gp-1"><span class="chip">ROLE</span>編集者として</div>
+                    <div class="gp-part" id="gp-2"><span class="chip">NAV</span>過去台本50本</div>
+                    <div class="gp-part" id="gp-3"><span class="chip">OUT</span>構成テンプレ</div>
+                </div>
+                <div class="gp-arrow">→</div>
+                <div class="gp-product">
+                    <div class="badge">GPTs</div>
+                    <div class="name">台本作成GPT</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でGPTsが組み立てられる様子</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">プロンプト＋ナレッジ＋出力形式を保存した専用AI。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「専用ツール」として保存できる</h2>
+            <p>
+                GPTsとは、ChatGPT上で作れる<span class="mark">特定用途に特化したカスタムAI</span>。
+                自分のプロンプトやナレッジ（社内資料・FAQ・過去コンテンツ）を組み込んで、
+                <span class="mark">繰り返し使える専用ツール</span>として保存できます。
+                毎回同じプロンプトを貼るのではなく、一度設定した「GPT」を呼び出すだけ。
+                DRY原則の実践ツールそのものです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① アプリの保存ショートカット</h3>
+                    <p>
+                        毎回Safariで検索するのではなく、<span class="mark">ホーム画面にアイコンを置く</span>と一発起動できる。
+                        GPTsも、毎回プロンプトを書かずに<span class="mark">「呼び出すだけ」</span>に近い使い勝手を実現します。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 登録した注文</h3>
+                    <p>
+                        ネットスーパーで「いつもの買い物」を登録すれば、翌週はワンタップ。
+                        GPTsは、<span class="mark">「いつものAI指示」をワンタップ化</span>する機能と考えると直感的です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    GPTs＝<span class="mark">ChatGPT上の専用AI作成機能</span>。
+                    プロンプト＋ナレッジ＋出力形式をセットで保存しておけば、
+                    毎回同じ品質を最短時間で呼び出せます。GeminiのGEMとコンセプトは同じです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="orchestration.html" class="nav-link">← 前の用語：オーケストレーション</a>
+            <a href="gem.html" class="nav-link">次の用語：GEM →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const parts = ['gp-1','gp-2','gp-3'].map(id => document.getElementById(id));
+        const labels = ['① プロンプト（役割）を設定', '② ナレッジを登録', '③ 出力形式を指定'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            parts.forEach(p => p.classList.remove('in'));
+            for (let i = 0; i < parts.length; i++) {
+                await wait(500);
+                parts[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>専用GPTとして保存</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

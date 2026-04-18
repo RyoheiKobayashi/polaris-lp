@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIゴーストライティングとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="AIゴーストライティングを、アニメーションで3秒で理解。自分の文体・知識をAIに学習させ、自分の代わりに書かせる手法。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .gh-stage { max-width: 500px; margin: 0 auto; display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; }
+        .gh-ghost {
+            position: relative;
+            width: 110px; height: 110px;
+            background: var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 48px;
+            color: #fff;
+            font-weight: 500;
+            animation: gh-float 3s ease-in-out infinite;
+        }
+        .gh-ghost::after {
+            content: 'GHOST';
+            position: absolute;
+            bottom: -22px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            color: var(--ink-mute);
+        }
+        @keyframes gh-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-4px); }
+        }
+        .gh-paper {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 150px;
+        }
+        .gh-title {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            color: var(--ink-warm);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .gh-line {
+            height: 6px;
+            background: var(--ink);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .5s ease;
+        }
+        .gh-line.drawn { transform: scaleX(1); }
+        .gh-line.a { width: 100%; }
+        .gh-line.b { width: 85%; }
+        .gh-line.c { width: 92%; }
+        .gh-line.d { width: 60%; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">42 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">AI Ghostwriting</div>
+            <h1 class="detail-title">AIゴーストライティング</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">自分の代わりに書かせる</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="gh-stage">
+                <div class="gh-ghost">G</div>
+                <div class="gh-paper">
+                    <div class="gh-title">あなたらしい投稿</div>
+                    <div class="gh-line a" id="gh-1"></div>
+                    <div class="gh-line b" id="gh-2"></div>
+                    <div class="gh-line c" id="gh-3"></div>
+                    <div class="gh-line d" id="gh-4"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でゴーストが書き上げる様子</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">自分の名前で、自分が書いたようにAIに書かせる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">文字通り「AIをゴーストに雇う」</h2>
+            <p>
+                AIゴーストライティングとは、AIに自分の<span class="mark">文体・知識・考え方を学習させ、自分の代わりに文章を書かせる手法</span>。
+                パーソナルナレッジとコンテンツナレッジを組み合わせることで実現します。
+                講座の最終的なゴールの一つであり、<span class="mark">プロンプト力とナレッジの質の両方が求められる</span>上級テクニック。
+                ここに到達すると「自分の発信量を倍にしながら、自分の時間を増やす」運用が可能になります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 著名人の自伝代筆</h3>
+                    <p>
+                        著名人の自伝は、プロのライターが<span class="mark">本人の文体・価値観を学んで代筆</span>します。
+                        AIゴーストライティングも、<span class="mark">AIに自分のクセを学ばせて代筆</span>させる構造です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 専属秘書のメール代筆</h3>
+                    <p>
+                        長年の秘書は、上司の口調まで真似て代筆できる。
+                        AIも、文体・口癖・論理展開を学習させれば<span class="mark">ほぼ本人のトーン</span>で書けるようになります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    AIゴーストライティング＝<span class="mark">AIに自分の代わりに書かせる</span>運用。
+                    パーソナルナレッジ＋コンテンツナレッジ＋プロンプト力の総合格闘技。
+                    講座のゴール地点の一つです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="transcript.html" class="nav-link">← 前の用語：文字起こし</a>
+            <a href="qa-bot.html" class="nav-link">次の用語：Q&Aボット →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const lines = ['gh-1','gh-2','gh-3','gh-4'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            lines.forEach(l => l.classList.remove('drawn'));
+            status.textContent = 'あなたの文体を学習したAIが執筆中…';
+            await wait(500);
+            for (let i = 0; i < lines.length; i++) {
+                await wait(500);
+                lines[i].classList.add('drawn');
+            }
+            await wait(500);
+            status.innerHTML = '✓ あなた名義の<strong>記事が自動で完成</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

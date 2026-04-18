@@ -1015,6 +1015,759 @@
             100%     { opacity: 0; }
         }
 
+        /* ========= 26. ナレッジ: 書類がAIへ流入 ========= */
+        .thumb-knowledge .kn-stage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-knowledge .kn-docs {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .thumb-knowledge .kn-doc {
+            width: 38px; height: 10px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            position: relative;
+            animation: kn-flow 3s ease-in-out infinite;
+        }
+        .thumb-knowledge .kn-doc::before {
+            content: '';
+            position: absolute;
+            top: 2px; left: 3px; right: 3px;
+            height: 1.5px;
+            background: var(--ink-mute);
+            opacity: .6;
+        }
+        .thumb-knowledge .kn-doc:nth-child(1) { animation-delay: 0s; }
+        .thumb-knowledge .kn-doc:nth-child(2) { animation-delay: .25s; }
+        .thumb-knowledge .kn-doc:nth-child(3) { animation-delay: .5s; }
+        .thumb-knowledge .kn-ai {
+            width: 38px; height: 38px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb-knowledge .kn-arrow {
+            color: var(--ink-mute);
+            font-size: 14px;
+        }
+        @keyframes kn-flow {
+            0%, 15% { transform: translateX(0); opacity: .5; }
+            55%, 75% { transform: translateX(16px); opacity: 1; }
+            100%    { transform: translateX(32px); opacity: 0; }
+        }
+
+        /* ========= 27. リバースナレッジ: 逆算抽出 ========= */
+        .thumb-reverse .rv-stage {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .thumb-reverse .rv-content {
+            width: 44px; height: 44px;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+        }
+        .thumb-reverse .rv-content div {
+            width: 26px; height: 2px;
+            background: var(--ink-soft);
+            opacity: .6;
+        }
+        .thumb-reverse .rv-arrow {
+            font-size: 16px;
+            color: var(--ink-mute);
+            animation: rv-pulse 2.5s ease-in-out infinite;
+        }
+        .thumb-reverse .rv-out {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink);
+            background: var(--mark);
+            padding: 4px 8px;
+            border-radius: 4px;
+            line-height: 1.4;
+        }
+        @keyframes rv-pulse {
+            0%, 100% { opacity: .5; transform: translateX(-2px); }
+            50%      { opacity: 1; transform: translateX(2px); }
+        }
+
+        /* ========= 28. 壁打ち: 往復の吹き出し ========= */
+        .thumb-brain .br-stage {
+            position: relative;
+            width: 180px;
+            height: 90px;
+        }
+        .thumb-brain .br-bubble {
+            position: absolute;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            max-width: 90px;
+            line-height: 1.4;
+        }
+        .thumb-brain .br-1 {
+            top: 0; left: 0;
+            background: var(--ink);
+            color: #fff;
+            border-top-left-radius: 2px;
+            animation: br-bounce-l 3s ease-in-out infinite;
+        }
+        .thumb-brain .br-2 {
+            bottom: 0; right: 0;
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            border-top-right-radius: 2px;
+            animation: br-bounce-r 3s ease-in-out infinite;
+        }
+        @keyframes br-bounce-l {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50%      { transform: translateY(-4px); opacity: .5; }
+        }
+        @keyframes br-bounce-r {
+            0%, 100% { transform: translateY(0); opacity: .5; }
+            50%      { transform: translateY(-4px); opacity: 1; }
+        }
+
+        /* ========= 29. DRY原則: 重複→1つへ ========= */
+        .thumb-dry .dr-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+        .thumb-dry .dr-row {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .thumb-dry .dr-item {
+            width: 48px; height: 14px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            animation: dr-dim 3s ease-in-out infinite;
+        }
+        .thumb-dry .dr-item:nth-child(1) { animation-delay: 0s; }
+        .thumb-dry .dr-item:nth-child(2) { animation-delay: .15s; }
+        .thumb-dry .dr-item:nth-child(3) { animation-delay: .3s; }
+        .thumb-dry .dr-badge {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--ink);
+            padding: 4px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.08em;
+            animation: dr-in 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        @keyframes dr-dim {
+            0%, 30%   { opacity: 1; }
+            50%, 100% { opacity: .25; transform: scale(.96); }
+        }
+        @keyframes dr-in {
+            0%, 40%  { opacity: 0; transform: scale(.8); }
+            60%, 95% { opacity: 1; transform: scale(1); }
+            100%     { opacity: 0; }
+        }
+
+        /* ========= 30. AIエージェント: 複数のAIノード ========= */
+        .thumb-agent .ag-stage {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .thumb-agent .ag-node {
+            width: 36px; height: 36px;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink);
+            position: relative;
+            animation: ag-pulse 3s ease-in-out infinite;
+        }
+        .thumb-agent .ag-node:nth-child(1) { animation-delay: 0s; }
+        .thumb-agent .ag-node:nth-child(2) { animation-delay: .3s; }
+        .thumb-agent .ag-node:nth-child(3) { animation-delay: .6s; }
+        .thumb-agent .ag-label {
+            position: absolute;
+            bottom: -18px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+        @keyframes ag-pulse {
+            0%, 60%, 100% { border-color: var(--ink); background: #fff; }
+            70%, 85%      { border-color: var(--ink); background: var(--mark); }
+        }
+
+        /* ========= 31. オーケストレーション: 指揮+連携 ========= */
+        .thumb-orch .or-stage {
+            position: relative;
+            width: 160px;
+            height: 90px;
+        }
+        .thumb-orch .or-conductor {
+            position: absolute;
+            top: 4px; left: 50%;
+            transform: translateX(-50%);
+            width: 34px; height: 34px;
+            border: 2px solid var(--ink);
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .thumb-orch .or-satellite {
+            position: absolute;
+            bottom: 4px;
+            width: 22px; height: 22px;
+            background: #fff;
+            border: 1.5px solid var(--ink-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--ink);
+        }
+        .thumb-orch .or-satellite:nth-of-type(1) { left: 10px; }
+        .thumb-orch .or-satellite:nth-of-type(2) { left: 50%; transform: translateX(-50%); }
+        .thumb-orch .or-satellite:nth-of-type(3) { right: 10px; }
+        .thumb-orch .or-line {
+            position: absolute;
+            top: 35px;
+            height: 25px;
+            width: 1.5px;
+            background: var(--ink-mute);
+            animation: or-flash 2.4s ease-in-out infinite;
+        }
+        .thumb-orch .or-line:nth-of-type(1) { left: 24px; transform: rotate(18deg); transform-origin: top; animation-delay: 0s; }
+        .thumb-orch .or-line:nth-of-type(2) { left: 50%; animation-delay: .3s; }
+        .thumb-orch .or-line:nth-of-type(3) { right: 24px; transform: rotate(-18deg); transform-origin: top; animation-delay: .6s; }
+        @keyframes or-flash {
+            0%, 100% { opacity: .3; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= 32. GPTs: バッジ ========= */
+        .thumb-gpts .gp-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-gpts .gp-badge {
+            background: var(--ink);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 999px;
+            letter-spacing: 0.04em;
+            animation: gp-glow 3s ease-in-out infinite;
+        }
+        .thumb-gpts .gp-sub {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-soft);
+            letter-spacing: 0.08em;
+        }
+        @keyframes gp-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(25,25,25,0); }
+            50%      { box-shadow: 0 0 0 6px rgba(25,25,25,0.08); }
+        }
+
+        /* ========= 33. GEM: ダイヤモンド ========= */
+        .thumb-gem .gm-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .thumb-gem .gm-shape {
+            width: 40px; height: 40px;
+            background: var(--ink);
+            transform: rotate(45deg);
+            position: relative;
+            animation: gm-rotate 6s linear infinite;
+        }
+        .thumb-gem .gm-shape::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            background: linear-gradient(135deg, var(--ink-warm), var(--ink));
+            border: 1px solid #fff;
+        }
+        .thumb-gem .gm-label {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        @keyframes gm-rotate {
+            0%   { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+
+        /* ========= 34. プロジェクト機能: フォルダ ========= */
+        .thumb-project .pr-folder {
+            width: 110px; height: 80px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            position: relative;
+            padding: 12px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .thumb-project .pr-folder::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: 0;
+            width: 40px; height: 14px;
+            background: var(--ink);
+            border-radius: 4px 4px 0 0;
+        }
+        .thumb-project .pr-file {
+            height: 7px;
+            background: var(--bg-warm);
+            border-radius: 2px;
+            animation: pr-fade 3s ease-in-out infinite;
+        }
+        .thumb-project .pr-file:nth-child(1) { width: 85%; animation-delay: 0s; }
+        .thumb-project .pr-file:nth-child(2) { width: 70%; animation-delay: .15s; }
+        .thumb-project .pr-file:nth-child(3) { width: 55%; animation-delay: .3s; }
+        @keyframes pr-fade {
+            0%, 100% { background: var(--bg-warm); }
+            50%      { background: var(--mark); }
+        }
+
+        /* ========= 35. ナレッジ構築: 積み上げ ========= */
+        .thumb-kb .kb-stack {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 3px;
+            align-items: center;
+        }
+        .thumb-kb .kb-block {
+            height: 14px;
+            background: var(--ink);
+            border-radius: 3px;
+            opacity: 0;
+            animation: kb-up 3.5s ease-in-out infinite;
+        }
+        .thumb-kb .kb-block:nth-child(1) { width: 90px; animation-delay: 0s; }
+        .thumb-kb .kb-block:nth-child(2) { width: 70px; animation-delay: .3s; background: var(--ink-warm); }
+        .thumb-kb .kb-block:nth-child(3) { width: 50px; animation-delay: .6s; background: var(--ink-soft); }
+        .thumb-kb .kb-block:nth-child(4) { width: 30px; animation-delay: .9s; background: var(--ink-mute); }
+        @keyframes kb-up {
+            0%, 5%  { opacity: 0; transform: translateY(10px); }
+            20%, 90% { opacity: 1; transform: translateY(0); }
+            100%    { opacity: 0; }
+        }
+
+        /* ========= 36. パーソナルナレッジ: 人物+データ ========= */
+        .thumb-personal .ps-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-personal .ps-avatar {
+            width: 40px; height: 40px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            background: var(--bg-warm);
+            position: relative;
+            flex-shrink: 0;
+        }
+        .thumb-personal .ps-avatar::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 50%;
+            transform: translateX(-50%);
+            width: 14px; height: 14px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+        .thumb-personal .ps-avatar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 22px; height: 10px;
+            background: var(--ink);
+            border-radius: 11px 11px 0 0;
+        }
+        .thumb-personal .ps-card {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .thumb-personal .ps-line {
+            height: 5px;
+            background: var(--ink-soft);
+            border-radius: 2px;
+            opacity: .45;
+            animation: ps-high 3s ease-in-out infinite;
+        }
+        .thumb-personal .ps-line:nth-child(1) { width: 70px; animation-delay: 0s; }
+        .thumb-personal .ps-line:nth-child(2) { width: 55px; animation-delay: .2s; }
+        .thumb-personal .ps-line:nth-child(3) { width: 40px; animation-delay: .4s; }
+        @keyframes ps-high {
+            0%, 100% { opacity: .45; background: var(--ink-soft); }
+            50%      { opacity: 1; background: var(--ink); }
+        }
+
+        /* ========= 37. プロダクトナレッジ: パッケージ ========= */
+        .thumb-product .pd-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-product .pd-box {
+            width: 44px; height: 44px;
+            position: relative;
+            background: var(--ink);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .thumb-product .pd-box::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 0; right: 0;
+            height: 1.5px;
+            background: #fff;
+            opacity: .4;
+        }
+        .thumb-product .pd-box::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 1.5px;
+            background: #fff;
+            opacity: .4;
+        }
+        .thumb-product .pd-tags {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .thumb-product .pd-tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            padding: 2px 6px;
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            color: var(--ink-soft);
+            animation: pd-hl 3s ease-in-out infinite;
+        }
+        .thumb-product .pd-tag:nth-child(1) { animation-delay: 0s; }
+        .thumb-product .pd-tag:nth-child(2) { animation-delay: .2s; }
+        .thumb-product .pd-tag:nth-child(3) { animation-delay: .4s; }
+        @keyframes pd-hl {
+            0%, 100% { background: var(--bg-warm); color: var(--ink-soft); }
+            50%      { background: var(--mark); color: var(--ink); }
+        }
+
+        /* ========= 38. コンテンツナレッジ: カード重ね ========= */
+        .thumb-content .ct-stack {
+            position: relative;
+            width: 70px;
+            height: 60px;
+        }
+        .thumb-content .ct-card {
+            position: absolute;
+            width: 60px;
+            height: 50px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 6px 8px;
+        }
+        .thumb-content .ct-card:nth-child(1) { top: 0; left: 0; transform: rotate(-6deg); animation: ct-wiggle 4s ease-in-out infinite; }
+        .thumb-content .ct-card:nth-child(2) { top: 4px; left: 6px; animation: ct-wiggle 4s ease-in-out infinite .3s; }
+        .thumb-content .ct-card:nth-child(3) { top: 8px; left: 12px; transform: rotate(6deg); animation: ct-wiggle 4s ease-in-out infinite .6s; }
+        .thumb-content .ct-line {
+            height: 3px;
+            background: var(--ink-soft);
+            opacity: .45;
+            border-radius: 2px;
+        }
+        .thumb-content .ct-line:first-child { width: 70%; }
+        .thumb-content .ct-line:last-child { width: 50%; }
+        @keyframes ct-wiggle {
+            0%, 100% { transform: translateX(0) rotate(var(--r, 0deg)); }
+            50%      { transform: translateX(2px) rotate(var(--r, 0deg)); }
+        }
+
+        /* ========= 39. 一次情報: ユニークバッジ ========= */
+        .thumb-primary .pr-wrap {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb-primary .pr-core {
+            width: 60px; height: 60px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        .thumb-primary .pr-ring {
+            position: absolute;
+            inset: 0;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            animation: pr-expand 2.5s ease-out infinite;
+            opacity: 0;
+        }
+        .thumb-primary .pr-ring:nth-child(2) { animation-delay: 0s; }
+        .thumb-primary .pr-ring:nth-child(3) { animation-delay: 1.25s; }
+        @keyframes pr-expand {
+            0%   { opacity: .6; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.6); }
+        }
+
+        /* ========= 40. ナレッジ化: 混沌→整列 ========= */
+        .thumb-ktransform .kt-stage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-ktransform .kt-chaos {
+            width: 44px; height: 44px;
+            position: relative;
+        }
+        .thumb-ktransform .kt-chaos span {
+            position: absolute;
+            width: 10px; height: 3px;
+            background: var(--ink-mute);
+            border-radius: 1px;
+        }
+        .thumb-ktransform .kt-chaos span:nth-child(1) { top: 4px;  left: 2px; transform: rotate(-18deg); }
+        .thumb-ktransform .kt-chaos span:nth-child(2) { top: 14px; left: 20px; transform: rotate(40deg); }
+        .thumb-ktransform .kt-chaos span:nth-child(3) { top: 24px; left: 6px; transform: rotate(10deg); }
+        .thumb-ktransform .kt-chaos span:nth-child(4) { top: 34px; left: 16px; transform: rotate(-28deg); }
+        .thumb-ktransform .kt-arrow {
+            font-size: 14px;
+            color: var(--ink-mute);
+        }
+        .thumb-ktransform .kt-ordered {
+            width: 44px; height: 44px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 6px;
+        }
+        .thumb-ktransform .kt-ordered span {
+            height: 3px;
+            background: var(--ink);
+            border-radius: 1px;
+            animation: kt-draw 3s ease-in-out infinite;
+            transform-origin: left;
+        }
+        .thumb-ktransform .kt-ordered span:nth-child(1) { animation-delay: 0s; }
+        .thumb-ktransform .kt-ordered span:nth-child(2) { animation-delay: .2s; }
+        .thumb-ktransform .kt-ordered span:nth-child(3) { animation-delay: .4s; }
+        .thumb-ktransform .kt-ordered span:nth-child(4) { animation-delay: .6s; }
+        @keyframes kt-draw {
+            0%, 15% { transform: scaleX(0); }
+            45%, 85% { transform: scaleX(1); }
+            100%    { transform: scaleX(0); }
+        }
+
+        /* ========= 41. 文字起こし: 音波→文字 ========= */
+        .thumb-transcript .ts-stage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-transcript .ts-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 38px;
+        }
+        .thumb-transcript .ts-bar {
+            width: 3px;
+            background: var(--ink);
+            border-radius: 1px;
+            animation: ts-wave 1.2s ease-in-out infinite;
+        }
+        .thumb-transcript .ts-bar:nth-child(1) { height: 12px; animation-delay: 0s; }
+        .thumb-transcript .ts-bar:nth-child(2) { height: 20px; animation-delay: .1s; }
+        .thumb-transcript .ts-bar:nth-child(3) { height: 30px; animation-delay: .2s; }
+        .thumb-transcript .ts-bar:nth-child(4) { height: 22px; animation-delay: .3s; }
+        .thumb-transcript .ts-bar:nth-child(5) { height: 14px; animation-delay: .4s; }
+        .thumb-transcript .ts-arrow {
+            font-size: 14px;
+            color: var(--ink-mute);
+        }
+        .thumb-transcript .ts-text {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink);
+            line-height: 1.5;
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            padding: 6px 8px;
+            border-radius: 4px;
+        }
+        @keyframes ts-wave {
+            0%, 100% { transform: scaleY(.4); }
+            50%      { transform: scaleY(1); }
+        }
+
+        /* ========= 42. AIゴーストライティング: タイプ ========= */
+        .thumb-ghost .gh-stage {
+            position: relative;
+            width: 160px;
+        }
+        .thumb-ghost .gh-icon {
+            position: absolute;
+            top: -4px; right: -4px;
+            width: 24px; height: 24px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2;
+        }
+        .thumb-ghost .gh-paper {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink);
+            overflow: hidden;
+        }
+        .thumb-ghost .gh-line {
+            height: 4px;
+            background: var(--ink);
+            border-radius: 2px;
+            animation: gh-type 3s steps(1) infinite;
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+        .thumb-ghost .gh-line:nth-child(1) { width: 100%; animation-delay: 0s; }
+        .thumb-ghost .gh-line:nth-child(2) { width: 80%; animation-delay: .25s; }
+        .thumb-ghost .gh-line:nth-child(3) { width: 90%; animation-delay: .5s; }
+        .thumb-ghost .gh-line:nth-child(4) { width: 60%; animation-delay: .75s; }
+        @keyframes gh-type {
+            0%, 10%  { transform: scaleX(0); }
+            30%, 90% { transform: scaleX(1); }
+            100%     { transform: scaleX(0); }
+        }
+
+        /* ========= 43. Q&Aボット: Q→A ========= */
+        .thumb-qabot .qa-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 90%;
+            max-width: 200px;
+        }
+        .thumb-qabot .qa-q, .thumb-qabot .qa-a {
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+        }
+        .thumb-qabot .qa-label {
+            width: 20px; height: 20px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .thumb-qabot .qa-q .qa-label { background: var(--ink); color: #fff; }
+        .thumb-qabot .qa-a .qa-label { background: var(--mark); color: var(--ink); }
+        .thumb-qabot .qa-body {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 11px;
+            color: var(--ink);
+            line-height: 1.4;
+            flex: 1;
+        }
+        .thumb-qabot .qa-q .qa-body { animation: qa-in 3s ease-in-out infinite; opacity: 0; }
+        .thumb-qabot .qa-a .qa-body { animation: qa-in 3s ease-in-out infinite .3s; opacity: 0; }
+        @keyframes qa-in {
+            0%, 10%  { opacity: 0; transform: translateY(4px); }
+            25%, 90% { opacity: 1; transform: translateY(0); }
+            100%     { opacity: 0; }
+        }
+
         /* ========= カテゴリフィルタ ========= */
         .cat-filter {
             display: flex;
@@ -1080,9 +1833,10 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">25</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">43</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
+            <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
         </div>
     </div>
 
@@ -1560,6 +2314,364 @@
                     <div class="card-body">
                         <h3>Chain of Thought</h3>
                         <p class="desc">「<span class="mark">段階的に考えて</span>」と指示して推論精度を上げる。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Category C -->
+        <section class="cat-section" data-cat="C">
+            <header class="cat-head">
+                <div class="cat-tag">C · Knowledge & AI Workflow</div>
+                <h2 class="cat-heading">ナレッジ・AI活用の仕組み</h2>
+                <p class="cat-lead">AIに渡す情報（ナレッジ）や、AIを実務に組み込む仕組みに関する用語。講座の核心部分。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 26. ナレッジ -->
+                <a href="knowledge.html" class="term-card">
+                    <div class="thumb thumb-knowledge">
+                        <div class="thumb-inner">
+                            <div class="kn-stage">
+                                <div class="kn-docs">
+                                    <div class="kn-doc"></div>
+                                    <div class="kn-doc"></div>
+                                    <div class="kn-doc"></div>
+                                </div>
+                                <span class="kn-arrow">→</span>
+                                <div class="kn-ai">AI</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ナレッジ</h3>
+                        <p class="desc">AIに渡す<span class="mark">「追加情報」</span>の総称。講座の主役。</p>
+                    </div>
+                </a>
+
+                <!-- 27. リバースナレッジ -->
+                <a href="reverse-knowledge.html" class="term-card">
+                    <div class="thumb thumb-reverse">
+                        <div class="thumb-inner">
+                            <div class="rv-stage">
+                                <div class="rv-content">
+                                    <div></div><div></div><div></div>
+                                </div>
+                                <span class="rv-arrow">←</span>
+                                <div class="rv-out">特徴<br>抽出</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>リバースナレッジ</h3>
+                        <p class="desc">既存コンテンツから<span class="mark">ノウハウを逆算抽出</span>する手法。</p>
+                    </div>
+                </a>
+
+                <!-- 28. 壁打ち -->
+                <a href="brainstorm.html" class="term-card">
+                    <div class="thumb thumb-brain">
+                        <div class="thumb-inner">
+                            <div class="br-stage">
+                                <div class="br-bubble br-1">アイデア？</div>
+                                <div class="br-bubble br-2">こうでは？</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>壁打ち（AIブレスト）</h3>
+                        <p class="desc">AIと<span class="mark">対話しながらアイデアを深める</span>手法。</p>
+                    </div>
+                </a>
+
+                <!-- 29. DRY原則 -->
+                <a href="dry.html" class="term-card">
+                    <div class="thumb thumb-dry">
+                        <div class="thumb-inner">
+                            <div class="dr-stage">
+                                <div class="dr-row">
+                                    <div class="dr-item"></div>
+                                    <div class="dr-item"></div>
+                                    <div class="dr-item"></div>
+                                </div>
+                                <div class="dr-badge">DRY</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>DRY原則</h3>
+                        <p class="desc"><span class="mark">同じ作業を繰り返すな</span>。2回以上はAIに任せる。</p>
+                    </div>
+                </a>
+
+                <!-- 30. AIエージェント -->
+                <a href="ai-agent.html" class="term-card">
+                    <div class="thumb thumb-agent">
+                        <div class="thumb-inner">
+                            <div class="ag-stage">
+                                <div class="ag-node">R</div>
+                                <div class="ag-node">W</div>
+                                <div class="ag-node">E</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AIエージェント</h3>
+                        <p class="desc">特定業務に特化した<span class="mark">AIの単位</span>。役割ごとに分業。</p>
+                    </div>
+                </a>
+
+                <!-- 31. オーケストレーション -->
+                <a href="orchestration.html" class="term-card">
+                    <div class="thumb thumb-orch">
+                        <div class="thumb-inner">
+                            <div class="or-stage">
+                                <div class="or-conductor">C</div>
+                                <div class="or-line"></div>
+                                <div class="or-line"></div>
+                                <div class="or-line"></div>
+                                <div class="or-satellite">R</div>
+                                <div class="or-satellite">W</div>
+                                <div class="or-satellite">E</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>オーケストレーション</h3>
+                        <p class="desc">複数のAIエージェントを<span class="mark">束ねて連携</span>させる仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 32. GPTs -->
+                <a href="gpts.html" class="term-card">
+                    <div class="thumb thumb-gpts">
+                        <div class="thumb-inner">
+                            <div class="gp-wrap">
+                                <div class="gp-badge">GPTs</div>
+                                <div class="gp-sub">CUSTOM · CHATGPT</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>GPTs</h3>
+                        <p class="desc">ChatGPT上で作る<span class="mark">特定用途のカスタムAI</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 33. GEM -->
+                <a href="gem.html" class="term-card">
+                    <div class="thumb thumb-gem">
+                        <div class="thumb-inner">
+                            <div class="gm-wrap">
+                                <div class="gm-shape"></div>
+                                <div class="gm-label">GEM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>GEM（Gemini Gems）</h3>
+                        <p class="desc">Geminiで作れる<span class="mark">カスタム指示機能</span>。GPTsのGemini版。</p>
+                    </div>
+                </a>
+
+                <!-- 34. プロジェクト機能 -->
+                <a href="project.html" class="term-card">
+                    <div class="thumb thumb-project">
+                        <div class="thumb-inner">
+                            <div class="pr-folder">
+                                <div class="pr-file"></div>
+                                <div class="pr-file"></div>
+                                <div class="pr-file"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プロジェクト機能</h3>
+                        <p class="desc">案件単位で<span class="mark">会話・ナレッジをまとめて管理</span>できる機能。</p>
+                    </div>
+                </a>
+
+                <!-- 35. ナレッジ構築 -->
+                <a href="knowledge-building.html" class="term-card">
+                    <div class="thumb thumb-kb">
+                        <div class="thumb-inner">
+                            <div class="kb-stack">
+                                <div class="kb-block"></div>
+                                <div class="kb-block"></div>
+                                <div class="kb-block"></div>
+                                <div class="kb-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ナレッジ構築</h3>
+                        <p class="desc">AIに渡す情報を<span class="mark">体系的に積み上げる</span>プロセス全体。</p>
+                    </div>
+                </a>
+
+                <!-- 36. パーソナルナレッジ -->
+                <a href="personal-knowledge.html" class="term-card">
+                    <div class="thumb thumb-personal">
+                        <div class="thumb-inner">
+                            <div class="ps-wrap">
+                                <div class="ps-avatar"></div>
+                                <div class="ps-card">
+                                    <div class="ps-line"></div>
+                                    <div class="ps-line"></div>
+                                    <div class="ps-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>パーソナルナレッジ</h3>
+                        <p class="desc">発信者自身の<span class="mark">経歴・文体・価値観</span>をまとめた情報。</p>
+                    </div>
+                </a>
+
+                <!-- 37. プロダクトナレッジ -->
+                <a href="product-knowledge.html" class="term-card">
+                    <div class="thumb thumb-product">
+                        <div class="thumb-inner">
+                            <div class="pd-wrap">
+                                <div class="pd-box"></div>
+                                <div class="pd-tags">
+                                    <div class="pd-tag">価格</div>
+                                    <div class="pd-tag">特徴</div>
+                                    <div class="pd-tag">ターゲット</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プロダクトナレッジ</h3>
+                        <p class="desc">自分が販売する<span class="mark">商品の詳細情報</span>まとめ。</p>
+                    </div>
+                </a>
+
+                <!-- 38. コンテンツナレッジ -->
+                <a href="content-knowledge.html" class="term-card">
+                    <div class="thumb thumb-content">
+                        <div class="thumb-inner">
+                            <div class="ct-stack">
+                                <div class="ct-card">
+                                    <div class="ct-line"></div>
+                                    <div class="ct-line"></div>
+                                </div>
+                                <div class="ct-card">
+                                    <div class="ct-line"></div>
+                                    <div class="ct-line"></div>
+                                </div>
+                                <div class="ct-card">
+                                    <div class="ct-line"></div>
+                                    <div class="ct-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>コンテンツナレッジ</h3>
+                        <p class="desc">過去の投稿・台本を<span class="mark">AI用に整理</span>したナレッジ。</p>
+                    </div>
+                </a>
+
+                <!-- 39. 一次情報 -->
+                <a href="primary-info.html" class="term-card">
+                    <div class="thumb thumb-primary">
+                        <div class="thumb-inner">
+                            <div class="pr-wrap">
+                                <div class="pr-ring"></div>
+                                <div class="pr-ring"></div>
+                                <div class="pr-core">1st</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>一次情報</h3>
+                        <p class="desc">他の誰も持たない<span class="mark">自分だけのオリジナル情報</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 40. ナレッジ化 -->
+                <a href="knowledge-transform.html" class="term-card">
+                    <div class="thumb thumb-ktransform">
+                        <div class="thumb-inner">
+                            <div class="kt-stage">
+                                <div class="kt-chaos">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="kt-arrow">→</span>
+                                <div class="kt-ordered">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ナレッジ化</h3>
+                        <p class="desc">散在する情報を<span class="mark">AIが読める形</span>に変換する作業。</p>
+                    </div>
+                </a>
+
+                <!-- 41. 文字起こし -->
+                <a href="transcript.html" class="term-card">
+                    <div class="thumb thumb-transcript">
+                        <div class="thumb-inner">
+                            <div class="ts-stage">
+                                <div class="ts-wave">
+                                    <div class="ts-bar"></div>
+                                    <div class="ts-bar"></div>
+                                    <div class="ts-bar"></div>
+                                    <div class="ts-bar"></div>
+                                    <div class="ts-bar"></div>
+                                </div>
+                                <span class="ts-arrow">→</span>
+                                <div class="ts-text">Aa Bb<br>Cc Dd</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>文字起こし</h3>
+                        <p class="desc">動画・音声を<span class="mark">テキスト化</span>してナレッジの素材に。</p>
+                    </div>
+                </a>
+
+                <!-- 42. AIゴーストライティング -->
+                <a href="ai-ghostwriting.html" class="term-card">
+                    <div class="thumb thumb-ghost">
+                        <div class="thumb-inner">
+                            <div class="gh-stage">
+                                <div class="gh-icon">G</div>
+                                <div class="gh-paper">
+                                    <div class="gh-line"></div>
+                                    <div class="gh-line"></div>
+                                    <div class="gh-line"></div>
+                                    <div class="gh-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AIゴーストライティング</h3>
+                        <p class="desc">AIに<span class="mark">自分の文体を学習させ</span>代わりに書かせる。</p>
+                    </div>
+                </a>
+
+                <!-- 43. Q&Aボット -->
+                <a href="qa-bot.html" class="term-card">
+                    <div class="thumb thumb-qabot">
+                        <div class="thumb-inner">
+                            <div class="qa-stage">
+                                <div class="qa-q"><div class="qa-label">Q</div><div class="qa-body">返金はいつまで？</div></div>
+                                <div class="qa-a"><div class="qa-label">A</div><div class="qa-body">到着後7日以内です。</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Q&Aボット</h3>
+                        <p class="desc">FAQをナレッジ化して<span class="mark">自動応答させる</span>AI。</p>
                     </div>
                 </a>
 

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コンテンツナレッジとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="コンテンツナレッジを、アニメーションで3秒で理解。過去の投稿・台本・記事をAI用に整理して発信の再現性を高める。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ck-stage { max-width: 500px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .ck-post {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            line-height: 1.55;
+            position: relative;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease, border-color .3s ease;
+        }
+        .ck-post.in { opacity: 1; transform: translateY(0); }
+        .ck-post.hit { border-color: var(--ink); background: var(--bg-warm); }
+        .ck-score {
+            position: absolute;
+            top: 6px; right: 8px;
+            font-size: 9px;
+            background: var(--mark);
+            padding: 1px 6px;
+            border-radius: 3px;
+            color: var(--ink);
+        }
+        .ck-tag { font-size: 9px; color: var(--ink-mute); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">38 · C. ナレッジ・AI活用の仕組み</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Content Knowledge</div>
+            <h1 class="detail-title">コンテンツナレッジ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">過去発信をAI用に整理</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ck-stage">
+                <div class="ck-post" id="ck-1"><div class="ck-tag">X投稿</div>マネタイズ最初の一歩<span class="ck-score">4.2k</span></div>
+                <div class="ck-post" id="ck-2"><div class="ck-tag">動画台本</div>副業で始める3原則<span class="ck-score">8.1k</span></div>
+                <div class="ck-post" id="ck-3"><div class="ck-tag">ブログ</div>最短で月5万の構造<span class="ck-score">2.5k</span></div>
+                <div class="ck-post" id="ck-4"><div class="ck-tag">X投稿</div>SNSで伸びる順番<span class="ck-score">6.3k</span></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で反応が良かった投稿を抽出</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">伸びた投稿を集めて、再現性のある発信パターンをAIに渡す。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「過去の勝ち筋」をAIに渡す</h2>
+            <p>
+                コンテンツナレッジとは、過去の投稿・動画台本・記事など、<span class="mark">発信に使ったコンテンツをAI用に整理</span>したナレッジ。
+                自分の発信スタイルや成功パターンをAIに学習させるために使います。
+                バズった投稿の構成や、反応が良かった表現パターンなどを蓄積することで、
+                <span class="mark">再現性のある発信</span>が可能になります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 売れ筋商品の分析資料</h3>
+                    <p>
+                        小売店は売れた商品を分析して、棚割りや仕入れに活かします。
+                        コンテンツナレッジは、<span class="mark">自分の「売れた発信」の棚割り</span>のようなもの。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ベスト作品集</h3>
+                    <p>
+                        クリエイターの「ベスト集」は、<span class="mark">代表作だけを集めた濃縮版</span>。
+                        AIにも代表作を集中投下することで、「ベストな発信」を再生産しやすくなります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    コンテンツナレッジ＝<span class="mark">過去の発信の「勝ち筋」集</span>。
+                    伸びた投稿・反応が良かった記事を集中的にAIに渡すことで、
+                    AIゴーストライティングの精度が桁違いに上がります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="product-knowledge.html" class="nav-link">← 前の用語：プロダクトナレッジ</a>
+            <a href="primary-info.html" class="nav-link">次の用語：一次情報 →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const posts = ['ck-1','ck-2','ck-3','ck-4'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            posts.forEach(p => { p.classList.remove('in'); p.classList.remove('hit'); });
+            status.textContent = '過去コンテンツを並べる…';
+            for (let i = 0; i < posts.length; i++) {
+                await wait(300);
+                posts[i].classList.add('in');
+            }
+            await wait(600);
+            status.textContent = '反応が高い投稿をフィルタ…';
+            posts[1].classList.add('hit');
+            await wait(400);
+            posts[3].classList.add('hit');
+            await wait(600);
+            status.innerHTML = '✓ <strong>勝ち筋パターン</strong>をAIに渡す';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
