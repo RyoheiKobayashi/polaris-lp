@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コンテキストウィンドウとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="コンテキストウィンドウを、アニメーションで3秒で理解。AIが一度に読める情報量の上限を動きで解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .window-frame {
+            border: 2px solid var(--ink);
+            border-radius: 10px;
+            background: var(--bg-warm);
+            padding: 16px;
+            min-height: 200px;
+            max-height: 200px;
+            overflow: hidden;
+            position: relative;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .window-msg {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            transition: opacity .5s ease, transform .5s ease, margin .5s ease;
+            color: var(--ink-warm);
+        }
+        .window-msg.pushed-out {
+            opacity: 0;
+            transform: translateY(-20px);
+            margin: 0;
+            padding: 0;
+            height: 0;
+            border: 0;
+            overflow: hidden;
+        }
+        .capacity-bar {
+            height: 10px;
+            background: #e9e9e7;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .capacity-fill {
+            height: 100%;
+            background: var(--ink);
+            width: 0%;
+            transition: width .5s ease, background .3s ease;
+            border-radius: 5px;
+        }
+        .capacity-fill.warning { background: #f59e0b; }
+        .capacity-fill.full { background: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">08 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Context Window</div>
+            <h1 class="detail-title">コンテキスト<br>ウィンドウ</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="max-w-md mx-auto">
+                <div class="flex justify-between items-baseline mb-2">
+                    <div class="cat-label" style="color: var(--ink-soft);">Context Window（上限: 4メッセージ）</div>
+                    <div class="mono text-xs" id="count" style="color: var(--ink);">0 / 4</div>
+                </div>
+                <div class="window-frame" id="window"></div>
+                <div class="capacity-bar"><div class="capacity-fill" id="capacity"></div></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「追加」でメッセージを入れていくと…</p>
+                <button id="add-btn" class="btn btn-primary">＋ メッセージを追加</button>
+                <button id="reset-btn" class="btn btn-secondary ml-2">リセット</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">上限を超えると、古いメッセージが押し出されてAIの記憶から消える。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIには「視野の広さ」がある</h2>
+            <p>
+                人間が長い小説を一気に読めないように、AIにも<span class="mark">一度に読める量の上限（トークン数）</span>があります。
+                GPT-4o は約12万、Gemini 1.5 Pro は最大200万トークン、など。
+                長い会話や大きなファイルを渡すと、<span class="mark">古い情報から順に「窓」の外に押し出され</span>、AIが忘れていく現象が起きます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 大きさが決まっている弁当箱</h3>
+                    <p>
+                        弁当箱に入るおかずの量は決まっていて、たくさん入れようとすると<span class="mark">古いおかずを出さないといけない</span>。
+                        AIの会話も同じで、新しい情報が増えると古い会話が押し出されます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 短期記憶の限界</h3>
+                    <p>
+                        人間も一度に覚えられることに限界がありますよね。
+                        AIにとってのコンテキストウィンドウは、<span class="mark">まさに「作業記憶」の容量</span>。
+                        長い作業をお願いするときは、大事な情報を適度に繰り返すのがコツです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    AIは<span class="mark">無限に記憶できるわけではない</span>。
+                    長文のナレッジを渡すときは「全部詰め込む」ではなく「必要な部分だけ抜粋して渡す」が鉄則。
+                    会話が長くなって「あれ？さっき言ったこと忘れた？」と感じたら、それは窓から押し出された可能性大です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="generative-ai.html" class="nav-link">← 前の用語：生成AI</a>
+            <a href="multimodal.html" class="nav-link">次の用語：マルチモーダル →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const MESSAGES = [
+            'ユーザー: こんにちは、AIとは何ですか？',
+            'AI: AIは人間の知的作業を代替する技術の総称です。',
+            'ユーザー: LLMとは何が違いますか？',
+            'AI: LLMはAIの中の言語特化モデルです。',
+            'ユーザー: 具体例を教えて',
+            'AI: ChatGPTやGeminiがLLMの代表例です。',
+            'ユーザー: どれが一番賢い？'
+        ];
+        const CAPACITY = 4;
+        const addBtn = document.getElementById('add-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const windowEl = document.getElementById('window');
+        const status = document.getElementById('status');
+        const count = document.getElementById('count');
+        const capacity = document.getElementById('capacity');
+
+        let idx = 0;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function updateCapacity(count) {
+            const pct = Math.min(100, (count / CAPACITY) * 100);
+            capacity.style.width = pct + '%';
+            capacity.classList.remove('warning', 'full');
+            if (pct >= 100) capacity.classList.add('full');
+            else if (pct >= 75) capacity.classList.add('warning');
+        }
+
+        function reset() {
+            windowEl.innerHTML = '';
+            idx = 0;
+            count.textContent = '0 / ' + CAPACITY;
+            updateCapacity(0);
+            status.textContent = '「追加」でメッセージを入れていくと…';
+            addBtn.disabled = false;
+            addBtn.textContent = '＋ メッセージを追加';
+        }
+
+        async function addMessage() {
+            if (idx >= MESSAGES.length) {
+                status.textContent = '全メッセージ追加済み。リセットしてください。';
+                addBtn.disabled = true;
+                return;
+            }
+
+            const msg = MESSAGES[idx];
+            const el = document.createElement('div');
+            el.className = 'window-msg';
+            el.textContent = msg;
+            windowEl.appendChild(el);
+            idx++;
+
+            const visibleMsgs = windowEl.querySelectorAll('.window-msg:not(.pushed-out)');
+            if (visibleMsgs.length > CAPACITY) {
+                const oldest = visibleMsgs[0];
+                status.innerHTML = '⚠ 上限超過 → <strong>最古のメッセージが窓の外へ</strong>';
+                oldest.classList.add('pushed-out');
+                await wait(500);
+                oldest.remove();
+            } else if (visibleMsgs.length === CAPACITY) {
+                status.innerHTML = '⚠ <strong>窓が満杯</strong>。次に追加すると古いメッセージが押し出される';
+            } else {
+                status.textContent = 'メッセージを追加。まだ窓に余裕あり';
+            }
+
+            const visible = windowEl.querySelectorAll('.window-msg:not(.pushed-out)').length;
+            count.textContent = visible + ' / ' + CAPACITY;
+            updateCapacity(visible);
+        }
+
+        addBtn.addEventListener('click', addMessage);
+        resetBtn.addEventListener('click', reset);
+        reset();
+    })();
+    </script>
+
+</body>
+</html>

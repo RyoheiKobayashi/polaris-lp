@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メモリとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="AIのメモリ機能を、アニメーションで3秒で理解。過去の会話内容を記憶し次の会話に活かす仕組みを動きで解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .mem-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        @media (min-width: 640px) {
+            .mem-layout { grid-template-columns: 1.3fr 1fr; }
+        }
+        .mem-box {
+            background: var(--bg-warm);
+            border: 1px dashed var(--ink-mute);
+            border-radius: 10px;
+            padding: 16px;
+            min-height: 200px;
+        }
+        .mem-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-mute);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .mem-item {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--ink);
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity .5s ease, transform .5s ease, box-shadow .3s ease;
+        }
+        .mem-item.in { opacity: 1; transform: translateX(0); }
+        .mem-item.highlight {
+            box-shadow: 0 0 0 2px var(--mark);
+        }
+
+        .chat-msg {
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 8px;
+            max-width: 85%;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .chat-msg.in { opacity: 1; transform: translateY(0); }
+        .chat-user {
+            background: var(--ink);
+            color: #fff;
+            margin-left: auto;
+            border-top-right-radius: 3px;
+        }
+        .chat-ai {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--ink-warm);
+            margin-right: auto;
+            border-top-left-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">11 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Memory</div>
+            <h1 class="detail-title">メモリ</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="mem-layout">
+                <div>
+                    <div class="mem-title">💬 会話（今）</div>
+                    <div id="chat-area" class="space-y-2"></div>
+                </div>
+                <div class="mem-box">
+                    <div class="mem-title">🧠 メモリ（記憶）</div>
+                    <div id="memory-area"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で2回分の会話を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">1回目の会話で得た情報を、2回目に自動で参照する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">普通のLLMは「毎回初対面」</h2>
+            <p>
+                LLMは基本的に、1つの会話が終わると内容を忘れてしまいます。
+                だから毎回「私は◯◯の仕事をしてます…」と自己紹介が必要になる。
+                メモリ機能は、その状況を変えて<span class="mark">ユーザーの好み・過去の会話・よく使う設定を覚えておける</span>仕組み。
+                ChatGPTやGeminiに搭載されていて、2回目以降の会話から活躍します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 行きつけの美容師</h3>
+                    <p>
+                        毎回「前回と同じで」と言うだけで通じる美容師は、<span class="mark">あなたの好みを記憶している</span>から。
+                        AIのメモリも同じで、覚えておいてほしい情報を蓄積することで、毎回の前置きが不要になります。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ノートに書き溜めた備忘録</h3>
+                    <p>
+                        人間も脳に全部は覚えていられないから、ノートに書き溜めます。
+                        AIのメモリも<span class="mark">脳の外側に置いた「備忘録」</span>のような仕組み。
+                        重要な指示は、会話の流れ任せにせず明示的にメモリへ残すのが確実です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    メモリは<span class="mark">AIを「自分専用の秘書」に近づける機能</span>。
+                    ただし精度は完全ではないので、<span class="mark">重要な指示は毎回ナレッジとして明示</span>するのが確実。
+                    「覚えていてくれたら嬉しい」くらいの気持ちで使うのがちょうど良いバランスです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="rag.html" class="nav-link">← 前の用語：RAG</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const chatArea = document.getElementById('chat-area');
+        const memoryArea = document.getElementById('memory-area');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function addChat(role, text) {
+            const el = document.createElement('div');
+            el.className = 'chat-msg ' + (role === 'user' ? 'chat-user' : 'chat-ai');
+            el.textContent = text;
+            chatArea.appendChild(el);
+            requestAnimationFrame(() => el.classList.add('in'));
+            return el;
+        }
+
+        function addMemory(text) {
+            const el = document.createElement('div');
+            el.className = 'mem-item';
+            el.textContent = text;
+            memoryArea.appendChild(el);
+            requestAnimationFrame(() => el.classList.add('in'));
+            return el;
+        }
+
+        function highlightMemory() {
+            memoryArea.querySelectorAll('.mem-item').forEach(el => el.classList.add('highlight'));
+        }
+        function unhighlightMemory() {
+            memoryArea.querySelectorAll('.mem-item').forEach(el => el.classList.remove('highlight'));
+        }
+
+        function reset() {
+            chatArea.innerHTML = '';
+            memoryArea.innerHTML = '';
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            reset();
+
+            // 1回目の会話
+            status.textContent = '【1回目の会話】ユーザーが情報を伝える';
+            await wait(400);
+            addChat('user', '私はヴィーガンで、好きな色は青です。');
+            await wait(1000);
+            addChat('ai', '承知しました！ 記録しておきますね。');
+            await wait(800);
+
+            status.textContent = 'AIが重要情報をメモリへ保存中…';
+            addMemory('ユーザーはヴィーガン');
+            await wait(600);
+            addMemory('好きな色は青');
+            await wait(1200);
+
+            // 2回目の会話
+            status.textContent = '【2回目・別の日】ユーザーが新しい質問';
+            await wait(500);
+            addChat('user', 'おすすめのレストラン教えて');
+            await wait(1100);
+
+            status.textContent = 'AIがメモリを参照中…';
+            highlightMemory();
+            await wait(1200);
+
+            unhighlightMemory();
+            addChat('ai', 'ヴィーガンメニューが豊富で、店内が青を基調とした◯◯カフェはいかがですか？');
+            status.innerHTML = '✓ メモリを活用して <strong>自己紹介なしで最適解</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

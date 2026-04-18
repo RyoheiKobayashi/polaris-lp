@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>トークンとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="AIのトークンを、アニメーションで3秒で理解。AIが文章を処理する最小単位とは？日本語と英語の違いも動きで分かる。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .token-display {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            line-height: 1.4;
+            min-height: 3em;
+            word-break: keep-all;
+        }
+        .token-chip {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 2px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: scale(0.7);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+        .token-chip.in { opacity: 1; transform: scale(1); }
+        .chip-a { background: #dbeafe; color: #1e3a8a; }
+        .chip-b { background: #fce7f3; color: #831843; }
+        .chip-c { background: #dcfce7; color: #14532d; }
+        .chip-d { background: #fef3c7; color: #78350f; }
+        .chip-e { background: #e9d5ff; color: #581c87; }
+        .counter {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--ink);
+            transition: color .3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">05 · A. AIの基本概念</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Token</div>
+            <h1 class="detail-title">トークン</h1>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="flex justify-center gap-2 mb-8 flex-wrap" id="tabs">
+                <button class="btn btn-secondary active" data-key="jp">日本語</button>
+                <button class="btn btn-secondary" data-key="en">英語</button>
+            </div>
+
+            <div class="mb-6">
+                <div class="cat-label mb-2" style="color: var(--ink-soft);">入力テキスト</div>
+                <div class="token-display text-center" id="text-display" style="color: var(--ink-warm);"></div>
+            </div>
+
+            <div class="mb-6">
+                <div class="cat-label mb-2" style="color: var(--ink-soft);">トークン分解</div>
+                <div class="token-display text-center" id="token-display" style="min-height: 3em; padding: 12px; background: var(--bg-warm); border-radius: 8px;"></div>
+            </div>
+
+            <div class="text-center mb-6">
+                <div class="cat-label mb-2" style="color: var(--ink-soft);">トークン数</div>
+                <div class="counter" id="counter">0</div>
+            </div>
+
+            <div class="text-center">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」を押して分解してみよう</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">※ 実際のトークナイザ（tiktoken等）の分割に近づけた近似表現</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">なぜ「文字」ではなく「トークン」なのか</h2>
+            <p>
+                AIは文字を1個ずつ読むのではなく、<span class="mark">「よく出る単語ごと」にまとめて処理</span>します。
+                英語なら「the」「ing」などはまとめて1トークン。日本語は漢字ごとに分かれたり、2〜3文字が1トークンになったりします。
+                だいたい <span class="mark">日本語は1文字 ≒ 1〜3トークン、英語は1単語 ≒ 1〜2トークン</span> と覚えておけばOK。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 寿司のシャリ一口</h3>
+                    <p>
+                        お寿司を食べるとき、シャリを米粒1個ずつではなく「一口ぶん」で頬張りますよね。
+                        AIも同じで、<span class="mark">一口サイズ（トークン）にまとめて</span>処理します。
+                        「一口の大きさ」はネタ（単語）によって違う、これがトークン可変の世界です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 従量課金の携帯料金</h3>
+                    <p>
+                        トークンは<span class="mark">AIの「通信量」</span>でもあります。
+                        APIを使って開発するときは、入力＋出力のトークン数で料金が決まります。
+                        無駄な前置きや冗長なナレッジはコストに直結、という実務感覚も持っておくと吉。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    トークンは<span class="mark">AIにとっての「情報量の単位」</span>。
+                    文字数ではなくトークン数で上限が決まる、と覚えておきましょう。
+                    長文を渡すときは「全部渡す」ではなく<span class="mark">「必要な部分だけ絞って渡す」</span>が鉄則です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="hallucination.html" class="nav-link">← 前の用語：ハルシネーション</a>
+            <a href="ai.html" class="nav-link">次の用語：AI →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const SAMPLES = {
+            jp: {
+                text: '今日はいい天気ですね。',
+                tokens: ['今日', 'は', 'いい', '天気', 'です', 'ね', '。']
+            },
+            en: {
+                text: 'Hello, world!',
+                tokens: ['Hello', ',', ' world', '!']
+            }
+        };
+        const CHIP_CLASSES = ['chip-a', 'chip-b', 'chip-c', 'chip-d', 'chip-e'];
+
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const textDisplay = document.getElementById('text-display');
+        const tokenDisplay = document.getElementById('token-display');
+        const counter = document.getElementById('counter');
+        const tabs = document.querySelectorAll('#tabs .btn-secondary');
+
+        let currentKey = 'jp';
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function renderText() {
+            textDisplay.textContent = SAMPLES[currentKey].text;
+            tokenDisplay.innerHTML = '';
+            counter.textContent = '0';
+            status.textContent = '「再生」を押して分解してみよう';
+        }
+
+        function setActive(key) {
+            currentKey = key;
+            tabs.forEach(t => {
+                const active = t.dataset.key === key;
+                t.classList.toggle('btn-primary', active);
+                t.classList.toggle('btn-secondary', !active);
+            });
+            renderText();
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '分解中…';
+
+            tokenDisplay.innerHTML = '';
+            counter.textContent = '0';
+
+            const tokens = SAMPLES[currentKey].tokens;
+            status.textContent = '一口サイズに分解…';
+
+            for (let i = 0; i < tokens.length; i++) {
+                const chip = document.createElement('span');
+                chip.className = 'token-chip ' + CHIP_CLASSES[i % CHIP_CLASSES.length];
+                chip.textContent = tokens[i];
+                tokenDisplay.appendChild(chip);
+                await wait(50);
+                chip.classList.add('in');
+                counter.textContent = (i + 1).toString();
+                await wait(280);
+            }
+
+            status.innerHTML = `✓ <strong>${tokens.length}トークン</strong> に分解されました`;
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        tabs.forEach(t => t.addEventListener('click', () => {
+            if (running) return;
+            setActive(t.dataset.key);
+        }));
+        btn.addEventListener('click', play);
+
+        setActive('jp');
+    })();
+    </script>
+
+</body>
+</html>

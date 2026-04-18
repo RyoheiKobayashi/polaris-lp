@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アニメでわかるAI用語集</title>
-    <meta name="description" content="文字で読むより、動きで覚える。アニメーションで見てわかるAI用語集。LLM、AIモデル、ナレッジカットオフなどを3秒で理解。">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="文字で読むより、動きで覚える。アニメーションで見てわかるAI用語集。LLM、AIモデル、ナレッジカットオフなど、AIの基本用語を3秒で理解。">
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/icon.png">
@@ -15,6 +14,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
@@ -24,178 +25,19 @@
       gtag('js', new Date());
       gtag('config', 'G-EQR100H021');
     </script>
-
-    <style>
-        :root {
-            --bg: #ffffff;
-            --bg-warm: #f7f6f3;
-            --surface: #ffffff;
-            --ink: #191919;
-            --ink-warm: #37352f;
-            --ink-soft: #787774;
-            --ink-mute: #9b9a97;
-            --line: #e9e9e7;
-            --accent: #2383e2;
-            --mark: #fdecc8;
-            --line-green: #06c755;
-            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
-            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
-            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-        }
-        * { -webkit-font-smoothing: antialiased; }
-        html { font-feature-settings: "palt" 1; }
-        body {
-            font-family: var(--font-sans);
-            color: var(--ink);
-            background: var(--bg);
-            font-size: 17px;
-            line-height: 1.7;
-        }
-        h1, h2, h3 {
-            font-family: var(--font-serif);
-            color: var(--ink-warm);
-            line-height: 1.25;
-            font-weight: 500;
-        }
-        .cat-label {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--ink-mute);
-        }
-        .mono { font-family: var(--font-mono); }
-        .mark {
-            background: linear-gradient(transparent 60%, var(--mark) 60%);
-            padding: 0 2px;
-        }
-        .hairline { border-top: 1px solid var(--line); }
-
-        .term-card {
-            display: block;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-        .term-card:hover {
-            border-color: var(--ink-mute);
-            transform: translateY(-2px);
-        }
-
-        /* サムネイル（Notion基調） */
-        .thumb {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: var(--bg-warm);
-            border-bottom: 1px solid var(--line);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* LLMサムネ */
-        .thumb-llm .bar {
-            height: 6px;
-            border-radius: 3px;
-            background: var(--ink);
-            animation: bar-grow 2.4s ease-in-out infinite;
-        }
-        .thumb-llm .bar-top {
-            background: transparent;
-            border-radius: 3px;
-            height: 6px;
-            position: relative;
-        }
-        .thumb-llm .bar-top::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%;
-            background: var(--ink);
-            border-radius: 3px;
-            animation: bar-grow 2.4s ease-in-out infinite;
-            width: 0;
-        }
-        @keyframes bar-grow {
-            0%   { width: 0%; }
-            40%  { width: var(--w); }
-            80%  { width: var(--w); }
-            100% { width: 0%; }
-        }
-
-        /* AIモデルサムネ */
-        .thumb-model .engine {
-            opacity: 0;
-            transform: scale(0.9);
-            animation: engine-cycle 4.5s ease-in-out infinite;
-        }
-        .thumb-model .engine:nth-child(1) { animation-delay: 0s; }
-        .thumb-model .engine:nth-child(2) { animation-delay: 1.5s; }
-        .thumb-model .engine:nth-child(3) { animation-delay: 3.0s; }
-        @keyframes engine-cycle {
-            0%, 5%    { opacity: 0; transform: scale(0.9); }
-            10%, 30%  { opacity: 1; transform: scale(1); }
-            35%, 100% { opacity: 0; transform: scale(0.9); }
-        }
-
-        /* カットオフサムネ */
-        .thumb-cutoff .dot {
-            animation: dot-pulse 2.2s ease-in-out infinite;
-        }
-        @keyframes dot-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.85; }
-            50%      { transform: scale(1.3); opacity: 1; }
-        }
-        .thumb-cutoff .newspaper {
-            animation: news-fly 3s ease-in-out infinite;
-        }
-        @keyframes news-fly {
-            0%   { transform: translateX(60%); opacity: 0; }
-            40%  { transform: translateX(0%);  opacity: 1; }
-            70%  { transform: translateX(0%);  opacity: 1; }
-            100% { transform: translateX(-10%); opacity: 0; }
-        }
-
-        /* LINE CTA */
-        .cta-box {
-            background: var(--bg-warm);
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 32px;
-        }
-        .btn-line {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--line-green);
-            color: #fff;
-            font-weight: 600;
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: opacity .2s;
-        }
-        .btn-line:hover { opacity: 0.9; }
-    </style>
 </head>
 <body>
 
-    <!-- 上部：極小ナビ -->
-    <div class="border-b" style="border-color: var(--line);">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm">
+    <!-- 上部ナビ -->
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-5xl">
             <span class="cat-label">AI · Visual Glossary</span>
-            <a href="disclaimer.html" style="color: var(--ink-soft);" class="no-underline hover:underline text-xs">免責事項</a>
+            <a href="disclaimer.html" class="nav-link text-xs">免責事項</a>
         </div>
     </div>
 
     <!-- ヒーロー -->
-    <header class="container mx-auto px-6 pt-20 pb-16 max-w-3xl">
+    <header class="container mx-auto px-6 pt-16 md:pt-24 pb-12 max-w-3xl">
         <h1 class="text-4xl md:text-6xl mb-6" style="letter-spacing: -0.01em;">
             AI用語、<span class="mark">動きで見ると</span><br>
             一発でわかる。
@@ -210,130 +52,130 @@
         <div class="hairline"></div>
     </div>
 
-    <!-- 用語カードリスト -->
-    <main class="container mx-auto px-6 pt-12 pb-20 max-w-3xl">
+    <!-- 用語一覧 -->
+    <main class="container mx-auto px-6 pt-16 pb-24 max-w-5xl">
 
-        <div class="space-y-8">
-
-            <!-- LLMカード -->
-            <a href="llm.html" class="term-card">
-                <div class="px-8 pt-8 pb-4">
-                    <div class="cat-label mb-2">01 · AI用語</div>
-                    <div class="mono text-sm mb-2" style="color: var(--ink-soft);">Large Language Model</div>
-                    <h2 class="text-3xl md:text-4xl mb-0">LLM</h2>
-                </div>
-                <div class="thumb thumb-llm">
-                    <div class="w-full max-w-xs px-6">
-                        <div class="text-xs mb-3 mono" style="color: var(--ink-mute);">今日の天気は___</div>
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs w-10" style="color: var(--ink);">晴れ</span>
-                                <div class="flex-1 rounded-full h-1.5 overflow-hidden" style="background: #e9e9e7;">
-                                    <div class="bar" style="--w: 78%; background: var(--ink);"></div>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs w-10" style="color: var(--ink-soft);">曇り</span>
-                                <div class="flex-1 rounded-full h-1.5 overflow-hidden" style="background: #e9e9e7;">
-                                    <div class="bar" style="--w: 15%; animation-delay: .15s; background: var(--ink-soft);"></div>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-xs w-10" style="color: var(--ink-mute);">雨</span>
-                                <div class="flex-1 rounded-full h-1.5 overflow-hidden" style="background: #e9e9e7;">
-                                    <div class="bar" style="--w: 7%; animation-delay: .3s; background: var(--ink-mute);"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-8">
-                    <p style="color: var(--ink-soft);">
-                        人類が書いた文章を学んで、<span class="mark">「次の単語」を確率で当てる</span>マシン。
-                    </p>
-                    <div class="mt-4 text-sm mono" style="color: var(--ink-mute);">Read →</div>
-                </div>
-            </a>
-
-            <!-- AIモデルカード -->
-            <a href="ai-model.html" class="term-card">
-                <div class="px-8 pt-8 pb-4">
-                    <div class="cat-label mb-2">02 · AI用語</div>
-                    <div class="mono text-sm mb-2" style="color: var(--ink-soft);">AI Model</div>
-                    <h2 class="text-3xl md:text-4xl mb-0">AIモデル</h2>
-                </div>
-                <div class="thumb thumb-model">
-                    <div class="relative w-28 h-28 rounded-2xl border flex items-center justify-center" style="background: #fff; border-color: var(--line);">
-                        <span class="engine absolute text-sm font-bold" style="color: var(--ink);">GPT-3.5</span>
-                        <span class="engine absolute text-sm font-bold" style="color: var(--ink);">GPT-4o</span>
-                        <span class="engine absolute text-sm font-bold" style="color: var(--ink);">GPT-5</span>
-                    </div>
-                </div>
-                <div class="p-8">
-                    <p style="color: var(--ink-soft);">
-                        サービス名は同じでも、<span class="mark">中身のエンジン（モデル）が違う</span>。
-                    </p>
-                    <div class="mt-4 text-sm mono" style="color: var(--ink-mute);">Read →</div>
-                </div>
-            </a>
-
-            <!-- カットオフカード -->
-            <a href="knowledge-cutoff.html" class="term-card">
-                <div class="px-8 pt-8 pb-4">
-                    <div class="cat-label mb-2">03 · AI用語</div>
-                    <div class="mono text-sm mb-2" style="color: var(--ink-soft);">Knowledge Cutoff</div>
-                    <h2 class="text-3xl md:text-4xl mb-0">ナレッジカットオフ</h2>
-                </div>
-                <div class="thumb thumb-cutoff">
-                    <div class="w-full max-w-xs px-6">
-                        <div class="relative h-10">
-                            <div class="absolute top-1/2 left-0 right-0 h-0.5" style="background: var(--ink-soft);"></div>
-                            <div class="absolute top-0 bottom-0" style="left: 62%; border-left: 1.5px dashed var(--accent);"></div>
-                            <div class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full dot" style="left: 10%; background: var(--ink);"></div>
-                            <div class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full dot" style="left: 28%; animation-delay: .2s; background: var(--ink);"></div>
-                            <div class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full dot" style="left: 46%; animation-delay: .4s; background: var(--ink);"></div>
-                            <div class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full dot" style="left: 78%; animation-delay: .6s; background: var(--ink-mute);"></div>
-                        </div>
-                        <div class="mt-4 text-center">
-                            <span class="newspaper inline-block text-2xl">📰</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-8">
-                    <p style="color: var(--ink-soft);">
-                        AIが知っている日付には<span class="mark">「線」がある</span>。<br>
-                        それ以降の情報は、あなたが渡さないと届かない。
-                    </p>
-                    <div class="mt-4 text-sm mono" style="color: var(--ink-mute);">Read →</div>
-                </div>
-            </a>
-
-        </div>
-
-        <!-- LINE CTA -->
-        <div class="cta-box mt-20">
-            <div class="flex items-start gap-4">
-                <div class="text-2xl flex-shrink-0">💬</div>
-                <div class="flex-1">
-                    <h3 class="text-xl md:text-2xl mb-2" style="font-weight: 500;">新しい用語が追加されたら、LINEで通知。</h3>
-                    <p class="mb-6" style="color: var(--ink-soft);">
-                        オープンチャットなので匿名OK・無料・通知オフ可。
-                    </p>
-                    <a href="https://line.me/ti/g2/Q_wc2e9Avaj3sf4YM0J2z81UMdpQ_2AqmNOp8g"
-                       target="_blank" rel="noopener noreferrer"
-                       onclick="gtag('event', 'click', {event_category: 'line_oc', event_label: 'index_cta'});"
-                       class="btn-line">
-                        LINEで受け取る
-                        <span>→</span>
-                    </a>
-                </div>
+        <!-- カテゴリA -->
+        <section class="mb-20">
+            <div class="flex items-center gap-3 mb-3">
+                <span class="cat-label">Category A</span>
             </div>
-        </div>
+            <h2 class="text-2xl md:text-3xl mb-3" style="font-weight: 500;">
+                <span class="mr-2">🤖</span>AIの基本概念
+            </h2>
+            <p class="mb-10" style="color: var(--ink-soft); max-width: 640px;">
+                AIサービスの土台となる仕組みや特性に関する用語。「AIが何をしていて、何が限界なのか」を正しく理解するための基礎知識です。
+            </p>
+
+            <div class="term-grid">
+
+                <a href="llm.html" class="term-card">
+                    <div class="hero">📊</div>
+                    <div class="num">01</div>
+                    <h3>LLM</h3>
+                    <div class="en">Large Language Model</div>
+                    <p class="desc">人間が書いた大量のテキストデータを学習し、<span class="mark">自然な文章を生成</span>できるAIの仕組み。ChatGPT・Gemini・Claudeはすべてこの「LLM」をベースに作られています。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="ai-model.html" class="term-card">
+                    <div class="hero">⚙️</div>
+                    <div class="num">02</div>
+                    <h3>AIモデル</h3>
+                    <div class="en">AI Model</div>
+                    <p class="desc">AIの「<span class="mark">頭脳</span>」にあたる部分。同じサービス（例: ChatGPT）でも、搭載されるモデルによって賢さや速度が異なります。「Gemini 2.5 Pro」「GPT-4o」などの名前がついています。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="knowledge-cutoff.html" class="term-card">
+                    <div class="hero">📅</div>
+                    <div class="num">03</div>
+                    <h3>ナレッジカットオフ</h3>
+                    <div class="en">Knowledge Cutoff</div>
+                    <p class="desc">AIモデルが<span class="mark">学習したデータの最終日</span>のこと。それ以降の出来事をAIは知りません。だからこそ自分の最新情報をナレッジとして渡す必要があります。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="hallucination.html" class="term-card">
+                    <div class="hero">👻</div>
+                    <div class="num">04</div>
+                    <h3>ハルシネーション</h3>
+                    <div class="en">Hallucination</div>
+                    <p class="desc">AIが事実と異なる情報を<span class="mark">もっともらしく生成</span>してしまう現象。「AIの幻覚」とも呼ばれます。発信や業務利用ではファクトチェックが必須です。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="token.html" class="term-card">
+                    <div class="hero">🧩</div>
+                    <div class="num">05</div>
+                    <h3>トークン</h3>
+                    <div class="en">Token</div>
+                    <p class="desc">AIが文章を処理する際の<span class="mark">最小単位</span>。日本語は1文字が1〜3トークン程度。入力と出力の合計トークン数に上限があり、一度に扱える情報量の限界を決めます。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="ai.html" class="term-card">
+                    <div class="hero">🤖</div>
+                    <div class="num">06</div>
+                    <h3>AI（人工知能）</h3>
+                    <div class="en">Artificial Intelligence</div>
+                    <p class="desc">人間の知的な作業（文章作成・分析・判断など）をコンピュータに行わせる<span class="mark">技術の総称</span>。ChatGPT・Gemini・Claudeなどの生成AIもこれに含まれます。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="generative-ai.html" class="term-card">
+                    <div class="hero">✨</div>
+                    <div class="num">07</div>
+                    <h3>生成AI</h3>
+                    <div class="en">Generative AI</div>
+                    <p class="desc">テキスト・画像・動画など新しいコンテンツを「<span class="mark">生成</span>」できるタイプのAI。ChatGPT・Gemini・Claudeはすべて生成AIに分類されます。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="context-window.html" class="term-card">
+                    <div class="hero">🪟</div>
+                    <div class="num">08</div>
+                    <h3>コンテキスト<br>ウィンドウ</h3>
+                    <div class="en">Context Window</div>
+                    <p class="desc">AIが一度の会話で<span class="mark">読み込めるトークン数の上限</span>。この枠に収まる範囲でしかAIは情報を参照できません。長文のナレッジは必要な情報に絞って渡すのが重要です。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="multimodal.html" class="term-card">
+                    <div class="hero">🎭</div>
+                    <div class="num">09</div>
+                    <h3>マルチモーダル</h3>
+                    <div class="en">Multimodal</div>
+                    <p class="desc">テキストだけでなく、<span class="mark">画像・音声・動画</span>など複数の形式のデータを同時に扱えるAIの能力。「この画像を説明して」と頼めるのはマルチモーダルのおかげです。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="rag.html" class="term-card">
+                    <div class="hero">🔍</div>
+                    <div class="num">10</div>
+                    <h3>RAG</h3>
+                    <div class="en">Retrieval-Augmented Generation</div>
+                    <p class="desc">AIが回答を生成する前に、<span class="mark">外部のデータから関連情報を検索</span>して取り込む仕組み。AIの知識不足を自分のデータで補う技術です。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+                <a href="memory.html" class="term-card">
+                    <div class="hero">🧠</div>
+                    <div class="num">11</div>
+                    <h3>メモリ</h3>
+                    <div class="en">Memory</div>
+                    <p class="desc">AIが<span class="mark">過去の会話内容や好みを記憶</span>し、次の会話に反映する機能。ChatGPTやGeminiに搭載。ただし精度は完全ではないため、重要な指示はナレッジで明示的に渡すのが確実。</p>
+                    <div class="read">Read →</div>
+                </a>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- フッター（極小） -->
     <footer class="border-t" style="border-color: var(--line);">
-        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+        <div class="container mx-auto px-6 py-10 max-w-5xl text-sm" style="color: var(--ink-mute);">
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
                 <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
                 <span>運営: 株式会社レベルアップ</span>
