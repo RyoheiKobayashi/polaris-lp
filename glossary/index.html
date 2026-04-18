@@ -1014,6 +1014,41 @@
             30%, 90% { opacity: 1; }
             100%     { opacity: 0; }
         }
+
+        /* ========= カテゴリフィルタ ========= */
+        .cat-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0 auto;
+        }
+        .cat-btn {
+            padding: 8px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: border-color .2s ease, color .2s ease, background .2s ease, transform .2s ease;
+        }
+        .cat-btn:hover {
+            border-color: var(--ink-mute);
+            color: var(--ink);
+        }
+        .cat-btn.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+        .cat-count {
+            margin-left: 6px;
+            font-size: 11px;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -1042,11 +1077,20 @@
         <div class="hairline"></div>
     </div>
 
+    <!-- カテゴリフィルタ -->
+    <div class="container mx-auto px-6 pt-10 max-w-6xl">
+        <div class="cat-filter" id="cat-filter">
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">25</span></button>
+            <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
+            <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
+        </div>
+    </div>
+
     <!-- 用語一覧 -->
     <main class="container mx-auto px-6 pt-12 pb-24 max-w-6xl">
 
         <!-- Category A -->
-        <section class="cat-section">
+        <section class="cat-section" data-cat="A">
             <header class="cat-head">
                 <div class="cat-tag">A · AI Basics</div>
                 <h2 class="cat-heading">AIの基本概念</h2>
@@ -1260,7 +1304,7 @@
         </section>
 
         <!-- Category B -->
-        <section class="cat-section">
+        <section class="cat-section" data-cat="B">
             <header class="cat-head">
                 <div class="cat-tag">B · Prompt Engineering</div>
                 <h2 class="cat-heading">プロンプトエンジニアリング</h2>
@@ -1535,6 +1579,26 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    (function() {
+        const filterBar = document.getElementById('cat-filter');
+        if (!filterBar) return;
+        const buttons = filterBar.querySelectorAll('.cat-btn');
+        const sections = document.querySelectorAll('.cat-section');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                sections.forEach(sec => {
+                    sec.style.display = (filter === 'all' || sec.dataset.cat === filter) ? '' : 'none';
+                });
+            });
+        });
+    })();
+    </script>
 
 </body>
 </html>
