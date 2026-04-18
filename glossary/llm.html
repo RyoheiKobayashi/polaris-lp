@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM（大規模言語モデル）とは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="LLM（大規模言語モデル）を、アニメーションで3秒で理解。次の単語を確率で当てるマシン、それがLLMの正体。こば先生監修。">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#1f2937">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .sentence {
+            font-size: clamp(1.25rem, 4.5vw, 2rem);
+            line-height: 1.7;
+            min-height: 4.5em;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 2.5em;
+            border-bottom: 3px solid #60a5fa;
+            margin: 0 .15em;
+            color: #fbbf24;
+            font-weight: 700;
+            transition: color .3s ease;
+        }
+        .candidate-row {
+            display: grid;
+            grid-template-columns: 4em 1fr 3em;
+            gap: .75rem;
+            align-items: center;
+            padding: .5rem .75rem;
+            border-radius: .5rem;
+            transition: background .3s, transform .3s;
+        }
+        .candidate-row.winner {
+            background: rgba(59, 130, 246, 0.15);
+            transform: scale(1.03);
+        }
+        .bar-track {
+            height: 10px;
+            background: rgba(75, 85, 99, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 5px;
+            transition: width 1s cubic-bezier(.2,.8,.2,1);
+        }
+        .pct {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+            color: #cbd5e1;
+            font-size: .9rem;
+        }
+        .word-picked {
+            display: inline-block;
+            animation: pop-in .45s ease-out;
+            color: #fbbf24;
+            font-weight: 700;
+        }
+        @keyframes pop-in {
+            0%   { transform: scale(0.4) translateY(10px); opacity: 0; }
+            60%  { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+    <!-- ヘッダー帯 -->
+    <div class="bg-gray-800/60 border-b border-gray-700 sticky top-0 z-40 backdrop-blur">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between text-sm">
+            <span class="text-gray-300">
+                <span class="text-white font-semibold">アニメでわかるAI用語</span>
+                <span class="text-gray-500 mx-2">×</span>
+                <span class="text-blue-400">こば先生監修</span>
+            </span>
+            <a href="index.html" class="text-gray-400 hover:text-white transition">← 一覧に戻る</a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-12 max-w-3xl">
+
+        <!-- タイトル -->
+        <header class="mb-10">
+            <div class="text-sm text-blue-400 font-semibold mb-2">#01 ・ AIの基本概念</div>
+            <h1 class="text-3xl md:text-4xl font-bold leading-tight">
+                LLM<span class="text-gray-400 text-xl md:text-2xl ml-2">（大規模言語モデル）</span>
+            </h1>
+        </header>
+
+        <!-- 結論 -->
+        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
+            <div class="text-red-400 font-bold text-sm mb-2">🔴 結論（一言で）</div>
+            <p class="text-lg md:text-xl leading-relaxed">
+                LLMは、<span class="font-bold text-white">人類が書いた文章を大量に学んで、「次の単語」を確率で当てるマシン</span>です。
+            </p>
+        </section>
+
+        <!-- 理由 -->
+        <section class="bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-10">
+            <div class="text-yellow-400 font-bold text-sm mb-2">🟡 理由</div>
+            <p class="text-gray-200 leading-relaxed">
+                LLMは意味を「理解」しているわけではなく、<span class="text-white font-semibold">次に来る単語の確率</span>を計算しています。<br>
+                たとえば「今日の天気は」の次には「晴れ」「曇り」「雨」など、いくつもの候補があります。
+                その中から、過去に学んだ膨大な文章をもとに<span class="text-white font-semibold">一番それっぽい単語</span>を選んでいるだけ。<br>
+                それを何回も繰り返すことで、一見「考えているように見える文章」が出来上がります。
+            </p>
+        </section>
+
+        <!-- アニメーション主役 -->
+        <section class="bg-gray-800 rounded-xl p-6 md:p-8 mb-10 border border-gray-700">
+            <div class="text-green-400 font-bold text-sm mb-4">🟢 アニメーションで見る</div>
+
+            <!-- 文字表示エリア -->
+            <div class="sentence text-center mb-8" id="sentence">
+                <span id="sentence-text"></span><span class="blank" id="blank">___</span>
+            </div>
+
+            <!-- 候補バー -->
+            <div id="candidates" class="space-y-2 max-w-md mx-auto mb-6">
+                <div class="candidate-row" data-word="晴れ">
+                    <span class="text-gray-300">晴れ</span>
+                    <div class="bar-track"><div class="bar-fill" data-pct="78"></div></div>
+                    <span class="pct">0%</span>
+                </div>
+                <div class="candidate-row" data-word="曇り">
+                    <span class="text-gray-300">曇り</span>
+                    <div class="bar-track"><div class="bar-fill" data-pct="15"></div></div>
+                    <span class="pct">0%</span>
+                </div>
+                <div class="candidate-row" data-word="雨">
+                    <span class="text-gray-300">雨</span>
+                    <div class="bar-track"><div class="bar-fill" data-pct="7"></div></div>
+                    <span class="pct">0%</span>
+                </div>
+            </div>
+
+            <!-- ステータス -->
+            <div class="text-center">
+                <p id="status" class="text-gray-400 text-sm min-h-[1.5rem] mb-4">▶︎ 「再生」を押してみてください</p>
+                <button id="play-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg transition">
+                    ▶︎ 再生
+                </button>
+            </div>
+
+            <p class="text-center text-gray-500 text-xs mt-6">これがLLMの正体。「次の単語」を確率で当てているだけ。</p>
+        </section>
+
+        <!-- 具体例 -->
+        <section class="mb-10">
+            <div class="text-green-400 font-bold text-sm mb-4">🟢 具体例（身近な例え）</div>
+
+            <div class="space-y-4">
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-bold mb-2 text-white">例① ラーメン屋10万軒の味を知っている人</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        ラーメン屋を10万軒食べ歩いた人に「このスープの次に合う麺は？」と聞くと、
+                        「細麺が7割、中太が2割、太麺が1割」と答えられる。<br>
+                        LLMも同じ。<span class="text-white font-semibold">過去の大量データから、一番それっぽい「次」を当てている</span>だけです。
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-bold mb-2 text-white">例② 車のエンジン</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        ChatGPTが「車」なら、LLMは<span class="text-white font-semibold">「エンジン」</span>の部分。<br>
+                        私たちが普段触るのは車体（アプリ）ですが、中で動いている本体＝エンジンがLLMです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- まとめ -->
+        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-12">
+            <div class="text-red-400 font-bold text-sm mb-2">🔴 まとめ</div>
+            <p class="text-lg leading-relaxed">
+                LLMは、<span class="text-white font-semibold">人類の文章を10万杯ぶん味見した「確率予測マシン」</span>です。<br>
+                意味を理解しているのではなく、<span class="text-white font-semibold">「次にこの単語が来る確率」</span>を計算して、
+                それっぽい文章を作っている。<br>
+                この仕組みを知るだけで、AIの回答を<span class="text-white font-semibold">鵜呑みにしない目</span>が育ちます。
+            </p>
+        </section>
+
+        <!-- フッターナビ -->
+        <nav class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-10">
+            <div class="flex items-center gap-3 mb-4">
+                <img src="../images/icon.png" alt="Polaris" class="w-10 h-10 rounded-lg">
+                <div>
+                    <p class="text-sm text-gray-400">📱 学習の進捗管理は</p>
+                    <a href="../index.html" class="text-white font-bold hover:text-blue-400 transition">Polaris で</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 justify-between">
+                <a href="ai-model.html" class="text-blue-400 hover:text-blue-300 font-semibold">次の用語 → AIモデル</a>
+                <a href="index.html" class="text-gray-400 hover:text-white">他の用語一覧 →</a>
+            </div>
+        </nav>
+
+    </main>
+
+    <footer class="border-t border-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-xs">提供：Polaris ｜ © 2025 LEVEL UP, K.K.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const words = ['晴れ', 'で', '散歩', 'に', '行きたい'];
+        const probs = [
+            [{w:'晴れ', p:78}, {w:'曇り', p:15}, {w:'雨', p:7}],
+            [{w:'で',   p:62}, {w:'が',   p:25}, {w:'、', p:13}],
+            [{w:'散歩', p:55}, {w:'外出', p:28}, {w:'買い物', p:17}],
+            [{w:'に',   p:70}, {w:'へ',   p:20}, {w:'と', p:10}],
+            [{w:'行きたい', p:68}, {w:'出かけたい', p:22}, {w:'なる', p:10}],
+        ];
+
+        const sentenceText = document.getElementById('sentence-text');
+        const blank = document.getElementById('blank');
+        const candidatesEl = document.getElementById('candidates');
+        const statusEl = document.getElementById('status');
+        const btn = document.getElementById('play-btn');
+
+        let running = false;
+        let currentWords = '今日の天気は ';
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        function setCandidates(list) {
+            const rows = candidatesEl.querySelectorAll('.candidate-row');
+            rows.forEach((row, i) => {
+                row.classList.remove('winner');
+                const item = list[i];
+                if (!item) {
+                    row.style.display = 'none';
+                    return;
+                }
+                row.style.display = '';
+                row.dataset.word = item.w;
+                row.querySelector('span').textContent = item.w;
+                const fill = row.querySelector('.bar-fill');
+                const pct = row.querySelector('.pct');
+                fill.style.width = '0%';
+                pct.textContent = '0%';
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        fill.style.width = item.p + '%';
+                        animatePct(pct, item.p);
+                    }, 50);
+                });
+            });
+        }
+
+        function animatePct(el, target) {
+            const start = performance.now();
+            const dur = 900;
+            function step(now) {
+                const t = Math.min(1, (now - start) / dur);
+                el.textContent = Math.round(target * t) + '%';
+                if (t < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function highlightWinner(word) {
+            candidatesEl.querySelectorAll('.candidate-row').forEach(row => {
+                if (row.dataset.word === word) row.classList.add('winner');
+            });
+        }
+
+        async function reset() {
+            currentWords = '今日の天気は ';
+            sentenceText.textContent = currentWords;
+            blank.textContent = '___';
+            blank.style.display = '';
+            statusEl.textContent = '';
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            await reset();
+
+            for (let i = 0; i < words.length; i++) {
+                statusEl.textContent = `ステップ ${i + 1} / ${words.length}：次の単語を確率で予測中…`;
+                setCandidates(probs[i]);
+                await wait(1600);
+
+                highlightWinner(words[i]);
+                statusEl.textContent = `一番確率が高い「${words[i]}」を選択 →`;
+                await wait(900);
+
+                currentWords += words[i] + ' ';
+                sentenceText.innerHTML = currentWords.replace(/(\S+) $/, '<span class="word-picked">$1</span> ');
+                blank.textContent = i === words.length - 1 ? '。' : '___';
+                await wait(700);
+            }
+
+            statusEl.textContent = '✅ これがLLM。「次の単語」を何度も予測して文章を作っている。';
+            blank.style.display = 'none';
+
+            btn.disabled = false;
+            btn.textContent = '▶︎ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

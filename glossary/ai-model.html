@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIモデルとは｜アニメでわかるAI用語集</title>
+    <meta name="description" content="AIモデルを、アニメーションで3秒で理解。サービス名は同じでも、中身のエンジンが違う。GPT-3.5とGPT-5で返答はどう変わる？こば先生監修。">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#1f2937">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .phone-frame {
+            width: min(100%, 320px);
+            aspect-ratio: 9 / 16;
+            max-height: 420px;
+            background: #0b1220;
+            border: 6px solid #1f2937;
+            border-radius: 28px;
+            box-shadow: 0 18px 50px rgba(0,0,0,.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px; height: 18px;
+            background: #1f2937;
+            border-radius: 0 0 12px 12px;
+            z-index: 3;
+        }
+        .tab-btn {
+            transition: all .25s ease;
+        }
+        .tab-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, .4);
+        }
+        .engine-label {
+            transition: opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+        }
+        .meter {
+            height: 12px;
+            background: rgba(75, 85, 99, 0.5);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 6px;
+            transition: width .9s cubic-bezier(.2,.8,.2,1);
+        }
+        .chat-bubble {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .chat-bubble.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+    <!-- ヘッダー帯 -->
+    <div class="bg-gray-800/60 border-b border-gray-700 sticky top-0 z-40 backdrop-blur">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between text-sm">
+            <span class="text-gray-300">
+                <span class="text-white font-semibold">アニメでわかるAI用語</span>
+                <span class="text-gray-500 mx-2">×</span>
+                <span class="text-blue-400">こば先生監修</span>
+            </span>
+            <a href="index.html" class="text-gray-400 hover:text-white transition">← 一覧に戻る</a>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-12 max-w-3xl">
+
+        <!-- タイトル -->
+        <header class="mb-10">
+            <div class="text-sm text-blue-400 font-semibold mb-2">#02 ・ AIの基本概念</div>
+            <h1 class="text-3xl md:text-4xl font-bold leading-tight">AIモデル</h1>
+        </header>
+
+        <!-- 結論 -->
+        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
+            <div class="text-red-400 font-bold text-sm mb-2">🔴 結論（一言で）</div>
+            <p class="text-lg md:text-xl leading-relaxed">
+                AIモデルは、<span class="font-bold text-white">アプリの中で動いている「エンジン」</span>のこと。<br>
+                サービス名（ChatGPT等）は同じでも、中身のモデルが変わると<span class="text-white font-semibold">賢さ・速さ・得意分野</span>が変わります。
+            </p>
+        </section>
+
+        <!-- 理由 -->
+        <section class="bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-10">
+            <div class="text-yellow-400 font-bold text-sm mb-2">🟡 理由</div>
+            <p class="text-gray-200 leading-relaxed">
+                ChatGPT・Claude・Geminiのようなサービスは「車体」で、中には<span class="text-white font-semibold">GPT-4o、Claude Opus、Gemini 2.5</span>のような<span class="text-white font-semibold">エンジン＝AIモデル</span>が積まれています。<br>
+                同じ車体でも、エンジンを載せ替えれば加速力や燃費が変わります。AIも同じで、<span class="text-white font-semibold">モデルを切り替えると返答の質が変わる</span>んです。
+            </p>
+        </section>
+
+        <!-- アニメーション主役 -->
+        <section class="bg-gray-800 rounded-xl p-6 md:p-8 mb-10 border border-gray-700">
+            <div class="text-green-400 font-bold text-sm mb-4">🟢 アニメーションで見る</div>
+
+            <!-- タブ -->
+            <div class="flex justify-center gap-2 mb-6 flex-wrap">
+                <button class="tab-btn active bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt35">GPT-3.5</button>
+                <button class="tab-btn bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt4o">GPT-4o</button>
+                <button class="tab-btn bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt5">GPT-5</button>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                <!-- スマホフレーム -->
+                <div class="phone-frame flex-shrink-0">
+                    <div class="phone-notch"></div>
+                    <div class="p-4 pt-8 h-full flex flex-col">
+                        <div class="text-center text-xs text-gray-500 mb-2">ChatGPT</div>
+                        <div class="text-center mb-4">
+                            <div id="engine-label" class="engine-label inline-block text-lg font-bold text-blue-300 bg-blue-900/40 px-3 py-1 rounded-full">GPT-3.5</div>
+                        </div>
+                        <div class="flex-1 space-y-2 overflow-hidden">
+                            <div class="chat-bubble bg-gray-700/60 rounded-2xl rounded-tr-sm p-2.5 text-xs text-gray-200 ml-6" id="bubble-q">
+                                こんにちは
+                            </div>
+                            <div class="chat-bubble bg-blue-600/30 border border-blue-500/30 rounded-2xl rounded-tl-sm p-2.5 text-xs text-gray-100 mr-6" id="bubble-a">
+                                …
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- メーター -->
+                <div class="w-full md:w-64 space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-400">賢さ</span>
+                            <span class="text-gray-300" id="iq-val">0</span>
+                        </div>
+                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-blue-500 to-purple-500" id="iq-bar"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-400">速さ</span>
+                            <span class="text-gray-300" id="speed-val">0</span>
+                        </div>
+                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-emerald-500 to-teal-400" id="speed-bar"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-400">コスト</span>
+                            <span class="text-gray-300" id="cost-val">0</span>
+                        </div>
+                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-pink-500 to-rose-500" id="cost-bar"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-500 text-xs mt-6">タブを切り替えると、「同じサービス」でもエンジン（モデル）が変わり、返答と性能が変化します。</p>
+        </section>
+
+        <!-- 具体例 -->
+        <section class="mb-10">
+            <div class="text-green-400 font-bold text-sm mb-4">🟢 具体例（身近な例え）</div>
+
+            <div class="space-y-4">
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-bold mb-2 text-white">例① 車の車体とエンジン</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        「プリウス」という車体でも、中のエンジンが違えば、燃費も加速も変わります。<br>
+                        ChatGPTも同じ。<span class="text-white font-semibold">車体はChatGPTでも、エンジン（モデル）が変われば体感が全く違う</span>んです。
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="font-bold mb-2 text-white">例② 料理人の腕</h3>
+                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                        同じ「和食店」に入っても、見習いの板前と30年のベテランでは料理の深さが違います。<br>
+                        AIモデルも同じで、<span class="text-white font-semibold">GPT-3.5は見習い、GPT-5はベテラン板前</span>くらい差があります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- まとめ -->
+        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-12">
+            <div class="text-red-400 font-bold text-sm mb-2">🔴 まとめ</div>
+            <p class="text-lg leading-relaxed">
+                AIを使うときは、<span class="text-white font-semibold">サービス名だけでなく「どのモデルが動いているか」</span>を気にしてみてください。<br>
+                同じ質問でも、<span class="text-white font-semibold">モデル次第で答えの深さが大きく変わる</span>。<br>
+                「なんかAIって浅いな」と感じたら、<span class="text-white font-semibold">モデルを変えるだけで世界が変わる</span>こともあります。
+            </p>
+        </section>
+
+        <!-- フッターナビ -->
+        <nav class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-10">
+            <div class="flex items-center gap-3 mb-4">
+                <img src="../images/icon.png" alt="Polaris" class="w-10 h-10 rounded-lg">
+                <div>
+                    <p class="text-sm text-gray-400">📱 学習の進捗管理は</p>
+                    <a href="../index.html" class="text-white font-bold hover:text-blue-400 transition">Polaris で</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 justify-between">
+                <a href="knowledge-cutoff.html" class="text-blue-400 hover:text-blue-300 font-semibold">次の用語 → ナレッジカットオフ</a>
+                <a href="index.html" class="text-gray-400 hover:text-white">他の用語一覧 →</a>
+            </div>
+        </nav>
+
+    </main>
+
+    <footer class="border-t border-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-xs">提供：Polaris ｜ © 2025 LEVEL UP, K.K.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const MODELS = {
+            gpt35: {
+                name: 'GPT-3.5',
+                color: 'text-blue-300',
+                bg: 'bg-blue-900/40',
+                iq: 35, speed: 90, cost: 15,
+                q: 'こんにちは',
+                a: 'こんにちは。ご質問ありがとうございます。',
+            },
+            gpt4o: {
+                name: 'GPT-4o',
+                color: 'text-purple-300',
+                bg: 'bg-purple-900/40',
+                iq: 65, speed: 75, cost: 45,
+                q: 'こんにちは',
+                a: 'こんにちは。どのような観点からお答えしましょうか？',
+            },
+            gpt5: {
+                name: 'GPT-5',
+                color: 'text-pink-300',
+                bg: 'bg-pink-900/40',
+                iq: 92, speed: 55, cost: 80,
+                q: 'こんにちは',
+                a: 'こんにちは。ご質問の背景を踏まえて、3つの視点でお答えしますね。',
+            },
+        };
+
+        const engineLabel = document.getElementById('engine-label');
+        const bubbleQ = document.getElementById('bubble-q');
+        const bubbleA = document.getElementById('bubble-a');
+        const iqBar = document.getElementById('iq-bar');
+        const speedBar = document.getElementById('speed-bar');
+        const costBar = document.getElementById('cost-bar');
+        const iqVal = document.getElementById('iq-val');
+        const speedVal = document.getElementById('speed-val');
+        const costVal = document.getElementById('cost-val');
+        const tabs = document.querySelectorAll('.tab-btn');
+
+        function animateNum(el, target) {
+            const start = parseInt(el.textContent) || 0;
+            const s = performance.now();
+            const dur = 800;
+            function step(now) {
+                const t = Math.min(1, (now - s) / dur);
+                el.textContent = Math.round(start + (target - start) * t);
+                if (t < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function apply(modelKey) {
+            const m = MODELS[modelKey];
+
+            engineLabel.style.opacity = '0';
+            engineLabel.style.transform = 'scale(0.85) rotate(-6deg)';
+            bubbleA.classList.remove('visible');
+            bubbleQ.classList.remove('visible');
+
+            setTimeout(() => {
+                engineLabel.textContent = m.name;
+                engineLabel.className = 'engine-label inline-block text-lg font-bold ' + m.color + ' ' + m.bg + ' px-3 py-1 rounded-full';
+                engineLabel.style.opacity = '1';
+                engineLabel.style.transform = 'scale(1) rotate(0)';
+
+                bubbleQ.textContent = m.q;
+                setTimeout(() => bubbleQ.classList.add('visible'), 100);
+                setTimeout(() => {
+                    bubbleA.textContent = m.a;
+                    bubbleA.classList.add('visible');
+                }, 500);
+
+                iqBar.style.width = m.iq + '%';
+                speedBar.style.width = m.speed + '%';
+                costBar.style.width = m.cost + '%';
+                animateNum(iqVal, m.iq);
+                animateNum(speedVal, m.speed);
+                animateNum(costVal, m.cost);
+            }, 220);
+
+            tabs.forEach(t => {
+                if (t.dataset.model === modelKey) {
+                    t.classList.remove('bg-gray-700', 'hover:bg-gray-600', 'text-gray-200');
+                    t.classList.add('active', 'bg-blue-600', 'hover:bg-blue-700', 'text-white');
+                } else {
+                    t.classList.remove('active', 'bg-blue-600', 'hover:bg-blue-700', 'text-white');
+                    t.classList.add('bg-gray-700', 'hover:bg-gray-600', 'text-gray-200');
+                }
+            });
+        }
+
+        tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.model)));
+
+        // 初期表示
+        setTimeout(() => apply('gpt35'), 200);
+    })();
+    </script>
+
+</body>
+</html>
