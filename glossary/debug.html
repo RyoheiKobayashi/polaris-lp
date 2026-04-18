@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デバッグとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプトのデバッグ（Debug）を、アニメーションで3秒で理解。AIの出力を検証して期待通りに近づける反復作業。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .dbg-stage { max-width: 520px; margin: 0 auto; }
+        .dbg-loop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .dbg-step {
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: var(--ink);
+            min-width: 90px;
+            text-align: center;
+            transition: border-color .3s ease, background .3s ease, transform .3s ease;
+        }
+        .dbg-step.active {
+            border-color: var(--ink);
+            background: var(--bg-warm);
+            transform: scale(1.04);
+        }
+        .dbg-arrow { color: var(--ink-mute); font-size: 16px; }
+        .dbg-out {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.65;
+            min-height: 3.6em;
+            transition: background .3s ease, color .3s ease;
+        }
+        .dbg-out.fail { background: #fee2e2; color: #991b1b; }
+        .dbg-out.pass { background: #d1fae5; color: #065f46; }
+        .dbg-iter {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-mute);
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">21 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Debug</div>
+            <h1 class="detail-title">デバッグ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">プロンプトを直す反復作業</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="dbg-stage">
+                <div class="dbg-loop">
+                    <div class="dbg-step" id="s-run">① 実行</div>
+                    <span class="dbg-arrow">→</span>
+                    <div class="dbg-step" id="s-check">② 検証</div>
+                    <span class="dbg-arrow">→</span>
+                    <div class="dbg-step" id="s-fix">③ 修正</div>
+                </div>
+                <div class="dbg-iter" id="iter">ITER 1</div>
+                <div class="dbg-out" id="out">待機中…</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で3回試行するループを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">一発で決まらない。直して試すのが普通。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">プロンプトは「書いて終わり」ではない</h2>
+            <p>
+                デバッグとは、AIの出力を検証し、期待通りでない部分を特定して<span class="mark">プロンプトを修正するプロセス</span>。
+                エンジニアリングの世界では「プログラムのバグを取る作業」ですが、プロンプトの世界では<span class="mark">出力を見ながらプロンプトを磨き込む反復作業</span>を指します。
+                1回で完璧なプロンプトは書けません。試して、ずれを見つけて、直す。これが普通のプロセスです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 料理の味見</h3>
+                    <p>
+                        レシピ通りに作っても、最終的には味見して調整しますよね。
+                        プロンプトも<span class="mark">試作→味見→調整</span>の繰り返しで精度が上がっていきます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 発注後の修正依頼</h3>
+                    <p>
+                        デザイナーへの初稿が100点で上がってくることは稀。
+                        「ここを◯◯に」というフィードバックを重ねて完成に近づきます。
+                        プロンプトも同じく<span class="mark">対話的に磨く</span>ものと考えましょう。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    デバッグ＝<span class="mark">実行→検証→修正のループ</span>。
+                    初回で上手くいかなくても焦らず、
+                    どこがズレたのかを観察し、プロンプトを一文ずつ直す。
+                    この反復の速さが、プロンプトエンジニアリングの上達速度を決めます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="three-c.html" class="nav-link">← 前の用語：3C原則</a>
+            <a href="markdown.html" class="nav-link">次の用語：マークダウン →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const sRun = document.getElementById('s-run');
+        const sCheck = document.getElementById('s-check');
+        const sFix = document.getElementById('s-fix');
+        const iter = document.getElementById('iter');
+        const out = document.getElementById('out');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function iteration(n, finalPass) {
+            iter.textContent = 'ITER ' + n;
+            out.classList.remove('fail', 'pass');
+            out.textContent = '出力待ち…';
+            [sRun, sCheck, sFix].forEach(s => s.classList.remove('active'));
+
+            sRun.classList.add('active');
+            status.textContent = '① プロンプト実行';
+            await wait(700);
+
+            sRun.classList.remove('active');
+            sCheck.classList.add('active');
+            status.textContent = '② 出力を検証';
+            out.classList.add(finalPass ? 'pass' : 'fail');
+            out.textContent = finalPass ? '✓ 期待通りの出力' : '✗ トーンがズレている／情報不足';
+            await wait(1100);
+
+            if (!finalPass) {
+                sCheck.classList.remove('active');
+                sFix.classList.add('active');
+                status.textContent = '③ プロンプトを修正';
+                await wait(900);
+            }
+        }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+
+            await iteration(1, false);
+            await iteration(2, false);
+            await iteration(3, true);
+            status.innerHTML = '✓ デバッグの末に <strong>狙い通り</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

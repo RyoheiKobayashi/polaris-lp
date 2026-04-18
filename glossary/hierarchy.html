@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>階層構造とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプトの階層構造を、アニメーションで3秒で理解。マークダウンの見出しレベル（#・##・###）で情報を段階的に整理する方法。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .hier-stage {
+            max-width: 520px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 18px 22px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.9;
+        }
+        .hier-line {
+            opacity: 0;
+            transform: translateX(-6px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .hier-line.in { opacity: 1; transform: translateX(0); }
+        .hier-syntax { color: var(--ink-mute); margin-right: 6px; }
+        .hier-level-1 { color: var(--ink); font-weight: 600; font-size: 15px; }
+        .hier-level-2 { color: var(--ink-warm); padding-left: 12px; font-size: 13px; }
+        .hier-level-3 { color: var(--ink-soft); padding-left: 28px; font-size: 12px; }
+        .hier-level-4 { color: var(--ink-mute); padding-left: 44px; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">23 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Hierarchy</div>
+            <h1 class="detail-title">階層構造</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">情報を段階的に整理する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="hier-stage">
+                <div class="hier-line hier-level-1" id="h1"><span class="hier-syntax">#</span>台本作成</div>
+                <div class="hier-line hier-level-2" id="h2"><span class="hier-syntax">##</span>導入部</div>
+                <div class="hier-line hier-level-3" id="h3a"><span class="hier-syntax">###</span>悩みの共感</div>
+                <div class="hier-line hier-level-3" id="h3b"><span class="hier-syntax">###</span>結論の予告</div>
+                <div class="hier-line hier-level-2" id="h2b"><span class="hier-syntax">##</span>本編</div>
+                <div class="hier-line hier-level-3" id="h3c"><span class="hier-syntax">###</span>ステップ1</div>
+                <div class="hier-line hier-level-4" id="h4"><span class="hier-syntax">####</span>具体例</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で階層が展開する様子を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">大見出し→中見出し→小見出し。情報が入れ子になっていく。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">情報の「大・中・小」を明示する</h2>
+            <p>
+                階層構造とは、マークダウンの見出しレベル（#, ##, ###, ####）を使って
+                <span class="mark">情報を段階的に整理する方法</span>。
+                大見出し→中見出し→小見出しと入れ子にしていくことで、
+                AIは「どれが上位概念で、どれが下位の詳細か」を正しく理解します。
+                見出し2の中に見出し1が来ないように──<span class="mark">レベルを守る</span>ことが大切です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 本の目次</h3>
+                    <p>
+                        「章」の下に「節」があり、その下に「項」がある。
+                        階層構造は<span class="mark">目次の骨格</span>そのものです。
+                        構造があるからこそ、読者（AI）は全体像と詳細を両方把握できます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② フォルダ管理</h3>
+                    <p>
+                        パソコンのフォルダも、大カテゴリ→中カテゴリ→ファイルと階層化されているから迷わない。
+                        プロンプトも<span class="mark">階層で整理すれば迷子にならず</span>、
+                        AIが長い指示を端から端まで理解できます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    階層構造＝<span class="mark">マークダウンの見出しを正しく使う</span>こと。
+                    ##の中に###を、###の中に####を。レベル順を守るだけで、
+                    AIは長文プロンプトもスッキリ解釈できます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="markdown.html" class="nav-link">← 前の用語：マークダウン</a>
+            <a href="few-shot.html" class="nav-link">次の用語：Few-shot / Zero-shot →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const lines = ['h1','h2','h3a','h3b','h2b','h3c','h4'].map(id => document.getElementById(id));
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            lines.forEach(l => l.classList.remove('in'));
+
+            const statuses = [
+                '# 章（レベル1）',
+                '## 節（レベル2）',
+                '### 項（レベル3）',
+                '### 項（レベル3）',
+                '## 節（レベル2）',
+                '### 項（レベル3）',
+                '#### 詳細（レベル4）'
+            ];
+
+            for (let i = 0; i < lines.length; i++) {
+                await wait(500);
+                lines[i].classList.add('in');
+                status.textContent = statuses[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>見出しレベルで情報を整理</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

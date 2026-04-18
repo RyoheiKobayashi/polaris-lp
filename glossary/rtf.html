@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTF（Role・Task・Format）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプトの基本構造 RTF（Role / Task / Format）を、アニメーションで3秒で理解。役割・やること・出力形式の3点セット。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .rtf-stage { max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+        .rtf-row {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 14px;
+            align-items: center;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .rtf-row.in { opacity: 1; transform: translateX(0); }
+        .rtf-letter {
+            background: var(--ink);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 8px;
+        }
+        .rtf-body {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .rtf-name { font-weight: 500; color: var(--ink-warm); margin-right: 6px; }
+        .rtf-hint { color: var(--ink-soft); font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">17 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Role / Task / Format</div>
+            <h1 class="detail-title">RTF</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">プロンプトの基本の型</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="rtf-stage">
+                <div class="rtf-row" id="r-row"><div class="rtf-letter">R</div><div class="rtf-body"><span class="rtf-name">Role</span><span class="rtf-hint">あなたはプロの編集者です</span></div></div>
+                <div class="rtf-row" id="t-row"><div class="rtf-letter">T</div><div class="rtf-body"><span class="rtf-name">Task</span><span class="rtf-hint">この記事を300字で要約してください</span></div></div>
+                <div class="rtf-row" id="f-row"><div class="rtf-letter">F</div><div class="rtf-body"><span class="rtf-name">Format</span><span class="rtf-hint">結論・理由・具体例の3部構成で</span></div></div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でRTFの3要素を組み立てる</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">R＋T＋F、この3つを積み上げるだけで質が安定する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">迷ったら「R・T・F」の3点セット</h2>
+            <p>
+                RTFは、プロンプトを書くときの<span class="mark">基本構造</span>。
+                <strong>R</strong>ole（役割）＋<strong>T</strong>ask（やること）＋<strong>F</strong>ormat（出力形式）の3要素で構成します。
+                この型に即してプロンプトを書くだけで、どんなAIでも<span class="mark">安定した品質の出力</span>が得やすくなります。
+                慣れるまでは、毎回この3つの枠に当てはめて書くのがおすすめ。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 仕事を頼むときの3点セット</h3>
+                    <p>
+                        外注先に仕事を依頼するときも、
+                        「<span class="mark">誰として</span>（Role）」「<span class="mark">何を</span>（Task）」「<span class="mark">どう納品する</span>（Format）」の3つがあれば、余計な往復が減ります。
+                        AIも同じ。この3点を最初に揃えれば、聞き返しが減って一発で良い出力が返ってきます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 履歴書の書式</h3>
+                    <p>
+                        履歴書は「役割（応募ポジション）」「経歴（何をしてきたか）」「形式（フォーマット統一）」で書かれています。
+                        RTFはその<span class="mark">プロンプト版フォーマット</span>。型に沿うほど、読み手（AI）の理解が速くなります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    RTF＝<span class="mark">Role・Task・Format</span>。
+                    まず役割を与え、次に具体的な依頼を投げ、最後に出力形式を指定する。
+                    この順で書けば、<span class="mark">初心者でもAIから安定した回答</span>を引き出せます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="assistant-prompt.html" class="nav-link">← 前の用語：アシスタントプロンプト</a>
+            <a href="role.html" class="nav-link">次の用語：ロール（役割指定） →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const rows = ['r-row','t-row','f-row'].map(id => document.getElementById(id));
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            rows.forEach(r => r.classList.remove('in'));
+
+            await wait(300);
+            rows[0].classList.add('in');
+            status.textContent = 'Role（役割）を設定';
+            await wait(900);
+            rows[1].classList.add('in');
+            status.textContent = 'Task（やること）を指示';
+            await wait(900);
+            rows[2].classList.add('in');
+            status.innerHTML = '✓ Format（形式）まで揃って <strong>完成</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

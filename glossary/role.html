@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ロール（役割指定）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="プロンプトの「ロール（Role）」を、アニメーションで3秒で理解。AIにどんな専門家として振る舞わせるかを決めるパート。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .role-stage { max-width: 520px; margin: 0 auto; }
+        .role-mask {
+            width: 100px; height: 100px;
+            border: 2px solid var(--ink);
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-family: var(--font-serif);
+            font-size: 42px;
+            color: var(--ink);
+            position: relative;
+            transition: transform .4s ease;
+        }
+        .role-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        .role-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            padding: 5px 12px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: #fff;
+            color: var(--ink-soft);
+            cursor: default;
+            transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
+        }
+        .role-tag.active {
+            background: var(--ink);
+            color: #fff;
+            border-color: var(--ink);
+            transform: scale(1.06);
+        }
+        .role-output {
+            margin-top: 24px;
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--ink-warm);
+            min-height: 3.6em;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .role-output.in { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">18 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Role</div>
+            <h1 class="detail-title">ロール（役割指定）</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">RTFの「R」</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="role-stage">
+                <div class="role-mask" id="role-mask">R</div>
+                <div class="role-tags">
+                    <span class="role-tag" data-role="編集者" data-out="300字に要約し、見出し・結論・理由の順で整えます。">編集者</span>
+                    <span class="role-tag" data-role="コピーライター" data-out="キャッチコピーを5案提示し、ターゲットと狙いを添えます。">コピーライター</span>
+                    <span class="role-tag" data-role="コーチ" data-out="あなたの目標を言語化してから、次のステップを具体的に提案します。">コーチ</span>
+                </div>
+                <div class="role-output" id="role-out">役割を選ぶと、AIの回答トーンが切り替わる</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で役割切り替えを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">同じ質問でも、ロールが変われば回答の形が変わる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIに「誰として話すか」を与える</h2>
+            <p>
+                ロールは、RTFの「R」にあたるパート。
+                AIに<span class="mark">どんな専門家として振る舞うか</span>を指定します。
+                「あなたはプロの編集者です」「あなたは熟練のコピーライターです」など、
+                役職のように書くだけで、<span class="mark">回答の視点・語彙・深さが一変</span>します。
+                制約条件（「専門用語は使わない」「丁寧語で」など）もここで一緒に指定することが多いです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 同じ人でも「立場」で発言が変わる</h3>
+                    <p>
+                        あなた自身、職場では「社員として」、家では「親として」話しますよね。
+                        AIも<span class="mark">与えられたロール次第で、同じ情報を全く違うトーン</span>で語ります。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 俳優に台本を渡す</h3>
+                    <p>
+                        優秀な俳優でも、台本で「医者役」を指定されなければ医者の演技はしません。
+                        ロールは<span class="mark">AIに配役を与える行為</span>。
+                        渡した役柄が具体的であるほど、演技（回答）もリアルになります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ロール＝<span class="mark">AIに与える「役柄」</span>。
+                    役割と制約をセットで書くと、出力の方向性がブレません。
+                    「〜として、〜の立場で、〜を避けて答えて」の一文が強力です。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="rtf.html" class="nav-link">← 前の用語：RTF</a>
+            <a href="context.html" class="nav-link">次の用語：コンテキスト →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const mask = document.getElementById('role-mask');
+        const tags = Array.from(document.querySelectorAll('.role-tag'));
+        const out = document.getElementById('role-out');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            tags.forEach(t => t.classList.remove('active'));
+            out.classList.remove('in');
+            mask.textContent = 'R';
+
+            for (let i = 0; i < tags.length; i++) {
+                await wait(600);
+                tags.forEach(t => t.classList.remove('active'));
+                tags[i].classList.add('active');
+                mask.textContent = tags[i].dataset.role.charAt(0);
+                status.textContent = 'ロール：' + tags[i].dataset.role;
+                out.classList.remove('in');
+                await wait(200);
+                out.textContent = tags[i].dataset.out;
+                out.classList.add('in');
+                await wait(1500);
+            }
+            status.innerHTML = '✓ ロールを変えるだけで <strong>AIの振る舞いが切り替わる</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

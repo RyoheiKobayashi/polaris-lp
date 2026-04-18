@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>システムプロンプトとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="システムプロンプト（System Prompt）を、アニメーションで3秒で理解。AIの役割・振る舞いを定義する「職務記述書」の役割を解説。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .sp-stage { max-width: 520px; margin: 0 auto; }
+        .sp-card {
+            background: var(--surface);
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--ink);
+        }
+        .sp-tag {
+            display: inline-block;
+            background: var(--ink);
+            color: #fff;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .sp-arrow { text-align: center; color: var(--ink-mute); font-size: 18px; margin: 10px 0; }
+        .sp-user-bubble, .sp-ai-bubble {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            max-width: 85%;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .sp-user-bubble {
+            background: var(--ink);
+            color: #fff;
+            margin-left: auto;
+            border-top-right-radius: 3px;
+        }
+        .sp-ai-bubble {
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            margin-right: auto;
+            border-top-left-radius: 3px;
+        }
+        .sp-user-bubble.in, .sp-ai-bubble.in { opacity: 1; transform: translateY(0); }
+        .sp-chat { display: flex; flex-direction: column; gap: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">14 · B. プロンプトエンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">System Prompt</div>
+            <h1 class="detail-title">システムプロンプト</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIの「役割」や「振る舞い」を定義する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="sp-stage">
+                <div class="sp-card" id="sp-def">
+                    <div class="sp-tag">SYSTEM</div>
+                    <div>あなたはYouTube動画台本の<span class="mark">プロの構成作家</span>です。<br>導入→本編→CTAの順で提案してください。</div>
+                </div>
+                <div class="sp-arrow">↓</div>
+                <div class="sp-chat">
+                    <div class="sp-user-bubble" id="sp-usr">ダイエットを扱う動画の台本を考えて</div>
+                    <div class="sp-ai-bubble" id="sp-ai">
+                        <strong>導入</strong>：視聴者の悩みに共感<br>
+                        <strong>本編</strong>：実践3ステップ<br>
+                        <strong>CTA</strong>：チャンネル登録の誘導
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でシステムプロンプトの効きを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">最初に役割を定義しておくと、以降の全回答に効いてくる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIの「職務記述書」</h2>
+            <p>
+                システムプロンプトは、会社でいう<span class="mark">「職務記述書（Job Description）」</span>のような存在。
+                「あなたは何者で、どう振る舞うべきか」を最初にセットしておくと、以降のやり取り全てに効きます。
+                ChatGPTのカスタム指示、ClaudeのSystem、各種API実装の`system`フィールドがこれに該当します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新人スタッフへの初日研修</h3>
+                    <p>
+                        「うちはこういう方針で、あなたはこういう役割です」と最初に伝えておくと、
+                        あとは<span class="mark">細かい指示なしでも方針通りに動いてくれる</span>。
+                        システムプロンプトはAIへの「初日研修」の役割です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② アプリの設定画面</h3>
+                    <p>
+                        音量・通知・テーマカラー。一度設定すれば毎回変える必要がない。
+                        システムプロンプトもAIの<span class="mark">「デフォルト設定」</span>として働き、
+                        以降のユーザープロンプトは毎回一から説明しなくて済みます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    システムプロンプトで<span class="mark">AIの人格と役割</span>を決めておけば、
+                    以降のユーザープロンプトは短くても高品質な回答が返ってきます。
+                    AIを業務で使うなら、まずシステムプロンプトを磨くのが最短ルートです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="prompt-engineering.html" class="nav-link">← 前の用語：プロンプトエンジニアリング</a>
+            <a href="user-prompt.html" class="nav-link">次の用語：ユーザープロンプト →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const usr = document.getElementById('sp-usr');
+        const ai = document.getElementById('sp-ai');
+        let running = false;
+
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            usr.classList.remove('in');
+            ai.classList.remove('in');
+
+            await wait(400);
+            status.textContent = 'システムプロンプトが効いた状態…';
+            await wait(600);
+            usr.classList.add('in');
+            status.textContent = 'ユーザーが新しい依頼';
+            await wait(1200);
+            ai.classList.add('in');
+            status.innerHTML = '✓ 「構成作家として」の <strong>役割通りに回答</strong>';
+
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

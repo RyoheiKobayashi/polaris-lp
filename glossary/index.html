@@ -497,6 +497,523 @@
             background: var(--bg-warm);
             padding: 0 4px;
         }
+
+        /* ========= カテゴリ見出し ========= */
+        .cat-section { margin-bottom: 80px; }
+        .cat-section:last-child { margin-bottom: 0; }
+        .cat-head {
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+        }
+        .cat-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 10px;
+        }
+        .cat-heading {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            margin: 0 0 8px;
+            line-height: 1.25;
+        }
+        .cat-lead {
+            font-size: 15px;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            max-width: 40em;
+            margin: 0;
+        }
+
+        /* ========= 12. プロンプト: 入力枠 + カーソル ========= */
+        .thumb-prompt .p-box {
+            width: 85%;
+            max-width: 220px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .thumb-prompt .p-caret {
+            display: inline-block;
+            width: 1.5px;
+            height: 14px;
+            background: var(--ink);
+            animation: caret-blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+        .thumb-prompt .p-typed {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: p-type 3.5s steps(10) infinite;
+            display: inline-block;
+            width: 0;
+            max-width: 7em;
+        }
+        @keyframes caret-blink {
+            50% { opacity: 0; }
+        }
+        @keyframes p-type {
+            0%   { width: 0; }
+            40%  { width: 7em; }
+            80%  { width: 7em; }
+            100% { width: 0; }
+        }
+
+        /* ========= 13. プロンプトエンジニアリング: before→after ========= */
+        .thumb-pe .pe-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 220px;
+            width: 90%;
+        }
+        .thumb-pe .pe-box {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 7px 10px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            position: relative;
+        }
+        .thumb-pe .pe-box.before {
+            color: var(--ink-soft);
+            animation: pe-fade 4s ease-in-out infinite;
+        }
+        .thumb-pe .pe-arrow {
+            text-align: center;
+            color: var(--ink-mute);
+            font-size: 12px;
+            opacity: 0;
+            animation: pe-arrow 4s ease-in-out infinite;
+        }
+        .thumb-pe .pe-box.after {
+            border-color: var(--ink);
+            opacity: 0;
+            animation: pe-in 4s ease-in-out infinite;
+        }
+        .thumb-pe .pe-after-mark {
+            background: var(--mark);
+            padding: 0 2px;
+        }
+        @keyframes pe-fade {
+            0%, 40%   { opacity: 1; }
+            60%, 100% { opacity: .4; }
+        }
+        @keyframes pe-arrow {
+            0%, 35%   { opacity: 0; }
+            45%, 95%  { opacity: 1; }
+            100%      { opacity: 0; }
+        }
+        @keyframes pe-in {
+            0%, 45%   { opacity: 0; transform: translateY(4px); }
+            55%, 95%  { opacity: 1; transform: translateY(0); }
+            100%      { opacity: 0; transform: translateY(0); }
+        }
+
+        /* ========= 14. システムプロンプト: ロール定義 ========= */
+        .thumb-sys .sys-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 200px;
+            width: 90%;
+        }
+        .thumb-sys .sys-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: #fff;
+            background: var(--ink);
+            padding: 2px 8px;
+            border-radius: 3px;
+            align-self: flex-start;
+        }
+        .thumb-sys .sys-body {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-size: 12px;
+            color: var(--ink);
+        }
+        .thumb-sys .sys-role {
+            background: var(--mark);
+            padding: 0 2px;
+            font-weight: 500;
+        }
+
+        /* ========= 15. ユーザープロンプト: ユーザー吹き出し ========= */
+        .thumb-user .usr-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 90%;
+            max-width: 200px;
+        }
+        .thumb-user .usr-tag {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-mute);
+            align-self: flex-end;
+        }
+        .thumb-user .usr-bubble {
+            background: var(--ink);
+            color: #fff;
+            border-radius: 12px 12px 3px 12px;
+            padding: 8px 12px;
+            font-size: 12px;
+            align-self: flex-end;
+            max-width: 90%;
+            animation: usr-pop 3s ease-in-out infinite;
+        }
+        @keyframes usr-pop {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.04); }
+        }
+
+        /* ========= 16. アシスタントプロンプト: AI応答例 ========= */
+        .thumb-ast .ast-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 200px;
+            width: 90%;
+        }
+        .thumb-ast .ast-tag {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-mute);
+        }
+        .thumb-ast .ast-bubble {
+            background: #fff;
+            border: 1px dashed var(--ink-mute);
+            border-radius: 3px 12px 12px 12px;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: var(--ink-warm);
+            font-family: var(--font-mono);
+            line-height: 1.5;
+        }
+        .thumb-ast .ast-line {
+            opacity: .4;
+        }
+
+        /* ========= 17. RTF: 3段スタック ========= */
+        .thumb-rtf .rtf-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 140px;
+        }
+        .thumb-rtf .rtf-row {
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: 8px;
+            align-items: center;
+            opacity: 0;
+            animation: rtf-in 3.6s ease-in-out infinite;
+        }
+        .thumb-rtf .rtf-letter {
+            background: var(--ink);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            padding: 4px 0;
+            border-radius: 4px;
+        }
+        .thumb-rtf .rtf-text {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--ink-soft);
+        }
+        .thumb-rtf .rtf-row:nth-child(1) { animation-delay: 0s; }
+        .thumb-rtf .rtf-row:nth-child(2) { animation-delay: .3s; }
+        .thumb-rtf .rtf-row:nth-child(3) { animation-delay: .6s; }
+        @keyframes rtf-in {
+            0%, 10%  { opacity: 0; transform: translateX(-6px); }
+            25%, 85% { opacity: 1; transform: translateX(0); }
+            100%     { opacity: 0; transform: translateX(-6px); }
+        }
+
+        /* ========= 18. ロール: バッジ ========= */
+        .thumb-role .role-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        .thumb-role .role-icon {
+            width: 44px; height: 44px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 22px;
+            color: var(--ink);
+            background: #fff;
+            animation: role-pulse 2.8s ease-in-out infinite;
+        }
+        .thumb-role .role-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            background: var(--mark);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+        @keyframes role-pulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.08); }
+        }
+
+        /* ========= 19. コンテキスト: 情報ブロック ========= */
+        .thumb-ctx2 .ctx-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 90%;
+            max-width: 200px;
+            background: var(--mark);
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+        .thumb-ctx2 .ctx-head {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-warm);
+            letter-spacing: 0.05em;
+        }
+        .thumb-ctx2 .ctx-line {
+            height: 4px;
+            background: var(--ink-warm);
+            opacity: .4;
+            border-radius: 2px;
+            animation: ctx-load 3s ease-in-out infinite;
+        }
+        .thumb-ctx2 .ctx-line.a { width: 85%; animation-delay: 0s; }
+        .thumb-ctx2 .ctx-line.b { width: 70%; animation-delay: .2s; }
+        .thumb-ctx2 .ctx-line.c { width: 55%; animation-delay: .4s; }
+        @keyframes ctx-load {
+            0%, 100% { opacity: .25; }
+            50%      { opacity: .75; }
+        }
+
+        /* ========= 20. 3C原則: 3文字 ========= */
+        .thumb-3c .c-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .thumb-3c .c-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .thumb-3c .c-big {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--ink);
+            line-height: 1;
+            animation: c-pop 3s ease-in-out infinite;
+        }
+        .thumb-3c .c-sub {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.06em;
+            color: var(--ink-soft);
+            text-transform: uppercase;
+        }
+        .thumb-3c .c-item:nth-child(1) .c-big { animation-delay: 0s; }
+        .thumb-3c .c-item:nth-child(2) .c-big { animation-delay: .25s; }
+        .thumb-3c .c-item:nth-child(3) .c-big { animation-delay: .5s; }
+        @keyframes c-pop {
+            0%, 70%, 100% { transform: translateY(0); color: var(--ink); }
+            85%           { transform: translateY(-4px); color: var(--ink-warm); }
+        }
+
+        /* ========= 21. デバッグ: ×→✓ ========= */
+        .thumb-debug .dbg-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .thumb-debug .dbg-box {
+            width: 40px; height: 40px;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--ink);
+        }
+        .thumb-debug .dbg-fail { color: #dc2626; animation: dbg-fail 3s ease-in-out infinite; }
+        .thumb-debug .dbg-pass { animation: dbg-pass 3s ease-in-out infinite; color: #059669; }
+        .thumb-debug .dbg-arrow {
+            color: var(--ink-mute);
+            font-size: 18px;
+        }
+        @keyframes dbg-fail {
+            0%, 40%  { opacity: 1; }
+            60%, 100% { opacity: .3; }
+        }
+        @keyframes dbg-pass {
+            0%, 40%  { opacity: .3; transform: scale(.9); }
+            60%, 100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* ========= 22. マークダウン: #→見出し ========= */
+        .thumb-md .md-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 90%;
+            max-width: 200px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+        .thumb-md .md-line {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .thumb-md .md-syntax { color: var(--ink-mute); }
+        .thumb-md .md-h1 { font-size: 14px; font-weight: 600; color: var(--ink); }
+        .thumb-md .md-h2 { font-size: 12px; font-weight: 500; color: var(--ink-warm); padding-left: 6px; }
+        .thumb-md .md-item { font-size: 11px; color: var(--ink-soft); padding-left: 12px; }
+        .thumb-md .md-dot { color: var(--ink-warm); }
+
+        /* ========= 23. 階層構造: 入れ子インデント ========= */
+        .thumb-hier .hier-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+        .thumb-hier .hier-line {
+            color: var(--ink);
+            opacity: 0;
+            animation: hier-in 3.6s ease-in-out infinite;
+        }
+        .thumb-hier .hier-line:nth-child(1) { padding-left: 0;   animation-delay: 0s; color: var(--ink); font-weight: 600; }
+        .thumb-hier .hier-line:nth-child(2) { padding-left: 14px; animation-delay: .25s; }
+        .thumb-hier .hier-line:nth-child(3) { padding-left: 28px; animation-delay: .5s; color: var(--ink-soft); }
+        .thumb-hier .hier-line:nth-child(4) { padding-left: 42px; animation-delay: .75s; color: var(--ink-mute); }
+        @keyframes hier-in {
+            0%, 10%  { opacity: 0; transform: translateX(-4px); }
+            25%, 85% { opacity: 1; transform: translateX(0); }
+            100%     { opacity: 0; }
+        }
+
+        /* ========= 24. Few-shot / Zero-shot: 例示カード ========= */
+        .thumb-shot .shot-wrap {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+        .thumb-shot .shot-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .thumb-shot .shot-tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.06em;
+            color: var(--ink-mute);
+            text-transform: uppercase;
+        }
+        .thumb-shot .shot-item {
+            height: 4px;
+            background: var(--ink-mute);
+            border-radius: 2px;
+            opacity: .5;
+        }
+        .thumb-shot .shot-item.hi { background: var(--ink); opacity: 1; }
+        .thumb-shot .shot-col.few .shot-item {
+            animation: shot-grow 2.5s ease-in-out infinite;
+        }
+        .thumb-shot .shot-col.few .shot-item:nth-child(2) { animation-delay: 0s; }
+        .thumb-shot .shot-col.few .shot-item:nth-child(3) { animation-delay: .2s; }
+        .thumb-shot .shot-col.few .shot-item:nth-child(4) { animation-delay: .4s; }
+        @keyframes shot-grow {
+            0%, 100% { transform: scaleX(.6); }
+            50%      { transform: scaleX(1); }
+        }
+
+        /* ========= 25. Chain of Thought: ステップ連鎖 ========= */
+        .thumb-cot .cot-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .thumb-cot .cot-step {
+            width: 28px; height: 28px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            animation: cot-pulse 3s ease-in-out infinite;
+        }
+        .thumb-cot .cot-step:nth-child(1) { animation-delay: 0s; }
+        .thumb-cot .cot-step:nth-child(3) { animation-delay: .3s; }
+        .thumb-cot .cot-step:nth-child(5) { animation-delay: .6s; }
+        .thumb-cot .cot-final {
+            background: var(--ink);
+            color: #fff;
+        }
+        .thumb-cot .cot-arrow {
+            color: var(--ink-mute);
+            font-size: 14px;
+            opacity: 0;
+            animation: cot-arrow 3s ease-in-out infinite;
+        }
+        .thumb-cot .cot-arrow:nth-of-type(1) { animation-delay: .15s; }
+        .thumb-cot .cot-arrow:nth-of-type(2) { animation-delay: .45s; }
+        @keyframes cot-pulse {
+            0%, 70%, 100% { transform: scale(1); }
+            85%           { transform: scale(1.12); }
+        }
+        @keyframes cot-arrow {
+            0%, 10%  { opacity: 0; }
+            30%, 90% { opacity: 1; }
+            100%     { opacity: 0; }
+        }
     </style>
 </head>
 <body>
@@ -528,9 +1045,17 @@
     <!-- 用語一覧 -->
     <main class="container mx-auto px-6 pt-12 pb-24 max-w-6xl">
 
-        <div class="term-grid">
+        <!-- Category A -->
+        <section class="cat-section">
+            <header class="cat-head">
+                <div class="cat-tag">A · AI Basics</div>
+                <h2 class="cat-heading">AIの基本概念</h2>
+                <p class="cat-lead">AIとは何か、LLMとは何か。AIを使い始めるときに最初に押さえておきたい基礎用語。</p>
+            </header>
 
-            <!-- 01. LLM -->
+            <div class="term-grid">
+
+                <!-- 01. LLM -->
             <a href="llm.html" class="term-card">
                 <div class="thumb thumb-llm">
                     <div class="thumb-inner">
@@ -731,7 +1256,271 @@
                 </div>
             </a>
 
-        </div>
+            </div>
+        </section>
+
+        <!-- Category B -->
+        <section class="cat-section">
+            <header class="cat-head">
+                <div class="cat-tag">B · Prompt Engineering</div>
+                <h2 class="cat-heading">プロンプトエンジニアリング</h2>
+                <p class="cat-lead">AIへの指示の書き方・構造・テクニックに関する用語。プロンプトの質がAI出力の質を決めます。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 12. プロンプト -->
+                <a href="prompt.html" class="term-card">
+                    <div class="thumb thumb-prompt">
+                        <div class="thumb-inner">
+                            <div class="p-box">
+                                <span>&gt;</span>
+                                <span class="p-typed">指示文を書く</span>
+                                <span class="p-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プロンプト</h3>
+                        <p class="desc">AIに与える<span class="mark">「指示文」</span>そのもの。</p>
+                    </div>
+                </a>
+
+                <!-- 13. プロンプトエンジニアリング -->
+                <a href="prompt-engineering.html" class="term-card">
+                    <div class="thumb thumb-pe">
+                        <div class="thumb-inner">
+                            <div class="pe-stack">
+                                <div class="pe-box before">文章書いて</div>
+                                <div class="pe-arrow">↓</div>
+                                <div class="pe-box after">あなたは編集者。<span class="pe-after-mark">300字で要約</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プロンプトエンジニアリング</h3>
+                        <p class="desc">プロンプトを工夫して<span class="mark">出力品質を高める技術</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 14. システムプロンプト -->
+                <a href="system-prompt.html" class="term-card">
+                    <div class="thumb thumb-sys">
+                        <div class="thumb-inner">
+                            <div class="sys-wrap">
+                                <span class="sys-label">SYSTEM</span>
+                                <div class="sys-body">あなたは<span class="sys-role">プロの編集者</span>です</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>システムプロンプト</h3>
+                        <p class="desc">AIの<span class="mark">「役割」や振る舞い</span>を定義するプロンプト。</p>
+                    </div>
+                </a>
+
+                <!-- 15. ユーザープロンプト -->
+                <a href="user-prompt.html" class="term-card">
+                    <div class="thumb thumb-user">
+                        <div class="thumb-inner">
+                            <div class="usr-wrap">
+                                <span class="usr-tag">USER</span>
+                                <div class="usr-bubble">要約してください</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ユーザープロンプト</h3>
+                        <p class="desc">ユーザーがAIに投げる<span class="mark">具体的な依頼</span>の文。</p>
+                    </div>
+                </a>
+
+                <!-- 16. アシスタントプロンプト -->
+                <a href="assistant-prompt.html" class="term-card">
+                    <div class="thumb thumb-ast">
+                        <div class="thumb-inner">
+                            <div class="ast-wrap">
+                                <span class="ast-tag">ASSISTANT（例）</span>
+                                <div class="ast-bubble">
+                                    <div>1. 要点A</div>
+                                    <div class="ast-line">2. 要点B</div>
+                                    <div class="ast-line">3. 要点C</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>アシスタントプロンプト</h3>
+                        <p class="desc">AIの<span class="mark">応答例</span>を先に見せて形式を揃える。</p>
+                    </div>
+                </a>
+
+                <!-- 17. RTF -->
+                <a href="rtf.html" class="term-card">
+                    <div class="thumb thumb-rtf">
+                        <div class="thumb-inner">
+                            <div class="rtf-stack">
+                                <div class="rtf-row"><div class="rtf-letter">R</div><div class="rtf-text">Role（役割）</div></div>
+                                <div class="rtf-row"><div class="rtf-letter">T</div><div class="rtf-text">Task（やること）</div></div>
+                                <div class="rtf-row"><div class="rtf-letter">F</div><div class="rtf-text">Format（形式）</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>RTF</h3>
+                        <p class="desc">プロンプトの<span class="mark">基本の型</span>＝Role・Task・Format。</p>
+                    </div>
+                </a>
+
+                <!-- 18. ロール -->
+                <a href="role.html" class="term-card">
+                    <div class="thumb thumb-role">
+                        <div class="thumb-inner">
+                            <div class="role-wrap">
+                                <div class="role-icon">R</div>
+                                <div class="role-label">編集者として</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ロール（役割指定）</h3>
+                        <p class="desc">AIに<span class="mark">どんな専門家として振る舞うか</span>を指定するパート。</p>
+                    </div>
+                </a>
+
+                <!-- 19. コンテキスト -->
+                <a href="context.html" class="term-card">
+                    <div class="thumb thumb-ctx2">
+                        <div class="thumb-inner">
+                            <div class="ctx-wrap">
+                                <div class="ctx-head">CONTEXT</div>
+                                <div class="ctx-line a"></div>
+                                <div class="ctx-line b"></div>
+                                <div class="ctx-line c"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>コンテキスト</h3>
+                        <p class="desc">AIに渡す<span class="mark">背景情報</span>。前提が揃うと回答が変わる。</p>
+                    </div>
+                </a>
+
+                <!-- 20. 3C原則 -->
+                <a href="three-c.html" class="term-card">
+                    <div class="thumb thumb-3c">
+                        <div class="thumb-inner">
+                            <div class="c-row">
+                                <div class="c-item"><div class="c-big">C</div><div class="c-sub">compact</div></div>
+                                <div class="c-item"><div class="c-big">C</div><div class="c-sub">complete</div></div>
+                                <div class="c-item"><div class="c-big">C</div><div class="c-sub">correct</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>3C原則</h3>
+                        <p class="desc">良いコンテキストの条件：<span class="mark">簡潔・完全・正確</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 21. デバッグ -->
+                <a href="debug.html" class="term-card">
+                    <div class="thumb thumb-debug">
+                        <div class="thumb-inner">
+                            <div class="dbg-wrap">
+                                <div class="dbg-box dbg-fail">✗</div>
+                                <span class="dbg-arrow">→</span>
+                                <div class="dbg-box dbg-pass">✓</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>デバッグ</h3>
+                        <p class="desc">出力を検証して<span class="mark">プロンプトを直す</span>反復作業。</p>
+                    </div>
+                </a>
+
+                <!-- 22. マークダウン -->
+                <a href="markdown.html" class="term-card">
+                    <div class="thumb thumb-md">
+                        <div class="thumb-inner">
+                            <div class="md-wrap">
+                                <div class="md-line"><span class="md-syntax">#</span><span class="md-h1">見出し</span></div>
+                                <div class="md-line"><span class="md-syntax">##</span><span class="md-h2">小見出し</span></div>
+                                <div class="md-line"><span class="md-dot">-</span><span class="md-item">箇条書き</span></div>
+                                <div class="md-line"><span class="md-dot">-</span><span class="md-item">箇条書き</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>マークダウン</h3>
+                        <p class="desc">「#」や「-」で書く<span class="mark">AIが理解しやすい記法</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 23. 階層構造 -->
+                <a href="hierarchy.html" class="term-card">
+                    <div class="thumb thumb-hier">
+                        <div class="thumb-inner">
+                            <div class="hier-wrap">
+                                <div class="hier-line"># 章</div>
+                                <div class="hier-line">## 節</div>
+                                <div class="hier-line">### 項</div>
+                                <div class="hier-line">#### 詳細</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>階層構造</h3>
+                        <p class="desc">見出しレベルで情報を<span class="mark">段階的に整理</span>する。</p>
+                    </div>
+                </a>
+
+                <!-- 24. Few-shot / Zero-shot -->
+                <a href="few-shot.html" class="term-card">
+                    <div class="thumb thumb-shot">
+                        <div class="thumb-inner">
+                            <div class="shot-wrap">
+                                <div class="shot-col">
+                                    <div class="shot-tag">Zero</div>
+                                    <div class="shot-item"></div>
+                                </div>
+                                <div class="shot-col few">
+                                    <div class="shot-tag">Few</div>
+                                    <div class="shot-item hi"></div>
+                                    <div class="shot-item hi"></div>
+                                    <div class="shot-item hi"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Few-shot / Zero-shot</h3>
+                        <p class="desc">例を<span class="mark">見せるか見せないか</span>で精度を調整する手法。</p>
+                    </div>
+                </a>
+
+                <!-- 25. Chain of Thought -->
+                <a href="chain-of-thought.html" class="term-card">
+                    <div class="thumb thumb-cot">
+                        <div class="thumb-inner">
+                            <div class="cot-wrap">
+                                <div class="cot-step">1</div>
+                                <span class="cot-arrow">→</span>
+                                <div class="cot-step">2</div>
+                                <span class="cot-arrow">→</span>
+                                <div class="cot-step cot-final">✓</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Chain of Thought</h3>
+                        <p class="desc">「<span class="mark">段階的に考えて</span>」と指示して推論精度を上げる。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
 
     </main>
 
