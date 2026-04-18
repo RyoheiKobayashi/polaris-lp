@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LLM（大規模言語モデル）とは｜アニメでわかるAI用語集</title>
-    <meta name="description" content="LLM（大規模言語モデル）を、アニメーションで3秒で理解。次の単語を確率で当てるマシン、それがLLMの正体。こば先生監修。">
+    <meta name="description" content="LLM（大規模言語モデル）を、アニメーションで3秒で理解。次の単語を確率で当てるマシン、それがLLMの正体。">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
-    <meta name="theme-color" content="#1f2937">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
@@ -21,19 +25,89 @@
     </script>
 
     <style>
+        :root {
+            --bg: #ffffff;
+            --bg-warm: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #191919;
+            --ink-warm: #37352f;
+            --ink-soft: #787774;
+            --ink-mute: #9b9a97;
+            --line: #e9e9e7;
+            --accent: #2383e2;
+            --mark: #fdecc8;
+            --callout-bg: #f1f1ef;
+            --callout-blue: #e7f3f8;
+            --callout-yellow: #fdecc8;
+            --line-green: #06c755;
+            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--bg);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--ink-warm);
+            line-height: 1.25;
+            font-weight: 500;
+        }
+        .cat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+        .mono { font-family: var(--font-mono); }
+        .mark {
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+        }
+        .hairline { border-top: 1px solid var(--line); }
+
+        /* コールアウト（Notion風） */
+        .callout {
+            display: flex;
+            gap: 14px;
+            padding: 18px 22px;
+            border-radius: 6px;
+            line-height: 1.7;
+        }
+        .callout-blue   { background: var(--callout-blue); }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-gray   { background: var(--callout-bg); }
+        .callout-icon   { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+
+        /* カード */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        /* アニメ本体 */
         .sentence {
-            font-size: clamp(1.25rem, 4.5vw, 2rem);
+            font-family: var(--font-serif);
+            font-size: clamp(1.35rem, 4.5vw, 2rem);
             line-height: 1.7;
             min-height: 4.5em;
+            color: var(--ink-warm);
         }
         .blank {
             display: inline-block;
             min-width: 2.5em;
-            border-bottom: 3px solid #60a5fa;
+            border-bottom: 2px solid var(--ink);
             margin: 0 .15em;
-            color: #fbbf24;
-            font-weight: 700;
-            transition: color .3s ease;
+            color: var(--ink-mute);
+            font-weight: 500;
         }
         .candidate-row {
             display: grid;
@@ -41,182 +115,241 @@
             gap: .75rem;
             align-items: center;
             padding: .5rem .75rem;
-            border-radius: .5rem;
+            border-radius: 6px;
             transition: background .3s, transform .3s;
         }
         .candidate-row.winner {
-            background: rgba(59, 130, 246, 0.15);
-            transform: scale(1.03);
+            background: var(--mark);
+            transform: scale(1.02);
         }
         .bar-track {
             height: 10px;
-            background: rgba(75, 85, 99, 0.5);
+            background: #e9e9e7;
             border-radius: 5px;
             overflow: hidden;
         }
         .bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: var(--ink);
             border-radius: 5px;
             transition: width 1s cubic-bezier(.2,.8,.2,1);
         }
         .pct {
             text-align: right;
             font-variant-numeric: tabular-nums;
-            color: #cbd5e1;
+            color: var(--ink-soft);
             font-size: .9rem;
+            font-family: var(--font-mono);
         }
         .word-picked {
             display: inline-block;
             animation: pop-in .45s ease-out;
-            color: #fbbf24;
-            font-weight: 700;
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+            color: var(--ink-warm);
+            font-weight: 600;
         }
         @keyframes pop-in {
             0%   { transform: scale(0.4) translateY(10px); opacity: 0; }
             60%  { transform: scale(1.15); opacity: 1; }
             100% { transform: scale(1); }
         }
+
+        /* ボタン */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity .2s, background .2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+        .btn-primary {
+            background: var(--ink);
+            color: #fff;
+        }
+        .btn-primary:hover:not(:disabled) { opacity: 0.85; }
+        .btn-primary:disabled { opacity: 0.5; cursor: default; }
+        .btn-line {
+            background: var(--line-green);
+            color: #fff;
+            padding: 14px 28px;
+        }
+        .btn-line:hover { opacity: 0.9; color: #fff; }
+
+        .cta-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .nav-link {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
+<body>
 
-    <!-- ヘッダー帯 -->
-    <div class="bg-gray-800/60 border-b border-gray-700 sticky top-0 z-40 backdrop-blur">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between text-sm">
-            <span class="text-gray-300">
-                <span class="text-white font-semibold">アニメでわかるAI用語</span>
-                <span class="text-gray-500 mx-2">×</span>
-                <span class="text-blue-400">こば先生監修</span>
-            </span>
-            <a href="index.html" class="text-gray-400 hover:text-white transition">← 一覧に戻る</a>
+    <!-- 上部ナビ -->
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
         </div>
     </div>
 
-    <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
 
         <!-- タイトル -->
-        <header class="mb-10">
-            <div class="text-sm text-blue-400 font-semibold mb-2">#01 ・ AIの基本概念</div>
-            <h1 class="text-3xl md:text-4xl font-bold leading-tight">
-                LLM<span class="text-gray-400 text-xl md:text-2xl ml-2">（大規模言語モデル）</span>
-            </h1>
+        <header class="mb-14">
+            <div class="cat-label mb-3">01 · AI用語</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Large Language Model</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">LLM</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">大規模言語モデル</p>
         </header>
 
-        <!-- 結論 -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 結論（一言で）</div>
-            <p class="text-lg md:text-xl leading-relaxed">
-                LLMは、<span class="font-bold text-white">人類が書いた文章を大量に学んで、「次の単語」を確率で当てるマシン</span>です。
-            </p>
-        </section>
+        <!-- 結論（コールアウト blue） -->
+        <div class="callout callout-blue mb-10">
+            <span class="callout-icon">💡</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">結論</div>
+                <p class="text-lg" style="color: var(--ink-warm);">
+                    LLMは、<span class="mark">人類が書いた文章を大量に学んで「次の単語」を確率で当てるマシン</span>です。
+                </p>
+            </div>
+        </div>
 
-        <!-- 理由 -->
-        <section class="bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-10">
-            <div class="text-yellow-400 font-bold text-sm mb-2">🟡 理由</div>
-            <p class="text-gray-200 leading-relaxed">
-                LLMは意味を「理解」しているわけではなく、<span class="text-white font-semibold">次に来る単語の確率</span>を計算しています。<br>
+        <!-- 理由（プレーン段落） -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">なぜ「次の単語を当てる」だけで文章が作れるのか</h2>
+            <p style="color: var(--ink-warm);">
+                LLMは意味を「理解」しているわけではなく、<span class="mark">次に来る単語の確率</span>を計算しています。
                 たとえば「今日の天気は」の次には「晴れ」「曇り」「雨」など、いくつもの候補があります。
-                その中から、過去に学んだ膨大な文章をもとに<span class="text-white font-semibold">一番それっぽい単語</span>を選んでいるだけ。<br>
+                その中から、過去に学んだ膨大な文章をもとに<span class="mark">一番それっぽい単語</span>を選んでいるだけ。
                 それを何回も繰り返すことで、一見「考えているように見える文章」が出来上がります。
             </p>
         </section>
 
         <!-- アニメーション主役 -->
-        <section class="bg-gray-800 rounded-xl p-6 md:p-8 mb-10 border border-gray-700">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 アニメーションで見る</div>
+        <section class="card p-8 md:p-10 mb-12">
+            <div class="cat-label mb-5">Animation</div>
 
-            <!-- 文字表示エリア -->
             <div class="sentence text-center mb-8" id="sentence">
                 <span id="sentence-text"></span><span class="blank" id="blank">___</span>
             </div>
 
-            <!-- 候補バー -->
             <div id="candidates" class="space-y-2 max-w-md mx-auto mb-6">
                 <div class="candidate-row" data-word="晴れ">
-                    <span class="text-gray-300">晴れ</span>
+                    <span style="color: var(--ink);">晴れ</span>
                     <div class="bar-track"><div class="bar-fill" data-pct="78"></div></div>
                     <span class="pct">0%</span>
                 </div>
                 <div class="candidate-row" data-word="曇り">
-                    <span class="text-gray-300">曇り</span>
+                    <span style="color: var(--ink);">曇り</span>
                     <div class="bar-track"><div class="bar-fill" data-pct="15"></div></div>
                     <span class="pct">0%</span>
                 </div>
                 <div class="candidate-row" data-word="雨">
-                    <span class="text-gray-300">雨</span>
+                    <span style="color: var(--ink);">雨</span>
                     <div class="bar-track"><div class="bar-fill" data-pct="7"></div></div>
                     <span class="pct">0%</span>
                 </div>
             </div>
 
-            <!-- ステータス -->
             <div class="text-center">
-                <p id="status" class="text-gray-400 text-sm min-h-[1.5rem] mb-4">▶︎ 「再生」を押してみてください</p>
-                <button id="play-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg transition">
-                    ▶︎ 再生
-                </button>
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」を押してみてください</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
             </div>
 
-            <p class="text-center text-gray-500 text-xs mt-6">これがLLMの正体。「次の単語」を確率で当てているだけ。</p>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">これがLLMの正体。「次の単語」を確率で当てているだけ。</p>
         </section>
 
         <!-- 具体例 -->
-        <section class="mb-10">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 具体例（身近な例え）</div>
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
 
             <div class="space-y-4">
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例① ラーメン屋10万軒の味を知っている人</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ラーメン屋10万軒の味を知っている人</h3>
+                    <p style="color: var(--ink-warm);">
                         ラーメン屋を10万軒食べ歩いた人に「このスープの次に合う麺は？」と聞くと、
-                        「細麺が7割、中太が2割、太麺が1割」と答えられる。<br>
-                        LLMも同じ。<span class="text-white font-semibold">過去の大量データから、一番それっぽい「次」を当てている</span>だけです。
+                        「細麺が7割、中太が2割、太麺が1割」と答えられる。
+                        LLMも同じ。<span class="mark">過去の大量データから、一番それっぽい「次」を当てている</span>だけです。
                     </p>
                 </div>
 
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例② 車のエンジン</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
-                        ChatGPTが「車」なら、LLMは<span class="text-white font-semibold">「エンジン」</span>の部分。<br>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 車のエンジン</h3>
+                    <p style="color: var(--ink-warm);">
+                        ChatGPTが「車」なら、LLMは<span class="mark">「エンジン」</span>の部分。
                         私たちが普段触るのは車体（アプリ）ですが、中で動いている本体＝エンジンがLLMです。
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- まとめ -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-12">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 まとめ</div>
-            <p class="text-lg leading-relaxed">
-                LLMは、<span class="text-white font-semibold">人類の文章を10万杯ぶん味見した「確率予測マシン」</span>です。<br>
-                意味を理解しているのではなく、<span class="text-white font-semibold">「次にこの単語が来る確率」</span>を計算して、
-                それっぽい文章を作っている。<br>
-                この仕組みを知るだけで、AIの回答を<span class="text-white font-semibold">鵜呑みにしない目</span>が育ちます。
-            </p>
-        </section>
+        <!-- まとめ（コールアウト yellow） -->
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p style="color: var(--ink-warm);">
+                    LLMは、<span class="mark">人類の文章を10万杯ぶん味見した「確率予測マシン」</span>です。
+                    意味を理解しているのではなく、<span class="mark">「次にこの単語が来る確率」</span>を計算して、
+                    それっぽい文章を作っている。
+                    この仕組みを知るだけで、AIの回答を<span class="mark">鵜呑みにしない目</span>が育ちます。
+                </p>
+            </div>
+        </div>
 
-        <!-- フッターナビ -->
-        <nav class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-                <img src="../images/icon.png" alt="Polaris" class="w-10 h-10 rounded-lg">
-                <div>
-                    <p class="text-sm text-gray-400">📱 学習の進捗管理は</p>
-                    <a href="../index.html" class="text-white font-bold hover:text-blue-400 transition">Polaris で</a>
+        <!-- LINE CTA -->
+        <div class="cta-box mb-12">
+            <div class="flex items-start gap-4">
+                <div class="text-2xl flex-shrink-0">💬</div>
+                <div class="flex-1">
+                    <h3 class="text-xl mb-2" style="font-weight: 500;">こういう「動きで見るAI用語」、<br>LINEで新着配信中。</h3>
+                    <p class="mb-6" style="color: var(--ink-soft);">
+                        オープンチャットなので匿名OK・無料・通知オフ可。
+                    </p>
+                    <a href="https://line.me/ti/g2/Q_wc2e9Avaj3sf4YM0J2z81UMdpQ_2AqmNOp8g"
+                       target="_blank" rel="noopener noreferrer"
+                       onclick="gtag('event', 'click', {event_category: 'line_oc', event_label: 'llm_cta'});"
+                       class="btn btn-line">
+                        LINEオープンチャットに参加
+                        <span>→</span>
+                    </a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 justify-between">
-                <a href="ai-model.html" class="text-blue-400 hover:text-blue-300 font-semibold">次の用語 → AIモデル</a>
-                <a href="index.html" class="text-gray-400 hover:text-white">他の用語一覧 →</a>
-            </div>
+        </div>
+
+        <!-- ページナビ -->
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm">
+            <span style="color: var(--ink-mute);">&nbsp;</span>
+            <a href="ai-model.html" class="nav-link">次の用語：AIモデル →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
         </nav>
 
     </main>
 
-    <footer class="border-t border-gray-800 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-500 text-xs">提供：Polaris ｜ © 2025 LEVEL UP, K.K.</p>
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
         </div>
     </footer>
 
@@ -314,11 +447,11 @@
                 await wait(700);
             }
 
-            statusEl.textContent = '✅ これがLLM。「次の単語」を何度も予測して文章を作っている。';
+            statusEl.textContent = '✓ これがLLM。「次の単語」を何度も予測して文章を作っている。';
             blank.style.display = 'none';
 
             btn.disabled = false;
-            btn.textContent = '▶︎ もう一度';
+            btn.textContent = '▶ もう一度';
             running = false;
         }
 
