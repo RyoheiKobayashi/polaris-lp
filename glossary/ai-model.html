@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIモデルとは｜アニメでわかるAI用語集</title>
-    <meta name="description" content="AIモデルを、アニメーションで3秒で理解。サービス名は同じでも、中身のエンジンが違う。GPT-3.5とGPT-5で返答はどう変わる？こば先生監修。">
+    <meta name="description" content="AIモデルを、アニメーションで3秒で理解。サービス名は同じでも、中身のエンジンが違う。GPT-3.5とGPT-5で返答はどう変わる？">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
-    <meta name="theme-color" content="#1f2937">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
@@ -21,14 +25,81 @@
     </script>
 
     <style>
+        :root {
+            --bg: #ffffff;
+            --bg-warm: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #191919;
+            --ink-warm: #37352f;
+            --ink-soft: #787774;
+            --ink-mute: #9b9a97;
+            --line: #e9e9e7;
+            --accent: #2383e2;
+            --mark: #fdecc8;
+            --callout-bg: #f1f1ef;
+            --callout-blue: #e7f3f8;
+            --callout-yellow: #fdecc8;
+            --line-green: #06c755;
+            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--bg);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--ink-warm);
+            line-height: 1.25;
+            font-weight: 500;
+        }
+        .cat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+        .mono { font-family: var(--font-mono); }
+        .mark {
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+        }
+        .hairline { border-top: 1px solid var(--line); }
+
+        .callout {
+            display: flex;
+            gap: 14px;
+            padding: 18px 22px;
+            border-radius: 6px;
+            line-height: 1.7;
+        }
+        .callout-blue   { background: var(--callout-blue); }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-gray   { background: var(--callout-bg); }
+        .callout-icon   { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        /* スマホフレーム（Notion風・白＋薄境界） */
         .phone-frame {
-            width: min(100%, 320px);
+            width: min(100%, 280px);
             aspect-ratio: 9 / 16;
             max-height: 420px;
-            background: #0b1220;
-            border: 6px solid #1f2937;
-            border-radius: 28px;
-            box-shadow: 0 18px 50px rgba(0,0,0,.5);
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,.04);
             position: relative;
             overflow: hidden;
         }
@@ -36,31 +107,44 @@
             position: absolute;
             top: 0; left: 50%;
             transform: translateX(-50%);
-            width: 100px; height: 18px;
-            background: #1f2937;
-            border-radius: 0 0 12px 12px;
+            width: 80px; height: 14px;
+            background: var(--bg-warm);
+            border-radius: 0 0 10px 10px;
             z-index: 3;
         }
         .tab-btn {
-            transition: all .25s ease;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: all .2s ease;
         }
+        .tab-btn:hover { border-color: var(--ink-mute); }
         .tab-btn.active {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, .4);
+            background: var(--ink);
+            color: #fff;
+            border-color: var(--ink);
         }
         .engine-label {
             transition: opacity .4s ease, transform .5s cubic-bezier(.2,.8,.2,1);
+            font-family: var(--font-mono);
         }
         .meter {
-            height: 12px;
-            background: rgba(75, 85, 99, 0.5);
-            border-radius: 6px;
+            height: 8px;
+            background: #e9e9e7;
+            border-radius: 4px;
             overflow: hidden;
         }
         .meter-fill {
             height: 100%;
             width: 0%;
-            border-radius: 6px;
+            background: var(--ink);
+            border-radius: 4px;
             transition: width .9s cubic-bezier(.2,.8,.2,1);
         }
         .chat-bubble {
@@ -72,73 +156,108 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* ボタン */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity .2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+        .btn-line {
+            background: var(--line-green);
+            color: #fff;
+            padding: 14px 28px;
+        }
+        .btn-line:hover { opacity: 0.9; color: #fff; }
+
+        .cta-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .nav-link {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
+<body>
 
-    <!-- ヘッダー帯 -->
-    <div class="bg-gray-800/60 border-b border-gray-700 sticky top-0 z-40 backdrop-blur">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between text-sm">
-            <span class="text-gray-300">
-                <span class="text-white font-semibold">アニメでわかるAI用語</span>
-                <span class="text-gray-500 mx-2">×</span>
-                <span class="text-blue-400">こば先生監修</span>
-            </span>
-            <a href="index.html" class="text-gray-400 hover:text-white transition">← 一覧に戻る</a>
+    <!-- 上部ナビ -->
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
         </div>
     </div>
 
-    <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
 
         <!-- タイトル -->
-        <header class="mb-10">
-            <div class="text-sm text-blue-400 font-semibold mb-2">#02 ・ AIの基本概念</div>
-            <h1 class="text-3xl md:text-4xl font-bold leading-tight">AIモデル</h1>
+        <header class="mb-14">
+            <div class="cat-label mb-3">02 · AI用語</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">AI Model</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">AIモデル</h1>
         </header>
 
         <!-- 結論 -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 結論（一言で）</div>
-            <p class="text-lg md:text-xl leading-relaxed">
-                AIモデルは、<span class="font-bold text-white">アプリの中で動いている「エンジン」</span>のこと。<br>
-                サービス名（ChatGPT等）は同じでも、中身のモデルが変わると<span class="text-white font-semibold">賢さ・速さ・得意分野</span>が変わります。
-            </p>
-        </section>
+        <div class="callout callout-blue mb-10">
+            <span class="callout-icon">💡</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">結論</div>
+                <p class="text-lg" style="color: var(--ink-warm);">
+                    AIモデルは、<span class="mark">アプリの中で動いている「エンジン」</span>のこと。
+                    サービス名（ChatGPT等）は同じでも、中身のモデルが変わると<span class="mark">賢さ・速さ・得意分野</span>が変わります。
+                </p>
+            </div>
+        </div>
 
         <!-- 理由 -->
-        <section class="bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-10">
-            <div class="text-yellow-400 font-bold text-sm mb-2">🟡 理由</div>
-            <p class="text-gray-200 leading-relaxed">
-                ChatGPT・Claude・Geminiのようなサービスは「車体」で、中には<span class="text-white font-semibold">GPT-4o、Claude Opus、Gemini 2.5</span>のような<span class="text-white font-semibold">エンジン＝AIモデル</span>が積まれています。<br>
-                同じ車体でも、エンジンを載せ替えれば加速力や燃費が変わります。AIも同じで、<span class="text-white font-semibold">モデルを切り替えると返答の質が変わる</span>んです。
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「アプリ」と「モデル」は別物</h2>
+            <p style="color: var(--ink-warm);">
+                ChatGPT・Claude・Geminiのようなサービスは「車体」で、中には<span class="mark">GPT-4o、Claude Opus、Gemini 2.5</span>のようなエンジン＝AIモデルが積まれています。
+                同じ車体でも、エンジンを載せ替えれば加速力や燃費が変わります。AIも同じで、<span class="mark">モデルを切り替えると返答の質が変わる</span>んです。
             </p>
         </section>
 
         <!-- アニメーション主役 -->
-        <section class="bg-gray-800 rounded-xl p-6 md:p-8 mb-10 border border-gray-700">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 アニメーションで見る</div>
+        <section class="card p-8 md:p-10 mb-12">
+            <div class="cat-label mb-5">Animation</div>
 
             <!-- タブ -->
-            <div class="flex justify-center gap-2 mb-6 flex-wrap">
-                <button class="tab-btn active bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt35">GPT-3.5</button>
-                <button class="tab-btn bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt4o">GPT-4o</button>
-                <button class="tab-btn bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold px-4 py-2 rounded-lg text-sm" data-model="gpt5">GPT-5</button>
+            <div class="flex justify-center gap-2 mb-8 flex-wrap">
+                <button class="tab-btn active" data-model="gpt35">GPT-3.5</button>
+                <button class="tab-btn" data-model="gpt4o">GPT-4o</button>
+                <button class="tab-btn" data-model="gpt5">GPT-5</button>
             </div>
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-8">
                 <!-- スマホフレーム -->
                 <div class="phone-frame flex-shrink-0">
                     <div class="phone-notch"></div>
-                    <div class="p-4 pt-8 h-full flex flex-col">
-                        <div class="text-center text-xs text-gray-500 mb-2">ChatGPT</div>
+                    <div class="p-4 pt-8 h-full flex flex-col" style="background: var(--bg-warm);">
+                        <div class="text-center text-xs mb-2 mono" style="color: var(--ink-mute);">ChatGPT</div>
                         <div class="text-center mb-4">
-                            <div id="engine-label" class="engine-label inline-block text-lg font-bold text-blue-300 bg-blue-900/40 px-3 py-1 rounded-full">GPT-3.5</div>
+                            <div id="engine-label" class="engine-label inline-block text-sm font-bold px-3 py-1 rounded-full" style="background: var(--ink); color: #fff;">GPT-3.5</div>
                         </div>
                         <div class="flex-1 space-y-2 overflow-hidden">
-                            <div class="chat-bubble bg-gray-700/60 rounded-2xl rounded-tr-sm p-2.5 text-xs text-gray-200 ml-6" id="bubble-q">
+                            <div class="chat-bubble rounded-2xl rounded-tr-sm p-2.5 text-xs ml-6" style="background: #fff; border: 1px solid var(--line); color: var(--ink-warm);" id="bubble-q">
                                 こんにちは
                             </div>
-                            <div class="chat-bubble bg-blue-600/30 border border-blue-500/30 rounded-2xl rounded-tl-sm p-2.5 text-xs text-gray-100 mr-6" id="bubble-a">
+                            <div class="chat-bubble rounded-2xl rounded-tl-sm p-2.5 text-xs mr-6" style="background: var(--ink); color: #fff;" id="bubble-a">
                                 …
                             </div>
                         </div>
@@ -146,87 +265,107 @@
                 </div>
 
                 <!-- メーター -->
-                <div class="w-full md:w-64 space-y-4">
+                <div class="w-full md:w-56 space-y-4">
                     <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-gray-400">賢さ</span>
-                            <span class="text-gray-300" id="iq-val">0</span>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <span style="color: var(--ink-soft);">賢さ</span>
+                            <span class="mono" style="color: var(--ink);" id="iq-val">0</span>
                         </div>
-                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-blue-500 to-purple-500" id="iq-bar"></div></div>
+                        <div class="meter"><div class="meter-fill" id="iq-bar"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-gray-400">速さ</span>
-                            <span class="text-gray-300" id="speed-val">0</span>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <span style="color: var(--ink-soft);">速さ</span>
+                            <span class="mono" style="color: var(--ink);" id="speed-val">0</span>
                         </div>
-                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-emerald-500 to-teal-400" id="speed-bar"></div></div>
+                        <div class="meter"><div class="meter-fill" id="speed-bar"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-gray-400">コスト</span>
-                            <span class="text-gray-300" id="cost-val">0</span>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <span style="color: var(--ink-soft);">コスト</span>
+                            <span class="mono" style="color: var(--ink);" id="cost-val">0</span>
                         </div>
-                        <div class="meter"><div class="meter-fill bg-gradient-to-r from-pink-500 to-rose-500" id="cost-bar"></div></div>
+                        <div class="meter"><div class="meter-fill" id="cost-bar"></div></div>
                     </div>
                 </div>
             </div>
 
-            <p class="text-center text-gray-500 text-xs mt-6">タブを切り替えると、「同じサービス」でもエンジン（モデル）が変わり、返答と性能が変化します。</p>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">タブを切り替えると、「同じサービス」でもエンジン（モデル）が変わり、返答と性能が変化します。</p>
         </section>
 
         <!-- 具体例 -->
-        <section class="mb-10">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 具体例（身近な例え）</div>
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
 
             <div class="space-y-4">
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例① 車の車体とエンジン</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
-                        「プリウス」という車体でも、中のエンジンが違えば、燃費も加速も変わります。<br>
-                        ChatGPTも同じ。<span class="text-white font-semibold">車体はChatGPTでも、エンジン（モデル）が変われば体感が全く違う</span>んです。
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 車の車体とエンジン</h3>
+                    <p style="color: var(--ink-warm);">
+                        「プリウス」という車体でも、中のエンジンが違えば、燃費も加速も変わります。
+                        ChatGPTも同じ。<span class="mark">車体はChatGPTでも、エンジン（モデル）が変われば体感が全く違う</span>んです。
                     </p>
                 </div>
 
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例② 料理人の腕</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
-                        同じ「和食店」に入っても、見習いの板前と30年のベテランでは料理の深さが違います。<br>
-                        AIモデルも同じで、<span class="text-white font-semibold">GPT-3.5は見習い、GPT-5はベテラン板前</span>くらい差があります。
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 料理人の腕</h3>
+                    <p style="color: var(--ink-warm);">
+                        同じ「和食店」に入っても、見習いの板前と30年のベテランでは料理の深さが違います。
+                        AIモデルも同じで、<span class="mark">GPT-3.5は見習い、GPT-5はベテラン板前</span>くらい差があります。
                     </p>
                 </div>
             </div>
         </section>
 
         <!-- まとめ -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-12">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 まとめ</div>
-            <p class="text-lg leading-relaxed">
-                AIを使うときは、<span class="text-white font-semibold">サービス名だけでなく「どのモデルが動いているか」</span>を気にしてみてください。<br>
-                同じ質問でも、<span class="text-white font-semibold">モデル次第で答えの深さが大きく変わる</span>。<br>
-                「なんかAIって浅いな」と感じたら、<span class="text-white font-semibold">モデルを変えるだけで世界が変わる</span>こともあります。
-            </p>
-        </section>
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p style="color: var(--ink-warm);">
+                    AIを使うときは、<span class="mark">サービス名だけでなく「どのモデルが動いているか」</span>を気にしてみてください。
+                    同じ質問でも、<span class="mark">モデル次第で答えの深さが大きく変わる</span>。
+                    「なんかAIって浅いな」と感じたら、<span class="mark">モデルを変えるだけで世界が変わる</span>こともあります。
+                </p>
+            </div>
+        </div>
 
-        <!-- フッターナビ -->
-        <nav class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-                <img src="../images/icon.png" alt="Polaris" class="w-10 h-10 rounded-lg">
-                <div>
-                    <p class="text-sm text-gray-400">📱 学習の進捗管理は</p>
-                    <a href="../index.html" class="text-white font-bold hover:text-blue-400 transition">Polaris で</a>
+        <!-- LINE CTA -->
+        <div class="cta-box mb-12">
+            <div class="flex items-start gap-4">
+                <div class="text-2xl flex-shrink-0">💬</div>
+                <div class="flex-1">
+                    <h3 class="text-xl mb-2" style="font-weight: 500;">こういう「動きで見るAI用語」、<br>LINEで新着配信中。</h3>
+                    <p class="mb-6" style="color: var(--ink-soft);">
+                        オープンチャットなので匿名OK・無料・通知オフ可。
+                    </p>
+                    <a href="https://line.me/ti/g2/Q_wc2e9Avaj3sf4YM0J2z81UMdpQ_2AqmNOp8g"
+                       target="_blank" rel="noopener noreferrer"
+                       onclick="gtag('event', 'click', {event_category: 'line_oc', event_label: 'ai_model_cta'});"
+                       class="btn btn-line">
+                        LINEオープンチャットに参加
+                        <span>→</span>
+                    </a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 justify-between">
-                <a href="knowledge-cutoff.html" class="text-blue-400 hover:text-blue-300 font-semibold">次の用語 → ナレッジカットオフ</a>
-                <a href="index.html" class="text-gray-400 hover:text-white">他の用語一覧 →</a>
-            </div>
+        </div>
+
+        <!-- ページナビ -->
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm">
+            <a href="llm.html" class="nav-link">← 前の用語：LLM</a>
+            <a href="knowledge-cutoff.html" class="nav-link">次の用語：ナレッジカットオフ →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
         </nav>
 
     </main>
 
-    <footer class="border-t border-gray-800 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-500 text-xs">提供：Polaris ｜ © 2025 LEVEL UP, K.K.</p>
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
         </div>
     </footer>
 
@@ -235,24 +374,18 @@
         const MODELS = {
             gpt35: {
                 name: 'GPT-3.5',
-                color: 'text-blue-300',
-                bg: 'bg-blue-900/40',
                 iq: 35, speed: 90, cost: 15,
                 q: 'こんにちは',
                 a: 'こんにちは。ご質問ありがとうございます。',
             },
             gpt4o: {
                 name: 'GPT-4o',
-                color: 'text-purple-300',
-                bg: 'bg-purple-900/40',
                 iq: 65, speed: 75, cost: 45,
                 q: 'こんにちは',
                 a: 'こんにちは。どのような観点からお答えしましょうか？',
             },
             gpt5: {
                 name: 'GPT-5',
-                color: 'text-pink-300',
-                bg: 'bg-pink-900/40',
                 iq: 92, speed: 55, cost: 80,
                 q: 'こんにちは',
                 a: 'こんにちは。ご質問の背景を踏まえて、3つの視点でお答えしますね。',
@@ -286,15 +419,14 @@
             const m = MODELS[modelKey];
 
             engineLabel.style.opacity = '0';
-            engineLabel.style.transform = 'scale(0.85) rotate(-6deg)';
+            engineLabel.style.transform = 'scale(0.85)';
             bubbleA.classList.remove('visible');
             bubbleQ.classList.remove('visible');
 
             setTimeout(() => {
                 engineLabel.textContent = m.name;
-                engineLabel.className = 'engine-label inline-block text-lg font-bold ' + m.color + ' ' + m.bg + ' px-3 py-1 rounded-full';
                 engineLabel.style.opacity = '1';
-                engineLabel.style.transform = 'scale(1) rotate(0)';
+                engineLabel.style.transform = 'scale(1)';
 
                 bubbleQ.textContent = m.q;
                 setTimeout(() => bubbleQ.classList.add('visible'), 100);
@@ -312,19 +444,12 @@
             }, 220);
 
             tabs.forEach(t => {
-                if (t.dataset.model === modelKey) {
-                    t.classList.remove('bg-gray-700', 'hover:bg-gray-600', 'text-gray-200');
-                    t.classList.add('active', 'bg-blue-600', 'hover:bg-blue-700', 'text-white');
-                } else {
-                    t.classList.remove('active', 'bg-blue-600', 'hover:bg-blue-700', 'text-white');
-                    t.classList.add('bg-gray-700', 'hover:bg-gray-600', 'text-gray-200');
-                }
+                t.classList.toggle('active', t.dataset.model === modelKey);
             });
         }
 
         tabs.forEach(t => t.addEventListener('click', () => apply(t.dataset.model)));
 
-        // 初期表示
         setTimeout(() => apply('gpt35'), 200);
     })();
     </script>

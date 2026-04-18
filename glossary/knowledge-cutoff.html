@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ナレッジカットオフとは｜アニメでわかるAI用語集</title>
-    <meta name="description" content="ナレッジカットオフを、アニメーションで3秒で理解。AIが知ってる日付には「線」がある。最新情報を渡すとAIは進化する、その仕組みを動きで解説。こば先生監修。">
+    <meta name="description" content="ナレッジカットオフを、アニメーションで3秒で理解。AIが知ってる日付には「線」がある。最新情報を渡すとAIは進化する、その仕組みを動きで解説。">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
-    <meta name="theme-color" content="#1f2937">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
@@ -21,6 +25,73 @@
     </script>
 
     <style>
+        :root {
+            --bg: #ffffff;
+            --bg-warm: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #191919;
+            --ink-warm: #37352f;
+            --ink-soft: #787774;
+            --ink-mute: #9b9a97;
+            --line: #e9e9e7;
+            --accent: #2383e2;
+            --mark: #fdecc8;
+            --callout-bg: #f1f1ef;
+            --callout-blue: #e7f3f8;
+            --callout-yellow: #fdecc8;
+            --line-green: #06c755;
+            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--bg);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--ink-warm);
+            line-height: 1.25;
+            font-weight: 500;
+        }
+        .cat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+        .mono { font-family: var(--font-mono); }
+        .mark {
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+        }
+        .hairline { border-top: 1px solid var(--line); }
+
+        .callout {
+            display: flex;
+            gap: 14px;
+            padding: 18px 22px;
+            border-radius: 6px;
+            line-height: 1.7;
+        }
+        .callout-blue   { background: var(--callout-blue); }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-gray   { background: var(--callout-bg); }
+        .callout-icon   { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+        }
+
+        /* タイムライン（Notion基調・黒メイン・点線カットオフ） */
         .timeline {
             position: relative;
             height: 220px;
@@ -31,26 +102,28 @@
             top: 50%;
             left: 0;
             right: 0;
-            height: 2px;
-            background: #475569;
+            height: 1.5px;
+            background: var(--ink-warm);
         }
         .cutoff-line {
             position: absolute;
             top: 12%;
             bottom: 12%;
-            width: 3px;
-            background: linear-gradient(to bottom, #ef4444, #f97316);
-            box-shadow: 0 0 12px rgba(239, 68, 68, .6);
+            width: 0;
+            border-left: 2px dashed var(--accent);
             z-index: 1;
         }
         .cutoff-label {
             position: absolute;
-            top: 0;
+            top: -4px;
             transform: translateX(-50%);
-            color: #fca5a5;
+            color: var(--accent);
             font-size: .7rem;
-            font-weight: 700;
+            font-weight: 600;
+            font-family: var(--font-mono);
             white-space: nowrap;
+            background: var(--bg);
+            padding: 0 4px;
         }
         .event {
             position: absolute;
@@ -67,23 +140,22 @@
             opacity: 1;
         }
         .event-dot {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: #475569;
-            border: 2px solid #1e293b;
+            background: var(--ink-mute);
+            border: 2px solid var(--bg);
             transition: background .4s ease, box-shadow .4s ease;
         }
         .event.known .event-dot {
-            background: #22c55e;
-            box-shadow: 0 0 10px rgba(34, 197, 94, .7);
+            background: var(--ink);
         }
         .event.unknown .event-dot {
-            background: #64748b;
+            background: var(--ink-mute);
+            opacity: 0.6;
         }
         .event.revealed .event-dot {
-            background: #22c55e;
-            box-shadow: 0 0 14px rgba(34, 197, 94, .8);
+            background: var(--ink);
             animation: dot-pop .6s ease-out;
         }
         @keyframes dot-pop {
@@ -98,22 +170,23 @@
         }
         .event-year {
             position: absolute;
-            top: 26px;
+            top: 22px;
             font-size: .7rem;
-            color: #94a3b8;
+            color: var(--ink-soft);
+            font-family: var(--font-mono);
             white-space: nowrap;
         }
         .event-label {
             position: absolute;
-            top: 44px;
+            top: 40px;
             font-size: .7rem;
-            color: #cbd5e1;
+            color: var(--ink);
             white-space: nowrap;
             opacity: 0;
             transition: opacity .4s ease;
         }
         .event.in .event-label { opacity: 1; }
-        .event.unknown .event-icon { filter: grayscale(1); opacity: .6; }
+        .event.unknown .event-icon { filter: grayscale(1); opacity: .5; }
         .event.revealed .event-icon { filter: none; opacity: 1; animation: pop-in .5s ease-out; }
         @keyframes pop-in {
             0% { transform: scale(0.3) rotate(-20deg); }
@@ -139,66 +212,109 @@
             right: 22%;
             opacity: 0;
         }
+
+        /* ボタン */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity .2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+        .btn-primary {
+            background: var(--ink);
+            color: #fff;
+        }
+        .btn-primary:hover:not(:disabled) { opacity: 0.85; }
+        .btn-primary:disabled { opacity: 0.5; cursor: default; }
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+        .btn-secondary:hover { border-color: var(--ink-mute); }
+        .btn-line {
+            background: var(--line-green);
+            color: #fff;
+            padding: 14px 28px;
+        }
+        .btn-line:hover { opacity: 0.9; color: #fff; }
+
+        .cta-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .nav-link {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
+<body>
 
-    <!-- ヘッダー帯 -->
-    <div class="bg-gray-800/60 border-b border-gray-700 sticky top-0 z-40 backdrop-blur">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between text-sm">
-            <span class="text-gray-300">
-                <span class="text-white font-semibold">アニメでわかるAI用語</span>
-                <span class="text-gray-500 mx-2">×</span>
-                <span class="text-blue-400">こば先生監修</span>
-            </span>
-            <a href="index.html" class="text-gray-400 hover:text-white transition">← 一覧に戻る</a>
+    <!-- 上部ナビ -->
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
         </div>
     </div>
 
-    <main class="container mx-auto px-4 py-12 max-w-3xl">
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
 
         <!-- タイトル -->
-        <header class="mb-10">
-            <div class="text-sm text-blue-400 font-semibold mb-2">#03 ・ AIの基本概念</div>
-            <h1 class="text-3xl md:text-4xl font-bold leading-tight">ナレッジカットオフ</h1>
+        <header class="mb-14">
+            <div class="cat-label mb-3">03 · AI用語</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Knowledge Cutoff</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">ナレッジ<br>カットオフ</h1>
         </header>
 
         <!-- 結論 -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-8">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 結論（一言で）</div>
-            <p class="text-lg md:text-xl leading-relaxed">
-                AIには、<span class="font-bold text-white">「ここまでの出来事しか知らない」という日付の線</span>があります。<br>
-                それより新しい情報は、<span class="text-white font-semibold">あなたが教えないとAIは知りません</span>。
-            </p>
-        </section>
+        <div class="callout callout-blue mb-10">
+            <span class="callout-icon">💡</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">結論</div>
+                <p class="text-lg" style="color: var(--ink-warm);">
+                    AIには、<span class="mark">「ここまでの出来事しか知らない」という日付の線</span>があります。
+                    それより新しい情報は、<span class="mark">あなたが教えないとAIは知りません</span>。
+                </p>
+            </div>
+        </div>
 
         <!-- 理由 -->
-        <section class="bg-yellow-900/20 border-l-4 border-yellow-500 p-6 rounded-lg mb-10">
-            <div class="text-yellow-400 font-bold text-sm mb-2">🟡 理由</div>
-            <p class="text-gray-200 leading-relaxed">
-                AIは、学習時点までの文章を読んで作られます。その<span class="text-white font-semibold">「学習の締め切り日」がナレッジカットオフ</span>です。<br>
-                締め切り日以降の出来事は、AIにとって<span class="text-white font-semibold">まだ存在しない世界</span>。<br>
-                だから最新のニュースや、あなたの会社の社内資料を知らないのは当たり前。<span class="text-white font-semibold">「知らない」のではなく「渡されていない」</span>だけなんです。
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIには「学習の締め切り日」がある</h2>
+            <p style="color: var(--ink-warm);">
+                AIは、学習時点までの文章を読んで作られます。その<span class="mark">「学習の締め切り日」がナレッジカットオフ</span>です。
+                締め切り日以降の出来事は、AIにとって<span class="mark">まだ存在しない世界</span>。
+                だから最新のニュースや、あなたの会社の社内資料を知らないのは当たり前。<span class="mark">「知らない」のではなく「渡されていない」</span>だけなんです。
             </p>
         </section>
 
         <!-- アニメーション主役 -->
-        <section class="bg-gray-800 rounded-xl p-6 md:p-8 mb-10 border border-gray-700 overflow-hidden">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 アニメーションで見る</div>
+        <section class="card p-8 md:p-10 mb-12 overflow-hidden">
+            <div class="cat-label mb-5">Animation</div>
 
-            <!-- タイムライン -->
             <div class="timeline" id="timeline">
                 <div class="timeline-line"></div>
 
-                <!-- 新聞（最初は非表示） -->
                 <div class="newspaper" id="newspaper">📰</div>
 
-                <!-- カットオフ線 -->
                 <div class="cutoff-line" style="left: 66%;">
-                    <div class="cutoff-label">▲ カットオフ 2024</div>
+                    <div class="cutoff-label">カットオフ 2024</div>
                 </div>
 
-                <!-- イベント群 -->
                 <div class="event" data-delay="200" data-type="known" style="left: 8%;">
                     <span class="event-icon">🦠</span>
                     <span class="event-dot"></span>
@@ -237,80 +353,102 @@
                 </div>
             </div>
 
-            <!-- 凡例・操作 -->
+            <!-- 凡例 -->
             <div class="flex items-center justify-center gap-6 mt-6 flex-wrap text-xs">
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span><span class="text-gray-400">AIが知ってる</span></div>
-                <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-gray-500 inline-block"></span><span class="text-gray-400">AIが知らない</span></div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full inline-block" style="background: var(--ink);"></span>
+                    <span style="color: var(--ink-soft);">AIが知ってる</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full inline-block" style="background: var(--ink-mute); opacity: 0.6;"></span>
+                    <span style="color: var(--ink-soft);">AIが知らない</span>
+                </div>
             </div>
 
             <div class="text-center mt-6">
-                <p id="cutoff-status" class="text-gray-400 text-sm min-h-[1.5rem] mb-4">▶︎ 「再生」を押してみてください</p>
-                <button id="play-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg transition">
-                    ▶︎ 再生
-                </button>
-                <button id="news-btn" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-6 py-3 rounded-lg transition ml-2 hidden">
-                    📰 最新情報を渡す
-                </button>
+                <p id="cutoff-status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」を押してみてください</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+                <button id="news-btn" class="btn btn-secondary ml-2 hidden">📰 最新情報を渡す</button>
             </div>
 
-            <p class="text-center text-gray-500 text-xs mt-6">あなたが渡す最新情報で、AIは進化する。</p>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">あなたが渡す最新情報で、AIは進化する。</p>
         </section>
 
         <!-- 具体例 -->
-        <section class="mb-10">
-            <div class="text-green-400 font-bold text-sm mb-4">🟢 具体例（身近な例え）</div>
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
 
             <div class="space-y-4">
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例① 冷凍睡眠から起きた人</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
-                        2024年に冷凍睡眠に入って、2026年に起きた人を想像してください。<br>
-                        その人は<span class="text-white font-semibold">2年間の出来事を何も知らない</span>。悪気があるわけじゃなく、<span class="text-white font-semibold">寝ていた間の情報を渡されていない</span>だけ。<br>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 冷凍睡眠から起きた人</h3>
+                    <p style="color: var(--ink-warm);">
+                        2024年に冷凍睡眠に入って、2026年に起きた人を想像してください。
+                        その人は<span class="mark">2年間の出来事を何も知らない</span>。悪気があるわけじゃなく、<span class="mark">寝ていた間の情報を渡されていない</span>だけ。
                         AIもこれと同じです。
                     </p>
                 </div>
 
-                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                    <h3 class="font-bold mb-2 text-white">例② 古い教科書しか読んでいない先生</h3>
-                    <p class="text-gray-300 leading-relaxed text-sm md:text-base">
-                        5年前の教科書しか読んでいない先生に、最新の業界トレンドを聞いても答えられません。<br>
-                        でも、<span class="text-white font-semibold">あなたが最新の資料を机に置けば</span>、それを読んで答えてくれます。<br>
-                        AIとの付き合い方は、<span class="text-white font-semibold">「最新資料を渡す」こと</span>から始まります。
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 古い教科書しか読んでいない先生</h3>
+                    <p style="color: var(--ink-warm);">
+                        5年前の教科書しか読んでいない先生に、最新の業界トレンドを聞いても答えられません。
+                        でも、<span class="mark">あなたが最新の資料を机に置けば</span>、それを読んで答えてくれます。
+                        AIとの付き合い方は、<span class="mark">「最新資料を渡す」こと</span>から始まります。
                     </p>
                 </div>
             </div>
         </section>
 
         <!-- まとめ -->
-        <section class="bg-gradient-to-br from-red-900/40 to-red-800/20 border-l-4 border-red-500 p-6 rounded-lg mb-12">
-            <div class="text-red-400 font-bold text-sm mb-2">🔴 まとめ</div>
-            <p class="text-lg leading-relaxed">
-                AIが最新情報を知らないのは<span class="text-white font-semibold">欠陥ではなく仕様</span>です。<br>
-                大切なのは、<span class="text-white font-semibold">「この線より新しい情報は、自分が渡す」</span>という前提で使うこと。<br>
-                最新の資料・社内情報・直近のニュースを一緒に渡すだけで、AIの答えは一気に深くなります。
-            </p>
-        </section>
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p style="color: var(--ink-warm);">
+                    AIが最新情報を知らないのは<span class="mark">欠陥ではなく仕様</span>です。
+                    大切なのは、<span class="mark">「この線より新しい情報は、自分が渡す」</span>という前提で使うこと。
+                    最新の資料・社内情報・直近のニュースを一緒に渡すだけで、AIの答えは一気に深くなります。
+                </p>
+            </div>
+        </div>
 
-        <!-- フッターナビ -->
-        <nav class="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-10">
-            <div class="flex items-center gap-3 mb-4">
-                <img src="../images/icon.png" alt="Polaris" class="w-10 h-10 rounded-lg">
-                <div>
-                    <p class="text-sm text-gray-400">📱 学習の進捗管理は</p>
-                    <a href="../index.html" class="text-white font-bold hover:text-blue-400 transition">Polaris で</a>
+        <!-- LINE CTA -->
+        <div class="cta-box mb-12">
+            <div class="flex items-start gap-4">
+                <div class="text-2xl flex-shrink-0">💬</div>
+                <div class="flex-1">
+                    <h3 class="text-xl mb-2" style="font-weight: 500;">こういう「動きで見るAI用語」、<br>LINEで新着配信中。</h3>
+                    <p class="mb-6" style="color: var(--ink-soft);">
+                        オープンチャットなので匿名OK・無料・通知オフ可。
+                    </p>
+                    <a href="https://line.me/ti/g2/Q_wc2e9Avaj3sf4YM0J2z81UMdpQ_2AqmNOp8g"
+                       target="_blank" rel="noopener noreferrer"
+                       onclick="gtag('event', 'click', {event_category: 'line_oc', event_label: 'cutoff_cta'});"
+                       class="btn btn-line">
+                        LINEオープンチャットに参加
+                        <span>→</span>
+                    </a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 pt-4 flex flex-col sm:flex-row gap-3 justify-between">
-                <a href="llm.html" class="text-blue-400 hover:text-blue-300 font-semibold">← 前の用語：LLM</a>
-                <a href="index.html" class="text-gray-400 hover:text-white">他の用語一覧 →</a>
-            </div>
+        </div>
+
+        <!-- ページナビ -->
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm">
+            <a href="ai-model.html" class="nav-link">← 前の用語：AIモデル</a>
+            <span></span>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
         </nav>
 
     </main>
 
-    <footer class="border-t border-gray-800 py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-500 text-xs">提供：Polaris ｜ © 2025 LEVEL UP, K.K.</p>
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
         </div>
     </footer>
 
@@ -336,7 +474,6 @@
             newsBtn.classList.add('hidden');
         }
 
-        // オリジナルを記録
         events.forEach(ev => {
             const icon = ev.querySelector('.event-icon');
             const label = ev.querySelector('.event-label');
@@ -356,12 +493,12 @@
             }
 
             await wait(600);
-            status.innerHTML = '🔴 赤い線より <span class="text-green-400 font-semibold">左はAIが知ってる</span>、<span class="text-gray-400 font-semibold">右は知らない</span>';
+            status.innerHTML = '青い線より <span style="font-weight:600;color:var(--ink);">左はAIが知ってる</span>、<span style="font-weight:600;color:var(--ink-soft);">右は知らない</span>';
 
             await wait(1200);
             status.textContent = '📰 では、あなたが「最新の情報」をAIに渡してみましょう。';
             playBtn.disabled = false;
-            playBtn.textContent = '▶︎ もう一度';
+            playBtn.textContent = '▶ もう一度';
             newsBtn.classList.remove('hidden');
         }
 
@@ -372,7 +509,6 @@
 
             await wait(1100);
 
-            // 「2025」以降を順番に明らかにする
             const unknownEvents = Array.from(events).filter(e => e.dataset.type === 'unknown');
             const reveals = [
                 { icon: '🚀', label: 'GPT-5' },
@@ -394,7 +530,7 @@
             newspaper.classList.remove('flying');
             newspaper.classList.add('delivered');
 
-            status.innerHTML = '✅ あなたが渡した情報で、<span class="text-green-400 font-semibold">AIの世界が広がった</span>。';
+            status.innerHTML = '✓ あなたが渡した情報で、<span style="font-weight:600;color:var(--ink);">AIの世界が広がった</span>。';
             newsBtn.disabled = false;
         }
 
