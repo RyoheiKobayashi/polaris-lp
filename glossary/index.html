@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アニメでわかるAI用語集</title>
+    <title>アニメーションでわかるAI用語集</title>
     <meta name="description" content="文字で読むより、動きで覚える。アニメーションで見てわかるAI用語集。LLM、AIモデル、ナレッジカットオフなど、AIの基本用語を3秒で理解。">
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
@@ -25,12 +25,477 @@
       gtag('js', new Date());
       gtag('config', 'G-EQR100H021');
     </script>
+
+    <style>
+        /* ========= グリッド（動的カラム） ========= */
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        /* ========= カード（アニメ+名前のみ） ========= */
+        .term-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .term-card:hover {
+            border-color: var(--ink-mute);
+            transform: translateY(-2px);
+        }
+        .term-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            padding: 18px 22px 22px;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* ========= サムネ共通 ========= */
+        .thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .thumb-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+        }
+
+        /* ========= 01. LLM: 確率バー ========= */
+        .thumb-llm .pbars { width: 100%; max-width: 180px; }
+        .thumb-llm .pbar-row {
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+        }
+        .thumb-llm .pbar-row:last-child { margin-bottom: 0; }
+        .thumb-llm .pbar-row span { color: var(--ink); }
+        .thumb-llm .pbar-track {
+            height: 4px;
+            background: #e9e9e7;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .thumb-llm .pbar-fill {
+            height: 100%;
+            background: var(--ink);
+            border-radius: 2px;
+            animation: pbar 3s ease-in-out infinite;
+            width: 0;
+        }
+        .thumb-llm .pbar-row:nth-child(1) .pbar-fill { --w: 78%; }
+        .thumb-llm .pbar-row:nth-child(2) .pbar-fill { --w: 15%; animation-delay: .1s; background: var(--ink-soft); }
+        .thumb-llm .pbar-row:nth-child(3) .pbar-fill { --w: 7%;  animation-delay: .2s; background: var(--ink-mute); }
+        @keyframes pbar {
+            0%   { width: 0; }
+            40%  { width: var(--w); }
+            80%  { width: var(--w); }
+            100% { width: 0; }
+        }
+
+        /* ========= 02. AIモデル: ラベル回転 ========= */
+        .thumb-model .phone {
+            width: 72px;
+            aspect-ratio: 9 / 14;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb-model .phone::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 24px; height: 5px;
+            background: var(--bg-warm);
+            border-radius: 0 0 4px 4px;
+        }
+        .thumb-model .engine {
+            position: absolute;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--ink);
+            opacity: 0;
+            animation: engine-cycle 4.5s ease-in-out infinite;
+            background: var(--ink);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .thumb-model .engine:nth-child(1) { animation-delay: 0s; }
+        .thumb-model .engine:nth-child(2) { animation-delay: 1.5s; }
+        .thumb-model .engine:nth-child(3) { animation-delay: 3.0s; }
+        @keyframes engine-cycle {
+            0%, 5%    { opacity: 0; transform: scale(.9); }
+            10%, 30%  { opacity: 1; transform: scale(1); }
+            35%, 100% { opacity: 0; transform: scale(.9); }
+        }
+
+        /* ========= 03. ナレッジカットオフ: タイムライン ========= */
+        .thumb-cutoff .tl-wrap { width: 100%; max-width: 200px; position: relative; }
+        .thumb-cutoff .tl-line {
+            height: 1.5px;
+            background: var(--ink-warm);
+            position: relative;
+            margin: 0 8px;
+        }
+        .thumb-cutoff .tl-cut {
+            position: absolute;
+            top: -12px; bottom: -12px;
+            left: 66%;
+            border-left: 1.5px dashed var(--accent);
+        }
+        .thumb-cutoff .tl-dot {
+            position: absolute;
+            top: 50%;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--ink);
+            animation: dot-pulse 2.2s ease-in-out infinite;
+        }
+        .thumb-cutoff .tl-dot:nth-child(2) { left: 10%; animation-delay: 0s; }
+        .thumb-cutoff .tl-dot:nth-child(3) { left: 30%; animation-delay: .2s; }
+        .thumb-cutoff .tl-dot:nth-child(4) { left: 50%; animation-delay: .4s; }
+        .thumb-cutoff .tl-dot:nth-child(5) { left: 80%; animation-delay: .6s; background: var(--ink-mute); opacity: .5; }
+        @keyframes dot-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: .9; }
+            50%      { transform: translate(-50%, -50%) scale(1.35); opacity: 1; }
+        }
+        .thumb-cutoff .tl-news {
+            position: absolute;
+            right: -8px; top: -22px;
+            font-size: 16px;
+            animation: news-fly 3.2s ease-in-out infinite;
+        }
+        @keyframes news-fly {
+            0%   { transform: translateX(16px); opacity: 0; }
+            40%  { transform: translateX(0);    opacity: 1; }
+            70%  { transform: translateX(0);    opacity: 1; }
+            100% { transform: translateX(-8px); opacity: 0; }
+        }
+
+        /* ========= 04. ハルシネーション: 取り消し線 ========= */
+        .thumb-hallu .bubble {
+            position: relative;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            color: var(--ink);
+            min-width: 140px;
+        }
+        .thumb-hallu .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -7px; left: 18px;
+            width: 12px; height: 12px;
+            background: #fff;
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            transform: rotate(45deg);
+        }
+        .thumb-hallu .strike {
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            height: 1.5px;
+            background: #dc2626;
+            width: 0;
+            animation: strike-through 3s ease-in-out infinite;
+        }
+        @keyframes strike-through {
+            0%, 30%   { width: 0; opacity: 0; }
+            40%       { width: 0; opacity: 1; }
+            70%       { width: calc(100% - 16px); opacity: 1; }
+            100%      { width: calc(100% - 16px); opacity: 0; }
+        }
+
+        /* ========= 05. トークン: 文字分割 ========= */
+        .thumb-token .tok-row {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+        .thumb-token .tok {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 24px;
+            padding: 0 5px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            color: var(--ink);
+            opacity: 0;
+            transform: translateY(4px) scale(.85);
+            animation: tok-in 3s ease-in-out infinite;
+        }
+        .thumb-token .tok:nth-child(1) { animation-delay: 0s; }
+        .thumb-token .tok:nth-child(2) { animation-delay: .15s; }
+        .thumb-token .tok:nth-child(3) { animation-delay: .30s; }
+        .thumb-token .tok:nth-child(4) { animation-delay: .45s; }
+        .thumb-token .tok:nth-child(5) { animation-delay: .60s; }
+        @keyframes tok-in {
+            0%, 10% { opacity: 0; transform: translateY(4px) scale(.85); }
+            25%, 80% { opacity: 1; transform: translateY(0) scale(1); }
+            95%, 100% { opacity: 0; transform: translateY(-4px) scale(.85); }
+        }
+
+        /* ========= 06. AI: 入れ子円 ========= */
+        .thumb-ai .rings {
+            position: relative;
+            width: 140px; height: 140px;
+        }
+        .thumb-ai .ring {
+            position: absolute;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            animation: ring-pulse 3.5s ease-in-out infinite;
+        }
+        .thumb-ai .ring:nth-child(1) { width: 130px; height: 130px; animation-delay: 0s; }
+        .thumb-ai .ring:nth-child(2) { width: 92px;  height: 92px; animation-delay: .3s; opacity: .75; }
+        .thumb-ai .ring:nth-child(3) { width: 58px;  height: 58px; animation-delay: .6s; opacity: .5; }
+        .thumb-ai .ring:nth-child(4) {
+            width: 28px; height: 28px;
+            background: var(--ink);
+            border: none;
+            animation-delay: .9s;
+        }
+        @keyframes ring-pulse {
+            0%, 100%   { transform: translate(-50%, -50%) scale(1); }
+            50%        { transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        /* ========= 07. 生成AI: タイプライター ========= */
+        .thumb-gen .typer {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--ink);
+            animation: type 3.6s steps(16) infinite, blink 0.7s step-end infinite;
+            width: 0;
+            max-width: 9em;
+        }
+        @keyframes type {
+            0%   { width: 0; }
+            50%  { width: 9em; }
+            90%  { width: 9em; }
+            100% { width: 0; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* ========= 08. コンテキストウィンドウ: テキスト流入 ========= */
+        .thumb-ctx .win {
+            position: relative;
+            width: 70%;
+            height: 70%;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .thumb-ctx .scroll {
+            position: absolute;
+            inset: 0;
+            animation: ctx-scroll 4s linear infinite;
+        }
+        .thumb-ctx .line {
+            height: 4px;
+            margin: 6px 10px;
+            background: var(--ink-mute);
+            border-radius: 2px;
+            opacity: .4;
+        }
+        .thumb-ctx .line.wide { width: 75%; }
+        .thumb-ctx .line.mid { width: 55%; }
+        .thumb-ctx .line.narrow { width: 40%; }
+        @keyframes ctx-scroll {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-30%); }
+        }
+
+        /* ========= 09. マルチモーダル: 3モード収束 ========= */
+        .thumb-mm .mm-stage {
+            position: relative;
+            width: 180px;
+            height: 80px;
+        }
+        .thumb-mm .mm-node {
+            position: absolute;
+            top: 50%;
+            width: 28px; height: 28px;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--ink);
+            transform: translateY(-50%);
+            animation: mm-converge 3.5s ease-in-out infinite;
+        }
+        .thumb-mm .mm-node.txt { left: 0;    animation-delay: 0s; }
+        .thumb-mm .mm-node.img { left: 50%;  transform: translate(-50%, -50%); animation-delay: .15s; }
+        .thumb-mm .mm-node.snd { right: 0;   animation-delay: .30s; }
+        .thumb-mm .mm-center {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 36px; height: 36px;
+            background: var(--ink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: mm-core 3.5s ease-in-out infinite;
+        }
+        @keyframes mm-converge {
+            0%, 40%  { opacity: 1; }
+            60%, 80% { opacity: .3; }
+            100%     { opacity: 1; }
+        }
+        @keyframes mm-core {
+            0%, 40%  { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+            60%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100%     { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+        }
+
+        /* ========= 10. RAG: 検索 → 回答フロー ========= */
+        .thumb-rag .rag-flow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-rag .rag-box {
+            width: 32px; height: 32px;
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--ink);
+            position: relative;
+        }
+        .thumb-rag .rag-box .dot {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--ink);
+            border-radius: 50%;
+            top: 6px; left: 6px;
+        }
+        .thumb-rag .rag-arrow {
+            width: 18px; height: 2px;
+            background: var(--ink-soft);
+            position: relative;
+            opacity: 0;
+            animation: rag-flow 3s ease-in-out infinite;
+        }
+        .thumb-rag .rag-arrow::after {
+            content: '';
+            position: absolute;
+            right: -2px; top: -3px;
+            width: 0; height: 0;
+            border-left: 6px solid var(--ink-soft);
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        .thumb-rag .rag-arrow:nth-of-type(1) { animation-delay: 0s; }
+        .thumb-rag .rag-arrow:nth-of-type(2) { animation-delay: .6s; }
+        @keyframes rag-flow {
+            0%, 30%   { opacity: 0; transform: translateX(-4px); }
+            40%, 80%  { opacity: 1; transform: translateX(0); }
+            100%      { opacity: 0; transform: translateX(4px); }
+        }
+
+        /* ========= 11. メモリ: 2セッション ========= */
+        .thumb-mem .mem-stage {
+            position: relative;
+            width: 180px;
+            height: 80px;
+        }
+        .thumb-mem .chat {
+            position: absolute;
+            padding: 6px 10px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            color: var(--ink);
+            white-space: nowrap;
+        }
+        .thumb-mem .chat.s1 { top: 0; left: 0; }
+        .thumb-mem .chat.s2 { bottom: 0; right: 0; background: var(--ink); color: #fff; border-color: var(--ink); }
+        .thumb-mem .mem-link {
+            position: absolute;
+            left: 30%; top: 20%;
+            width: 40%; height: 60%;
+            border-right: 1.5px dashed var(--ink-mute);
+            border-bottom: 1.5px dashed var(--ink-mute);
+            border-radius: 0 0 8px 0;
+            animation: mem-pulse 2.8s ease-in-out infinite;
+        }
+        @keyframes mem-pulse {
+            0%, 100% { opacity: .4; }
+            50%      { opacity: 1; }
+        }
+        .thumb-mem .mem-tag {
+            position: absolute;
+            top: 40%;
+            right: 40%;
+            font-size: 9px;
+            font-family: var(--font-mono);
+            color: var(--ink-soft);
+            background: var(--bg-warm);
+            padding: 0 4px;
+        }
+    </style>
 </head>
 <body>
 
     <!-- 上部ナビ -->
     <div class="top-nav">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-5xl">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-6xl">
             <span class="cat-label">AI · Visual Glossary</span>
             <a href="disclaimer.html" class="nav-link text-xs">免責事項</a>
         </div>
@@ -53,129 +518,185 @@
     </div>
 
     <!-- 用語一覧 -->
-    <main class="container mx-auto px-6 pt-16 pb-24 max-w-5xl">
+    <main class="container mx-auto px-6 pt-12 pb-24 max-w-6xl">
 
-        <!-- カテゴリA -->
-        <section class="mb-20">
-            <div class="flex items-center gap-3 mb-3">
-                <span class="cat-label">Category A</span>
-            </div>
-            <h2 class="text-2xl md:text-3xl mb-3" style="font-weight: 500;">
-                <span class="mr-2">🤖</span>AIの基本概念
-            </h2>
-            <p class="mb-10" style="color: var(--ink-soft); max-width: 640px;">
-                AIサービスの土台となる仕組みや特性に関する用語。「AIが何をしていて、何が限界なのか」を正しく理解するための基礎知識です。
-            </p>
+        <div class="term-grid">
 
-            <div class="term-grid">
+            <!-- 01. LLM -->
+            <a href="llm.html" class="term-card">
+                <div class="thumb thumb-llm">
+                    <div class="thumb-inner">
+                        <div class="pbars">
+                            <div class="pbar-row"><span>晴</span><div class="pbar-track"><div class="pbar-fill"></div></div></div>
+                            <div class="pbar-row"><span>曇</span><div class="pbar-track"><div class="pbar-fill"></div></div></div>
+                            <div class="pbar-row"><span>雨</span><div class="pbar-track"><div class="pbar-fill"></div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <h3>LLM</h3>
+            </a>
 
-                <a href="llm.html" class="term-card">
-                    <div class="hero">📊</div>
-                    <div class="num">01</div>
-                    <h3>LLM</h3>
-                    <div class="en">Large Language Model</div>
-                    <p class="desc">人間が書いた大量のテキストデータを学習し、<span class="mark">自然な文章を生成</span>できるAIの仕組み。ChatGPT・Gemini・Claudeはすべてこの「LLM」をベースに作られています。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 02. AIモデル -->
+            <a href="ai-model.html" class="term-card">
+                <div class="thumb thumb-model">
+                    <div class="thumb-inner">
+                        <div class="phone">
+                            <span class="engine">GPT-3.5</span>
+                            <span class="engine">GPT-4o</span>
+                            <span class="engine">GPT-5</span>
+                        </div>
+                    </div>
+                </div>
+                <h3>AIモデル</h3>
+            </a>
 
-                <a href="ai-model.html" class="term-card">
-                    <div class="hero">⚙️</div>
-                    <div class="num">02</div>
-                    <h3>AIモデル</h3>
-                    <div class="en">AI Model</div>
-                    <p class="desc">AIの「<span class="mark">頭脳</span>」にあたる部分。同じサービス（例: ChatGPT）でも、搭載されるモデルによって賢さや速度が異なります。「Gemini 2.5 Pro」「GPT-4o」などの名前がついています。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 03. ナレッジカットオフ -->
+            <a href="knowledge-cutoff.html" class="term-card">
+                <div class="thumb thumb-cutoff">
+                    <div class="thumb-inner">
+                        <div class="tl-wrap">
+                            <div class="tl-line">
+                                <div class="tl-cut"></div>
+                                <span class="tl-dot"></span>
+                                <span class="tl-dot"></span>
+                                <span class="tl-dot"></span>
+                                <span class="tl-dot"></span>
+                                <span class="tl-news">📰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>ナレッジカットオフ</h3>
+            </a>
 
-                <a href="knowledge-cutoff.html" class="term-card">
-                    <div class="hero">📅</div>
-                    <div class="num">03</div>
-                    <h3>ナレッジカットオフ</h3>
-                    <div class="en">Knowledge Cutoff</div>
-                    <p class="desc">AIモデルが<span class="mark">学習したデータの最終日</span>のこと。それ以降の出来事をAIは知りません。だからこそ自分の最新情報をナレッジとして渡す必要があります。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 04. ハルシネーション -->
+            <a href="hallucination.html" class="term-card">
+                <div class="thumb thumb-hallu">
+                    <div class="thumb-inner">
+                        <div class="bubble">
+                            板垣退助です
+                            <div class="strike"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3>ハルシネーション</h3>
+            </a>
 
-                <a href="hallucination.html" class="term-card">
-                    <div class="hero">👻</div>
-                    <div class="num">04</div>
-                    <h3>ハルシネーション</h3>
-                    <div class="en">Hallucination</div>
-                    <p class="desc">AIが事実と異なる情報を<span class="mark">もっともらしく生成</span>してしまう現象。「AIの幻覚」とも呼ばれます。発信や業務利用ではファクトチェックが必須です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 05. トークン -->
+            <a href="token.html" class="term-card">
+                <div class="thumb thumb-token">
+                    <div class="thumb-inner">
+                        <div class="tok-row">
+                            <span class="tok">今日</span>
+                            <span class="tok">は</span>
+                            <span class="tok">晴</span>
+                            <span class="tok">れ</span>
+                            <span class="tok">。</span>
+                        </div>
+                    </div>
+                </div>
+                <h3>トークン</h3>
+            </a>
 
-                <a href="token.html" class="term-card">
-                    <div class="hero">🧩</div>
-                    <div class="num">05</div>
-                    <h3>トークン</h3>
-                    <div class="en">Token</div>
-                    <p class="desc">AIが文章を処理する際の<span class="mark">最小単位</span>。日本語は1文字が1〜3トークン程度。入力と出力の合計トークン数に上限があり、一度に扱える情報量の限界を決めます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 06. AI -->
+            <a href="ai.html" class="term-card">
+                <div class="thumb thumb-ai">
+                    <div class="thumb-inner">
+                        <div class="rings">
+                            <div class="ring"></div>
+                            <div class="ring"></div>
+                            <div class="ring"></div>
+                            <div class="ring"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3>AI（人工知能）</h3>
+            </a>
 
-                <a href="ai.html" class="term-card">
-                    <div class="hero">🤖</div>
-                    <div class="num">06</div>
-                    <h3>AI（人工知能）</h3>
-                    <div class="en">Artificial Intelligence</div>
-                    <p class="desc">人間の知的な作業（文章作成・分析・判断など）をコンピュータに行わせる<span class="mark">技術の総称</span>。ChatGPT・Gemini・Claudeなどの生成AIもこれに含まれます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 07. 生成AI -->
+            <a href="generative-ai.html" class="term-card">
+                <div class="thumb thumb-gen">
+                    <div class="thumb-inner">
+                        <div class="typer">こんにちは、AIです</div>
+                    </div>
+                </div>
+                <h3>生成AI</h3>
+            </a>
 
-                <a href="generative-ai.html" class="term-card">
-                    <div class="hero">✨</div>
-                    <div class="num">07</div>
-                    <h3>生成AI</h3>
-                    <div class="en">Generative AI</div>
-                    <p class="desc">テキスト・画像・動画など新しいコンテンツを「<span class="mark">生成</span>」できるタイプのAI。ChatGPT・Gemini・Claudeはすべて生成AIに分類されます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 08. コンテキストウィンドウ -->
+            <a href="context-window.html" class="term-card">
+                <div class="thumb thumb-ctx">
+                    <div class="thumb-inner">
+                        <div class="win">
+                            <div class="scroll">
+                                <div class="line wide"></div>
+                                <div class="line mid"></div>
+                                <div class="line narrow"></div>
+                                <div class="line wide"></div>
+                                <div class="line mid"></div>
+                                <div class="line wide"></div>
+                                <div class="line narrow"></div>
+                                <div class="line mid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3>コンテキストウィンドウ</h3>
+            </a>
 
-                <a href="context-window.html" class="term-card">
-                    <div class="hero">🪟</div>
-                    <div class="num">08</div>
-                    <h3>コンテキスト<br>ウィンドウ</h3>
-                    <div class="en">Context Window</div>
-                    <p class="desc">AIが一度の会話で<span class="mark">読み込めるトークン数の上限</span>。この枠に収まる範囲でしかAIは情報を参照できません。長文のナレッジは必要な情報に絞って渡すのが重要です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 09. マルチモーダル -->
+            <a href="multimodal.html" class="term-card">
+                <div class="thumb thumb-mm">
+                    <div class="thumb-inner">
+                        <div class="mm-stage">
+                            <div class="mm-node txt">Aa</div>
+                            <div class="mm-node img">▧</div>
+                            <div class="mm-node snd">〜</div>
+                            <div class="mm-center"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3>マルチモーダル</h3>
+            </a>
 
-                <a href="multimodal.html" class="term-card">
-                    <div class="hero">🎭</div>
-                    <div class="num">09</div>
-                    <h3>マルチモーダル</h3>
-                    <div class="en">Multimodal</div>
-                    <p class="desc">テキストだけでなく、<span class="mark">画像・音声・動画</span>など複数の形式のデータを同時に扱えるAIの能力。「この画像を説明して」と頼めるのはマルチモーダルのおかげです。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 10. RAG -->
+            <a href="rag.html" class="term-card">
+                <div class="thumb thumb-rag">
+                    <div class="thumb-inner">
+                        <div class="rag-flow">
+                            <div class="rag-box">?</div>
+                            <div class="rag-arrow"></div>
+                            <div class="rag-box"><span class="dot"></span></div>
+                            <div class="rag-arrow"></div>
+                            <div class="rag-box">✓</div>
+                        </div>
+                    </div>
+                </div>
+                <h3>RAG</h3>
+            </a>
 
-                <a href="rag.html" class="term-card">
-                    <div class="hero">🔍</div>
-                    <div class="num">10</div>
-                    <h3>RAG</h3>
-                    <div class="en">Retrieval-Augmented Generation</div>
-                    <p class="desc">AIが回答を生成する前に、<span class="mark">外部のデータから関連情報を検索</span>して取り込む仕組み。AIの知識不足を自分のデータで補う技術です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <!-- 11. メモリ -->
+            <a href="memory.html" class="term-card">
+                <div class="thumb thumb-mem">
+                    <div class="thumb-inner">
+                        <div class="mem-stage">
+                            <div class="chat s1">初回: 私は〇〇</div>
+                            <div class="mem-link"></div>
+                            <div class="mem-tag">memo</div>
+                            <div class="chat s2">おかえり、〇〇</div>
+                        </div>
+                    </div>
+                </div>
+                <h3>メモリ</h3>
+            </a>
 
-                <a href="memory.html" class="term-card">
-                    <div class="hero">🧠</div>
-                    <div class="num">11</div>
-                    <h3>メモリ</h3>
-                    <div class="en">Memory</div>
-                    <p class="desc">AIが<span class="mark">過去の会話内容や好みを記憶</span>し、次の会話に反映する機能。ChatGPTやGeminiに搭載。ただし精度は完全ではないため、重要な指示はナレッジで明示的に渡すのが確実。</p>
-                    <div class="read">Read →</div>
-                </a>
-
-            </div>
-        </section>
+        </div>
 
     </main>
 
     <!-- フッター（極小） -->
     <footer class="border-t" style="border-color: var(--line);">
-        <div class="container mx-auto px-6 py-10 max-w-5xl text-sm" style="color: var(--ink-mute);">
+        <div class="container mx-auto px-6 py-10 max-w-6xl text-sm" style="color: var(--ink-mute);">
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
                 <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
                 <span>運営: 株式会社レベルアップ</span>
