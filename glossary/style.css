@@ -149,11 +149,6 @@ a { color: var(--accent); text-underline-offset: 3px; }
     border-color: var(--ink-mute);
     transform: translateY(-2px);
 }
-.term-card .hero {
-    font-size: 2.2rem;
-    line-height: 1;
-    margin-bottom: 16px;
-}
 .term-card .num {
     font-family: var(--font-mono);
     font-size: 12px;

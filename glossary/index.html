@@ -55,121 +55,97 @@
     <!-- 用語一覧 -->
     <main class="container mx-auto px-6 pt-16 pb-24 max-w-5xl">
 
-        <!-- カテゴリA -->
-        <section class="mb-20">
-            <div class="flex items-center gap-3 mb-3">
-                <span class="cat-label">Category A</span>
-            </div>
-            <h2 class="text-2xl md:text-3xl mb-3" style="font-weight: 500;">
-                <span class="mr-2">🤖</span>AIの基本概念
-            </h2>
-            <p class="mb-10" style="color: var(--ink-soft); max-width: 640px;">
-                AIサービスの土台となる仕組みや特性に関する用語。「AIが何をしていて、何が限界なのか」を正しく理解するための基礎知識です。
-            </p>
+        <div class="term-grid">
 
-            <div class="term-grid">
+            <a href="llm.html" class="term-card">
+                <div class="num">01</div>
+                <h3>LLM</h3>
+                <div class="en">Large Language Model</div>
+                <p class="desc">人間が書いた大量のテキストデータを学習し、<span class="mark">自然な文章を生成</span>できるAIの仕組み。ChatGPT・Gemini・Claudeはすべてこの「LLM」をベースに作られています。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="llm.html" class="term-card">
-                    <div class="hero">📊</div>
-                    <div class="num">01</div>
-                    <h3>LLM</h3>
-                    <div class="en">Large Language Model</div>
-                    <p class="desc">人間が書いた大量のテキストデータを学習し、<span class="mark">自然な文章を生成</span>できるAIの仕組み。ChatGPT・Gemini・Claudeはすべてこの「LLM」をベースに作られています。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="ai-model.html" class="term-card">
+                <div class="num">02</div>
+                <h3>AIモデル</h3>
+                <div class="en">AI Model</div>
+                <p class="desc">AIの「<span class="mark">頭脳</span>」にあたる部分。同じサービス（例: ChatGPT）でも、搭載されるモデルによって賢さや速度が異なります。「Gemini 2.5 Pro」「GPT-4o」などの名前がついています。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="ai-model.html" class="term-card">
-                    <div class="hero">⚙️</div>
-                    <div class="num">02</div>
-                    <h3>AIモデル</h3>
-                    <div class="en">AI Model</div>
-                    <p class="desc">AIの「<span class="mark">頭脳</span>」にあたる部分。同じサービス（例: ChatGPT）でも、搭載されるモデルによって賢さや速度が異なります。「Gemini 2.5 Pro」「GPT-4o」などの名前がついています。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="knowledge-cutoff.html" class="term-card">
+                <div class="num">03</div>
+                <h3>ナレッジカットオフ</h3>
+                <div class="en">Knowledge Cutoff</div>
+                <p class="desc">AIモデルが<span class="mark">学習したデータの最終日</span>のこと。それ以降の出来事をAIは知りません。だからこそ自分の最新情報をナレッジとして渡す必要があります。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="knowledge-cutoff.html" class="term-card">
-                    <div class="hero">📅</div>
-                    <div class="num">03</div>
-                    <h3>ナレッジカットオフ</h3>
-                    <div class="en">Knowledge Cutoff</div>
-                    <p class="desc">AIモデルが<span class="mark">学習したデータの最終日</span>のこと。それ以降の出来事をAIは知りません。だからこそ自分の最新情報をナレッジとして渡す必要があります。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="hallucination.html" class="term-card">
+                <div class="num">04</div>
+                <h3>ハルシネーション</h3>
+                <div class="en">Hallucination</div>
+                <p class="desc">AIが事実と異なる情報を<span class="mark">もっともらしく生成</span>してしまう現象。「AIの幻覚」とも呼ばれます。発信や業務利用ではファクトチェックが必須です。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="hallucination.html" class="term-card">
-                    <div class="hero">👻</div>
-                    <div class="num">04</div>
-                    <h3>ハルシネーション</h3>
-                    <div class="en">Hallucination</div>
-                    <p class="desc">AIが事実と異なる情報を<span class="mark">もっともらしく生成</span>してしまう現象。「AIの幻覚」とも呼ばれます。発信や業務利用ではファクトチェックが必須です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="token.html" class="term-card">
+                <div class="num">05</div>
+                <h3>トークン</h3>
+                <div class="en">Token</div>
+                <p class="desc">AIが文章を処理する際の<span class="mark">最小単位</span>。日本語は1文字が1〜3トークン程度。入力と出力の合計トークン数に上限があり、一度に扱える情報量の限界を決めます。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="token.html" class="term-card">
-                    <div class="hero">🧩</div>
-                    <div class="num">05</div>
-                    <h3>トークン</h3>
-                    <div class="en">Token</div>
-                    <p class="desc">AIが文章を処理する際の<span class="mark">最小単位</span>。日本語は1文字が1〜3トークン程度。入力と出力の合計トークン数に上限があり、一度に扱える情報量の限界を決めます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="ai.html" class="term-card">
+                <div class="num">06</div>
+                <h3>AI（人工知能）</h3>
+                <div class="en">Artificial Intelligence</div>
+                <p class="desc">人間の知的な作業（文章作成・分析・判断など）をコンピュータに行わせる<span class="mark">技術の総称</span>。ChatGPT・Gemini・Claudeなどの生成AIもこれに含まれます。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="ai.html" class="term-card">
-                    <div class="hero">🤖</div>
-                    <div class="num">06</div>
-                    <h3>AI（人工知能）</h3>
-                    <div class="en">Artificial Intelligence</div>
-                    <p class="desc">人間の知的な作業（文章作成・分析・判断など）をコンピュータに行わせる<span class="mark">技術の総称</span>。ChatGPT・Gemini・Claudeなどの生成AIもこれに含まれます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="generative-ai.html" class="term-card">
+                <div class="num">07</div>
+                <h3>生成AI</h3>
+                <div class="en">Generative AI</div>
+                <p class="desc">テキスト・画像・動画など新しいコンテンツを「<span class="mark">生成</span>」できるタイプのAI。ChatGPT・Gemini・Claudeはすべて生成AIに分類されます。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="generative-ai.html" class="term-card">
-                    <div class="hero">✨</div>
-                    <div class="num">07</div>
-                    <h3>生成AI</h3>
-                    <div class="en">Generative AI</div>
-                    <p class="desc">テキスト・画像・動画など新しいコンテンツを「<span class="mark">生成</span>」できるタイプのAI。ChatGPT・Gemini・Claudeはすべて生成AIに分類されます。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="context-window.html" class="term-card">
+                <div class="num">08</div>
+                <h3>コンテキスト<br>ウィンドウ</h3>
+                <div class="en">Context Window</div>
+                <p class="desc">AIが一度の会話で<span class="mark">読み込めるトークン数の上限</span>。この枠に収まる範囲でしかAIは情報を参照できません。長文のナレッジは必要な情報に絞って渡すのが重要です。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="context-window.html" class="term-card">
-                    <div class="hero">🪟</div>
-                    <div class="num">08</div>
-                    <h3>コンテキスト<br>ウィンドウ</h3>
-                    <div class="en">Context Window</div>
-                    <p class="desc">AIが一度の会話で<span class="mark">読み込めるトークン数の上限</span>。この枠に収まる範囲でしかAIは情報を参照できません。長文のナレッジは必要な情報に絞って渡すのが重要です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="multimodal.html" class="term-card">
+                <div class="num">09</div>
+                <h3>マルチモーダル</h3>
+                <div class="en">Multimodal</div>
+                <p class="desc">テキストだけでなく、<span class="mark">画像・音声・動画</span>など複数の形式のデータを同時に扱えるAIの能力。「この画像を説明して」と頼めるのはマルチモーダルのおかげです。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="multimodal.html" class="term-card">
-                    <div class="hero">🎭</div>
-                    <div class="num">09</div>
-                    <h3>マルチモーダル</h3>
-                    <div class="en">Multimodal</div>
-                    <p class="desc">テキストだけでなく、<span class="mark">画像・音声・動画</span>など複数の形式のデータを同時に扱えるAIの能力。「この画像を説明して」と頼めるのはマルチモーダルのおかげです。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="rag.html" class="term-card">
+                <div class="num">10</div>
+                <h3>RAG</h3>
+                <div class="en">Retrieval-Augmented Generation</div>
+                <p class="desc">AIが回答を生成する前に、<span class="mark">外部のデータから関連情報を検索</span>して取り込む仕組み。AIの知識不足を自分のデータで補う技術です。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="rag.html" class="term-card">
-                    <div class="hero">🔍</div>
-                    <div class="num">10</div>
-                    <h3>RAG</h3>
-                    <div class="en">Retrieval-Augmented Generation</div>
-                    <p class="desc">AIが回答を生成する前に、<span class="mark">外部のデータから関連情報を検索</span>して取り込む仕組み。AIの知識不足を自分のデータで補う技術です。</p>
-                    <div class="read">Read →</div>
-                </a>
+            <a href="memory.html" class="term-card">
+                <div class="num">11</div>
+                <h3>メモリ</h3>
+                <div class="en">Memory</div>
+                <p class="desc">AIが<span class="mark">過去の会話内容や好みを記憶</span>し、次の会話に反映する機能。ChatGPTやGeminiに搭載。ただし精度は完全ではないため、重要な指示はナレッジで明示的に渡すのが確実。</p>
+                <div class="read">Read →</div>
+            </a>
 
-                <a href="memory.html" class="term-card">
-                    <div class="hero">🧠</div>
-                    <div class="num">11</div>
-                    <h3>メモリ</h3>
-                    <div class="en">Memory</div>
-                    <p class="desc">AIが<span class="mark">過去の会話内容や好みを記憶</span>し、次の会話に反映する機能。ChatGPTやGeminiに搭載。ただし精度は完全ではないため、重要な指示はナレッジで明示的に渡すのが確実。</p>
-                    <div class="read">Read →</div>
-                </a>
-
-            </div>
-        </section>
+        </div>
 
     </main>
 
