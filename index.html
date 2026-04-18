@@ -7,16 +7,20 @@
     <meta name="description" content="頑張っているのに、なぜか前に進めない。Polarisは、やることを減らし「今日はこれでいい」と終われる状態をつくるアプリです。迷ったときに帰れる北極星を、あなたのスマホに。"
           data-ja="頑張っているのに、なぜか前に進めない。Polarisは、やることを減らし「今日はこれでいい」と終われる状態をつくるアプリです。迷ったときに帰れる北極星を、あなたのスマホに。"
           data-en="Working hard but not making progress? Polaris helps you do less and feel 'that's enough for today.' Your North Star, right on your phone.">
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- ファビコン -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/icon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/icon.png">
     <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#1f2937">
+    <meta name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
@@ -26,448 +30,853 @@
       gtag('js', new Date());
       gtag('config', 'G-EQR100H021');
     </script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-warm: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #191919;
+            --ink-warm: #37352f;
+            --ink-soft: #787774;
+            --ink-mute: #9b9a97;
+            --line: #e9e9e7;
+            --accent: #2383e2;
+            --mark: #fdecc8;
+            --callout-bg: #f1f1ef;
+            --callout-blue: #e7f3f8;
+            --callout-yellow: #fdecc8;
+            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--bg);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            color: var(--ink-warm);
+            line-height: 1.3;
+            font-weight: 500;
+        }
+        p { color: var(--ink-warm); }
+        a { color: var(--accent); text-underline-offset: 3px; }
+
+        .cat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+        .mono { font-family: var(--font-mono); }
+        .mark {
+            background-image: linear-gradient(transparent 60%, var(--mark) 60%);
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            padding: 0 2px;
+            transition: background-size 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .mark.is-visible { background-size: 100% 100%; }
+        .hairline { border-top: 1px solid var(--line); }
+
+        /* スクロール連動フェードイン */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1),
+                        transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .mark { transition: none !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+            .mark { background-size: 100% 100% !important; }
+        }
+
+        /* ヒーローアイコン浮遊 */
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+        .float-icon { animation: float-icon 5s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .float-icon { animation: none; }
+        }
+
+        /* 北極星の瞬き */
+        .north-star {
+            position: absolute;
+            font-family: var(--font-mono);
+            color: var(--ink-mute);
+            animation: twinkle 3.2s ease-in-out infinite;
+            pointer-events: none;
+            user-select: none;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50%      { opacity: 1;    transform: scale(1.15); }
+        }
+
+        /* シグネチャー: 流れ星→着地 */
+        .meteor-svg {
+            position: absolute;
+            top: 20px;
+            right: 8%;
+            width: min(260px, 45%);
+            height: 150px;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .meteor-svg path {
+            fill: none;
+            stroke: var(--ink-warm);
+            stroke-width: 1.2;
+            stroke-linecap: round;
+            stroke-dasharray: 30 260;
+            stroke-dashoffset: 30;
+            opacity: 0;
+            animation: meteor-travel 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+        }
+        @keyframes meteor-travel {
+            0%   { stroke-dashoffset: 30;   opacity: 0; }
+            10%  { opacity: 0.85; }
+            80%  { opacity: 0.85; }
+            100% { stroke-dashoffset: -260; opacity: 0; }
+        }
+        .signature-star {
+            position: absolute;
+            top: 6.5rem;
+            left: 50%;
+            transform: translateX(-50%) scale(0.2);
+            font-family: var(--font-mono);
+            font-size: 20px;
+            color: var(--ink-warm);
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+            animation:
+                signature-land 0.9s cubic-bezier(0.4, 0, 0.2, 1) 2.5s forwards,
+                signature-idle 3.6s ease-in-out 3.6s infinite;
+        }
+        @keyframes signature-land {
+            0%   { opacity: 0;   transform: translateX(-50%) scale(0.2); }
+            55%  { opacity: 1;   transform: translateX(-50%) scale(1.8); }
+            100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+        }
+        @keyframes signature-idle {
+            0%, 100% { opacity: 0.45; transform: translateX(-50%) scale(1); }
+            50%      { opacity: 1;    transform: translateX(-50%) scale(1.18); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .north-star, .meteor-svg path, .signature-star { animation: none; opacity: 0.5; }
+            .signature-star { transform: translateX(-50%) scale(1); opacity: 0.7; }
+            .meteor-svg path { opacity: 0; }
+        }
+
+        /* トップナビ */
+        .top-nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+        .nav-link {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .nav-link:hover { color: var(--ink); }
+
+        /* 言語切替 */
+        .lang-toggle {
+            display: inline-flex;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+        .lang-toggle button {
+            padding: 4px 10px;
+            background: transparent;
+            color: var(--ink-soft);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            transition: background 0.2s, color 0.2s;
+        }
+        .lang-toggle button:hover { color: var(--ink); }
+        .lang-toggle button.active {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        /* セクションヘッダ */
+        .section-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 12px;
+        }
+        .section-heading {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            color: var(--ink-warm);
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+        }
+        .section-lead {
+            font-size: 17px;
+            color: var(--ink-soft);
+            line-height: 1.8;
+        }
+
+        /* カード */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .card:hover { border-color: var(--ink-mute); }
+        .card .num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-mute);
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+        .card p {
+            color: var(--ink-soft);
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        /* バッジ */
+        .badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+        }
+        .badge-ink {
+            background: var(--ink);
+            color: #fff;
+            border-color: var(--ink);
+        }
+        .badge-accent {
+            background: var(--callout-blue);
+            color: var(--accent);
+            border-color: var(--callout-blue);
+        }
+
+        /* モード紹介画像カード */
+        .mode-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .mode-card .mode-body { padding: 22px 24px 16px; }
+        .mode-card h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink-warm);
+            font-family: var(--font-sans);
+        }
+        .mode-card .mode-desc {
+            color: var(--ink-soft);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .mode-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: var(--bg-warm);
+        }
+
+        /* 特徴リスト */
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            color: var(--ink-warm);
+        }
+        @media (min-width: 640px) {
+            .feature-list { grid-template-columns: repeat(2, 1fr); }
+        }
+        .feature-list li {
+            font-size: 14.5px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .feature-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ink-mute);
+        }
+
+        /* 料金プラン */
+        .plan {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .plan.plan-featured {
+            border-color: var(--ink);
+            box-shadow: 0 0 0 1px var(--ink);
+        }
+        .plan .plan-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink);
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            padding: 4px 12px;
+            border-radius: 999px;
+        }
+        .plan h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .plan .plan-price {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            margin-bottom: 4px;
+            line-height: 1.1;
+        }
+        .plan .plan-price .suffix {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+        }
+        .plan .plan-caption {
+            color: var(--ink-soft);
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .plan ul { list-style: none; padding: 0; margin: 0; }
+        .plan ul li {
+            font-size: 14.5px;
+            color: var(--ink-warm);
+            padding: 8px 0;
+            border-top: 1px solid var(--line);
+            display: flex;
+            gap: 8px;
+        }
+        .plan ul li:first-child { border-top: none; padding-top: 0; }
+        .plan ul li::before {
+            content: '✓';
+            color: var(--ink-mute);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        /* ボタン */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity .2s, background .2s, border-color .2s, transform .2s;
+            cursor: pointer;
+            border: 1px solid var(--line);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            background: var(--surface);
+            color: var(--ink);
+        }
+        .btn:hover { border-color: var(--ink-mute); transform: translateY(-1px); }
+        .btn .btn-sub {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-mute);
+            letter-spacing: 0.04em;
+        }
+        .btn .btn-main { font-weight: 600; font-size: 15px; color: var(--ink); }
+        .btn svg { flex-shrink: 0; }
+
+        /* アイコンストーリー */
+        .icon-story p {
+            color: var(--ink-warm);
+            line-height: 2.0;
+        }
+
+        /* CTAセクション */
+        .cta-band {
+            background: var(--bg-warm);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* フッター */
+        footer a.footer-link {
+            color: var(--ink-soft);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        footer a.footer-link:hover { color: var(--ink); text-decoration: underline; }
+
+        /* YouTubeボタン */
+        .btn-youtube {
+            background: var(--ink);
+            color: #fff;
+            border-color: var(--ink);
+        }
+        .btn-youtube:hover { opacity: 0.85; border-color: var(--ink); transform: translateY(-1px); }
+        .btn-youtube .btn-main { color: #fff; }
+    </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <!-- 言語切り替えトグル -->
-    <div class="fixed top-4 right-4 z-50 flex bg-gray-800/90 backdrop-blur rounded-lg border border-gray-700 text-sm overflow-hidden">
-        <button id="lang-ja" class="px-3 py-1.5 transition-colors hover:bg-white/5">JA</button>
-        <button id="lang-en" class="px-3 py-1.5 transition-colors hover:bg-white/5">EN</button>
+<body>
+
+    <!-- 上部ナビ -->
+    <div class="top-nav">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between text-sm max-w-6xl">
+            <span class="cat-label">Polaris · North Star App</span>
+            <div class="flex items-center gap-4">
+                <a href="glossary/index.html" class="nav-link" data-ja="AI用語集" data-en="Glossary">AI用語集</a>
+                <div class="lang-toggle">
+                    <button id="lang-ja">JA</button>
+                    <button id="lang-en">EN</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ヒーロー -->
-    <header class="container mx-auto px-4 py-20 text-center">
-        <div class="mb-8">
-            <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-32 h-32 mx-auto rounded-3xl shadow-2xl mb-6">
-            <h1 class="text-6xl font-bold mb-2">Polaris</h1>
-            <p class="text-xl text-gray-400" data-ja="やることを減らすタスク管理" data-en="An app that reduces what you need to do">やることを減らすタスク管理</p>
-        </div>
-        <p class="text-sm text-gray-400 mb-8" data-ja="※ 基本機能は無料で使えます" data-en="* Core features are free to use">※ 基本機能は無料で使えます</p>
+    <header class="container mx-auto px-6 pt-16 md:pt-24 pb-16 max-w-3xl text-center relative">
+        <!-- 流れ星 → 北極星着地 -->
+        <svg class="meteor-svg" viewBox="0 0 260 150" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 240 10 Q 170 60, 130 140" />
+        </svg>
+        <span class="signature-star" aria-hidden="true">✦</span>
+        <!-- 周辺の小さな星 -->
+        <span class="north-star" style="top: 10%; left: 12%; font-size: 12px;" aria-hidden="true">✦</span>
+        <span class="north-star" style="top: 22%; right: 14%; font-size: 9px; animation-delay: 1.1s;" aria-hidden="true">✦</span>
+        <span class="north-star" style="top: 5%; right: 32%; font-size: 10px; animation-delay: 2.0s;" aria-hidden="true">✦</span>
+        <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-24 h-24 mx-auto rounded-3xl shadow-sm mb-10 float-icon" style="border: 1px solid var(--line);">
+        <div class="cat-label mb-4">Polaris</div>
+        <h1 class="text-4xl md:text-6xl mb-6" style="letter-spacing: -0.01em;"
+            data-ja-html="やることを減らすと、<br><span class='mark'>今日が終われる。</span>"
+            data-en-html="Do less today,<br><span class='mark'>finish the day clean.</span>">
+            やることを減らすと、<br><span class="mark">今日が終われる。</span>
+        </h1>
+        <p class="text-lg md:text-xl mb-10" style="color: var(--ink-soft);"
+           data-ja-html="頑張っているのに、前に進めない。<br>Polarisは、やることを減らして「今日はこれでいい」と終われる状態をつくるアプリです。"
+           data-en-html="Working hard but not making progress?<br>Polaris reduces what you have to do, so you can feel 'that's enough for today.'">
+            頑張っているのに、前に進めない。<br>
+            Polarisは、やることを減らして「今日はこれでいい」と終われる状態をつくるアプリです。
+        </p>
+        <p class="mono text-xs mb-6" style="color: var(--ink-mute);" data-ja="※ 基本機能は無料で使えます" data-en="* Core features are free">※ 基本機能は無料で使えます</p>
 
-        <!-- CTAボタン -->
-        <!-- リンクを追加する場合は、下記のコメントアウトを解除してURLを設定してください -->
-        <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="APP_STORE_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
-                <p class="text-gray-400 text-sm">App Store</p>
-                <p class="text-white font-bold">ダウンロード</p>
-            </a>
-            <a href="GOOGLE_PLAY_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
-                <p class="text-gray-400 text-sm">Google Play</p>
-                <p class="text-white font-bold">ダウンロード</p>
-            </a>
-        </div> -->
-
-        <!-- ダウンロードボタン -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'app_store_hero'});" class="bg-gray-800 px-6 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition flex items-center gap-3">
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'app_store_hero'});" class="btn">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" style="color: var(--ink);"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                 <div class="text-left">
-                    <p class="text-gray-400 text-xs">App Store</p>
-                    <p class="text-white font-bold" data-ja="ダウンロード" data-en="Download">ダウンロード</p>
+                    <div class="btn-sub">App Store</div>
+                    <div class="btn-main" data-ja="ダウンロード" data-en="Download">ダウンロード</div>
                 </div>
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.levelupinc.polaris" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'google_play_hero'});" class="bg-gray-800 px-6 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition flex items-center gap-3">
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+            <a href="https://play.google.com/store/apps/details?id=com.levelupinc.polaris" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'google_play_hero'});" class="btn">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" style="color: var(--ink);"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
                 <div class="text-left">
-                    <p class="text-gray-400 text-xs">Google Play</p>
-                    <p class="text-white font-bold" data-ja="ダウンロード" data-en="Download">ダウンロード</p>
+                    <div class="btn-sub">Google Play</div>
+                    <div class="btn-main" data-ja="ダウンロード" data-en="Download">ダウンロード</div>
                 </div>
             </a>
         </div>
     </header>
 
+    <div class="container mx-auto px-6 max-w-3xl">
+        <div class="hairline"></div>
+    </div>
+
     <!-- 問題提起セクション -->
-    <section class="bg-gray-800 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12" data-ja="こんな状態になっていませんか？" data-en="Sound familiar?">こんな状態になっていませんか？</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-gray-900 p-8 rounded-lg text-center">
-                    <div class="text-5xl mb-4">📚</div>
-                    <h3 class="text-xl mb-3"
-                        data-ja-html="教材もToDoも増えているのに、<br><span class='font-bold'>「今日は何も終わっていない」</span><br>まま1日が終わる"
-                        data-en-html="Your courses and to-do list keep growing,<br>but the day ends with<br><span class='font-bold'>'nothing actually done.'</span>">教材もToDoも増えているのに、<br><span class="font-bold">「今日は何も終わっていない」</span><br>まま1日が終わる</h3>
-                </div>
-                <div class="bg-gray-900 p-8 rounded-lg text-center">
-                    <div class="text-5xl mb-4">😤</div>
-                    <h3 class="text-xl mb-3"
-                        data-ja-html="ちゃんと時間を使っているはずなのに、<br><span class='font-bold'>「進んでる感覚」</span><br>がまったくない"
-                        data-en-html="You're putting in the time,<br>but you have<br><span class='font-bold'>zero sense of progress.</span>">ちゃんと時間を使っているはずなのに、<br><span class="font-bold">「進んでる感覚」</span><br>がまったくない</h3>
-                </div>
-                <div class="bg-gray-900 p-8 rounded-lg text-center">
-                    <div class="text-5xl mb-4">📱</div>
-                    <h3 class="text-xl mb-3"
-                        data-ja-html="SNSを見るたび、<br><span class='font-bold'>「自分も頑張ってるはずなのに…」</span><br>と置いていかれた気持ちになる"
-                        data-en-html="Every time you check social media,<br>you feel left behind thinking<br><span class='font-bold'>'I'm working hard too, but...'</span>">SNSを見るたび、<br><span class="font-bold">「自分も頑張ってるはずなのに…」</span><br>と置いていかれた気持ちになる</h3>
-                </div>
-                <div class="bg-gray-900 p-8 rounded-lg text-center">
-                    <div class="text-5xl mb-4">🤯</div>
-                    <h3 class="text-xl mb-3"
-                        data-ja-html="やる気はあるのに、<br>やることが多すぎて、<br><span class='font-bold'>結局なにも選べなくなっている</span>"
-                        data-en-html="You're motivated,<br>but with too much to do,<br><span class='font-bold'>you end up choosing nothing.</span>">やる気はあるのに、<br>やることが多すぎて、<br><span class="font-bold">結局なにも選べなくなっている</span></h3>
-                </div>
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-5xl">
+        <div class="text-center mb-12">
+            <div class="section-tag">01 · Problem</div>
+            <h2 class="section-heading" data-ja="こんな状態になっていませんか？" data-en="Sound familiar?">こんな状態になっていませんか？</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            <div class="card">
+                <div class="num">01</div>
+                <p data-ja-html="教材もToDoも増えているのに、<span class='mark'>「今日は何も終わっていない」</span>まま1日が終わる。"
+                   data-en-html="Your courses and to-do list keep growing, but the day ends with <span class='mark'>'nothing actually done.'</span>">教材もToDoも増えているのに、<span class="mark">「今日は何も終わっていない」</span>まま1日が終わる。</p>
+            </div>
+            <div class="card">
+                <div class="num">02</div>
+                <p data-ja-html="ちゃんと時間を使っているはずなのに、<span class='mark'>「進んでる感覚」</span>がまったくない。"
+                   data-en-html="You're putting in the time, but you have <span class='mark'>zero sense of progress.</span>">ちゃんと時間を使っているはずなのに、<span class="mark">「進んでる感覚」</span>がまったくない。</p>
+            </div>
+            <div class="card">
+                <div class="num">03</div>
+                <p data-ja-html="SNSを見るたび、<span class='mark'>「自分も頑張ってるはずなのに…」</span>と置いていかれた気持ちになる。"
+                   data-en-html="Every time you check social media, you feel left behind thinking <span class='mark'>'I'm working hard too, but...'</span>">SNSを見るたび、<span class="mark">「自分も頑張ってるはずなのに…」</span>と置いていかれた気持ちになる。</p>
+            </div>
+            <div class="card">
+                <div class="num">04</div>
+                <p data-ja-html="やる気はあるのに、やることが多すぎて、<span class='mark'>結局なにも選べなくなっている。</span>"
+                   data-en-html="You're motivated, but with too much to do, <span class='mark'>you end up choosing nothing.</span>">やる気はあるのに、やることが多すぎて、<span class="mark">結局なにも選べなくなっている。</span></p>
             </div>
         </div>
     </section>
+
+    <div class="container mx-auto px-6 max-w-5xl">
+        <div class="hairline"></div>
+    </div>
 
     <!-- ソリューションセクション -->
-    <section class="container mx-auto px-4 py-16">
-        <h2 class="text-4xl font-bold text-center mb-4" data-ja-html="Polarisが解決するのは、<br>「もっと頑張ること」ではありません" data-en-html="Polaris doesn't ask you<br>to work harder">Polarisが解決するのは、<br>「もっと頑張ること」ではありません</h2>
-        <p class="text-center text-gray-300 mb-12 text-xl" data-ja-html="必要なのは、<br>やることを増やすことではなく、<br><span class='text-white font-semibold'>「今やらなくていいこと」を減らすこと。</span>" data-en-html="What you need isn't<br>adding more to your plate—<br><span class='text-white font-semibold'>it's removing what doesn't need to happen now.</span>">必要なのは、<br>やることを増やすことではなく、<br><span class="text-white font-semibold">「今やらなくていいこと」を減らすこと。</span></p>
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-5xl">
+        <div class="text-center mb-14 max-w-3xl mx-auto">
+            <div class="section-tag">02 · Solution</div>
+            <h2 class="section-heading"
+                data-ja-html="解決するのは、<br>「もっと頑張ること」ではない。"
+                data-en-html="Polaris doesn't ask<br>you to work harder.">解決するのは、<br>「もっと頑張ること」ではない。</h2>
+            <p class="section-lead"
+               data-ja-html="必要なのは、やることを増やすことではなく、<br><span class='mark'>「今やらなくていいこと」を減らすこと。</span>"
+               data-en-html="What you need isn't adding more to your plate—<br><span class='mark'>it's removing what doesn't need to happen now.</span>">必要なのは、やることを増やすことではなく、<br><span class="mark">「今やらなくていいこと」を減らすこと。</span></p>
+        </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-            <div class="bg-gray-800 p-8 rounded-lg text-center">
-                <div class="text-5xl mb-4">🎯</div>
-                <h3 class="text-2xl font-bold mb-4 text-blue-400" data-ja="減らす" data-en="Reduce">減らす</h3>
-                <p class="text-gray-300 leading-relaxed"
-                    data-ja-html="やることが多すぎると、人は動けません。<br><br>Polarisは、理想から逆算して<br><span class='text-white font-semibold'>「今やるべき一歩」</span>だけを残します。<br><br>"
-                    data-en-html="When there's too much to do,<br>you freeze.<br><br>Polaris works backward from your goals<br>to leave only <span class='text-white font-semibold'>'the one step you should take now.'</span><br><br>">
-                    やることが多すぎると、人は動けません。<br><br>
-                    Polarisは、理想から逆算して<br>
-                    <span class="text-white font-semibold">「今やるべき一歩」</span>だけを残します。<br><br>
-                </p>
+        <div class="grid md:grid-cols-3 gap-5">
+            <div class="card">
+                <div class="num">A · REDUCE</div>
+                <h3 data-ja="減らす" data-en="Reduce">減らす</h3>
+                <p data-ja-html="やることが多すぎると、人は動けません。<br><br>Polarisは、理想から逆算して<span class='mark'>「今やるべき一歩」</span>だけを残します。"
+                   data-en-html="When there's too much to do, you freeze.<br><br>Polaris works backward from your goals to leave only <span class='mark'>'the one step you should take now.'</span>">やることが多すぎると、人は動けません。<br><br>Polarisは、理想から逆算して<span class="mark">「今やるべき一歩」</span>だけを残します。</p>
             </div>
-            <div class="bg-gray-800 p-8 rounded-lg text-center">
-                <div class="text-5xl mb-4">🤝</div>
-                <h3 class="text-2xl font-bold mb-4 text-blue-400" data-ja="支える" data-en="Support">支える</h3>
-                <p class="text-gray-300 leading-relaxed"
-                    data-ja-html="人は、必ず迷います。<br>大切なのは、迷わないことじゃない。<br><br><span class='text-white font-semibold'>迷ったときに、帰れる場所があること。</span><br><br>Polarisを見るだけで、<span class='text-white font-semibold'>「自分は、これを目指してた」</span>と思い出せます。"
-                    data-en-html="Everyone gets lost sometimes.<br>What matters isn't never getting lost.<br><br><span class='text-white font-semibold'>It's having a place to return to when you do.</span><br><br>Just by opening Polaris, you'll remember<br><span class='text-white font-semibold'>'This is what I was aiming for.'</span>">
-                    人は、必ず迷います。<br>
-                    大切なのは、迷わないことじゃない。<br><br>
-                    <span class="text-white font-semibold">迷ったときに、帰れる場所があること。</span><br><br>
-                    Polarisを見るだけで、
-                    <span class="text-white font-semibold">「自分は、これを目指してた」</span>
-                    と思い出せます。
-                </p>
+            <div class="card">
+                <div class="num">B · SUPPORT</div>
+                <h3 data-ja="支える" data-en="Support">支える</h3>
+                <p data-ja-html="人は、必ず迷います。<br>大切なのは、迷わないことじゃない。<br><br><span class='mark'>迷ったときに、帰れる場所があること。</span>"
+                   data-en-html="Everyone gets lost sometimes.<br>What matters isn't never getting lost.<br><br><span class='mark'>It's having a place to return to when you do.</span>">人は、必ず迷います。<br>大切なのは、迷わないことじゃない。<br><br><span class="mark">迷ったときに、帰れる場所があること。</span></p>
             </div>
-            <div class="bg-gray-800 p-8 rounded-lg text-center">
-                <div class="text-5xl mb-4">📈</div>
-                <h3 class="text-2xl font-bold mb-4 text-blue-400" data-ja="積み上げる" data-en="Build">積み上げる</h3>
-                <p class="text-gray-300 leading-relaxed"
-                    data-ja-html="頑張れない理由は、<br>努力に意味が見えないから。<br><br>Polarisは、<br>やることを減らして<br><span class='text-white font-semibold'>「この一歩が、理想につながっている」</span><br>と分かるようにします。"
-                    data-en-html="The reason you can't push through<br>is that effort feels meaningless.<br><br>Polaris reduces your tasks<br>so you can see that<br><span class='text-white font-semibold'>'this one step connects to your goals.'</span>">
-                    頑張れない理由は、<br>
-                    努力に意味が見えないから。<br><br>
-                    Polarisは、<br>
-                    やることを減らして<br>
-                    <span class="text-white font-semibold">「この一歩が、理想につながっている」</span><br>
-                    と分かるようにします。
-                </p>
+            <div class="card">
+                <div class="num">C · BUILD</div>
+                <h3 data-ja="積み上げる" data-en="Build">積み上げる</h3>
+                <p data-ja-html="頑張れない理由は、努力に意味が見えないから。<br><br>Polarisは、<span class='mark'>「この一歩が、理想につながっている」</span>と分かるようにします。"
+                   data-en-html="The reason you can't push through is that effort feels meaningless.<br><br>Polaris makes it clear that <span class='mark'>'this one step connects to your goals.'</span>">頑張れない理由は、努力に意味が見えないから。<br><br>Polarisは、<span class="mark">「この一歩が、理想につながっている」</span>と分かるようにします。</p>
             </div>
         </div>
     </section>
 
-    <!-- 2つのモード導入 -->
-    <section class="bg-gray-800 py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-4" data-ja="2つのモード" data-en="Two Modes">2つのモード</h2>
-                <p class="text-xl text-gray-400"
-                   data-ja-html="Polarisには、<br>あなたの立っている場所に合わせた2つのモードがあります。"
-                   data-en-html="Polaris has two modes<br>tailored to where you are on your journey.">Polarisには、<br>あなたの立っている場所に合わせた2つのモードがあります。</p>
+    <div class="container mx-auto px-6 max-w-5xl">
+        <div class="hairline"></div>
+    </div>
+
+    <!-- 2つのモード -->
+    <section class="container mx-auto px-6 pt-20 pb-10 max-w-5xl text-center">
+        <div class="section-tag">03 · Two Modes</div>
+        <h2 class="section-heading" data-ja="2つのモード" data-en="Two Modes">2つのモード</h2>
+        <p class="section-lead max-w-2xl mx-auto"
+           data-ja-html="Polarisには、<br>あなたの立っている場所に合わせた2つのモードがあります。"
+           data-en-html="Polaris has two modes<br>tailored to where you are on your journey.">Polarisには、<br>あなたの立っている場所に合わせた2つのモードがあります。</p>
+    </section>
+
+    <!-- Growthモード -->
+    <section class="container mx-auto px-6 pt-10 pb-20 max-w-6xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <span class="badge badge-ink mb-4 inline-block">Growth Mode</span>
+            <h3 class="section-heading mt-4" style="font-size: clamp(1.5rem, 3.5vw, 2rem);" data-ja="自分の現在地を見失いたくない方へ" data-en="For those who don't want to lose sight of where they are">自分の現在地を見失いたくない方へ</h3>
+            <p class="section-lead"
+               data-ja-html="自己投資はしている。教材もある。<br>でも、「今どこにいるのか」が分からない。<br>そんな人のためのモードです。"
+               data-en-html="You've invested in yourself. You have the courses.<br>But you don't know where you are right now.<br>This mode is for you.">自己投資はしている。教材もある。<br>でも、「今どこにいるのか」が分からない。<br>そんな人のためのモードです。</p>
+            <p class="mono text-xs mt-4" style="color: var(--ink-mute);" data-ja="※ まずは Growth モードをおすすめします" data-en="* We recommend starting with Growth mode">※ まずは Growth モードをおすすめします</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 mb-4">
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Home</div>
+                    <h4 data-ja="ホーム画面" data-en="Home Screen">ホーム画面</h4>
+                    <p class="mode-desc" data-ja="アプリを開くと、「今日やること」だけが表示されます。" data-en="Open the app and see only what you need to do today.">アプリを開くと、「今日やること」だけが表示されます。</p>
+                </div>
+                <img src="images/growth1.png" alt="Polaris画面 - 今日のToDoを管理">
             </div>
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Roadmap</div>
+                    <h4 data-ja="ロードマップ画面" data-en="Roadmap Screen">ロードマップ画面</h4>
+                    <p class="mode-desc" data-ja="理想から逆算してステップを設計。今どこにいるかが、一目で分かります。" data-en="Design steps backward from your goals. See where you are at a glance.">理想から逆算してステップを設計。今どこにいるかが、一目で分かります。</p>
+                </div>
+                <img src="images/growth2.png" alt="ToDo画面 - 全タスクを確認">
+            </div>
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Partner</div>
+                    <h4 data-ja="パートナー画面" data-en="Partner Screen">パートナー画面</h4>
+                    <p class="mode-desc" data-ja="信頼できる人と進捗を共有。「見守ってくれてる人がいる」だけで、続けられます。" data-en="Share progress with someone you trust. Just knowing someone's watching helps you keep going.">信頼できる人と進捗を共有。「見守ってくれてる人がいる」だけで、続けられます。</p>
+                </div>
+                <img src="images/growth3.png" alt="パートナー画面 - 進捗共有">
+            </div>
+        </div>
+
+        <p class="text-center mono text-xs mb-8" style="color: var(--ink-mute);" data-ja="※画面はイメージです" data-en="* Screenshots are for illustration">※画面はイメージです</p>
+
+        <div class="card">
+            <div class="num" data-ja="主な機能" data-en="Key Features">主な機能</div>
+            <ul class="feature-list">
+                <li data-ja="ロードマップ・ステップ作成" data-en="Create roadmaps & steps">ロードマップ・ステップ作成</li>
+                <li data-ja="ToDo管理・繰り返しToDo設定" data-en="ToDo management & recurring tasks">ToDo管理・繰り返しToDo設定</li>
+                <li data-ja="パートナー申請・進捗共有" data-en="Partner requests & progress sharing">パートナー申請・進捗共有</li>
+                <li data-ja="テンプレート検索・利用" data-en="Search & use templates">テンプレート検索・利用</li>
+            </ul>
         </div>
     </section>
 
-    <!-- Growthモード紹介 -->
-    <section class="bg-gray-800 py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">Growth モード</span>
-                    <h2 class="text-4xl font-bold mt-4 mb-4" data-ja="自分の現在地を見失いたくない方へ" data-en="For those who don't want to lose sight of where they are">自分の現在地を見失いたくない方へ</h2>
-                    <p class="text-xl text-gray-300 max-w-2xl mx-auto"
-                       data-ja-html="自己投資はしている。教材もある。<br>でも、「今どこにいるのか」が分からない。<br><br>そんな人のためのモードです。"
-                       data-en-html="You've invested in yourself. You have the courses.<br>But you don't know where you are right now.<br><br>This mode is for you.">自己投資はしている。教材もある。<br>でも、「今どこにいるのか」が分からない。<br><br>そんな人のためのモードです。</p>
-                    <p class="text-yellow-400 font-semibold text-lg mt-4" data-ja="※ まずは Growth モードをおすすめします" data-en="* We recommend starting with Growth mode">※ まずは Growth モードをおすすめします</p>
-                </div>
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="hairline"></div>
+    </div>
 
-                <div class="grid md:grid-cols-3 gap-6 mb-2">
-                    <div class="bg-gray-700 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="📱 ホーム画面" data-en="📱 Home Screen">📱 ホーム画面</h3>
-                            <p class="text-gray-400 mb-6" data-ja="アプリを開くと、「今日やること」だけが表示されます。" data-en="Open the app and see only what you need to do today.">アプリを開くと、「今日やること」だけが表示されます。</p>
-                        </div>
-                        <img src="images/growth1.png" alt="Polaris画面 - 今日のToDoを管理" class="w-full h-auto">
-                    </div>
-                    <div class="bg-gray-700 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="🗺️ ロードマップ画面" data-en="🗺️ Roadmap Screen">🗺️ ロードマップ画面</h3>
-                            <p class="text-gray-400 mb-6" data-ja="理想から逆算してステップを設計。今どこにいるかが、一目で分かります。" data-en="Design steps backward from your goals. See where you are at a glance.">理想から逆算してステップを設計。今どこにいるかが、一目で分かります。</p>
-                        </div>
-                        <img src="images/growth2.png" alt="ToDo画面 - 全タスクを確認" class="w-full h-auto">
-                    </div>
-                    <div class="bg-gray-700 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="🤝 パートナー画面" data-en="🤝 Partner Screen">🤝 パートナー画面</h3>
-                            <p class="text-gray-400 mb-6" data-ja="信頼できる人と進捗を共有。「見守ってくれてる人がいる」だけで、続けられます。" data-en="Share progress with someone you trust. Just knowing someone's watching helps you keep going.">信頼できる人と進捗を共有。「見守ってくれてる人がいる」だけで、続けられます。</p>
-                        </div>
-                        <img src="images/growth3.png" alt="パートナー画面 - 進捗共有" class="w-full h-auto">
-                    </div>
-                </div>
+    <!-- Supportモード -->
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-6xl">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <span class="badge badge-accent mb-4 inline-block">Support Mode</span>
+            <h3 class="section-heading mt-4" style="font-size: clamp(1.5rem, 3.5vw, 2rem);" data-ja="誰かの迷いに気づきたい方へ" data-en="For those who want to notice when someone is lost">誰かの迷いに気づきたい方へ</h3>
+            <p class="section-lead"
+               data-ja-html="教えているのに、続かない。成果が出ない。<br>でも、どこで止まっているか分からない。<br>そんな悩みを解決します。"
+               data-en-html="You're teaching, but they don't continue. No results.<br>And you don't know where they're stuck.<br>This mode solves that problem.">教えているのに、続かない。成果が出ない。<br>でも、どこで止まっているか分からない。<br>そんな悩みを解決します。</p>
+        </div>
 
-                <p class="text-center text-gray-500 text-sm mb-8" data-ja="※画面はイメージです" data-en="* Screenshots are for illustration">※画面はイメージです</p>
-
-                <div class="bg-gray-700 p-6 rounded-lg">
-                    <h4 class="font-bold mb-3 text-lg" data-ja="主な機能" data-en="Key Features">主な機能</h4>
-                    <ul class="grid md:grid-cols-2 gap-3 text-gray-300">
-                        <li data-ja="• ロードマップ・ステップ作成" data-en="• Create roadmaps & steps">• ロードマップ・ステップ作成</li>
-                        <li data-ja="• ToDo管理・繰り返しToDo設定" data-en="• ToDo management & recurring tasks">• ToDo管理・繰り返しToDo設定</li>
-                        <li data-ja="• パートナー申請・進捗共有" data-en="• Partner requests & progress sharing">• パートナー申請・進捗共有</li>
-                        <li data-ja="• テンプレート検索・利用" data-en="• Search & use templates">• テンプレート検索・利用</li>
-                    </ul>
+        <div class="grid md:grid-cols-3 gap-5 mb-4">
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Dashboard</div>
+                    <h4 data-ja="ダッシュボード" data-en="Dashboard">ダッシュボード</h4>
+                    <p class="mode-desc" data-ja="パートナー全員の進捗を一覧で確認。誰が止まっているか、すぐに分かります。" data-en="View all partners' progress at a glance. See who's stuck right away.">パートナー全員の進捗を一覧で確認。誰が止まっているか、すぐに分かります。</p>
                 </div>
+                <img src="images/support1.png" alt="ダッシュボード画面">
             </div>
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Analytics</div>
+                    <h4 data-ja="分析画面" data-en="Analytics Screen">分析画面</h4>
+                    <p class="mode-desc" data-ja="パートナーの進捗を個別に分析。どこでつまずいているか把握できます。" data-en="Analyze each partner's progress individually. Understand where they're struggling.">パートナーの進捗を個別に分析。どこでつまずいているか把握できます。</p>
+                </div>
+                <img src="images/support2.png" alt="分析画面">
+            </div>
+            <div class="mode-card">
+                <div class="mode-body">
+                    <div class="cat-label mb-2">Roadmap</div>
+                    <h4 data-ja="ロードマップ管理" data-en="Roadmap Management">ロードマップ管理</h4>
+                    <p class="mode-desc" data-ja="テンプレートを作成・共有。パートナーはそれをコピーして使えます。" data-en="Create and share templates. Partners can copy and use them.">テンプレートを作成・共有。パートナーはそれをコピーして使えます。</p>
+                </div>
+                <img src="images/support3.png" alt="ロードマップ管理画面">
+            </div>
+        </div>
+
+        <p class="text-center mono text-xs mb-8" style="color: var(--ink-mute);" data-ja="※画面はイメージです" data-en="* Screenshots are for illustration">※画面はイメージです</p>
+
+        <div class="card">
+            <div class="num" data-ja="主な機能" data-en="Key Features">主な機能</div>
+            <ul class="feature-list">
+                <li data-ja="Growth機能すべて" data-en="All Growth features">Growth機能すべて</li>
+                <li data-ja="パートナーダッシュボード" data-en="Partner dashboard">パートナーダッシュボード</li>
+                <li data-ja="進捗分析・レポート" data-en="Progress analytics & reports">進捗分析・レポート</li>
+                <li data-ja="テンプレート作成・共有" data-en="Create & share templates">テンプレート作成・共有</li>
+            </ul>
         </div>
     </section>
 
-    <!-- Supportモード紹介 -->
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <span class="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold">Support モード</span>
-                    <h2 class="text-4xl font-bold mt-4 mb-4" data-ja="誰かの迷いに気づきたい方へ" data-en="For those who want to notice when someone is lost">誰かの迷いに気づきたい方へ</h2>
-                    <p class="text-xl text-gray-300 max-w-2xl mx-auto"
-                       data-ja-html="教えているのに、続かない。成果が出ない。<br>でも、どこで止まっているか分からない。<br><br>そんな悩みを解決します。"
-                       data-en-html="You're teaching, but they don't continue. No results.<br>And you don't know where they're stuck.<br><br>This mode solves that problem.">教えているのに、続かない。成果が出ない。<br>でも、どこで止まっているか分からない。<br><br>そんな悩みを解決します。</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6 mb-2">
-                    <div class="bg-gray-800 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="📊 ダッシュボード" data-en="📊 Dashboard">📊 ダッシュボード</h3>
-                            <p class="text-gray-400 mb-6" data-ja="パートナー全員の進捗を一覧で確認。誰が止まっているか、すぐに分かります。" data-en="View all partners' progress at a glance. See who's stuck right away.">パートナー全員の進捗を一覧で確認。誰が止まっているか、すぐに分かります。</p>
-                        </div>
-                        <img src="images/support1.png" alt="ダッシュボード画面" class="w-full h-auto">
-                    </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="📈 分析画面" data-en="📈 Analytics Screen">📈 分析画面</h3>
-                            <p class="text-gray-400 mb-6" data-ja="パートナーの進捗を個別に分析。どこでつまずいているか把握できます。" data-en="Analyze each partner's progress individually. Understand where they're struggling.">パートナーの進捗を個別に分析。どこでつまずいているか把握できます。</p>
-                        </div>
-                        <img src="images/support2.png" alt="分析画面" class="w-full h-auto">
-                    </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden">
-                        <div class="p-6 pb-0">
-                            <h3 class="text-xl font-bold mb-2" data-ja="🗺️ ロードマップ管理" data-en="🗺️ Roadmap Management">🗺️ ロードマップ管理</h3>
-                            <p class="text-gray-400 mb-6" data-ja="テンプレートを作成・共有。パートナーはそれをコピーして使えます。" data-en="Create and share templates. Partners can copy and use them.">テンプレートを作成・共有。パートナーはそれをコピーして使えます。</p>
-                        </div>
-                        <img src="images/support3.png" alt="ロードマップ管理画面" class="w-full h-auto">
-                    </div>
-                </div>
-
-                <p class="text-center text-gray-500 text-sm mb-8" data-ja="※画面はイメージです" data-en="* Screenshots are for illustration">※画面はイメージです</p>
-
-                <div class="bg-gray-800 p-6 rounded-lg">
-                    <h4 class="font-bold mb-3 text-lg" data-ja="主な機能" data-en="Key Features">主な機能</h4>
-                    <ul class="grid md:grid-cols-2 gap-3 text-gray-300">
-                        <li data-ja="• Growth機能すべて" data-en="• All Growth features">• Growth機能すべて</li>
-                        <li data-ja="• パートナーダッシュボード" data-en="• Partner dashboard">• パートナーダッシュボード</li>
-                        <li data-ja="• 進捗分析・レポート" data-en="• Progress analytics & reports">• 進捗分析・レポート</li>
-                        <li data-ja="• テンプレート作成・共有" data-en="• Create & share templates">• テンプレート作成・共有</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="hairline"></div>
+    </div>
 
     <!-- 料金プラン -->
-    <section class="bg-gray-800 py-16">
-        <h2 class="text-4xl font-bold text-center mb-4" data-ja="料金プラン" data-en="Pricing">料金プラン</h2>
-        <p class="text-center text-gray-400 mb-12 text-xl"
-           data-ja-html="今のあなたが「どこにいるか」で、<br>選んでください"
-           data-en-html="Choose based on<br>where you are right now">今のあなたが「どこにいるか」で、<br>選んでください</p>
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-6xl">
+        <div class="text-center mb-14 max-w-3xl mx-auto">
+            <div class="section-tag">04 · Pricing</div>
+            <h2 class="section-heading" data-ja="料金プラン" data-en="Pricing">料金プラン</h2>
+            <p class="section-lead"
+               data-ja-html="今のあなたが「どこにいるか」で、<br>選んでください。"
+               data-en-html="Choose based on<br>where you are right now.">今のあなたが「どこにいるか」で、<br>選んでください。</p>
+        </div>
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <!-- Freeプラン -->
-            <div class="bg-gray-900 rounded-lg p-8 border-2 border-gray-700">
-                <h3 class="text-2xl font-bold mb-2">Free</h3>
-                <p class="text-4xl font-bold mb-4" data-ja="無料" data-en="Free">無料</p>
-                <p class="text-gray-400 mb-6" data-ja="まずは、自分の現在地を確認したい方向け" data-en="For those who want to check where they are first">まずは、自分の現在地を確認したい方向け</p>
-                <ul class="space-y-3 mb-8 text-gray-300">
-                    <li data-ja="✓ ロードマップ作成: 3件まで" data-en="✓ Roadmaps: Up to 3">✓ ロードマップ作成: 3件まで</li>
-                    <li data-ja="✓ パートナー申請: 3件まで" data-en="✓ Partner requests: Up to 3">✓ パートナー申請: 3件まで</li>
-                    <li data-ja="✓ パートナー承認: 3件まで" data-en="✓ Partner approvals: Up to 3">✓ パートナー承認: 3件まで</li>
+        <div class="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <!-- Free -->
+            <div class="plan">
+                <h3>Free</h3>
+                <p class="plan-price" data-ja="無料" data-en="Free">無料</p>
+                <p class="plan-caption" data-ja="まずは、自分の現在地を確認したい方向け" data-en="For those who want to check where they are first">まずは、自分の現在地を確認したい方向け</p>
+                <ul>
+                    <li data-ja="ロードマップ作成: 3件まで" data-en="Roadmaps: Up to 3">ロードマップ作成: 3件まで</li>
+                    <li data-ja="パートナー申請: 3件まで" data-en="Partner requests: Up to 3">パートナー申請: 3件まで</li>
+                    <li data-ja="パートナー承認: 3件まで" data-en="Partner approvals: Up to 3">パートナー承認: 3件まで</li>
                 </ul>
             </div>
 
-            <!-- Growthプラン -->
-            <div class="bg-gradient-to-b from-blue-900 to-blue-800 rounded-lg p-8 border-2 border-blue-500 relative">
-                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-bold" data-ja="おすすめ" data-en="Recommended">
-                    おすすめ
-                </div>
-                <h3 class="text-2xl font-bold mb-2">Growth</h3>
-                <p class="text-4xl font-bold mb-4">¥500<span class="text-lg text-gray-300" data-ja="/月" data-en="/mo">/月</span></p>
-                <p class="text-gray-200 mb-6" data-ja="迷わず、一歩ずつ前に進みたい方向け" data-en="For those who want to move forward step by step without getting lost">迷わず、一歩ずつ前に進みたい方向け</p>
-                <ul class="space-y-3 mb-8 text-gray-100">
-                    <li data-ja="✓ ロードマップ作成: 30件まで" data-en="✓ Roadmaps: Up to 30">✓ ロードマップ作成: 30件まで</li>
-                    <li data-ja="✓ パートナー申請: 30件まで" data-en="✓ Partner requests: Up to 30">✓ パートナー申請: 30件まで</li>
-                    <li data-ja="✓ パートナー承認: 3件まで" data-en="✓ Partner approvals: Up to 3">✓ パートナー承認: 3件まで</li>
+            <!-- Growth (featured) -->
+            <div class="plan plan-featured">
+                <div class="plan-badge" data-ja="おすすめ" data-en="Recommended">おすすめ</div>
+                <h3>Growth</h3>
+                <p class="plan-price">¥500<span class="suffix" data-ja="/月" data-en="/mo">/月</span></p>
+                <p class="plan-caption" data-ja="迷わず、一歩ずつ前に進みたい方向け" data-en="For those who want to move forward step by step without getting lost">迷わず、一歩ずつ前に進みたい方向け</p>
+                <ul>
+                    <li data-ja="ロードマップ作成: 30件まで" data-en="Roadmaps: Up to 30">ロードマップ作成: 30件まで</li>
+                    <li data-ja="パートナー申請: 30件まで" data-en="Partner requests: Up to 30">パートナー申請: 30件まで</li>
+                    <li data-ja="パートナー承認: 3件まで" data-en="Partner approvals: Up to 3">パートナー承認: 3件まで</li>
                 </ul>
             </div>
 
-            <!-- Supportプラン -->
-            <div class="bg-gradient-to-b from-purple-900 to-purple-800 rounded-lg p-8 border-2 border-purple-500">
-                <h3 class="text-2xl font-bold mb-2">Support</h3>
-                <p class="text-4xl font-bold mb-4">¥2,980<span class="text-lg text-gray-300" data-ja="/月" data-en="/mo">/月</span></p>
-                <p class="text-gray-200 mb-6" data-ja="誰かの成長を、本気で導きたい方向け" data-en="For those who want to seriously guide someone's growth">誰かの成長を、本気で導きたい方向け</p>
-                <ul class="space-y-3 mb-8 text-gray-100">
-                    <li data-ja="✓ ロードマップ作成: 100件まで" data-en="✓ Roadmaps: Up to 100">✓ ロードマップ作成: 100件まで</li>
-                    <li data-ja="✓ パートナー申請: 100件まで" data-en="✓ Partner requests: Up to 100">✓ パートナー申請: 100件まで</li>
-                    <li data-ja="✓ パートナー承認: 100件まで" data-en="✓ Partner approvals: Up to 100">✓ パートナー承認: 100件まで</li>
+            <!-- Support -->
+            <div class="plan">
+                <h3>Support</h3>
+                <p class="plan-price">¥2,980<span class="suffix" data-ja="/月" data-en="/mo">/月</span></p>
+                <p class="plan-caption" data-ja="誰かの成長を、本気で導きたい方向け" data-en="For those who want to seriously guide someone's growth">誰かの成長を、本気で導きたい方向け</p>
+                <ul>
+                    <li data-ja="ロードマップ作成: 100件まで" data-en="Roadmaps: Up to 100">ロードマップ作成: 100件まで</li>
+                    <li data-ja="パートナー申請: 100件まで" data-en="Partner requests: Up to 100">パートナー申請: 100件まで</li>
+                    <li data-ja="パートナー承認: 100件まで" data-en="Partner approvals: Up to 100">パートナー承認: 100件まで</li>
                 </ul>
             </div>
         </div>
 
-        <p class="text-center text-gray-400 mt-8"
+        <p class="text-center mt-10 text-sm" style="color: var(--ink-soft);"
            data-ja-html="どのプランを選んでも、<br class='md:hidden'>「今やるべき一歩」が分かる設計は変わりません。"
            data-en-html="No matter which plan you choose,<br class='md:hidden'>the design that shows 'what to do next' remains the same.">どのプランを選んでも、<br class="md:hidden">「今やるべき一歩」が分かる設計は変わりません。</p>
     </section>
 
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="hairline"></div>
+    </div>
+
     <!-- YouTube操作ガイド -->
-    <section class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-4" data-ja="迷ったら、ここに戻ってきてください" data-en="When in doubt, come back here">迷ったら、ここに戻ってきてください</h2>
-                <p class="text-xl text-gray-400 mb-8" data-ja="動画でPolarisの使い方をわかりやすく解説" data-en="Easy-to-follow video guides on how to use Polaris">動画でPolarisの使い方をわかりやすく解説</p>
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-3xl">
+        <div class="text-center mb-10">
+            <div class="section-tag">05 · Guide</div>
+            <h2 class="section-heading" data-ja="迷ったら、ここに戻ってきてください" data-en="When in doubt, come back here">迷ったら、ここに戻ってきてください</h2>
+            <p class="section-lead" data-ja="動画でPolarisの使い方をわかりやすく解説。" data-en="Easy-to-follow video guides on how to use Polaris.">動画でPolarisの使い方をわかりやすく解説。</p>
+        </div>
 
-                <div class="bg-gray-800 p-8 rounded-lg">
-                    <div class="aspect-video bg-gray-700 rounded-lg mb-6 flex items-center justify-center">
-                        <svg class="w-20 h-20 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4" data-ja="Polaris 操作ガイド" data-en="Polaris User Guide">Polaris 操作ガイド</h3>
-                    <p class="text-gray-400 mb-6"
-                       data-ja-html="一度で覚えなくて大丈夫です。<br>迷ったときに、必要なところだけ確認できます。"
-                       data-en-html="You don't need to remember everything at once.<br>Just check what you need when you get stuck.">
-                        一度で覚えなくて大丈夫です。<br>
-                        迷ったときに、必要なところだけ確認できます。
-                    </p>
+        <div class="card" style="padding: 40px;">
+            <h3 style="font-size: 1.35rem; margin-bottom: 12px;" data-ja="Polaris 操作ガイド" data-en="Polaris User Guide">Polaris 操作ガイド</h3>
+            <p style="color: var(--ink-soft); margin-bottom: 24px;"
+               data-ja-html="一度で覚えなくて大丈夫です。<br>迷ったときに、必要なところだけ確認できます。"
+               data-en-html="You don't need to remember everything at once.<br>Just check what you need when you get stuck.">一度で覚えなくて大丈夫です。<br>迷ったときに、必要なところだけ確認できます。</p>
 
-                    <a href="https://www.youtube.com/playlist?list=PLkM-crNhnY-cFd-BNLr_Slwu8ti16AIWu"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-lg transition transform hover:scale-105">
-                        <span class="flex items-center gap-2">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                            <span data-ja="操作を動画で確認する" data-en="Watch Video Guides">操作を動画で確認する</span>
-                        </span>
-                    </a>
-
-                    <div class="mt-6">
-                        <a href="help.html" class="inline-block text-blue-400 hover:text-blue-300 font-bold" data-ja="困ったときのヘルプページ →" data-en="Help Page for When You're Stuck →">
-                            困ったときのヘルプページ →
-                        </a>
-                    </div>
-
-                    <p class="mt-8 text-gray-400 text-sm leading-relaxed"
-                       data-ja-html="Polarisは、「一度で使いこなす」ためのアプリではありません。<br>迷ったら戻ってきて、また次の一歩を確認できれば、それで十分です。"
-                       data-en-html="Polaris isn't an app you need to master right away.<br>If you can come back when lost and confirm your next step, that's enough.">
-                        Polarisは、「一度で使いこなす」ためのアプリではありません。<br>
-                        迷ったら戻ってきて、また次の一歩を確認できれば、それで十分です。
-                    </p>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="https://www.youtube.com/playlist?list=PLkM-crNhnY-cFd-BNLr_Slwu8ti16AIWu" target="_blank" rel="noopener noreferrer" class="btn btn-youtube">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span class="btn-main" data-ja="動画で確認する" data-en="Watch Video Guides">動画で確認する</span>
+                </a>
+                <a href="help.html" class="btn">
+                    <span class="btn-main" data-ja="困ったときのヘルプ →" data-en="Help Page →">困ったときのヘルプ →</span>
+                </a>
             </div>
+
+            <p class="mt-8 text-sm" style="color: var(--ink-soft);"
+               data-ja-html="Polarisは、「一度で使いこなす」ためのアプリではありません。<br>迷ったら戻ってきて、また次の一歩を確認できれば、それで十分です。"
+               data-en-html="Polaris isn't an app you need to master right away.<br>If you can come back when lost and confirm your next step, that's enough.">Polarisは、「一度で使いこなす」ためのアプリではありません。<br>迷ったら戻ってきて、また次の一歩を確認できれば、それで十分です。</p>
         </div>
     </section>
 
+    <div class="container mx-auto px-6 max-w-3xl">
+        <div class="hairline"></div>
+    </div>
+
     <!-- アイコンの話 -->
-    <section class="bg-gray-800 py-16">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-bold mb-8" data-ja="アイコンの話" data-en="About the Icon">アイコンの話</h2>
+    <section class="container mx-auto px-6 pt-20 pb-20 max-w-2xl">
+        <div class="text-center icon-story">
+            <div class="section-tag">06 · Icon Story</div>
+            <h2 class="section-heading mb-10" data-ja="アイコンの話" data-en="About the Icon">アイコンの話</h2>
 
-                <div class="text-xl text-gray-300 leading-relaxed space-y-6">
-                    <p data-ja-html="Polarisは、<br>アプリを「開かせる」ことを<br>目的にしていません。"
-                       data-en-html="Polaris isn't designed<br>to make you 'open the app.'">
-                        Polarisは、<br>
-                        アプリを「開かせる」ことを<br>
-                        目的にしていません。
-                    </p>
-                    <p data-ja-html="やることを減らしているから、<br>アプリを開かなくても思い出せる。"
-                       data-en-html="Because we've reduced what you need to do,<br>you can remember without even opening the app.">
-                        やることを減らしているから、<br>
-                        アプリを開かなくても思い出せる。
-                    </p>
-                    <p data-ja-html="スマホを開いたとき、<br>Polarisのアイコンが目に入る。"
-                       data-en-html="When you unlock your phone,<br>the Polaris icon catches your eye.">
-                        スマホを開いたとき、<br>
-                        Polarisのアイコンが目に入る。
-                    </p>
+            <div class="text-lg space-y-6">
+                <p data-ja-html="Polarisは、アプリを「開かせる」ことを目的にしていません。"
+                   data-en-html="Polaris isn't designed to make you 'open the app.'">Polarisは、アプリを「開かせる」ことを目的にしていません。</p>
+                <p data-ja-html="やることを減らしているから、アプリを開かなくても思い出せる。"
+                   data-en-html="Because we've reduced what you need to do, you can remember without even opening the app.">やることを減らしているから、アプリを開かなくても思い出せる。</p>
+                <p data-ja-html="スマホを開いたとき、Polarisのアイコンが目に入る。"
+                   data-en-html="When you unlock your phone, the Polaris icon catches your eye.">スマホを開いたとき、Polarisのアイコンが目に入る。</p>
 
-                    <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-24 h-24 mx-auto rounded-2xl shadow-lg mt-8">
+                <img src="images/icon.png" alt="Polaris アプリアイコン" class="w-20 h-20 mx-auto rounded-2xl mt-10 mb-6" style="border: 1px solid var(--line);">
 
-                    <p data-ja-html="その瞬間に、<br>「あ、あれやってなかったな」<br>と思い出せれば、それでいい。"
-                       data-en-html="In that moment,<br>if you remember 'Oh, I haven't done that yet,'<br>that's enough.">
-                        その瞬間に、<br>
-                        「あ、あれやってなかったな」<br>
-                        と思い出せれば、それでいい。
-                    </p>
-                    <p class="text-gray-400"
-                       data-ja-html="覚えることを増やすと、人は忘れます。<br>減らしているから、覚えていられる。"
-                       data-en-html="The more you try to remember, the more you forget.<br>Because we reduce, you can actually remember.">
-                        覚えることを増やすと、人は忘れます。<br>
-                        減らしているから、覚えていられる。
-                    </p>
-                    <p class="text-white font-semibold"
-                       data-ja-html="Polarisは、<br>アイコンを見るだけで<br>&quot;次の一歩&quot;を思い出せるよう、<br>北極星をイメージして設計しました。"
-                       data-en-html="Polaris was designed<br>with the North Star in mind,<br>so just seeing the icon reminds you<br>of 'your next step.'">
-                        Polarisは、<br>
-                        アイコンを見るだけで<br>
-                        "次の一歩"を思い出せるよう、<br>
-                        北極星をイメージして設計しました。
-                    </p>
-                </div>
-
+                <p data-ja-html="その瞬間に、<span class='mark'>「あ、あれやってなかったな」</span>と思い出せれば、それでいい。"
+                   data-en-html="In that moment, if you remember <span class='mark'>'Oh, I haven't done that yet,'</span> that's enough.">その瞬間に、<span class="mark">「あ、あれやってなかったな」</span>と思い出せれば、それでいい。</p>
+                <p class="text-sm" style="color: var(--ink-soft);"
+                   data-ja-html="覚えることを増やすと、人は忘れます。<br>減らしているから、覚えていられる。"
+                   data-en-html="The more you try to remember, the more you forget.<br>Because we reduce, you can actually remember.">覚えることを増やすと、人は忘れます。<br>減らしているから、覚えていられる。</p>
+                <p style="color: var(--ink-warm); font-weight: 500;"
+                   data-ja-html="Polarisは、アイコンを見るだけで<span class='mark'>&quot;次の一歩&quot;</span>を思い出せるよう、北極星をイメージして設計しました。"
+                   data-en-html="Polaris was designed with the North Star in mind, so just seeing the icon reminds you of <span class='mark'>'your next step.'</span>">Polarisは、アイコンを見るだけで<span class="mark">"次の一歩"</span>を思い出せるよう、北極星をイメージして設計しました。</p>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 py-20">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6" data-ja="スマホに北極星を" data-en="Your North Star on Your Phone">スマホに北極星を</h2>
-            <p class="text-xl text-gray-200 mb-4 max-w-2xl mx-auto"
-                data-ja-html="夜空の北極星が、<br>旅人の道しるべとなるように。"
-                data-en-html="Like the North Star in the night sky<br>guiding travelers on their way.">
-                夜空の北極星が、<br>旅人の道しるべとなるように。
-            </p>
-            <p class="text-sm text-gray-300 mb-4"
-                data-ja-html="Polarisは、<br class='md:hidden'><span class='text-white font-semibold'>迷ったときの&quot;帰る場所&quot;</span>になります。"
-                data-en-html="Polaris becomes<br class='md:hidden'><span class='text-white font-semibold'>your place to return when you're lost.</span>">Polarisは、<br class="md:hidden"><span class="text-white font-semibold">迷ったときの"帰る場所"</span>になります。</p>
-            <p class="text-gray-300 mb-8"
-                data-ja-html="登録して、いきなり完璧に使えなくても大丈夫です。<br>まずは「今日やる一歩」が見えれば、それで十分。"
-                data-en-html="You don't need to master it right away.<br>If you can see 'today's one step,' that's enough.">登録して、いきなり完璧に使えなくても大丈夫です。<br>まずは「今日やる一歩」が見えれば、それで十分。</p>
+    <section class="cta-band py-20">
+        <div class="container mx-auto px-6 text-center max-w-3xl">
+            <h2 class="section-heading" data-ja="スマホに北極星を。" data-en="Your North Star on Your Phone.">スマホに北極星を。</h2>
+            <p class="section-lead mb-4"
+               data-ja-html="夜空の北極星が、旅人の道しるべとなるように。<br>Polarisは、<span class='mark'>迷ったときの&quot;帰る場所&quot;</span>になります。"
+               data-en-html="Like the North Star in the night sky guiding travelers on their way.<br>Polaris becomes <span class='mark'>your place to return when you're lost.</span>">夜空の北極星が、旅人の道しるべとなるように。<br>Polarisは、<span class="mark">迷ったときの"帰る場所"</span>になります。</p>
+            <p class="text-sm mb-10" style="color: var(--ink-soft);"
+               data-ja-html="登録して、いきなり完璧に使えなくても大丈夫です。<br>まずは「今日やる一歩」が見えれば、それで十分。"
+               data-en-html="You don't need to master it right away.<br>If you can see 'today's one step,' that's enough.">登録して、いきなり完璧に使えなくても大丈夫です。<br>まずは「今日やる一歩」が見えれば、それで十分。</p>
 
-            <!-- リンクを追加する場合は、下記のコメントアウトを解除してURLを設定してください -->
-            <!-- <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="APP_STORE_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
-                    <p class="text-gray-400 text-sm">App Store</p>
-                    <p class="text-white font-bold">ダウンロード</p>
-                </a>
-                <a href="GOOGLE_PLAY_URL" target="_blank" rel="noopener noreferrer" class="bg-gray-800 px-8 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition">
-                    <p class="text-gray-400 text-sm">Google Play</p>
-                    <p class="text-white font-bold">ダウンロード</p>
-                </a>
-            </div> -->
-
-            <!-- ダウンロードボタン -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'app_store_footer'});" class="bg-gray-800 px-6 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition flex items-center gap-3">
-                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <a href="https://apps.apple.com/us/app/polaris-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E7%AE%A1%E7%90%86/id6755354064" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'app_store_footer'});" class="btn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" style="color: var(--ink);"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                     <div class="text-left">
-                        <p class="text-gray-400 text-xs">App Store</p>
-                        <p class="text-white font-bold" data-ja="ダウンロード" data-en="Download">ダウンロード</p>
+                        <div class="btn-sub">App Store</div>
+                        <div class="btn-main" data-ja="ダウンロード" data-en="Download">ダウンロード</div>
                     </div>
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=com.levelupinc.polaris" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'google_play_footer'});" class="bg-gray-800 px-6 py-4 rounded-lg border border-gray-700 hover:bg-gray-700 transition flex items-center gap-3">
-                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                <a href="https://play.google.com/store/apps/details?id=com.levelupinc.polaris" target="_blank" rel="noopener noreferrer" onclick="gtag('event', 'click', {event_category: 'CTA', event_label: 'google_play_footer'});" class="btn">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" style="color: var(--ink);"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
                     <div class="text-left">
-                        <p class="text-gray-400 text-xs">Google Play</p>
-                        <p class="text-white font-bold" data-ja="ダウンロード" data-en="Download">ダウンロード</p>
+                        <div class="btn-sub">Google Play</div>
+                        <div class="btn-main" data-ja="ダウンロード" data-en="Download">ダウンロード</div>
                     </div>
                 </a>
             </div>
@@ -475,35 +884,37 @@
     </section>
 
     <!-- フッター -->
-    <footer class="container mx-auto px-4 py-16 border-t border-gray-700">
+    <footer class="container mx-auto px-6 py-16 max-w-6xl">
         <div class="text-center">
-            <h2 class="text-xl font-bold mb-4" data-ja="運営会社" data-en="Company">運営会社</h2>
-            <p class="text-gray-300">株式会社レベルアップ / LEVEL UP, K.K.</p>
-            <p class="text-gray-400 mt-2"><a href="https://forms.gle/mCiuPh65JQmhwe5E6" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300" data-ja="お問い合わせフォーム" data-en="Contact Form">お問い合わせフォーム</a></p>
-            <div class="mt-6">
-                <a href="terms.html" class="text-gray-400 hover:text-white mx-2" data-ja="利用規約" data-en="Terms of Service">利用規約</a>
-                <a href="privacy.html" class="text-gray-400 hover:text-white mx-2" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</a>
-                <a href="tokutei.html" class="text-gray-400 hover:text-white mx-2" data-ja="特定商取引法に基づく表記" data-en="Specified Commercial Transactions (Japan)">特定商取引法に基づく表記</a>
-                <a href="help.html" class="text-gray-400 hover:text-white mx-2" data-ja="ヘルプ" data-en="Help">ヘルプ</a>
-                <a href="glossary/index.html" class="text-gray-400 hover:text-white mx-2" data-ja="AI用語集" data-en="AI Glossary">AI用語集</a>
-            </div>
-            <p class="text-gray-400 mt-4 text-sm">
-                <a href="https://www.orynth.dev/projects/polaris-5172" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-bold" data-ja="Orynth掲載ページ →" data-en="View on Orynth →">Orynth掲載ページ →</a>
+            <div class="cat-label mb-4" data-ja="運営会社" data-en="Company">運営会社</div>
+            <p class="text-base" style="color: var(--ink-warm);">株式会社レベルアップ / LEVEL UP, K.K.</p>
+            <p class="text-sm mt-2" style="color: var(--ink-soft);">
+                <a href="https://forms.gle/mCiuPh65JQmhwe5E6" target="_blank" rel="noopener noreferrer" style="color: var(--accent);" data-ja="お問い合わせフォーム" data-en="Contact Form">お問い合わせフォーム</a>
             </p>
-            <p class="text-gray-500 text-xs mt-4">* Legal documents (Terms, Privacy Policy, etc.) are available in Japanese only.</p>
-            <p class="text-gray-500 mt-8">© 2025 LEVEL UP, K.K. All rights reserved.</p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">
+                <a href="terms.html" class="footer-link" data-ja="利用規約" data-en="Terms of Service">利用規約</a>
+                <a href="privacy.html" class="footer-link" data-ja="プライバシーポリシー" data-en="Privacy Policy">プライバシーポリシー</a>
+                <a href="tokutei.html" class="footer-link" data-ja="特定商取引法に基づく表記" data-en="Specified Commercial Transactions (Japan)">特定商取引法に基づく表記</a>
+                <a href="help.html" class="footer-link" data-ja="ヘルプ" data-en="Help">ヘルプ</a>
+                <a href="glossary/index.html" class="footer-link" data-ja="AI用語集" data-en="AI Glossary">AI用語集</a>
+            </div>
+
+            <p class="mt-6 text-sm">
+                <a href="https://www.orynth.dev/projects/polaris-5172" target="_blank" rel="noopener noreferrer" style="color: var(--accent);" data-ja="Orynth掲載ページ →" data-en="View on Orynth →">Orynth掲載ページ →</a>
+            </p>
+            <p class="mono text-xs mt-6" style="color: var(--ink-mute);">* Legal documents (Terms, Privacy Policy, etc.) are available in Japanese only.</p>
+            <p class="mono text-xs mt-6" style="color: var(--ink-mute);">© 2025 LEVEL UP, K.K. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- 言語切り替えスクリプト -->
     <script>
     (function() {
-        // 言語判定（優先順位: URL > localStorage > navigator.language）
         function detectLang() {
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang === 'en' || urlLang === 'ja') {
-                // URLパラメータを消す
                 history.replaceState(null, '', window.location.pathname);
                 return urlLang;
             }
@@ -513,38 +924,53 @@
         }
 
         function applyLanguage(lang) {
-            // textContent切り替え
             document.querySelectorAll('[data-en][data-ja]').forEach(el => {
                 el.textContent = el.dataset[lang];
             });
-            // innerHTML切り替え
             document.querySelectorAll('[data-en-html][data-ja-html]').forEach(el => {
                 el.innerHTML = el.dataset[lang + 'Html'];
             });
-            // meta description切り替え
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc && metaDesc.dataset[lang]) {
                 metaDesc.content = metaDesc.dataset[lang];
             }
-            // title切り替え
             if (lang === 'en') {
                 document.title = 'Polaris | An app that reduces what you need to do | Your North Star';
             } else {
                 document.title = 'Polaris｜やることを減らすタスク管理';
             }
-            // トグルUI更新
             const jaBtn = document.getElementById('lang-ja');
             const enBtn = document.getElementById('lang-en');
-            jaBtn.classList.toggle('bg-amber-400', lang === 'ja');
-            jaBtn.classList.toggle('text-gray-900', lang === 'ja');
-            jaBtn.classList.toggle('text-gray-300', lang !== 'ja');
-            enBtn.classList.toggle('bg-amber-400', lang === 'en');
-            enBtn.classList.toggle('text-gray-900', lang === 'en');
-            enBtn.classList.toggle('text-gray-300', lang !== 'en');
-            // html lang属性
+            jaBtn.classList.toggle('active', lang === 'ja');
+            enBtn.classList.toggle('active', lang === 'en');
             document.documentElement.lang = lang;
-            // localStorage保存
             localStorage.setItem('polaris-lang', lang);
+            // 言語切替で再生成された .mark は即表示（すでに見えてるはずなので）
+            document.querySelectorAll('.mark').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('is-visible');
+            });
+        }
+
+        function initScrollReveal() {
+            const revealTargets = document.querySelectorAll('.card, .plan, .mode-card, .section-tag, .section-heading, .section-lead, .icon-story p, .icon-story img');
+            revealTargets.forEach(el => el.classList.add('reveal'));
+
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('.reveal, .mark').forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.reveal, .mark').forEach(el => observer.observe(el));
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -552,6 +978,7 @@
             applyLanguage(lang);
             document.getElementById('lang-ja').addEventListener('click', function() { applyLanguage('ja'); });
             document.getElementById('lang-en').addEventListener('click', function() { applyLanguage('en'); });
+            initScrollReveal();
         });
     })();
     </script>
