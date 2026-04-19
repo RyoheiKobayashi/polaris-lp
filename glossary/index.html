@@ -2316,6 +2316,257 @@
             100%     { opacity: 0; transform: translateY(-4px); }
         }
 
+        /* ========= E-1. スキル: パッケージ + /command ========= */
+        .thumb-skill .sk-wrap {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+        }
+        .thumb-skill .sk-slash {
+            font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute);
+            letter-spacing: 0.06em;
+        }
+        .thumb-skill .sk-pkg {
+            background: #fff; border: 1px solid var(--line); border-radius: 6px;
+            padding: 6px 10px; font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink); min-width: 100px; text-align: center;
+            animation: sk-pulse 2.8s ease-in-out infinite;
+        }
+        @keyframes sk-pulse {
+            0%, 100% { transform: scale(1); border-color: var(--line); }
+            50%      { transform: scale(1.04); border-color: var(--ink); }
+        }
+
+        /* ========= E-2. CLAUDE.md: ドキュメント ========= */
+        .thumb-claudemd .cm-doc {
+            width: 110px; background: #fff; border: 1px solid var(--line);
+            border-radius: 4px; padding: 8px 10px; font-family: var(--font-mono);
+            font-size: 9px; color: var(--ink-warm);
+        }
+        .thumb-claudemd .cm-name {
+            color: var(--ink); font-weight: 600; margin-bottom: 6px;
+            border-bottom: 1px solid var(--line); padding-bottom: 3px;
+        }
+        .thumb-claudemd .cm-line {
+            height: 2px; background: var(--line); border-radius: 1px; margin-top: 3px;
+        }
+        .thumb-claudemd .cm-line.fade {
+            animation: cm-fade 3s ease-in-out infinite;
+        }
+        @keyframes cm-fade {
+            0%, 100% { opacity: 0.3; }
+            50%      { opacity: 1; background: var(--mark); }
+        }
+
+        /* ========= E-3. MCP: ハブ&スポーク ========= */
+        .thumb-mcp .mcp-wrap {
+            position: relative; width: 140px; height: 100px;
+        }
+        .thumb-mcp .mcp-center {
+            position: absolute; top: 50%; left: 50%;
+            width: 24px; height: 24px; border-radius: 4px;
+            background: var(--ink); color: #fff;
+            font-family: var(--font-mono); font-size: 9px;
+            display: flex; align-items: center; justify-content: center;
+            transform: translate(-50%, -50%); z-index: 2;
+        }
+        .thumb-mcp .mcp-node {
+            position: absolute; width: 10px; height: 10px; border-radius: 50%;
+            background: var(--ink-mute);
+            animation: mcp-ping 2.4s ease-in-out infinite;
+        }
+        .thumb-mcp .mcp-node:nth-child(2) { top: 8px;    left: 14px; }
+        .thumb-mcp .mcp-node:nth-child(3) { top: 8px;    right: 14px; animation-delay: 0.3s; }
+        .thumb-mcp .mcp-node:nth-child(4) { bottom: 8px; left: 14px;  animation-delay: 0.6s; }
+        .thumb-mcp .mcp-node:nth-child(5) { bottom: 8px; right: 14px; animation-delay: 0.9s; }
+        @keyframes mcp-ping {
+            0%, 100% { transform: scale(1);   opacity: 0.6; }
+            50%      { transform: scale(1.4); opacity: 1; background: var(--ink); }
+        }
+
+        /* ========= E-4. Cowork: 共有 ========= */
+        .thumb-cowork .cw-wrap {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .thumb-cowork .cw-box {
+            background: #fff; border: 1px solid var(--line); border-radius: 4px;
+            padding: 6px 9px; font-family: var(--font-mono); font-size: 9px;
+            color: var(--ink-warm);
+        }
+        .thumb-cowork .cw-arrow {
+            color: var(--ink-mute); font-family: var(--font-mono); font-size: 14px;
+            animation: cw-slide 2s ease-in-out infinite;
+        }
+        @keyframes cw-slide {
+            0%, 100% { transform: translateX(0);   opacity: 0.4; }
+            50%      { transform: translateX(4px); opacity: 1; }
+        }
+
+        /* ========= E-5. スケジュールタスク: 時計 ========= */
+        .thumb-sched .sch-clock {
+            width: 66px; height: 66px; border: 2.5px solid var(--ink);
+            border-radius: 50%; position: relative;
+        }
+        .thumb-sched .sch-hand-h, .thumb-sched .sch-hand-m {
+            position: absolute; top: 50%; left: 50%;
+            background: var(--ink); transform-origin: bottom center;
+            border-radius: 2px;
+        }
+        .thumb-sched .sch-hand-h {
+            width: 2.5px; height: 16px; margin-left: -1.25px; margin-top: -16px;
+            animation: sch-rot 12s linear infinite;
+        }
+        .thumb-sched .sch-hand-m {
+            width: 1.5px; height: 22px; margin-left: -0.75px; margin-top: -22px;
+            animation: sch-rot 3s linear infinite;
+        }
+        @keyframes sch-rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .thumb-sched .sch-dot {
+            position: absolute; top: 50%; left: 50%;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--ink); transform: translate(-50%, -50%);
+        }
+
+        /* ========= E-6. サブエージェント: 分業 ========= */
+        .thumb-subagent .sa-wrap {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+        }
+        .thumb-subagent .sa-main {
+            background: var(--ink); color: #fff;
+            padding: 4px 10px; border-radius: 4px;
+            font-family: var(--font-mono); font-size: 10px;
+        }
+        .thumb-subagent .sa-line {
+            width: 1px; height: 8px; background: var(--ink-mute);
+        }
+        .thumb-subagent .sa-subs {
+            display: flex; gap: 6px;
+        }
+        .thumb-subagent .sa-sub {
+            background: #fff; border: 1px solid var(--line);
+            padding: 3px 7px; border-radius: 3px;
+            font-family: var(--font-mono); font-size: 9px; color: var(--ink-warm);
+            animation: sa-blink 2.4s ease-in-out infinite;
+        }
+        .thumb-subagent .sa-sub:nth-child(1) { animation-delay: 0s; }
+        .thumb-subagent .sa-sub:nth-child(2) { animation-delay: 0.4s; }
+        .thumb-subagent .sa-sub:nth-child(3) { animation-delay: 0.8s; }
+        @keyframes sa-blink {
+            0%, 100% { border-color: var(--line);    background: #fff; }
+            50%      { border-color: var(--ink);     background: var(--mark); }
+        }
+
+        /* ========= E-7. スキルクリエイター: 作成魔法 ========= */
+        .thumb-skcreator .scc-wrap {
+            position: relative; width: 140px; height: 80px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-skcreator .scc-pkg {
+            background: #fff; border: 1.5px solid var(--ink); border-radius: 6px;
+            padding: 8px 14px; font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink); animation: scc-appear 3s ease-in-out infinite;
+        }
+        @keyframes scc-appear {
+            0%, 15%  { opacity: 0; transform: scale(0.6) rotate(-6deg); }
+            50%, 80% { opacity: 1; transform: scale(1) rotate(0); }
+            100%     { opacity: 0; transform: scale(0.6) rotate(6deg); }
+        }
+        .thumb-skcreator .scc-spark {
+            position: absolute; font-family: var(--font-mono);
+            color: var(--ink-warm); font-size: 12px;
+            animation: gen-twinkle 1.5s ease-in-out infinite;
+        }
+        .thumb-skcreator .scc-spark:nth-child(2) { top: 6px;  left: 14px; }
+        .thumb-skcreator .scc-spark:nth-child(3) { top: 10px; right: 16px; animation-delay: 0.5s; }
+        .thumb-skcreator .scc-spark:nth-child(4) { bottom: 8px; left: 22px; animation-delay: 0.9s; }
+
+        /* ========= E-8. プラグイン: パズルピース ========= */
+        .thumb-plugin .pg-wrap {
+            display: flex; align-items: center;
+        }
+        .thumb-plugin .pg-base {
+            width: 56px; height: 50px;
+            background: var(--bg-warm); border: 1.5px solid var(--ink-warm);
+            border-radius: 4px; position: relative;
+        }
+        .thumb-plugin .pg-base::after {
+            content: ''; position: absolute; top: 50%; right: -9px;
+            width: 10px; height: 20px;
+            background: var(--bg-warm); border: 1.5px solid var(--ink-warm);
+            border-left: none; border-radius: 0 4px 4px 0;
+            transform: translateY(-50%);
+        }
+        .thumb-plugin .pg-piece {
+            width: 46px; height: 40px; margin-left: 18px;
+            background: var(--mark); border: 1.5px solid var(--ink-warm);
+            border-radius: 4px; position: relative;
+            animation: pg-snap 3s ease-in-out infinite;
+        }
+        .thumb-plugin .pg-piece::before {
+            content: ''; position: absolute; top: 50%; left: -9px;
+            width: 10px; height: 20px;
+            background: var(--mark); border: 1.5px solid var(--ink-warm);
+            border-right: none; border-radius: 4px 0 0 4px;
+            transform: translateY(-50%);
+        }
+        @keyframes pg-snap {
+            0%, 15%   { transform: translateX(12px); opacity: 0.5; }
+            50%, 85%  { transform: translateX(0);    opacity: 1; }
+            100%      { transform: translateX(12px); opacity: 0.5; }
+        }
+
+        /* ========= E-9. Artifacts: プレビュー ========= */
+        .thumb-artifact .af-wrap {
+            display: flex; align-items: center; gap: 6px;
+        }
+        .thumb-artifact .af-code {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 4px; padding: 8px 10px;
+            font-family: var(--font-mono); font-size: 9px;
+            min-width: 52px;
+        }
+        .thumb-artifact .af-arrow {
+            font-family: var(--font-mono); color: var(--ink-mute); font-size: 12px;
+        }
+        .thumb-artifact .af-preview {
+            width: 58px; height: 42px;
+            background: #fff; border: 1px solid var(--line); border-radius: 4px;
+            position: relative; overflow: hidden;
+        }
+        .thumb-artifact .af-preview::before {
+            content: ''; position: absolute; inset: 4px;
+            background: linear-gradient(135deg, var(--bg-warm) 50%, var(--mark) 50%);
+            border-radius: 2px;
+            animation: af-render 2.8s ease-in-out infinite;
+        }
+        @keyframes af-render {
+            0%, 20%  { opacity: 0; transform: scale(0.8); }
+            50%, 80% { opacity: 1; transform: scale(1); }
+            100%     { opacity: 0; transform: scale(0.8); }
+        }
+
+        /* ========= E-10. スラッシュコマンド: /command ========= */
+        .thumb-slash .sl-wrap {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 6px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 12px; min-width: 130px;
+        }
+        .thumb-slash .sl-slash { color: var(--mark); }
+        .thumb-slash .sl-cmd {
+            display: inline-block;
+            overflow: hidden; white-space: nowrap;
+            animation: sl-type 3s steps(8, end) infinite;
+            vertical-align: bottom;
+        }
+        .thumb-slash .sl-caret {
+            display: inline-block; width: 7px; height: 13px;
+            background: #fff; vertical-align: middle; margin-left: 1px;
+            animation: cc-blink 1s step-end infinite;
+        }
+        @keyframes sl-type {
+            0%, 10%   { width: 0; }
+            50%, 90%  { width: 8ch; }
+            100%      { width: 0; }
+        }
+
         /* ========= カテゴリフィルタ ========= */
         .cat-filter {
             display: flex;
@@ -2381,11 +2632,12 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">60</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">70</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
             <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
             <button class="cat-btn" data-filter="D">AIツール<span class="cat-count">17</span></button>
+            <button class="cat-btn" data-filter="E">Claude Code<span class="cat-count">10</span></button>
         </div>
     </div>
 
@@ -3523,6 +3775,193 @@
                     <div class="card-body">
                         <h3>Perplexity</h3>
                         <p class="desc">回答に<span class="mark">引用元を明示</span>するAI検索エンジン。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Category E -->
+        <section class="cat-section" data-cat="E">
+            <header class="cat-head">
+                <div class="cat-tag">E · Claude Code Ecosystem</div>
+                <h2 class="cat-heading">Claude Code関連</h2>
+                <p class="cat-lead">Claude Codeのエコシステムに関する用語。AIを「使う」から「仕組み化する」へ進むための概念です。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 61. スキル -->
+                <a href="skill.html" class="term-card">
+                    <div class="thumb thumb-skill">
+                        <div class="thumb-inner">
+                            <div class="sk-wrap">
+                                <div class="sk-slash">/command</div>
+                                <div class="sk-pkg">skill.md</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スキル</h3>
+                        <p class="desc">繰り返し使える<span class="mark">定型タスクの設計図</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 62. CLAUDE.md -->
+                <a href="claude-md.html" class="term-card">
+                    <div class="thumb thumb-claudemd">
+                        <div class="thumb-inner">
+                            <div class="cm-doc">
+                                <div class="cm-name">CLAUDE.md</div>
+                                <div class="cm-line"></div>
+                                <div class="cm-line fade"></div>
+                                <div class="cm-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>CLAUDE.md</h3>
+                        <p class="desc">Claude Codeの<span class="mark">動作ルール</span>を定義する設定ファイル。</p>
+                    </div>
+                </a>
+
+                <!-- 63. MCP -->
+                <a href="mcp.html" class="term-card">
+                    <div class="thumb thumb-mcp">
+                        <div class="thumb-inner">
+                            <div class="mcp-wrap">
+                                <div class="mcp-center">MCP</div>
+                                <div class="mcp-node"></div>
+                                <div class="mcp-node"></div>
+                                <div class="mcp-node"></div>
+                                <div class="mcp-node"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>MCP</h3>
+                        <p class="desc">外部ツールと<span class="mark">連携する標準プロトコル</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 64. Cowork -->
+                <a href="cowork.html" class="term-card">
+                    <div class="thumb thumb-cowork">
+                        <div class="thumb-inner">
+                            <div class="cw-wrap">
+                                <div class="cw-box">skill.md</div>
+                                <span class="cw-arrow">→</span>
+                                <div class="cw-box">user</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Cowork</h3>
+                        <p class="desc">スキルやプラグインを<span class="mark">共有・配布</span>する仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 65. スケジュールタスク -->
+                <a href="scheduled-task.html" class="term-card">
+                    <div class="thumb thumb-sched">
+                        <div class="thumb-inner">
+                            <div class="sch-clock">
+                                <div class="sch-hand-h"></div>
+                                <div class="sch-hand-m"></div>
+                                <div class="sch-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スケジュールタスク</h3>
+                        <p class="desc"><span class="mark">cron式で自動実行</span>する定期タスク。</p>
+                    </div>
+                </a>
+
+                <!-- 66. サブエージェント -->
+                <a href="sub-agent.html" class="term-card">
+                    <div class="thumb thumb-subagent">
+                        <div class="thumb-inner">
+                            <div class="sa-wrap">
+                                <div class="sa-main">AI</div>
+                                <div class="sa-line"></div>
+                                <div class="sa-subs">
+                                    <div class="sa-sub">research</div>
+                                    <div class="sa-sub">write</div>
+                                    <div class="sa-sub">review</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>サブエージェント</h3>
+                        <p class="desc">専門AIに<span class="mark">分業させる</span>仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 67. スキルクリエイター -->
+                <a href="skill-creator.html" class="term-card">
+                    <div class="thumb thumb-skcreator">
+                        <div class="thumb-inner">
+                            <div class="scc-wrap">
+                                <span class="scc-spark">✦</span>
+                                <span class="scc-spark">✦</span>
+                                <span class="scc-spark">✦</span>
+                                <div class="scc-pkg">new-skill.md</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スキルクリエイター</h3>
+                        <p class="desc">新しいスキルを<span class="mark">対話的に作成</span>する機能。</p>
+                    </div>
+                </a>
+
+                <!-- 68. プラグイン -->
+                <a href="plugin.html" class="term-card">
+                    <div class="thumb thumb-plugin">
+                        <div class="thumb-inner">
+                            <div class="pg-wrap">
+                                <div class="pg-base"></div>
+                                <div class="pg-piece"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プラグイン</h3>
+                        <p class="desc">Claude Codeを<span class="mark">拡張するモジュール</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 69. Artifacts -->
+                <a href="artifacts.html" class="term-card">
+                    <div class="thumb thumb-artifact">
+                        <div class="thumb-inner">
+                            <div class="af-wrap">
+                                <div class="af-code">&lt;html&gt;</div>
+                                <span class="af-arrow">→</span>
+                                <div class="af-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Artifacts</h3>
+                        <p class="desc">生成物を<span class="mark">即プレビュー</span>する機能。</p>
+                    </div>
+                </a>
+
+                <!-- 70. スラッシュコマンド -->
+                <a href="slash-command.html" class="term-card">
+                    <div class="thumb thumb-slash">
+                        <div class="thumb-inner">
+                            <div class="sl-wrap">
+                                <span class="sl-slash">/</span><span class="sl-cmd">command</span><span class="sl-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スラッシュコマンド</h3>
+                        <p class="desc"><span class="mark">「/」+ 名前</span>で機能を呼び出す操作。</p>
                     </div>
                 </a>
 
