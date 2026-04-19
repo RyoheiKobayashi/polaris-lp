@@ -2567,6 +2567,359 @@
             100%      { width: 0; }
         }
 
+        /* ========= G-1. API: リクエスト→レスポンス ========= */
+        .thumb-api .api-wrap {
+            display: flex; align-items: center; gap: 6px;
+            font-family: var(--font-mono); font-size: 10px;
+        }
+        .thumb-api .api-box {
+            background: #fff; border: 1px solid var(--line);
+            padding: 6px 10px; border-radius: 4px; color: var(--ink);
+        }
+        .thumb-api .api-pipe {
+            width: 18px; height: 2px; background: var(--ink-mute);
+            position: relative; overflow: hidden;
+        }
+        .thumb-api .api-pipe::before {
+            content: ''; position: absolute; left: 0; top: 0;
+            width: 6px; height: 100%; background: var(--ink);
+            animation: api-flow 1.8s linear infinite;
+        }
+        @keyframes api-flow {
+            0%   { left: -6px; }
+            100% { left: 100%; }
+        }
+
+        /* ========= G-2. APIキー: 鍵 ========= */
+        .thumb-apikey .ak-wrap {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .thumb-apikey .ak-key {
+            width: 16px; height: 16px; border-radius: 50%;
+            border: 3px solid var(--ink); position: relative;
+        }
+        .thumb-apikey .ak-key::after {
+            content: ''; position: absolute; top: 50%; left: 100%;
+            width: 20px; height: 3px; background: var(--ink);
+            transform: translateY(-50%);
+        }
+        .thumb-apikey .ak-key::before {
+            content: ''; position: absolute; top: 50%; left: 44px;
+            width: 3px; height: 6px; background: var(--ink);
+            transform: translateY(-50%);
+        }
+        .thumb-apikey .ak-env {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink-warm); background: var(--bg-warm);
+            padding: 4px 8px; border-radius: 3px;
+            border: 1px dashed var(--ink-mute);
+            animation: ak-blink 2s ease-in-out infinite;
+        }
+        @keyframes ak-blink {
+            0%, 100% { opacity: 0.6; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= G-3. HTML: タグ ========= */
+        .thumb-html .ht-wrap {
+            font-family: var(--font-mono); font-size: 14px; color: var(--ink-warm);
+            background: #fff; border: 1px solid var(--line);
+            border-radius: 6px; padding: 12px 16px; line-height: 1.6;
+        }
+        .thumb-html .ht-tag { color: var(--ink); }
+        .thumb-html .ht-dot {
+            display: inline-block; width: 24px; height: 4px;
+            background: var(--ink-mute); border-radius: 2px;
+            vertical-align: middle;
+            animation: ht-grow 2.5s ease-in-out infinite;
+            transform-origin: left center;
+        }
+        @keyframes ht-grow {
+            0%, 20%  { transform: scaleX(0); }
+            50%, 80% { transform: scaleX(1); }
+            100%     { transform: scaleX(0); }
+        }
+
+        /* ========= G-4. JSON: {} ========= */
+        .thumb-json .js-wrap {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 6px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 11px;
+            min-width: 140px; line-height: 1.7;
+        }
+        .thumb-json .js-key { color: var(--mark); }
+        .thumb-json .js-val { color: #fff; }
+        .thumb-json .js-brace { color: var(--ink-mute); }
+        .thumb-json .js-fade { animation: js-fade 2.5s ease-in-out infinite; }
+        @keyframes js-fade {
+            0%, 100% { opacity: 0.4; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= G-5. CLI: コマンド入力 ========= */
+        .thumb-cli .cli-wrap {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 6px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 12px;
+            min-width: 160px;
+        }
+        .thumb-cli .cli-prompt { color: var(--mark); }
+        .thumb-cli .cli-cmd {
+            display: inline-block;
+            overflow: hidden; white-space: nowrap;
+            animation: cli-type 3s steps(10, end) infinite;
+            vertical-align: bottom;
+        }
+        .thumb-cli .cli-caret {
+            display: inline-block; width: 7px; height: 13px;
+            background: #fff; vertical-align: middle;
+            animation: cc-blink 1s step-end infinite;
+        }
+        @keyframes cli-type {
+            0%, 10%  { width: 0; }
+            50%, 90% { width: 10ch; }
+            100%     { width: 0; }
+        }
+
+        /* ========= G-6. ターミナル: ウィンドウ ========= */
+        .thumb-terminal .tm-window {
+            width: 150px;
+            background: #fff; border: 1px solid var(--line);
+            border-radius: 6px; overflow: hidden;
+        }
+        .thumb-terminal .tm-bar {
+            background: var(--bg-warm); padding: 4px 8px;
+            display: flex; gap: 4px;
+            border-bottom: 1px solid var(--line);
+        }
+        .thumb-terminal .tm-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--ink-mute);
+        }
+        .thumb-terminal .tm-body {
+            background: var(--ink-warm); color: #fff;
+            padding: 8px 10px;
+            font-family: var(--font-mono); font-size: 10px;
+            min-height: 40px;
+        }
+        .thumb-terminal .tm-caret {
+            display: inline-block; width: 6px; height: 12px;
+            background: #fff; vertical-align: middle;
+            animation: cc-blink 1s step-end infinite;
+        }
+
+        /* ========= G-7. GitHub: ブランチ ========= */
+        .thumb-github .gh-wrap {
+            position: relative; width: 140px; height: 80px;
+        }
+        .thumb-github .gh-main {
+            position: absolute; top: 40%; left: 0;
+            width: 100%; height: 2px; background: var(--ink);
+        }
+        .thumb-github .gh-branch {
+            position: absolute; top: 70%; left: 20%;
+            width: 50%; height: 2px; background: var(--ink-mute);
+        }
+        .thumb-github .gh-link {
+            position: absolute; top: 40%; left: 20%;
+            width: 2px; height: 30%;
+            background: var(--ink-mute);
+        }
+        .thumb-github .gh-link-back {
+            position: absolute; top: 40%; left: 70%;
+            width: 2px; height: 30%;
+            background: var(--ink-mute);
+        }
+        .thumb-github .gh-commit {
+            position: absolute; width: 10px; height: 10px; border-radius: 50%;
+            background: var(--ink); transform: translate(-50%, -50%);
+            animation: gh-pulse 2s ease-in-out infinite;
+        }
+        .thumb-github .gh-commit:nth-child(5) { top: 40%; left: 15%; }
+        .thumb-github .gh-commit:nth-child(6) { top: 40%; left: 50%; animation-delay: 0.3s; }
+        .thumb-github .gh-commit:nth-child(7) { top: 40%; left: 85%; animation-delay: 0.6s; background: var(--mark); border: 2px solid var(--ink); }
+        .thumb-github .gh-commit:nth-child(8) { top: 70%; left: 45%; background: var(--ink-mute); animation-delay: 0.4s; }
+        @keyframes gh-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50%      { transform: translate(-50%, -50%) scale(1.3); }
+        }
+
+        /* ========= G-8. Webhook: トリガー→通知 ========= */
+        .thumb-webhook .wh-wrap {
+            display: flex; align-items: center; gap: 6px;
+            font-family: var(--font-mono); font-size: 10px;
+        }
+        .thumb-webhook .wh-event {
+            background: var(--mark); color: var(--ink);
+            padding: 4px 8px; border-radius: 3px;
+            border: 1px solid var(--ink-warm);
+            animation: wh-fire 2.8s ease-in-out infinite;
+        }
+        .thumb-webhook .wh-arrow {
+            color: var(--ink-mute); font-family: var(--font-mono); font-size: 12px;
+        }
+        .thumb-webhook .wh-bell {
+            background: var(--ink); color: #fff;
+            padding: 4px 8px; border-radius: 3px;
+            animation: wh-ring 2.8s ease-in-out infinite;
+        }
+        @keyframes wh-fire {
+            0%, 15%   { transform: scale(1); opacity: 0.6; }
+            30%       { transform: scale(1.08); opacity: 1; }
+            100%      { transform: scale(1); opacity: 0.6; }
+        }
+        @keyframes wh-ring {
+            0%, 55%   { transform: rotate(0); opacity: 0.6; }
+            65%       { transform: rotate(-8deg); opacity: 1; }
+            75%       { transform: rotate(8deg); opacity: 1; }
+            85%       { transform: rotate(0); opacity: 1; }
+            100%      { transform: rotate(0); opacity: 0.6; }
+        }
+
+        /* ========= G-9. デプロイ: ローカル→公開 ========= */
+        .thumb-deploy .dp-wrap {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .thumb-deploy .dp-local {
+            background: var(--bg-warm); border: 1px solid var(--line);
+            padding: 8px 10px; border-radius: 4px;
+            font-family: var(--font-mono); font-size: 10px; color: var(--ink-warm);
+        }
+        .thumb-deploy .dp-arrow {
+            font-family: var(--font-mono); font-size: 14px; color: var(--ink-warm);
+            animation: dp-fly 2.4s ease-in-out infinite;
+        }
+        @keyframes dp-fly {
+            0%, 100% { transform: translateX(0);    opacity: 0.5; }
+            50%      { transform: translateX(6px);  opacity: 1; }
+        }
+        .thumb-deploy .dp-cloud {
+            background: var(--ink); color: #fff;
+            padding: 8px 10px; border-radius: 4px;
+            font-family: var(--font-mono); font-size: 10px;
+        }
+
+        /* ========= G-10. スクレイピング: ページ→データ ========= */
+        .thumb-scrape .sc-wrap {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .thumb-scrape .sc-page {
+            width: 50px; height: 60px;
+            background: #fff; border: 1px solid var(--line);
+            border-radius: 3px; padding: 6px;
+            display: flex; flex-direction: column; gap: 3px;
+        }
+        .thumb-scrape .sc-page span {
+            height: 3px; background: var(--line); border-radius: 1px;
+        }
+        .thumb-scrape .sc-page span:nth-child(2) { width: 70%; background: var(--mark); animation: sc-extract 2.5s ease-in-out infinite; }
+        .thumb-scrape .sc-page span:nth-child(4) { width: 60%; background: var(--mark); animation: sc-extract 2.5s ease-in-out infinite 0.3s; }
+        @keyframes sc-extract {
+            0%, 100% { opacity: 0.3; }
+            50%      { opacity: 1; }
+        }
+        .thumb-scrape .sc-arrow {
+            font-family: var(--font-mono); color: var(--ink-mute); font-size: 14px;
+        }
+        .thumb-scrape .sc-data {
+            font-family: var(--font-mono); font-size: 10px;
+            background: var(--ink-warm); color: var(--mark);
+            padding: 6px 8px; border-radius: 4px;
+            line-height: 1.4;
+        }
+
+        /* ========= G-11. Python: def ========= */
+        .thumb-python .py-wrap {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 6px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 11px;
+            line-height: 1.6; min-width: 140px;
+        }
+        .thumb-python .py-kw { color: var(--mark); }
+        .thumb-python .py-fn { color: #fff; }
+        .thumb-python .py-str { color: var(--ink-mute); }
+
+        /* ========= G-12. YAML: インデント ========= */
+        .thumb-yaml .yl-wrap {
+            background: #fff; border: 1px solid var(--line);
+            border-radius: 6px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 10px;
+            line-height: 1.7;
+        }
+        .thumb-yaml .yl-key { color: var(--ink); }
+        .thumb-yaml .yl-val { color: var(--ink-mute); }
+        .thumb-yaml .yl-indent { display: inline-block; width: 12px; }
+
+        /* ========= G-13. .md/.txt: テキストファイル ========= */
+        .thumb-text .tx-wrap {
+            display: flex; gap: 10px;
+        }
+        .thumb-text .tx-file {
+            width: 48px; height: 56px;
+            background: #fff; border: 1px solid var(--line); border-radius: 4px;
+            position: relative; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 9px; color: var(--ink-warm);
+            font-weight: 600;
+            animation: tx-pulse 3s ease-in-out infinite;
+        }
+        .thumb-text .tx-file::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 10px; height: 10px;
+            background: var(--bg-warm);
+            border-left: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+        .thumb-text .tx-file:nth-child(2) { animation-delay: 0.5s; background: var(--mark); }
+        @keyframes tx-pulse {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-4px); }
+        }
+
+        /* ========= G-14. CSV: グリッド ========= */
+        .thumb-csv .cv-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1px; background: var(--ink-mute);
+            border: 1px solid var(--ink-mute);
+            width: 110px; height: 70px;
+        }
+        .thumb-csv .cv-cell {
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 8px; color: var(--ink);
+        }
+        .thumb-csv .cv-cell.header { background: var(--bg-warm); font-weight: 600; }
+        .thumb-csv .cv-cell.highlight {
+            background: var(--mark);
+            animation: cv-blink 2.2s ease-in-out infinite;
+        }
+        @keyframes cv-blink {
+            0%, 100% { opacity: 0.5; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= G-15. GAS: Googleサービス自動化 ========= */
+        .thumb-gas-term .gs-wrap {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .thumb-gas-term .gs-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: var(--ink); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+        }
+        .thumb-gas-term .gs-code {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink-warm); line-height: 1.6;
+        }
+        .thumb-gas-term .gs-kw { color: var(--ink); }
+        .thumb-gas-term .gs-gear {
+            animation: gs-rotate 4s linear infinite;
+            display: inline-block;
+        }
+        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
         /* ========= カテゴリフィルタ ========= */
         .cat-filter {
             display: flex;
@@ -2632,12 +2985,13 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">70</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">85</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
             <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
             <button class="cat-btn" data-filter="D">AIツール<span class="cat-count">17</span></button>
             <button class="cat-btn" data-filter="E">Claude Code<span class="cat-count">10</span></button>
+            <button class="cat-btn" data-filter="G">エンジニアリング<span class="cat-count">15</span></button>
         </div>
     </div>
 
@@ -3962,6 +4316,290 @@
                     <div class="card-body">
                         <h3>スラッシュコマンド</h3>
                         <p class="desc"><span class="mark">「/」+ 名前</span>で機能を呼び出す操作。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Category G -->
+        <section class="cat-section" data-cat="G">
+            <header class="cat-head">
+                <div class="cat-tag">G · Engineering & Tech</div>
+                <h2 class="cat-heading">エンジニアリング・技術</h2>
+                <p class="cat-lead">AI活用を一段上に引き上げるための技術用語。エンジニアでなくても「概念を知っている」だけで活用の幅が広がります。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 71. API -->
+                <a href="api.html" class="term-card">
+                    <div class="thumb thumb-api">
+                        <div class="thumb-inner">
+                            <div class="api-wrap">
+                                <span class="api-box">app</span>
+                                <span class="api-pipe"></span>
+                                <span class="api-box">API</span>
+                                <span class="api-pipe"></span>
+                                <span class="api-box">service</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>API</h3>
+                        <p class="desc">サービス間を繋ぐ<span class="mark">窓口</span>の仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 72. APIキー / .env -->
+                <a href="api-key.html" class="term-card">
+                    <div class="thumb thumb-apikey">
+                        <div class="thumb-inner">
+                            <div class="ak-wrap">
+                                <div class="ak-key"></div>
+                                <span class="ak-env">.env</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>APIキー / .env</h3>
+                        <p class="desc">APIの<span class="mark">合鍵</span>と安全な管理方法。</p>
+                    </div>
+                </a>
+
+                <!-- 73. HTML -->
+                <a href="html.html" class="term-card">
+                    <div class="thumb thumb-html">
+                        <div class="thumb-inner">
+                            <div class="ht-wrap">
+                                <span class="ht-tag">&lt;h1&gt;</span>
+                                <span class="ht-dot"></span>
+                                <span class="ht-tag">&lt;/h1&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>HTML</h3>
+                        <p class="desc">Webページの<span class="mark">構造を記述</span>する言語。</p>
+                    </div>
+                </a>
+
+                <!-- 74. JSON -->
+                <a href="json.html" class="term-card">
+                    <div class="thumb thumb-json">
+                        <div class="thumb-inner">
+                            <div class="js-wrap">
+                                <div><span class="js-brace">{</span></div>
+                                <div>&nbsp;&nbsp;<span class="js-key">"name"</span>: <span class="js-val js-fade">"koba"</span>,</div>
+                                <div>&nbsp;&nbsp;<span class="js-key">"age"</span>: <span class="js-val">36</span></div>
+                                <div><span class="js-brace">}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>JSON</h3>
+                        <p class="desc">データを<span class="mark">構造化して記述</span>する軽量形式。</p>
+                    </div>
+                </a>
+
+                <!-- 75. CLI -->
+                <a href="cli.html" class="term-card">
+                    <div class="thumb thumb-cli">
+                        <div class="thumb-inner">
+                            <div class="cli-wrap">
+                                <span class="cli-prompt">$</span> <span class="cli-cmd">claude run</span><span class="cli-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>CLI</h3>
+                        <p class="desc">テキストコマンドで<span class="mark">操作</span>するインターフェース。</p>
+                    </div>
+                </a>
+
+                <!-- 76. ターミナル -->
+                <a href="terminal.html" class="term-card">
+                    <div class="thumb thumb-terminal">
+                        <div class="thumb-inner">
+                            <div class="tm-window">
+                                <div class="tm-bar">
+                                    <div class="tm-dot"></div>
+                                    <div class="tm-dot"></div>
+                                    <div class="tm-dot"></div>
+                                </div>
+                                <div class="tm-body">~ % <span class="tm-caret"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ターミナル</h3>
+                        <p class="desc">CLIを<span class="mark">実行するアプリ</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 77. GitHub / GitHub Pages -->
+                <a href="github.html" class="term-card">
+                    <div class="thumb thumb-github">
+                        <div class="thumb-inner">
+                            <div class="gh-wrap">
+                                <div class="gh-main"></div>
+                                <div class="gh-branch"></div>
+                                <div class="gh-link"></div>
+                                <div class="gh-commit"></div>
+                                <div class="gh-commit"></div>
+                                <div class="gh-commit"></div>
+                                <div class="gh-commit"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>GitHub / GitHub Pages</h3>
+                        <p class="desc">コード管理と<span class="mark">無料公開</span>のプラットフォーム。</p>
+                    </div>
+                </a>
+
+                <!-- 78. Webhook -->
+                <a href="webhook.html" class="term-card">
+                    <div class="thumb thumb-webhook">
+                        <div class="thumb-inner">
+                            <div class="wh-wrap">
+                                <span class="wh-event">申込</span>
+                                <span class="wh-arrow">→</span>
+                                <span class="wh-bell">通知</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Webhook</h3>
+                        <p class="desc">イベント発生で<span class="mark">自動通知</span>する仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 79. デプロイ -->
+                <a href="deploy.html" class="term-card">
+                    <div class="thumb thumb-deploy">
+                        <div class="thumb-inner">
+                            <div class="dp-wrap">
+                                <div class="dp-local">local</div>
+                                <span class="dp-arrow">→</span>
+                                <div class="dp-cloud">live</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>デプロイ</h3>
+                        <p class="desc">作ったものを<span class="mark">公開状態にする</span>工程。</p>
+                    </div>
+                </a>
+
+                <!-- 80. スクレイピング -->
+                <a href="scraping.html" class="term-card">
+                    <div class="thumb thumb-scrape">
+                        <div class="thumb-inner">
+                            <div class="sc-wrap">
+                                <div class="sc-page">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="sc-arrow">→</span>
+                                <div class="sc-data">[...]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スクレイピング</h3>
+                        <p class="desc">Webから<span class="mark">自動でデータ収集</span>する技術。</p>
+                    </div>
+                </a>
+
+                <!-- 81. Python -->
+                <a href="python.html" class="term-card">
+                    <div class="thumb thumb-python">
+                        <div class="thumb-inner">
+                            <div class="py-wrap">
+                                <span class="py-kw">def</span> <span class="py-fn">hello</span>():<br>
+                                &nbsp;&nbsp;<span class="py-kw">print</span>(<span class="py-str">"hi"</span>)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Python</h3>
+                        <p class="desc">AI・自動化で<span class="mark">最も使われる</span>プログラミング言語。</p>
+                    </div>
+                </a>
+
+                <!-- 82. YAML -->
+                <a href="yaml.html" class="term-card">
+                    <div class="thumb thumb-yaml">
+                        <div class="thumb-inner">
+                            <div class="yl-wrap">
+                                <div><span class="yl-key">name:</span> <span class="yl-val">skill</span></div>
+                                <div><span class="yl-key">type:</span> <span class="yl-val">command</span></div>
+                                <div><span class="yl-indent"></span><span class="yl-key">args:</span></div>
+                                <div><span class="yl-indent"></span><span class="yl-indent"></span>- <span class="yl-val">input</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>YAML</h3>
+                        <p class="desc"><span class="mark">読みやすい設定ファイル</span>の記述形式。</p>
+                    </div>
+                </a>
+
+                <!-- 83. .md / .txt -->
+                <a href="text-files.html" class="term-card">
+                    <div class="thumb thumb-text">
+                        <div class="thumb-inner">
+                            <div class="tx-wrap">
+                                <div class="tx-file">.md</div>
+                                <div class="tx-file">.txt</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>.md / .txt</h3>
+                        <p class="desc">AIと相性が良い<span class="mark">テキストファイル形式</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 84. CSV -->
+                <a href="csv.html" class="term-card">
+                    <div class="thumb thumb-csv">
+                        <div class="thumb-inner">
+                            <div class="cv-grid">
+                                <div class="cv-cell header">name</div>
+                                <div class="cv-cell header">age</div>
+                                <div class="cv-cell header">city</div>
+                                <div class="cv-cell">koba</div>
+                                <div class="cv-cell highlight">36</div>
+                                <div class="cv-cell">tokyo</div>
+                                <div class="cv-cell">ai</div>
+                                <div class="cv-cell">5</div>
+                                <div class="cv-cell highlight">osaka</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>CSV</h3>
+                        <p class="desc">カンマ区切りの<span class="mark">表形式データ</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 85. GAS -->
+                <a href="gas.html" class="term-card">
+                    <div class="thumb thumb-gas-term">
+                        <div class="thumb-inner">
+                            <div class="gs-wrap">
+                                <div class="gs-icon">G</div>
+                                <div class="gs-code">
+                                    <span class="gs-kw">function</span> <span class="gs-gear">⚙</span><br>
+                                    autoReply()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>GAS</h3>
+                        <p class="desc">Googleサービスを<span class="mark">自動化</span>するスクリプト環境。</p>
                     </div>
                 </a>
 
