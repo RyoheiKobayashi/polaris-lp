@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="文字を読むより、動きで見る。ポモドーロ、Deep Work、メタ認知、忘却曲線など、学習効率を上げる定番メソッドを動きで3秒で理解。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-warm: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #191919;
+            --ink-warm: #37352f;
+            --ink-soft: #787774;
+            --ink-mute: #9b9a97;
+            --line: #e9e9e7;
+            --accent: #2383e2;
+            --mark: #fdecc8;
+            --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--bg);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--ink-warm);
+            line-height: 1.25;
+            font-weight: 500;
+        }
+        p { color: var(--ink-warm); }
+        a { color: var(--accent); text-underline-offset: 3px; }
+
+        .cat-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+        }
+        .mono { font-family: var(--font-mono); }
+        .mark {
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+        }
+        .hairline { border-top: 1px solid var(--line); }
+
+        .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
+
+        .top-nav {
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        /* ========= グリッド ========= */
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* ========= カード ========= */
+        .term-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .term-card:hover {
+            border-color: var(--ink-mute);
+            transform: translateY(-2px);
+        }
+        .term-card .card-body { padding: 22px 26px 26px; }
+        .term-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            margin: 0 0 10px;
+            line-height: 1.3;
+        }
+        .term-card .desc {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            margin: 0;
+        }
+
+        /* ========= サムネ共通 ========= */
+        .thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .thumb-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+        }
+
+        /* ========= L1. アイゼンハワーマトリクス: 4象限 ========= */
+        .thumb-matrix .em-stage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            width: 110px;
+            height: 90px;
+        }
+        .thumb-matrix .em-cell {
+            border: 1.5px solid var(--ink);
+            background: #fff;
+            border-radius: 4px;
+            position: relative;
+            animation: em-light 4s ease-in-out infinite;
+        }
+        .thumb-matrix .em-cell:nth-child(1) { animation-delay: 0s;   }
+        .thumb-matrix .em-cell:nth-child(2) { animation-delay: 1s;   }
+        .thumb-matrix .em-cell:nth-child(3) { animation-delay: 2s;   }
+        .thumb-matrix .em-cell:nth-child(4) { animation-delay: 3s;   }
+        @keyframes em-light {
+            0%, 15%, 100% { background: #fff; }
+            25%, 35%      { background: var(--mark); }
+        }
+        .thumb-matrix .em-cell.urgent::after {
+            content: '!'; position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+            color: var(--ink);
+        }
+
+        /* ========= L2. ポモドーロ: タイマー ========= */
+        .thumb-pomodoro .pm-stage { position: relative; width: 80px; height: 80px; }
+        .thumb-pomodoro .pm-circle {
+            position: absolute; inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--ink) 0deg, var(--ink) 360deg, var(--bg-warm) 360deg);
+            animation: pm-tick 4s linear infinite;
+        }
+        .thumb-pomodoro .pm-inner {
+            position: absolute; inset: 8px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .thumb-pomodoro .pm-stem {
+            position: absolute; top: -6px; left: 50%;
+            transform: translateX(-50%);
+            width: 14px; height: 8px;
+            background: var(--ink);
+            border-radius: 3px 3px 0 0;
+        }
+        @keyframes pm-tick {
+            0%   { background: conic-gradient(var(--mark) 0deg, var(--bg-warm) 0deg); }
+            100% { background: conic-gradient(var(--mark) 360deg, var(--bg-warm) 360deg); }
+        }
+
+        /* ========= L3. タイムブロッキング: 縦スケジュール ========= */
+        .thumb-block .tb-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 130px;
+        }
+        .thumb-block .tb-row {
+            display: flex; gap: 6px;
+            align-items: center;
+        }
+        .thumb-block .tb-time {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--ink-mute);
+            width: 22px;
+        }
+        .thumb-block .tb-bar {
+            height: 12px;
+            border-radius: 2px;
+            border: 1.5px solid var(--ink);
+            animation: tb-fill 3s ease-in-out infinite;
+        }
+        .thumb-block .tb-row:nth-child(1) .tb-bar { width: 80px; background: var(--mark); animation-delay: 0s; }
+        .thumb-block .tb-row:nth-child(2) .tb-bar { width: 60px; background: #fff;        animation-delay: .3s; }
+        .thumb-block .tb-row:nth-child(3) .tb-bar { width: 90px; background: var(--ink-soft); animation-delay: .6s; }
+        .thumb-block .tb-row:nth-child(4) .tb-bar { width: 50px; background: #fff;        animation-delay: .9s; }
+        @keyframes tb-fill {
+            0%, 100% { opacity: 0.55; transform: scaleX(0.95); transform-origin: left; }
+            50%      { opacity: 1;    transform: scaleX(1); }
+        }
+
+        /* ========= L4. 忘却曲線: 減衰ライン ========= */
+        .thumb-curve .cv-stage {
+            position: relative;
+            width: 140px; height: 80px;
+        }
+        .thumb-curve .cv-svg {
+            width: 100%; height: 100%;
+            overflow: visible;
+        }
+        .thumb-curve .cv-line {
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: cv-draw 3s ease-out infinite;
+        }
+        .thumb-curve .cv-dot {
+            fill: var(--mark);
+            stroke: var(--ink);
+            stroke-width: 1.5;
+            opacity: 0;
+            animation: cv-pop 3s ease-out infinite;
+        }
+        .thumb-curve .cv-dot:nth-of-type(2) { animation-delay: .8s; }
+        .thumb-curve .cv-dot:nth-of-type(3) { animation-delay: 1.4s; }
+        .thumb-curve .cv-dot:nth-of-type(4) { animation-delay: 2.0s; }
+        @keyframes cv-draw {
+            0%   { stroke-dashoffset: 200; }
+            60%  { stroke-dashoffset: 0; }
+            85%  { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 0; opacity: 0.3; }
+        }
+        @keyframes cv-pop {
+            0%, 30% { opacity: 0; r: 0; }
+            50%     { opacity: 1; r: 4; }
+            85%     { opacity: 1; r: 4; }
+            100%    { opacity: 0.3; r: 4; }
+        }
+
+        /* ========= L5. メタ認知: 入れ子の眼 ========= */
+        .thumb-meta .mt-stage { position: relative; width: 90px; height: 90px; }
+        .thumb-meta .mt-outer {
+            position: absolute; inset: 0;
+            border: 2px solid var(--ink);
+            border-radius: 50%;
+            animation: mt-pulse 3s ease-in-out infinite;
+        }
+        .thumb-meta .mt-mid {
+            position: absolute; inset: 14px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            background: #fff;
+            animation: mt-pulse 3s ease-in-out infinite;
+            animation-delay: .3s;
+        }
+        .thumb-meta .mt-inner {
+            position: absolute; inset: 28px;
+            border-radius: 50%;
+            background: var(--mark);
+            border: 1.5px solid var(--ink);
+            animation: mt-pulse 3s ease-in-out infinite;
+            animation-delay: .6s;
+        }
+        .thumb-meta .mt-arrow {
+            position: absolute;
+            top: 50%; left: 100%;
+            transform: translate(-30%, -50%);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--ink-mute);
+            animation: mt-pulse 3s ease-in-out infinite;
+        }
+        @keyframes mt-pulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.05); }
+        }
+        .thumb-meta .mt-mid { animation-name: mt-pulse-mid; }
+        @keyframes mt-pulse-mid {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.08); }
+        }
+
+        /* ========= 共有: S-pulse（脈動・反復） ========= */
+        .thumb-s-pulse .sp-stage { position: relative; width: 100px; height: 100px; }
+        .thumb-s-pulse .sp-core {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px; height: 44px;
+            background: var(--mark); border: 2px solid var(--ink); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--ink);
+            animation: sp-beat 1.6s ease-in-out infinite;
+        }
+        .thumb-s-pulse .sp-wave {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px; height: 44px;
+            border: 2px solid var(--ink); border-radius: 50%;
+            opacity: 0;
+            animation: sp-wave 1.6s ease-out infinite;
+        }
+        .thumb-s-pulse .sp-wave:nth-child(2) { animation-delay: 0s; }
+        .thumb-s-pulse .sp-wave:nth-child(3) { animation-delay: .55s; }
+        @keyframes sp-beat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50%      { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        @keyframes sp-wave {
+            0%   { opacity: .8; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0;  transform: translate(-50%, -50%) scale(2.2); }
+        }
+
+        /* ========= 共有: S-funnel（締切で絞る） ========= */
+        .thumb-s-funnel .sf-stage { position: relative; width: 140px; height: 90px; }
+        .thumb-s-funnel .sf-layer {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            height: 14px; border-radius: 2px;
+            animation: sf-flow 2.6s ease-in-out infinite;
+        }
+        .thumb-s-funnel .sf-layer:nth-child(1) { top: 4px;  width: 120px; background: var(--ink); animation-delay: 0s; }
+        .thumb-s-funnel .sf-layer:nth-child(2) { top: 28px; width: 90px;  background: var(--ink-soft); animation-delay: .25s; }
+        .thumb-s-funnel .sf-layer:nth-child(3) { top: 52px; width: 60px;  background: var(--ink-mute); animation-delay: .5s; }
+        .thumb-s-funnel .sf-layer:nth-child(4) { top: 72px; width: 32px;  background: var(--mark); border: 1.5px solid var(--ink); animation-delay: .75s; }
+        @keyframes sf-flow {
+            0%, 100% { opacity: 0.55; transform: translateX(-50%) scaleX(0.92); }
+            50%      { opacity: 1;    transform: translateX(-50%) scaleX(1); }
+        }
+
+        /* ========= 共有: S-bar（棒グラフ・偏り） ========= */
+        .thumb-s-bar .sb-stage { display: flex; align-items: flex-end; gap: 5px; height: 80px; }
+        .thumb-s-bar .sb-col {
+            width: 14px; background: var(--ink); border-radius: 2px 2px 0 0;
+            animation: sb-grow 2.8s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+        .thumb-s-bar .sb-col:nth-child(1) { height: 90%; animation-delay: 0s;   background: var(--mark); border: 1.5px solid var(--ink); }
+        .thumb-s-bar .sb-col:nth-child(2) { height: 25%; animation-delay: .12s; background: var(--ink-soft); }
+        .thumb-s-bar .sb-col:nth-child(3) { height: 22%; animation-delay: .24s; background: var(--ink-soft); }
+        .thumb-s-bar .sb-col:nth-child(4) { height: 18%; animation-delay: .36s; background: var(--ink-soft); }
+        .thumb-s-bar .sb-col:nth-child(5) { height: 15%; animation-delay: .48s; background: var(--ink-soft); }
+        @keyframes sb-grow {
+            0%, 100% { transform: scaleY(0.3); opacity: .55; }
+            50%      { transform: scaleY(1);   opacity: 1; }
+        }
+
+        /* ========= 共有: S-cycle（循環） ========= */
+        .thumb-s-cycle .sc-stage { position: relative; width: 90px; height: 90px; }
+        .thumb-s-cycle .sc-ring {
+            position: absolute; inset: 0;
+            border: 2px dashed var(--ink-mute); border-radius: 50%;
+            animation: sc-spin 6s linear infinite;
+        }
+        .thumb-s-cycle .sc-core {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            background: var(--ink); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em;
+        }
+        .thumb-s-cycle .sc-dot {
+            position: absolute; width: 10px; height: 10px;
+            background: var(--mark); border: 1.5px solid var(--ink); border-radius: 50%;
+            animation: sc-dot 2.4s ease-in-out infinite;
+        }
+        .thumb-s-cycle .sc-dot:nth-child(3) { top: -2px; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .thumb-s-cycle .sc-dot:nth-child(4) { top: 50%; right: -2px; transform: translateY(-50%); animation-delay: .6s; }
+        .thumb-s-cycle .sc-dot:nth-child(5) { bottom: -2px; left: 50%; transform: translateX(-50%); animation-delay: 1.2s; }
+        .thumb-s-cycle .sc-dot:nth-child(6) { top: 50%; left: -2px; transform: translateY(-50%); animation-delay: 1.8s; }
+        @keyframes sc-spin { to { transform: rotate(360deg); } }
+        @keyframes sc-dot  {
+            0%, 100% { opacity: .4; transform: scale(.8); }
+            50%      { opacity: 1;  transform: scale(1.2); }
+        }
+
+        /* ========= 共有: S-stack（積み上げ） ========= */
+        .thumb-s-stack .sk-stage { position: relative; width: 100px; height: 90px; }
+        .thumb-s-stack .sk-layer {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 70px; height: 16px; border-radius: 3px;
+            border: 1.5px solid var(--ink);
+            animation: sk-up 2.4s ease-out infinite;
+            opacity: 0;
+        }
+        .thumb-s-stack .sk-layer:nth-child(1) { bottom: 4px;  background: #fff;            animation-delay: 0s;   }
+        .thumb-s-stack .sk-layer:nth-child(2) { bottom: 24px; background: var(--ink-mute); animation-delay: .3s; }
+        .thumb-s-stack .sk-layer:nth-child(3) { bottom: 44px; background: var(--ink-soft); animation-delay: .6s; }
+        .thumb-s-stack .sk-layer:nth-child(4) { bottom: 64px; background: var(--mark);     animation-delay: .9s; }
+        @keyframes sk-up {
+            0%   { opacity: 0; transform: translate(-50%, 10px); }
+            30%, 90% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; }
+        }
+
+        /* ========= 共有: S-step（階段・段階） ========= */
+        .thumb-s-step .ss-stage { display: flex; align-items: flex-end; gap: 6px; }
+        .thumb-s-step .ss-step {
+            width: 28px; background: #fff;
+            border: 1.5px solid var(--ink); border-radius: 4px;
+            animation: ss-rise 2.4s ease-in-out infinite;
+        }
+        .thumb-s-step .ss-step:nth-child(1) { height: 30px; animation-delay: 0s; }
+        .thumb-s-step .ss-step:nth-child(2) { height: 50px; animation-delay: .2s; }
+        .thumb-s-step .ss-step:nth-child(3) { height: 70px; animation-delay: .4s; }
+        @keyframes ss-rise {
+            0%, 100% { background: #fff; transform: translateY(2px); }
+            50%      { background: var(--mark); transform: translateY(-2px); }
+        }
+
+        /* ========= 共有: S-magnet（引き出す） ========= */
+        .thumb-s-magnet .sm-stage { position: relative; width: 140px; height: 80px; }
+        .thumb-s-magnet .sm-magnet {
+            position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 28px; height: 40px;
+            background: var(--ink); border-radius: 4px;
+            box-shadow: inset 0 -8px 0 var(--mark);
+        }
+        .thumb-s-magnet .sm-dot {
+            position: absolute; top: 50%;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--ink-soft);
+            animation: sm-pull 2.4s ease-in infinite;
+        }
+        .thumb-s-magnet .sm-dot:nth-child(2) { left: 0;   animation-delay: 0s;   }
+        .thumb-s-magnet .sm-dot:nth-child(3) { left: 10px; animation-delay: .3s; }
+        .thumb-s-magnet .sm-dot:nth-child(4) { left: 20px; animation-delay: .6s; }
+        @keyframes sm-pull {
+            0%   { opacity: 0; transform: translate(0, -50%); }
+            40%  { opacity: 1; }
+            100% { opacity: 0; transform: translate(90px, -50%); }
+        }
+
+        /* ========= 共有: S-feed（流れ・交互） ========= */
+        .thumb-s-feed .sd-stage {
+            position: relative;
+            width: 120px; height: 90px;
+            overflow: hidden;
+            border: 1.5px solid var(--ink); border-radius: 6px;
+            background: #fff;
+        }
+        .thumb-s-feed .sd-track {
+            position: absolute; top: 0; left: 0; right: 0;
+            animation: sd-scroll 4s linear infinite;
+        }
+        .thumb-s-feed .sd-item {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--line);
+        }
+        .thumb-s-feed .sd-ava { width: 14px; height: 14px; border-radius: 50%; background: var(--ink-mute); flex: none; }
+        .thumb-s-feed .sd-line { height: 6px; border-radius: 2px; background: var(--ink-soft); flex: 1; }
+        .thumb-s-feed .sd-item:nth-child(2n) .sd-ava { background: var(--mark); border: 1px solid var(--ink); }
+        @keyframes sd-scroll {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        /* ========= カテゴリ ========= */
+        .cat-section { margin-bottom: 80px; }
+        .cat-section:last-child { margin-bottom: 0; }
+        .cat-head {
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--line);
+        }
+        .cat-tag {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-mute);
+            margin-bottom: 10px;
+        }
+        .cat-heading {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            margin: 0 0 8px;
+            line-height: 1.25;
+        }
+        .cat-lead {
+            font-size: 15px;
+            color: var(--ink-soft);
+            line-height: 1.7;
+            max-width: 40em;
+            margin: 0;
+        }
+
+        /* ========= フィルタ ========= */
+        .cat-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0 auto;
+        }
+        .cat-btn {
+            padding: 8px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--surface);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: border-color .2s ease, color .2s ease, background .2s ease;
+        }
+        .cat-btn:hover { border-color: var(--ink-mute); color: var(--ink); }
+        .cat-btn.active {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+        .cat-count { margin-left: 6px; font-size: 11px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <!-- 上部ナビ -->
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-6xl">
+            <span class="cat-label">Learning · Visual Glossary</span>
+            <a href="disclaimer.html" class="nav-link text-xs">免責事項</a>
+        </div>
+    </div>
+
+    <!-- ヒーロー -->
+    <header class="container mx-auto px-6 pt-16 md:pt-24 pb-12 max-w-3xl">
+        <h1 class="text-4xl md:text-6xl mb-6" style="letter-spacing: -0.01em;">
+            見たら<span class="mark">一発でわかる</span><br>
+            学習方法用語。
+        </h1>
+        <p class="text-lg md:text-xl" style="color: var(--ink-soft);">
+            文字を読むより、動きで見る。
+        </p>
+    </header>
+
+    <div class="container mx-auto px-6 max-w-3xl">
+        <div class="hairline"></div>
+    </div>
+
+    <!-- カテゴリフィルタ -->
+    <div class="container mx-auto px-6 pt-10 max-w-6xl">
+        <div class="cat-filter" id="cat-filter">
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">19</span></button>
+            <button class="cat-btn" data-filter="K">時間管理<span class="cat-count">6</span></button>
+            <button class="cat-btn" data-filter="L">集中・没頭<span class="cat-count">3</span></button>
+            <button class="cat-btn" data-filter="M">記憶・定着<span class="cat-count">5</span></button>
+            <button class="cat-btn" data-filter="N">メタ認知・目標<span class="cat-count">5</span></button>
+        </div>
+    </div>
+
+    <!-- 用語一覧 -->
+    <main class="container mx-auto px-6 pt-12 pb-24 max-w-6xl">
+
+        <!-- Category K: 時間管理 -->
+        <section class="cat-section" data-cat="K">
+            <header class="cat-head">
+                <div class="cat-tag">K · Time Management</div>
+                <h2 class="cat-heading">時間管理</h2>
+                <p class="cat-lead">「時間が足りない」の正体は、配分のミス。締切・優先順位・ブロックの定番メソッドで学習時間を確保する。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-funnel"><div class="thumb-inner"><div class="sf-stage"><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div></div></div></div>
+                    <div class="card-body"><h3>パーキンソンの法則</h3><p class="desc">仕事は<span class="mark">与えられた時間いっぱいに膨張する</span>。締切を短く区切れば、同じ作業も短時間で終わる。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-matrix"><div class="thumb-inner"><div class="em-stage"><div class="em-cell urgent"></div><div class="em-cell"></div><div class="em-cell"></div><div class="em-cell"></div></div></div></div>
+                    <div class="card-body"><h3>アイゼンハワーマトリクス</h3><p class="desc">タスクを<span class="mark">「緊急 × 重要」の4象限</span>に分けて優先順位をつける。学習は「重要だが緊急でない」枠を死守する。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-block"><div class="thumb-inner"><div class="tb-stage"><div class="tb-row"><div class="tb-time">9:00</div><div class="tb-bar"></div></div><div class="tb-row"><div class="tb-time">11:00</div><div class="tb-bar"></div></div><div class="tb-row"><div class="tb-time">14:00</div><div class="tb-bar"></div></div><div class="tb-row"><div class="tb-time">16:00</div><div class="tb-bar"></div></div></div></div></div>
+                    <div class="card-body"><h3>タイムブロッキング</h3><p class="desc">カレンダーに<span class="mark">「学習する時間」を予定として入れる</span>。空き時間にやるのではなく、ブロックを確保する。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-pomodoro"><div class="thumb-inner"><div class="pm-stage"><div class="pm-stem"></div><div class="pm-circle"></div><div class="pm-inner">25</div></div></div></div>
+                    <div class="card-body"><h3>ポモドーロ・テクニック</h3><p class="desc"><span class="mark">25分集中 → 5分休憩</span>を1セットで繰り返す。脳のスタミナを温存しながら長時間学べる定番メソッド。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">2m</div></div></div></div>
+                    <div class="card-body"><h3>2分ルール</h3><p class="desc">「2分以内で終わるなら、今すぐやる」。<span class="mark">先延ばしの累積を防ぐ</span>シンプルな実行ルール。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                    <div class="card-body"><h3>80:20の法則（パレート）</h3><p class="desc">成果の8割は、<span class="mark">原因の2割から生まれる</span>。学習も「効く2割」を見極めて、そこに時間を集中させる。</p></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Category L: 集中・没頭 -->
+        <section class="cat-section" data-cat="L">
+            <header class="cat-head">
+                <div class="cat-tag">L · Focus &amp; Flow</div>
+                <h2 class="cat-heading">集中・没頭</h2>
+                <p class="cat-lead">「なんとなく勉強した」を抜け出すには、集中の質を上げる。深い没頭状態の作り方と、脳を疲れさせない設計の話。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">DEEP</div></div></div></div>
+                    <div class="card-body"><h3>Deep Work（深い仕事）</h3><p class="desc">通知・雑音を遮断して<span class="mark">高難度タスクに没頭する状態</span>。カル・ニューポート提唱。学びの質はここで決まる。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-cycle"><div class="thumb-inner"><div class="sc-stage"><div class="sc-ring"></div><div class="sc-core">FLOW</div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div></div></div></div>
+                    <div class="card-body"><h3>フロー</h3><p class="desc">時間を忘れて没頭する<span class="mark">最高の集中状態</span>。チクセントミハイ提唱。難易度とスキルが釣り合うときに発生する。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-stack"><div class="thumb-inner"><div class="sk-stage"><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div></div></div></div>
+                    <div class="card-body"><h3>認知負荷</h3><p class="desc">脳の作業メモリにかかる負荷。<span class="mark">情報量が多すぎると学習が止まる</span>ので、分解して段階的に学ぶのがコツ。</p></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Category M: 記憶・定着 -->
+        <section class="cat-section" data-cat="M">
+            <header class="cat-head">
+                <div class="cat-tag">M · Memory &amp; Retention</div>
+                <h2 class="cat-heading">記憶・定着</h2>
+                <p class="cat-lead">「読んだのに思い出せない」は学び方の問題。脳の仕組みに沿って、忘れる前に呼び起こすテクニック。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <div class="term-card">
+                    <div class="thumb thumb-curve"><div class="thumb-inner"><div class="cv-stage"><svg class="cv-svg" viewBox="0 0 140 80"><path class="cv-line" d="M 5 10 Q 30 50, 60 65 T 135 75"/><circle class="cv-dot" cx="5" cy="10" r="4"/><circle class="cv-dot" cx="40" cy="48" r="4"/><circle class="cv-dot" cx="80" cy="68" r="4"/><circle class="cv-dot" cx="125" cy="74" r="4"/></svg></div></div></div>
+                    <div class="card-body"><h3>忘却曲線（エビングハウス）</h3><p class="desc">人は<span class="mark">1日で約7割を忘れる</span>。学習直後・1日後・1週間後…と復習タイミングを設計すれば定着率が跳ね上がる。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">×N</div></div></div></div>
+                    <div class="card-body"><h3>間隔反復</h3><p class="desc">間隔を空けて何度も復習する手法。<span class="mark">忘れかけた頃に思い出す</span>のが最も定着する。Anki等のSRSアプリの土台。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-magnet"><div class="thumb-inner"><div class="sm-stage"><div class="sm-dot"></div><div class="sm-dot"></div><div class="sm-dot"></div><div class="sm-magnet"></div></div></div></div>
+                    <div class="card-body"><h3>アクティブリコール</h3><p class="desc">読み返さず、<span class="mark">頭から強引に思い出す</span>復習法。テスト効果とも呼ばれ、再読より圧倒的に記憶定着が高い。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-stack"><div class="thumb-inner"><div class="sk-stage"><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div></div></div></div>
+                    <div class="card-body"><h3>チャンキング</h3><p class="desc">情報を<span class="mark">意味のある「かたまり」</span>にまとめて覚える手法。電話番号を3-4桁で区切るのも同じ原理。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-feed"><div class="thumb-inner"><div class="sd-stage"><div class="sd-track"><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div></div></div></div></div>
+                    <div class="card-body"><h3>インターリービング</h3><p class="desc">複数の科目・トピックを<span class="mark">交互に学ぶ</span>練習法。1つを集中的にやるより応用力が育ちやすい。</p></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Category N: メタ認知・目標 -->
+        <section class="cat-section" data-cat="N">
+            <header class="cat-head">
+                <div class="cat-tag">N · Metacognition &amp; Goals</div>
+                <h2 class="cat-heading">メタ認知・目標設計</h2>
+                <p class="cat-lead">「自分の学びを、自分で観察する」スキル。何を、なぜ、どこまで学ぶのかを設計する技術。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <div class="term-card">
+                    <div class="thumb thumb-meta"><div class="thumb-inner"><div class="mt-stage"><div class="mt-outer"></div><div class="mt-mid"></div><div class="mt-inner"></div></div></div></div>
+                    <div class="card-body"><h3>メタ認知</h3><p class="desc"><span class="mark">「自分の思考を、もう一段上から見る」</span>力。「今、何が分かっていないのか」を把握できると学習効率は跳ね上がる。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-cycle"><div class="thumb-inner"><div class="sc-stage"><div class="sc-ring"></div><div class="sc-core">TEACH</div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div></div></div></div>
+                    <div class="card-body"><h3>ファインマン・テクニック</h3><p class="desc"><span class="mark">「子どもに説明できるか」</span>で理解度を測る学習法。説明できない部分が、自分の弱点。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-step"><div class="thumb-inner"><div class="ss-stage"><div class="ss-step"></div><div class="ss-step"></div><div class="ss-step"></div></div></div></div>
+                    <div class="card-body"><h3>SMART目標</h3><p class="desc">Specific / Measurable / Achievable / Relevant / Time-bound。<span class="mark">5要素を満たす目標設定</span>のフレーム。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-cycle"><div class="thumb-inner"><div class="sc-stage"><div class="sc-ring"></div><div class="sc-core">WOOP</div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div><div class="sc-dot"></div></div></div></div>
+                    <div class="card-body"><h3>WOOPの法則</h3><p class="desc">Wish / Outcome / Obstacle / Plan の頭文字。<span class="mark">障害を先回りして計画する</span>目標達成フレーム。</p></div>
+                </div>
+
+                <div class="term-card">
+                    <div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                    <div class="card-body"><h3>1万時間の法則</h3><p class="desc">どの分野もプロ級になるには<span class="mark">約1万時間の意図的練習</span>が必要、という説。批判もあるが「継続の質」を考える起点として有名。</p></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="max-width: 1152px; margin: 80px auto 0; padding: 0 24px;">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 16px; padding: 56px 40px; max-width: 820px; margin: 0 auto; text-align: center;">
+                <div class="mono text-sm mb-4" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <h2 class="text-3xl md:text-5xl mb-5" style="color: var(--ink-warm); font-family: var(--font-serif); font-weight: 500; letter-spacing: -0.01em; line-height: 1.25;">
+                    用語を知ったあとが、<br>本番。
+                </h2>
+                <p class="mb-8" style="color: var(--ink-soft); font-size: 17px; line-height: 1.85;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。<br>
+                    用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 14px 32px; border-radius: 10px; background: var(--ink); color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; transition: opacity .2s, transform .2s;"
+                       onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform='translateY(0)'">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-6xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      (function () {
+        const filterBar = document.getElementById('cat-filter');
+        if (!filterBar) return;
+        const buttons = filterBar.querySelectorAll('.cat-btn');
+        const sections = document.querySelectorAll('.cat-section');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            sections.forEach(sec => {
+              sec.style.display = (filter === 'all' || sec.dataset.cat === filter) ? '' : 'none';
+            });
+          });
+        });
+      })();
+    </script>
+
+</body>
+</html>
