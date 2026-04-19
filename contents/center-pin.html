@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>センターピンとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="センターピンをアニメーションで3秒で理解。倒せば連鎖的に全体が動く最重要ポイント。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-cp { position: relative; width: 320px; height: 220px; margin: 0 auto; }
+        .hero-cp .hc-pins { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .hero-cp .hc-row { display: flex; gap: 8px; }
+        .hero-cp .hc-pin { width: 20px; height: 40px; background: #fff; border: 2px solid var(--ink); border-radius: 8px 8px 2px 2px; animation: hc-topple 4s ease-in-out infinite; }
+        .hero-cp .hc-pin.center { background: var(--mark); animation-delay: 1s; position: relative; }
+        .hero-cp .hc-pin.center::before { content: '★'; position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: 18px; color: var(--ink); }
+        .hero-cp .hc-row:nth-child(1) .hc-pin { animation-delay: 1.8s; }
+        .hero-cp .hc-row:nth-child(2) .hc-pin { animation-delay: 1.6s; }
+        .hero-cp .hc-row:nth-child(2) .hc-pin.center { animation-delay: 1s; }
+        .hero-cp .hc-row:nth-child(3) .hc-pin { animation-delay: 1.4s; }
+        .hero-cp .hc-row:nth-child(4) .hc-pin { animation-delay: 1.2s; }
+        .hero-cp .hc-ball { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 36px; height: 36px; background: var(--ink); border-radius: 50%; animation: hc-ball-roll 4s ease-in-out infinite; }
+        @keyframes hc-topple {
+            0%, 20% { transform: rotate(0); opacity: 1; }
+            35%, 95% { transform: rotate(25deg) translateY(20px); opacity: 0.5; }
+            100% { transform: rotate(0); opacity: 1; }
+        }
+        @keyframes hc-ball-roll {
+            0%, 15% { transform: translate(-50%, 100px); }
+            30%, 90% { transform: translate(-50%, -100px); }
+            100% { transform: translate(-50%, 100px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">50 · L. 心理トリガー</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Center Pin</div>
+            <h1 class="detail-title">センターピン</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">倒せば連鎖的に全体が動く最重要ポイント</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-cp">
+                <div class="hc-pins">
+                    <div class="hc-row"><div class="hc-pin"></div></div>
+                    <div class="hc-row"><div class="hc-pin"></div><div class="hc-pin center"></div><div class="hc-pin"></div></div>
+                    <div class="hc-row"><div class="hc-pin"></div><div class="hc-pin"></div><div class="hc-pin"></div><div class="hc-pin"></div></div>
+                </div>
+                <div class="hc-ball"></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">ど真ん中を狙えば、後ろのピンも連鎖的に倒せる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">センターピンってそもそも何？</h2>
+            <p>
+                センターピンは、ボウリング用語で<span class="mark">「倒せば他のピンが連鎖的に倒れる中心ピン」</span>のこと。マーケ用語では<span class="mark">「ここを押さえれば他が自然と動く最重要ポイント」</span>の意味。
+                たくさんの課題がある中で、<span class="mark">「全ての問題の根っこになってる1つ」</span>を特定して、そこに集中する思考法です。
+                「CVR・CTR・LTV・アクセス…どれが問題か」を並列で考えるより、<span class="mark">全てに波及する中心課題</span>を見つけた方が、改善の効率が段違いに上がります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ボウリングの1番ピン</h3>
+                    <p>
+                        ボウリングで<span class="mark">ど真ん中のピンを狙う</span>と、後ろのピンも連鎖的に倒れてストライクになる。
+                        それ以外のピンを狙うと、他のピンに伝播しない。<span class="mark">狙いどころ1つで結果が激変</span>する。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 生活習慣の「朝の起床時間」</h3>
+                    <p>
+                        朝起きる時間を早めるだけで、<span class="mark">食事・運動・仕事・睡眠</span>すべてが連鎖的に改善する。
+                        他を個別に改善するより、<span class="mark">根っこの1つ</span>を変える方が早い。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    センターピン＝<span class="mark">倒せば全てが連鎖する中心課題</span>。
+                    「全部やる」ではなく<span class="mark">「最もレバレッジの効く1つ」</span>に集中するのが賢い戦い方。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="human-weakness.html" class="nav-link">← 前の単語：性弱説</a>
+            <a href="algorithm.html" class="nav-link">次の単語：アルゴリズム →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
