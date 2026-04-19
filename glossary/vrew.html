@@ -46,33 +46,56 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Vrew: 動画 + キャプション */
-        .hero-vrew .frame {
-            width: 280px; background: #fff; border: 1px solid var(--line);
-            border-radius: 10px; padding: 16px;
+        /* Vrew: 動画 → 自動字幕 + 不要シーンカット */
+        .hero-vrew { width: 320px; }
+        .vr-frame {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 10px; padding: 14px;
         }
-        .hero-vrew .screen {
-            height: 100px; background: var(--bg-warm); border-radius: 6px;
-            margin-bottom: 16px; position: relative; overflow: hidden;
+        .vr-screen {
+            height: 110px; background: var(--ink-warm); border-radius: 6px;
+            margin-bottom: 12px; position: relative; overflow: hidden;
         }
-        .hero-vrew .screen::after {
+        .vr-screen::after {
             content: ''; position: absolute; top: 50%; left: 50%;
             width: 0; height: 0;
-            border-left: 20px solid var(--ink-mute);
+            border-left: 20px solid var(--mark);
             border-top: 14px solid transparent;
             border-bottom: 14px solid transparent;
             transform: translate(-50%, -50%);
+            opacity: 0.8;
         }
-        .hero-vrew .cap {
-            height: 5px; background: var(--ink-warm); border-radius: 2px;
-            margin: 0 auto; width: 0%;
-            animation: vr-type 3s ease-in-out infinite;
+        .vr-timeline {
+            display: flex; gap: 3px;
+            margin-bottom: 10px;
         }
-        @keyframes vr-type {
-            0%, 15%  { width: 0%; }
-            55%, 90% { width: 85%; }
-            100%     { width: 0%; }
+        .vr-clip {
+            flex: 1; height: 14px; border-radius: 2px;
+            background: var(--line);
+            transition: background .4s, opacity .4s;
         }
+        .hero-vrew.stage-1 .vr-clip,
+        .hero-vrew.stage-2 .vr-clip,
+        .hero-vrew.stage-3 .vr-clip { background: var(--ink-warm); }
+        .hero-vrew.stage-3 .vr-clip.cut { background: var(--line); opacity: 0.3; position: relative; }
+        .hero-vrew.stage-3 .vr-clip.cut::after {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0;
+            height: 1.5px; background: #e74c3c;
+            transform: translateY(-50%);
+        }
+        .vr-caption {
+            height: 6px; background: var(--ink-warm); border-radius: 2px;
+            width: 0;
+            transition: width .8s ease-in-out;
+        }
+        .hero-vrew.stage-2 .vr-caption,
+        .hero-vrew.stage-3 .vr-caption { width: 85%; }
+        .vr-label {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink-soft); margin-top: 8px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-vrew.stage-3 .vr-label { opacity: 1; }
     </style>
 </head>
 <body>
@@ -92,13 +115,40 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-vrew">
-                <div class="frame">
-                    <div class="screen"></div>
-                    <div class="cap"></div>
+            <div class="hero-vrew" id="hero-vrew">
+                <div class="vr-frame">
+                    <div class="vr-screen"></div>
+                    <div class="vr-timeline">
+                        <div class="vr-clip"></div>
+                        <div class="vr-clip cut"></div>
+                        <div class="vr-clip"></div>
+                        <div class="vr-clip cut"></div>
+                        <div class="vr-clip"></div>
+                    </div>
+                    <div class="vr-caption"></div>
+                    <div class="vr-label">字幕生成 + 不要シーン自動カット</div>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-vrew');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // タイムライン全部埋まる
+                await wait(900);
+                hero.classList.add('stage-2');  // 字幕生成
+                await wait(1100);
+                hero.classList.add('stage-3');  // 不要シーンカット
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Vrewってそもそも何？</h2>

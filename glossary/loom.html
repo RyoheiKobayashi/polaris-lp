@@ -46,24 +46,73 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Loom: 録画 + 再生 */
-        .hero-loom { display: flex; align-items: center; gap: 40px; }
-        .hero-loom .rec {
-            width: 30px; height: 30px; background: var(--ink); border-radius: 50%;
-            animation: loom-pulse 1.2s ease-in-out infinite;
+        /* Loom: 画面録画 → URL発行 → 相手が視聴 */
+        .hero-loom { display: flex; align-items: center; gap: 16px; }
+        .loom-window {
+            width: 180px; height: 120px;
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; overflow: hidden; position: relative;
         }
-        @keyframes loom-pulse {
-            0%, 100% { transform: scale(1);    opacity: 1; }
-            50%      { transform: scale(1.3);  opacity: 0.5; }
+        .loom-bar {
+            background: var(--bg-warm); padding: 6px 10px;
+            display: flex; gap: 4px;
+            border-bottom: 1px solid var(--line);
         }
-        .hero-loom .play {
+        .loom-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--ink-mute);
+        }
+        .loom-screen {
+            background: var(--ink-warm);
+            height: calc(100% - 26px);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .loom-rec {
+            position: absolute; top: 8px; right: 8px;
+            display: flex; align-items: center; gap: 4px;
+            font-family: var(--font-mono); font-size: 9px; color: #fff;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .hero-loom.stage-1 .loom-rec,
+        .hero-loom.stage-2 .loom-rec { opacity: 1; }
+        .hero-loom.stage-3 .loom-rec { opacity: 0; }
+        .loom-rec::before {
+            content: ''; width: 8px; height: 8px; border-radius: 50%;
+            background: #e74c3c; animation: loom-pulse 1s ease-in-out infinite;
+        }
+        @keyframes loom-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .loom-play {
             width: 0; height: 0;
-            border-left: 34px solid var(--ink-warm);
-            border-top: 22px solid transparent;
-            border-bottom: 22px solid transparent;
+            border-left: 24px solid var(--mark);
+            border-top: 16px solid transparent;
+            border-bottom: 16px solid transparent;
+            opacity: 0.5;
         }
-        .hero-loom .arrow {
-            font-family: var(--font-mono); font-size: 24px; color: var(--ink-mute);
+        .hero-loom.stage-3 .loom-play { opacity: 1; }
+        .loom-arrow {
+            font-family: var(--font-mono); font-size: 22px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-loom.stage-2 .loom-arrow,
+        .hero-loom.stage-3 .loom-arrow { opacity: 1; }
+        .loom-url {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 6px; padding: 6px 12px;
+            font-family: var(--font-mono); font-size: 11px; color: var(--ink);
+            opacity: 0; transform: translateX(-6px);
+            transition: opacity .35s, transform .35s;
+        }
+        .hero-loom.stage-2 .loom-url,
+        .hero-loom.stage-3 .loom-url { opacity: 1; transform: translateX(0); }
+        .hero-loom.stage-3 .loom-url {
+            border-color: var(--ink);
+            animation: loom-shared 0.5s ease-out;
+        }
+        @keyframes loom-shared {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -84,12 +133,41 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-loom">
-                <div class="rec"></div>
-                <span class="arrow">→</span>
-                <div class="play"></div>
+            <div class="hero-loom" id="hero-loom">
+                <div class="loom-window">
+                    <div class="loom-bar">
+                        <div class="loom-dot"></div>
+                        <div class="loom-dot"></div>
+                        <div class="loom-dot"></div>
+                    </div>
+                    <div class="loom-screen">
+                        <div class="loom-rec">REC</div>
+                        <div class="loom-play"></div>
+                    </div>
+                </div>
+                <span class="loom-arrow">→</span>
+                <div class="loom-url">loom.com/share/...</div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-loom');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 録画中
+                await wait(1400);
+                hero.classList.add('stage-2');  // URL発行
+                await wait(1200);
+                hero.classList.add('stage-3');  // 相手が視聴
+                await wait(1800);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Loomってそもそも何？</h2>

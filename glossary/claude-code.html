@@ -46,22 +46,38 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Claude Code: ターミナル */
-        .hero-cc .term {
+        /* Claude Code: 指示 → ファイル編集 → コミット */
+        .hero-cc {
             background: var(--ink-warm); color: #fff;
-            border-radius: 10px; padding: 24px 28px;
-            font-family: var(--font-mono); font-size: 20px;
-            min-width: 360px;
+            border-radius: 10px; padding: 20px 24px;
+            font-family: var(--font-mono); font-size: 14px;
+            min-width: 400px; line-height: 1.8;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
-        .hero-cc .prompt { color: var(--mark); margin-right: 10px; }
-        .hero-cc .cmd { color: #fff; }
+        .hero-cc .line {
+            display: block;
+            opacity: 0; transform: translateX(-4px);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-cc.stage-1 .line.l1,
+        .hero-cc.stage-2 .line.l1,
+        .hero-cc.stage-2 .line.l2,
+        .hero-cc.stage-2 .line.l3,
+        .hero-cc.stage-3 .line { opacity: 1; transform: translateX(0); }
+        .hero-cc .line.l2 { transition-delay: .1s; }
+        .hero-cc .line.l3 { transition-delay: .2s; }
+        .hero-cc .line.l4 { transition-delay: .1s; }
+        .hero-cc .prompt { color: var(--mark); margin-right: 8px; }
+        .hero-cc .you { color: #fff; }
+        .hero-cc .ai { color: var(--ink-mute); margin-left: 12px; }
+        .hero-cc .success { color: var(--mark); }
         .hero-cc .caret {
-            display: inline-block; width: 10px; height: 22px;
-            background: #fff; vertical-align: middle; margin-left: 4px;
+            display: inline-block; width: 8px; height: 16px;
+            background: #fff; vertical-align: middle; margin-left: 2px;
             animation: cc-blink 1s step-end infinite;
         }
         @keyframes cc-blink { 50% { opacity: 0; } }
+        .hero-cc.stage-2 .caret, .hero-cc.stage-3 .caret { display: none; }
     </style>
 </head>
 <body>
@@ -81,12 +97,32 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-cc">
-                <div class="term">
-                    <span class="prompt">$</span><span class="cmd">claude</span><span class="caret"></span>
-                </div>
+            <div class="hero-cc" id="hero-cc">
+                <span class="line l1"><span class="prompt">you ▸</span><span class="you">README更新して</span><span class="caret"></span></span>
+                <span class="line l2"><span class="ai">  ファイル3つ編集中...</span></span>
+                <span class="line l3"><span class="ai">  git commit 作成中...</span></span>
+                <span class="line l4"><span class="prompt">✓</span><span class="success">done (2 files changed)</span></span>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cc');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 指示入力
+                await wait(1000);
+                hero.classList.add('stage-2');  // AIがファイル編集中・コミット
+                await wait(1600);
+                hero.classList.add('stage-3');  // 完了
+                await wait(1700);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Claude Codeってそもそも何？</h2>

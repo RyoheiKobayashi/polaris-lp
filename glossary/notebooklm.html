@@ -46,24 +46,49 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* NotebookLM: ノート + ハイライト */
-        .hero-nlm .book {
-            width: 260px; background: #fff; border: 1px solid var(--line);
-            border-radius: 6px; padding: 24px 28px;
+        /* NotebookLM: 複数資料アップ → AIが読み取り → 根拠付き回答 */
+        .hero-nlm { display: flex; align-items: center; gap: 16px; }
+        .nlm-sources {
+            display: flex; flex-direction: column; gap: 6px;
         }
-        .hero-nlm .line {
-            height: 6px; background: var(--line); border-radius: 2px; margin-bottom: 10px;
+        .nlm-doc {
+            width: 80px; background: #fff; border: 1.5px solid var(--line);
+            border-radius: 6px; padding: 8px 10px;
+            font-family: var(--font-mono); font-size: 9px; color: var(--ink-warm);
+            opacity: 0; transform: translateX(-6px);
+            transition: opacity .35s, transform .35s;
+            display: flex; align-items: center; gap: 6px;
         }
-        .hero-nlm .line:last-child { margin-bottom: 0; width: 70%; }
-        .hero-nlm .highlight {
-            background: var(--mark);
-            animation: nlm-sweep 3.5s ease-in-out infinite;
-            width: 0%;
+        .nlm-doc::before {
+            content: '📄'; font-size: 12px;
         }
-        @keyframes nlm-sweep {
-            0%, 10%   { width: 0%; }
-            55%, 90%  { width: 100%; }
-            100%      { width: 0%; }
+        .hero-nlm.stage-1 .nlm-doc,
+        .hero-nlm.stage-2 .nlm-doc,
+        .hero-nlm.stage-3 .nlm-doc { opacity: 1; transform: translateX(0); }
+        .nlm-doc:nth-child(2) { transition-delay: .1s; }
+        .nlm-doc:nth-child(3) { transition-delay: .2s; }
+        .nlm-arrow {
+            font-family: var(--font-mono); font-size: 20px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-nlm.stage-2 .nlm-arrow,
+        .hero-nlm.stage-3 .nlm-arrow { opacity: 1; }
+        .nlm-answer {
+            width: 190px;
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 14px 16px;
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--ink-warm); line-height: 1.7;
+            opacity: 0; transform: translateX(6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-nlm.stage-3 .nlm-answer { opacity: 1; transform: translateX(0); }
+        .nlm-answer .highlight {
+            background: var(--mark); padding: 0 2px; border-radius: 2px;
+        }
+        .nlm-answer .cite {
+            font-size: 9px; color: var(--ink-mute); margin-top: 6px;
+            display: block;
         }
     </style>
 </head>
@@ -84,15 +109,38 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-nlm">
-                <div class="book">
-                    <div class="line"></div>
-                    <div class="line highlight"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+            <div class="hero-nlm" id="hero-nlm">
+                <div class="nlm-sources">
+                    <div class="nlm-doc">report.pdf</div>
+                    <div class="nlm-doc">notes.md</div>
+                    <div class="nlm-doc">web.html</div>
+                </div>
+                <span class="nlm-arrow">→</span>
+                <div class="nlm-answer">
+                    核心は<span class="highlight">この3点</span>です...
+                    <span class="cite">出典: report.pdf p.12</span>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-nlm');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 資料3つアップ
+                await wait(900);
+                hero.classList.add('stage-2');  // 矢印
+                await wait(500);
+                hero.classList.add('stage-3');  // 答え + 出典
+                await wait(2200);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">NotebookLMってそもそも何？</h2>

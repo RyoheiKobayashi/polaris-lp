@@ -46,34 +46,54 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Lovart: 画像フレーム + ブラシ */
-        .hero-lovart .frame {
-            width: 280px; height: 180px;
-            border: 1px solid var(--line); border-radius: 10px;
-            background: #fff; position: relative; overflow: hidden;
+        /* Lovart: プロンプト → 生成中 → 高品質画像 */
+        .hero-lovart { display: flex; flex-direction: column; gap: 14px; width: 320px; }
+        .lv-prompt {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-warm);
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .35s, transform .35s;
         }
-        .hero-lovart .stroke {
-            position: absolute; left: 10%; top: 50%;
-            width: 80%; height: 5px; background: var(--ink-warm);
-            border-radius: 3px;
-            transform: translateY(-50%) rotate(-6deg) scaleX(0);
-            transform-origin: left center;
-            animation: lv-paint 3.5s ease-in-out infinite;
+        .hero-lovart.stage-1 .lv-prompt,
+        .hero-lovart.stage-2 .lv-prompt,
+        .hero-lovart.stage-3 .lv-prompt { opacity: 1; transform: translateY(0); }
+        .lv-canvas {
+            width: 100%; height: 160px; position: relative;
+            border: 1.5px solid var(--line); border-radius: 10px;
+            overflow: hidden;
+            background: var(--bg-warm);
         }
-        @keyframes lv-paint {
-            0%, 10%  { transform: translateY(-50%) rotate(-6deg) scaleX(0); opacity: 1; }
-            60%, 80% { transform: translateY(-50%) rotate(-6deg) scaleX(1); opacity: 1; }
-            100%     { transform: translateY(-50%) rotate(-6deg) scaleX(1); opacity: 0; }
+        .lv-loading {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute);
+            opacity: 0;
+            transition: opacity .3s;
         }
-        .hero-lovart .star {
-            position: absolute; top: 20px; right: 28px;
-            font-size: 24px; color: var(--ink-mute);
-            animation: lv-twinkle 2s ease-in-out infinite;
+        .hero-lovart.stage-2 .lv-loading { opacity: 1; }
+        .hero-lovart.stage-3 .lv-loading { opacity: 0; }
+        .lv-loading::before {
+            content: ''; display: inline-block;
+            width: 12px; height: 12px; border: 2px solid var(--ink-mute);
+            border-top-color: var(--ink); border-radius: 50%;
+            margin-right: 8px; vertical-align: middle;
+            animation: lv-spin 0.8s linear infinite;
         }
-        @keyframes lv-twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50%      { opacity: 1;   transform: scale(1.3); }
+        @keyframes lv-spin { to { transform: rotate(360deg); } }
+        .lv-result {
+            position: absolute; inset: 0;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 0;
+            opacity: 0;
+            transition: opacity .5s;
         }
+        .hero-lovart.stage-3 .lv-result { opacity: 1; }
+        .lv-result .cell { background: var(--ink-warm); }
+        .lv-result .cell:nth-child(1) { background: linear-gradient(135deg, var(--ink-warm), var(--ink)); }
+        .lv-result .cell:nth-child(2) { background: linear-gradient(225deg, var(--mark), var(--bg-warm)); }
+        .lv-result .cell:nth-child(3) { background: linear-gradient(45deg, var(--bg-warm), var(--ink-mute)); }
+        .lv-result .cell:nth-child(4) { background: linear-gradient(315deg, var(--ink), var(--ink-warm)); }
     </style>
 </head>
 <body>
@@ -93,13 +113,38 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-lovart">
-                <div class="frame">
-                    <div class="stroke"></div>
-                    <span class="star">✦</span>
+            <div class="hero-lovart" id="hero-lovart">
+                <div class="lv-prompt">&gt; ブランドカラーのLPバナー</div>
+                <div class="lv-canvas">
+                    <div class="lv-loading">generating...</div>
+                    <div class="lv-result">
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                        <div class="cell"></div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-lovart');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // プロンプト
+                await wait(700);
+                hero.classList.add('stage-2');  // 生成中スピナー
+                await wait(1400);
+                hero.classList.add('stage-3');  // 結果画像出現
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Lovartってそもそも何？</h2>

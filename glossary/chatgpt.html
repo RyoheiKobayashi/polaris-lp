@@ -46,30 +46,50 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* ChatGPT アニメ（大） */
-        .hero-chatgpt .bubble {
-            background: #fff; border: 1px solid var(--line);
-            border-radius: 16px; padding: 18px 26px;
-            font-family: var(--font-mono); font-size: 18px; color: var(--ink);
-            min-width: 260px; position: relative; display: flex; align-items: center;
+        /* ChatGPT: 質問 → 多機能回答のローテーション */
+        .hero-chatgpt { display: flex; flex-direction: column; gap: 14px; width: 380px; }
+        .cg-q {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 14px 14px 14px 4px;
+            padding: 12px 18px;
+            font-family: var(--font-mono); font-size: 14px;
+            align-self: flex-start; max-width: 80%;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .35s, transform .35s;
         }
-        .hero-chatgpt .bubble::after {
-            content: ''; position: absolute; bottom: -8px; left: 28px;
-            width: 16px; height: 16px; background: #fff;
-            border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-            transform: rotate(45deg);
+        .hero-chatgpt.stage-1 .cg-q,
+        .hero-chatgpt.stage-2 .cg-q,
+        .hero-chatgpt.stage-3 .cg-q { opacity: 1; transform: translateY(0); }
+        .cg-a {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 14px 14px 4px 14px;
+            padding: 12px 18px;
+            font-family: var(--font-mono); font-size: 13px;
+            align-self: flex-end; max-width: 85%;
+            color: var(--ink-warm); line-height: 1.6;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .35s, transform .35s .1s;
         }
-        .hero-chatgpt .text {
-            overflow: hidden; white-space: nowrap;
-            animation: cg-type 4s steps(8, end) infinite; width: 0;
+        .hero-chatgpt.stage-2 .cg-a,
+        .hero-chatgpt.stage-3 .cg-a { opacity: 1; transform: translateY(0); }
+        .cg-a .mode {
+            display: inline-block;
+            background: var(--mark); padding: 1px 6px;
+            border-radius: 3px; font-size: 11px;
+            color: var(--ink); margin-right: 6px;
+            font-weight: 600;
         }
-        .hero-chatgpt .caret {
-            display: inline-block; width: 10px; height: 22px;
-            background: var(--ink); margin-left: 3px;
-            animation: cg-blink 1s step-end infinite;
+        .cg-a .mode-slot {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity .35s;
         }
-        @keyframes cg-type { 0%,10%{width:0;} 50%,90%{width:8ch;} 100%{width:0;} }
-        @keyframes cg-blink { 50% { opacity: 0; } }
+        .hero-chatgpt.mode-text .cg-a .mode-slot.text,
+        .hero-chatgpt.mode-code .cg-a .mode-slot.code,
+        .hero-chatgpt.mode-image .cg-a .mode-slot.image,
+        .hero-chatgpt.mode-search .cg-a .mode-slot.search { opacity: 1; position: static; }
+        .cg-a .mode-slot { position: absolute; }
+        .cg-a { position: relative; min-height: 50px; }
     </style>
 </head>
 <body>
@@ -90,12 +110,39 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-chatgpt">
-                <div class="bubble">
-                    <span class="text">質問してね</span><span class="caret"></span>
+            <div class="hero-chatgpt" id="hero-chatgpt">
+                <div class="cg-q">要約して、画像も作って</div>
+                <div class="cg-a">
+                    <span class="mode-slot text"><span class="mode">TEXT</span>要約しました...</span>
+                    <span class="mode-slot code"><span class="mode">CODE</span>function summarize() {...}</span>
+                    <span class="mode-slot image"><span class="mode">IMAGE</span>画像を生成しました</span>
+                    <span class="mode-slot search"><span class="mode">SEARCH</span>Webで検索しました</span>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-chatgpt');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            const modes = ['text','code','image','search'];
+            async function play() {
+                hero.className = 'hero-chatgpt';
+                await wait(100);
+                hero.classList.add('stage-1');  // 質問
+                await wait(600);
+                hero.classList.add('stage-2','mode-text');  // 最初のモード
+                for (let i = 1; i < modes.length; i++) {
+                    await wait(1100);
+                    modes.forEach(m => hero.classList.remove('mode-'+m));
+                    hero.classList.add('mode-'+modes[i]);
+                }
+                await wait(1500);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,400);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">ChatGPTってそもそも何？</h2>

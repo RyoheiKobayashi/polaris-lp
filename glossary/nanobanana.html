@@ -46,25 +46,51 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* NanoBanana: 画像グリッド */
-        .hero-nb .grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
-            gap: 10px; width: 260px; height: 170px;
+        /* NanoBanana: 日本語テーマ入力 → スライド図解画像生成 */
+        .hero-nb { display: flex; flex-direction: column; gap: 14px; width: 340px; }
+        .nb-prompt {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 10px 14px;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-warm);
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .35s, transform .35s;
         }
-        .hero-nb .cell {
-            border-radius: 6px; opacity: 0;
-            animation: nb-appear 3.2s ease-in-out infinite;
+        .hero-nb.stage-1 .nb-prompt,
+        .hero-nb.stage-2 .nb-prompt,
+        .hero-nb.stage-3 .nb-prompt { opacity: 1; transform: translateY(0); }
+        .nb-slide {
+            position: relative;
+            width: 100%; height: 180px;
+            background: var(--bg-warm);
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 18px;
+            opacity: 0; transform: scale(0.96);
+            transition: opacity .45s, transform .45s;
         }
-        .hero-nb .cell:nth-child(1) { background: var(--ink-warm); animation-delay: 0s; }
-        .hero-nb .cell:nth-child(2) { background: var(--mark);     animation-delay: 0.15s; }
-        .hero-nb .cell:nth-child(3) { background: var(--ink-mute); animation-delay: 0.3s; }
-        .hero-nb .cell:nth-child(4) { background: var(--ink-mute); animation-delay: 0.45s; }
-        .hero-nb .cell:nth-child(5) { background: var(--ink-warm); animation-delay: 0.6s; }
-        .hero-nb .cell:nth-child(6) { background: var(--mark);     animation-delay: 0.75s; }
-        @keyframes nb-appear {
-            0%, 15%   { opacity: 0; transform: scale(0.85); }
-            40%, 75%  { opacity: 1; transform: scale(1); }
-            100%      { opacity: 0; transform: scale(0.85); }
+        .hero-nb.stage-3 .nb-slide { opacity: 1; transform: scale(1); }
+        .nb-title {
+            background: var(--ink-warm);
+            height: 10px; width: 60%;
+            border-radius: 2px; margin-bottom: 14px;
+        }
+        .nb-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+        }
+        .nb-num {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--ink); color: var(--mark);
+            font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nb-bar {
+            flex: 1; height: 6px; background: var(--line); border-radius: 2px;
+        }
+        .nb-row:nth-child(3) .nb-bar { width: 80%; }
+        .nb-accent {
+            position: absolute; top: 18px; right: 18px;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--mark);
         }
     </style>
 </head>
@@ -85,17 +111,34 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-nb">
-                <div class="grid">
-                    <div class="cell"></div>
-                    <div class="cell"></div>
-                    <div class="cell"></div>
-                    <div class="cell"></div>
-                    <div class="cell"></div>
-                    <div class="cell"></div>
+            <div class="hero-nb" id="hero-nb">
+                <div class="nb-prompt">&gt; AI活用の3ステップを図解で</div>
+                <div class="nb-slide">
+                    <div class="nb-title"></div>
+                    <div class="nb-row"><div class="nb-num">1</div><div class="nb-bar"></div></div>
+                    <div class="nb-row"><div class="nb-num">2</div><div class="nb-bar"></div></div>
+                    <div class="nb-row"><div class="nb-num">3</div><div class="nb-bar"></div></div>
+                    <div class="nb-accent"></div>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-nb');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // テーマ入力
+                await wait(900);
+                hero.classList.add('stage-3');  // スライド出現
+                await wait(2400);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">NanoBananaってそもそも何？</h2>

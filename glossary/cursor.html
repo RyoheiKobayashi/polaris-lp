@@ -46,33 +46,63 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Cursor: コード + サジェスト */
-        .hero-cursor .code {
-            font-family: var(--font-mono); font-size: 18px;
-            color: var(--ink-warm); background: #fff;
-            border: 1px solid var(--line); border-radius: 10px;
-            padding: 24px 28px; white-space: nowrap;
+        /* Cursor: 入力 → AI補完サジェスト → Tabで確定 */
+        .hero-cursor {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 10px; padding: 20px 24px;
+            font-family: var(--font-mono); font-size: 14px;
+            line-height: 1.8; min-width: 400px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
-        .hero-cursor .kw { color: var(--ink); font-weight: 500; }
-        .hero-cursor .mute { color: var(--ink-mute); }
-        .hero-cursor .suggest {
-            color: var(--ink-mute);
-            overflow: hidden; display: inline-block;
-            vertical-align: bottom; white-space: nowrap;
-            animation: cur-suggest 3.2s steps(16, end) infinite;
+        .hero-cursor .line { display: block; }
+        .hero-cursor .kw { color: var(--mark); font-weight: 500; }
+        .hero-cursor .fn { color: #fff; }
+        .hero-cursor .str { color: var(--ink-mute); }
+        .hero-cursor .you {
+            display: inline-block;
+            overflow: hidden; white-space: nowrap; vertical-align: bottom;
             width: 0;
         }
+        .hero-cursor.stage-1 .you,
+        .hero-cursor.stage-2 .you,
+        .hero-cursor.stage-3 .you {
+            animation: cur-type 1s steps(20, end) forwards;
+        }
+        @keyframes cur-type { to { width: 20ch; } }
         .hero-cursor .caret {
-            display: inline-block; width: 3px; height: 20px;
-            background: var(--ink); vertical-align: middle;
+            display: inline-block; width: 2.5px; height: 18px;
+            background: #fff; vertical-align: middle; margin-left: 2px;
             animation: cur-blink 1s step-end infinite;
         }
-        @keyframes cur-suggest {
-            0%, 15%   { width: 0; }
-            55%, 90%  { width: 16ch; }
-            100%      { width: 0; }
-        }
+        .hero-cursor.stage-2 .caret, .hero-cursor.stage-3 .caret { display: none; }
         @keyframes cur-blink { 50% { opacity: 0; } }
+        .hero-cursor .ghost {
+            display: inline-block;
+            color: var(--ink-mute);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .hero-cursor.stage-2 .ghost { opacity: 1; }
+        .hero-cursor.stage-3 .ghost { color: #fff; opacity: 1; }
+        .hero-cursor .tab-key {
+            display: inline-block;
+            background: var(--mark); color: var(--ink);
+            padding: 2px 8px; border-radius: 4px;
+            font-size: 10px; margin-left: 12px;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .hero-cursor.stage-2 .tab-key { opacity: 1; }
+        .hero-cursor.stage-3 .tab-key {
+            opacity: 0;
+            transition-delay: 0s;
+        }
+        .hero-cursor .accepted-lines {
+            display: block;
+            opacity: 0; transform: translateX(-4px);
+            transition: opacity .35s, transform .35s;
+        }
+        .hero-cursor.stage-3 .accepted-lines { opacity: 1; transform: translateX(0); }
     </style>
 </head>
 <body>
@@ -92,12 +122,35 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-cursor">
-                <div class="code">
-                    <span class="kw">const</span> <span class="mute">goal</span> = <span class="suggest">"AIで裏方になる"</span><span class="caret"></span>
-                </div>
+            <div class="hero-cursor" id="hero-cursor">
+                <span class="line">
+                    <span class="kw">function</span> <span class="fn">summary</span>(<span class="you">text: string)</span><span class="caret"></span><span class="ghost"> {</span><span class="tab-key">Tab</span>
+                </span>
+                <span class="accepted-lines">
+                    <span class="line">&nbsp;&nbsp;<span class="kw">return</span> AI.<span class="fn">summarize</span>(text);</span>
+                    <span class="line">{'}'}</span>
+                </span>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cursor');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 手動タイプ
+                await wait(1200);
+                hero.classList.add('stage-2');  // AIサジェスト + Tab
+                await wait(1000);
+                hero.classList.add('stage-3');  // 確定→複数行展開
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Cursorってそもそも何？</h2>
