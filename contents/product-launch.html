@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロダクトローンチとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="プロダクトローンチをアニメーションで3秒で理解。段階的に情報公開し期待感を最大化して一気に販売する手法。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: カウントダウン→爆発 */
+        .hero-pl { position: relative; width: 100%; max-width: 400px; margin: 0 auto; text-align: center; }
+        .hero-pl .hpl-timer {
+            display: inline-flex; gap: 8px; margin-bottom: 28px;
+        }
+        .hero-pl .hpl-num {
+            width: 70px; height: 80px;
+            background: var(--ink); color: var(--mark);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-serif); font-size: 44px; font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-pl .hpl-num::after {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0;
+            border-top: 1px solid rgba(255,255,255,.12);
+        }
+        .hero-pl .hpl-n1 { animation: hpl-count1 5s ease-in-out infinite; }
+        .hero-pl .hpl-n2 { animation: hpl-count2 5s ease-in-out infinite; }
+        .hero-pl .hpl-label {
+            font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+            color: var(--ink-mute); margin-bottom: 20px;
+        }
+        .hero-pl .hpl-rocket {
+            font-size: 64px;
+            display: inline-block;
+            animation: hpl-launch 5s ease-in-out infinite;
+        }
+        .hero-pl .hpl-sold {
+            margin-top: 12px;
+            display: inline-block;
+            padding: 8px 18px;
+            background: var(--mark); border: 2px solid var(--ink); border-radius: 30px;
+            font-weight: 700; font-size: 14px;
+            opacity: 0;
+            animation: hpl-sold 5s ease-in-out infinite;
+        }
+        @keyframes hpl-count1 {
+            0%, 10%   { content: '0'; }
+            60%       { content: '0'; }
+        }
+        @keyframes hpl-count2 {
+            0%, 10%    { }
+            60%, 100%  { }
+        }
+        @keyframes hpl-launch {
+            0%, 60%     { transform: translateY(0) scale(1); opacity: 1; }
+            75%         { transform: translateY(-40px) scale(1.1); opacity: 1; }
+            90%, 100%   { transform: translateY(-120px) scale(.7); opacity: 0; }
+        }
+        @keyframes hpl-sold {
+            0%, 85%   { opacity: 0; transform: scale(.8); }
+            90%, 98%  { opacity: 1; transform: scale(1.1); }
+            100%      { opacity: 1; transform: scale(1); }
+        }
+        /* タイマー数字の切り替え */
+        .hero-pl .hpl-n1::before {
+            content: '0';
+            animation: n1-flip 5s steps(4, end) infinite;
+        }
+        .hero-pl .hpl-n2::before {
+            content: '3';
+            animation: n2-flip 5s steps(4, end) infinite;
+        }
+        @keyframes n1-flip {
+            0%   { content: '0'; }
+            100% { content: '0'; }
+        }
+        @keyframes n2-flip {
+            0%   { content: '3'; }
+            25%  { content: '2'; }
+            50%  { content: '1'; }
+            75%  { content: '0'; }
+            100% { content: '0'; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">09 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Product Launch</div>
+            <h1 class="detail-title">プロダクトローンチ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">期待感を最大化して一気に販売する手法</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-pl">
+                <div class="hpl-label">COUNTDOWN TO LAUNCH</div>
+                <div class="hpl-timer">
+                    <div class="hpl-num hpl-n1"></div>
+                    <div class="hpl-num hpl-n2"></div>
+                </div>
+                <div>
+                    <span class="hpl-rocket">🚀</span>
+                </div>
+                <div class="hpl-sold">SOLD OUT</div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">期待を溜め、発射の瞬間に一気に爆発させる販売手法。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">プロダクトローンチってそもそも何？</h2>
+            <p>
+                プロダクトローンチ（product launch）は、<span class="mark">「販売開始の日を予告し、事前に期待を最大化して一気に爆発的な売上を作る」手法</span>のこと。
+                映画の公開日が決まった時から予告編・主演インタビュー・試写会情報などで盛り上げ、封切り日に観客が殺到するのと同じ構造です。
+                日常販売（エバーグリーン）と違い、<span class="mark">販売期間を限定</span>して「このタイミングを逃すと買えない」と希少性を演出するのが鍵。
+                準備期間（プリプリ・プリローンチ）→本ローンチという段階設計で、<span class="mark">数週間〜数ヶ月の期待値積み上げ</span>が売上を何倍にも膨らませます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新型iPhoneの発表</h3>
+                    <p>
+                        何ヶ月も前から<span class="mark">リーク情報・予告・発表会・予約開始</span>と段階的に盛り上げる。
+                        発売日には Apple Store に長蛇の列——これこそ典型的なプロダクトローンチ。
+                        日常販売じゃ絶対に出ない熱量が、タイミング設計で生まれる。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 映画の公開初日</h3>
+                    <p>
+                        予告編 → キャストインタビュー → 試写会 → SNSで感想拡散 → 公開初日に満席。
+                        観客は何ヶ月も前から<span class="mark">見たい気持ちを溜めている</span>から、初日に一気に爆発する。
+                        プロダクトローンチは、この「期待を溜める設計」を真似た販売手法です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プロダクトローンチ＝<span class="mark">期待を溜めて一気に爆発させる販売イベント</span>。
+                    普段の100倍の熱量を<span class="mark">タイミング設計</span>で生み出す。
+                    高単価商品ほど効果が大きいのも特徴。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="opt-in.html" class="nav-link">← 前の単語：オプトイン</a>
+            <a href="pre-launch.html" class="nav-link">次の単語：プリプリ／プリローンチ →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

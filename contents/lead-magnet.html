@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リードマグネットとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="リードマグネットをアニメーションで3秒で理解。登録特典として無料で渡すPDFや動画。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 磁石が鉄粉（見込み客）を引き寄せる */
+        .hero-mag { position: relative; width: 100%; max-width: 420px; margin: 0 auto; height: 240px; }
+        .hero-mag .hm-magnet {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px; height: 110px;
+            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; gap: 6px;
+        }
+        .hero-mag .hm-magnet-body {
+            width: 72px; height: 60px;
+            background: var(--mark);
+            border: 3px solid var(--ink);
+            border-radius: 8px 8px 30px 30px;
+            position: relative;
+        }
+        .hero-mag .hm-magnet-body::before,
+        .hero-mag .hm-magnet-body::after {
+            content: '';
+            position: absolute; top: -3px;
+            width: 14px; height: 18px;
+            background: var(--ink);
+            border-radius: 3px 3px 0 0;
+        }
+        .hero-mag .hm-magnet-body::before { left: 6px; }
+        .hero-mag .hm-magnet-body::after  { right: 6px; }
+        .hero-mag .hm-magnet-label {
+            font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+            color: var(--ink-warm);
+            background: #fff;
+            padding: 2px 8px; border-radius: 10px;
+            border: 1px solid var(--ink);
+        }
+        .hero-mag .hm-lead {
+            position: absolute; width: 18px; height: 18px;
+            border-radius: 50%;
+            background: var(--ink-soft);
+            animation: hm-pull 2.8s ease-in infinite;
+        }
+        .hero-mag .hm-lead:nth-child(2)  { top: 10%;  left: 8%;  animation-delay: 0s; }
+        .hero-mag .hm-lead:nth-child(3)  { top: 30%;  left: 2%;  animation-delay: .2s; }
+        .hero-mag .hm-lead:nth-child(4)  { top: 70%;  left: 10%; animation-delay: .4s; }
+        .hero-mag .hm-lead:nth-child(5)  { top: 85%;  left: 20%; animation-delay: .6s; }
+        .hero-mag .hm-lead:nth-child(6)  { top: 10%;  right: 8%;  animation-delay: .3s; }
+        .hero-mag .hm-lead:nth-child(7)  { top: 30%;  right: 2%;  animation-delay: .5s; }
+        .hero-mag .hm-lead:nth-child(8)  { top: 70%;  right: 10%; animation-delay: .7s; }
+        .hero-mag .hm-lead:nth-child(9)  { top: 85%;  right: 20%; animation-delay: .9s; }
+        @keyframes hm-pull {
+            0%       { transform: scale(1); opacity: 1; }
+            70%      { transform: scale(.8); opacity: .9; }
+            100%     {
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%) scale(.4); opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">15 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Lead Magnet</div>
+            <h1 class="detail-title">リードマグネット</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">登録特典として配る無料コンテンツ</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-mag">
+                <div class="hm-magnet">
+                    <div class="hm-magnet-body"></div>
+                    <div class="hm-magnet-label">FREE GIFT</div>
+                </div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+                <div class="hm-lead"></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">魅力的な無料特典が、リストを引き寄せる「磁石」になる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">リードマグネットってそもそも何？</h2>
+            <p>
+                リードマグネットは<span class="mark">「リード（見込み客）」を「マグネット（磁石）」のように引き寄せる無料コンテンツ</span>のこと。
+                PDF・動画・テンプレート・チェックリストなど形式は様々ですが、共通点は<span class="mark">「登録するだけでもらえる、刺さる価値」</span>。
+                人は無料でも、登録という面倒くささと引き換えに何かを得るかどうかをシビアに判断します。だから<span class="mark">「これはどうしても欲しい！」と思わせる強烈な価値</span>が必要。
+                中途半端なリードマグネットは、登録率1%以下。強いリードマグネットは10%を超えることもあり、<span class="mark">リスト構築のすべてはここに懸かっている</span>と言っても過言ではありません。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① スーパーの試食コーナー</h3>
+                    <p>
+                        「<span class="mark">無料試食どうぞ！</span>」と言われると足が止まる。
+                        食べて美味しかったら本商品を買いたくなる——これがリードマグネットと本商品の関係。
+                        <span class="mark">試食の質</span>が、その後の購買意欲を左右する。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 釣り餌</h3>
+                    <p>
+                        釣りで針だけ垂らしても魚は食いつかない。<span class="mark">魚が好む餌をつける</span>から針にかかる。
+                        リードマグネットも同じで、<span class="mark">ターゲットが本当に欲しがる餌</span>を用意できるかが勝負。
+                        餌のセンスが全てを決める。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    リードマグネット＝<span class="mark">見込み客を引き寄せる無料特典</span>。
+                    特典の質＝そのまま登録率。<span class="mark">中途半端な特典より、"これは有料級"</span>と言えるものを1つ作る方が遥かに効く。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="one-lp-one-cta.html" class="nav-link">← 前の単語：1LP1CTA</a>
+            <a href="launch-funnel.html" class="nav-link">次の単語：ローンチファネル →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

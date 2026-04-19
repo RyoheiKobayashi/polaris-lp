@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="LP（ランディングページ）をアニメーションで3秒で理解。1つのアクションに誘導するための1枚のWebページ。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 1枚LPの縦スクロール */
+        .hero-lp { width: 240px; height: 320px; margin: 0 auto; border: 3px solid var(--ink); border-radius: 12px; overflow: hidden; background: #fff; position: relative; }
+        .hero-lp .hlp-inner {
+            position: absolute; top: 0; left: 0; right: 0;
+            animation: hlp-scroll 6s ease-in-out infinite;
+        }
+        .hero-lp .hlp-sec {
+            padding: 22px 18px;
+            border-bottom: 1px solid var(--line);
+        }
+        .hero-lp .hlp-title {
+            height: 14px; background: var(--ink); border-radius: 4px;
+            margin-bottom: 10px; width: 80%;
+        }
+        .hero-lp .hlp-line {
+            height: 6px; background: var(--line); border-radius: 2px; margin-bottom: 6px;
+        }
+        .hero-lp .hlp-line.s { width: 60%; }
+        .hero-lp .hlp-line.m { width: 85%; }
+        .hero-lp .hlp-line.l { width: 100%; }
+        .hero-lp .hlp-cta {
+            background: var(--ink); color: #fff;
+            padding: 12px; border-radius: 8px;
+            text-align: center; font-weight: 600; font-size: 13px;
+            margin: 12px 0 6px;
+            animation: hlp-cta-pulse 2s ease-in-out infinite;
+        }
+        .hero-lp .hlp-cta-note {
+            font-size: 9px; color: var(--ink-soft); text-align: center;
+        }
+        .hero-lp::after {
+            content: 'ONLY 1 ACTION';
+            position: absolute; bottom: 12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--mark); border: 1.5px solid var(--ink);
+            padding: 4px 10px; border-radius: 12px;
+            font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em;
+            color: var(--ink);
+            z-index: 3;
+        }
+        @keyframes hlp-scroll {
+            0%, 15%   { transform: translateY(0); }
+            45%, 60%  { transform: translateY(-140px); }
+            85%, 100% { transform: translateY(0); }
+        }
+        @keyframes hlp-cta-pulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.03); box-shadow: 0 4px 12px rgba(25,25,25,.3); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">12 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Landing Page</div>
+            <h1 class="detail-title">LP</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">特定の1アクションに誘導する1枚のWebページ</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-lp">
+                <div class="hlp-inner">
+                    <div class="hlp-sec">
+                        <div class="hlp-title"></div>
+                        <div class="hlp-line l"></div>
+                        <div class="hlp-line m"></div>
+                        <div class="hlp-line s"></div>
+                    </div>
+                    <div class="hlp-sec">
+                        <div class="hlp-title"></div>
+                        <div class="hlp-line l"></div>
+                        <div class="hlp-line l"></div>
+                        <div class="hlp-line m"></div>
+                    </div>
+                    <div class="hlp-sec">
+                        <div class="hlp-cta">今すぐ登録する</div>
+                        <div class="hlp-cta-note">※ 1ページ1アクション</div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">ページ全体が1つのゴール（登録・購入）に向かう設計。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">LPってそもそも何？</h2>
+            <p>
+                LPは「Landing Page（ランディングページ）」の略で、<span class="mark">特定の1つのアクション（登録・申込・購入）だけに誘導する1枚のWebページ</span>のこと。
+                普通のWebサイトがメニュー・お知らせ・お問い合わせ…と多方向へリンクを貼るのに対し、<span class="mark">LPはゴールが1つだけ</span>。
+                情報の順番も「悩みの提示→解決策→証拠→オファー→CTA」のように、<span class="mark">縦スクロールで説得していく設計</span>です。
+                コンテンツ販売の集客・販売どちらにも必須で、LPのクオリティがそのまま売上に直結します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ゴールテープ一本の競技場</h3>
+                    <p>
+                        陸上競技場には<span class="mark">ゴールテープが1本</span>しかない。選手全員がそこを目指す。
+                        LPも同じで、ページの最後に<span class="mark">たった1つのCTAボタン</span>がある。
+                        訪問者全員がそこに向かって説得されていく構造。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 一方通行の道路</h3>
+                    <p>
+                        一方通行の道は<span class="mark">迷わない</span>。どこまで行っても戻る選択肢がないから、決められた方向へ進む。
+                        LPも構造としては一方通行で、<span class="mark">脱線リンクを極力排除</span>する。
+                        ユーザーは真っ直ぐゴールへ導かれます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    LP＝<span class="mark">ゴール1つ、寄り道なしの1枚ページ</span>。
+                    コンテンツ販売では<span class="mark">集客LP・セールスLP</span>の2種類を使い分けるのが基本。
+                    1つの目的に向けた縦スクロール設計が鍵です。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="teaser.html" class="nav-link">← 前の単語：ティザー</a>
+            <a href="cta.html" class="nav-link">次の単語：CTA →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

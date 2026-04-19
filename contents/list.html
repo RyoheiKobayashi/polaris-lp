@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リストとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="リスト（見込み客リスト）をアニメーションで3秒で理解。メールやLINEなど、直接連絡できる連絡先の蓄積。ビジネスの最重要資産。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: リスト行が積み上がる */
+        .hero-list { width: 100%; max-width: 400px; margin: 0 auto; background: #fff; border: 2px solid var(--ink); border-radius: 10px; padding: 20px 24px; }
+        .hero-list .hl-title {
+            font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+            color: var(--ink-mute); margin-bottom: 14px; display: flex; justify-content: space-between;
+        }
+        .hero-list .hl-count { color: var(--ink); font-weight: 600; }
+        .hero-list .hl-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            opacity: 0;
+            animation: hl-appear 5s ease-in infinite;
+        }
+        .hero-list .hl-row:last-child { border-bottom: none; }
+        .hero-list .hl-row:nth-child(2) { animation-delay: 0s; }
+        .hero-list .hl-row:nth-child(3) { animation-delay: .6s; }
+        .hero-list .hl-row:nth-child(4) { animation-delay: 1.2s; }
+        .hero-list .hl-row:nth-child(5) { animation-delay: 1.8s; }
+        .hero-list .hl-row:nth-child(6) { animation-delay: 2.4s; }
+        .hero-list .hl-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--mark); border: 1.5px solid var(--ink);
+            flex: none;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+        .hero-list .hl-name {
+            flex: 1; height: 10px; border-radius: 4px; background: var(--line);
+        }
+        .hero-list .hl-type {
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink-mute);
+            padding: 3px 8px; border-radius: 4px; background: var(--bg-warm);
+        }
+        @keyframes hl-appear {
+            0%, 10%  { opacity: 0; transform: translateX(-8px); }
+            25%, 95% { opacity: 1; transform: translateX(0); }
+            100%     { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">04 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">List</div>
+            <h1 class="detail-title">リスト</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">メールやLINEなど、直接連絡できる連絡先の集まり</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-list">
+                <div class="hl-title"><span>📋 MY CONTACTS</span><span class="hl-count">5</span></div>
+                <div class="hl-row"><div class="hl-avatar">✉️</div><div class="hl-name"></div><div class="hl-type">mail</div></div>
+                <div class="hl-row"><div class="hl-avatar">💬</div><div class="hl-name"></div><div class="hl-type">LINE</div></div>
+                <div class="hl-row"><div class="hl-avatar">✉️</div><div class="hl-name"></div><div class="hl-type">mail</div></div>
+                <div class="hl-row"><div class="hl-avatar">💬</div><div class="hl-name"></div><div class="hl-type">LINE</div></div>
+                <div class="hl-row"><div class="hl-avatar">✉️</div><div class="hl-name"></div><div class="hl-type">mail</div></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">連絡先そのものが「ビジネス資産」になる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">リストってそもそも何？</h2>
+            <p>
+                コンテンツ販売で「リスト」と言えば、<span class="mark">自分が直接連絡できる見込み客・顧客の連絡先一覧</span>のこと。
+                メールアドレス・LINE ID・電話番号など、形式は様々だけど、共通するのは<span class="mark">「プラットフォーム任せではなく自分で所有できる連絡手段」</span>という点。
+                SNSのフォロワーは表示アルゴリズム次第で届かないけど、リストなら<span class="mark">ほぼ100%届ける</span>ことができる。
+                だから「リスト数＝そのビジネスの真の影響力」と言われます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① スマホの電話帳</h3>
+                    <p>
+                        電話帳に入ってる相手には<span class="mark">いつでも電話・LINEができる</span>。
+                        会社が倒産しても、SNSが終わっても、電話帳が残ってれば連絡は取れる。
+                        ビジネスのリストも同じで、<span class="mark">「いつでも届けられる連絡先」</span>こそ資産です。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 不動産の土地登記簿</h3>
+                    <p>
+                        土地を持っていても登記簿に記録されていなければ、誰の土地か証明できない。
+                        リストも<span class="mark">「自分が所有してる証明」</span>で、この一覧があるから「私はこの人たちに直接届けられる」と言える。
+                        SNSのフォロワー数と違って、消えないし他人に取られない。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    リスト＝<span class="mark">自分で所有できる「届けられる連絡先」</span>。
+                    フォロワー数じゃなく<span class="mark">リスト数</span>を追うのが、長期で生き残るコンテンツ販売者の思考です。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="list-marketing.html" class="nav-link">← 前の単語：リストマーケティング</a>
+            <a href="nurturing.html" class="nav-link">次の単語:ナーチャリング →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ティザーとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ティザーをアニメーションで3秒で理解。ローンチ前に期待感を高める「チラ見せ」投稿・告知。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: ベール越しにチラ見せ */
+        .hero-tz { position: relative; width: 100%; max-width: 380px; margin: 0 auto; }
+        .hero-tz .htz-box {
+            position: relative;
+            height: 220px;
+            background: var(--ink); color: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .hero-tz .htz-hidden {
+            font-family: var(--font-serif); font-size: 32px; font-weight: 600;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 2;
+            animation: htz-blur 5s ease-in-out infinite;
+        }
+        .hero-tz .htz-curtain {
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(135deg, var(--ink) 0 20px, #2a2a2a 20px 22px);
+            animation: htz-reveal 5s ease-in-out infinite;
+        }
+        .hero-tz .htz-date {
+            position: absolute; top: 12px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--mark); color: var(--ink);
+            border-radius: 14px;
+            padding: 4px 14px;
+            font-family: var(--font-mono); font-size: 11px;
+            letter-spacing: .08em;
+            z-index: 3;
+        }
+        .hero-tz .htz-caption {
+            margin-top: 16px; text-align: center;
+            font-size: 14px; color: var(--ink-warm);
+        }
+        @keyframes htz-reveal {
+            0%, 30%   { clip-path: inset(0 0 0 0); }
+            50%, 75%  { clip-path: inset(0 0 0 75%); }
+            90%, 100% { clip-path: inset(0 0 0 0); }
+        }
+        @keyframes htz-blur {
+            0%, 30%   { filter: blur(8px); }
+            50%, 75%  { filter: blur(0); }
+            90%, 100% { filter: blur(8px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">11 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Teaser</div>
+            <h1 class="detail-title">ティザー</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ローンチ前に期待感を高める「チラ見せ」</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-tz">
+                <div class="htz-box">
+                    <div class="htz-date">COMING SOON</div>
+                    <div class="htz-curtain"></div>
+                    <div class="htz-hidden">The Next Launch</div>
+                </div>
+                <div class="htz-caption">一部だけ見せて、続きを気にさせる。</div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">見せすぎず、隠しすぎず。興味を引く絶妙なバランスが鍵。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ティザーってそもそも何？</h2>
+            <p>
+                ティザー（teaser）は「からかう」「焦らす」が語源で、<span class="mark">本番の前に一部だけ見せて、受け手の興味を引く手法</span>のこと。
+                映画の予告編、新商品発表会の前の「🔥 9月1日、何かが始まる」的な投稿、X で頻出する<span class="mark">「重大発表まであと3日」</span>系のポスト——すべてティザーです。
+                ローンチ設計では、30日前からのティザー投稿で「何が来るんだろう？」と期待値を積み上げ、<span class="mark">発売開始時に熱量が最大化</span>している状態を作ります。
+                情報を出し惜しみすることで、<span class="mark">人は続きが気になって仕方なくなる</span>——この心理を使う戦略です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 映画の予告編</h3>
+                    <p>
+                        2〜3分の予告で<span class="mark">「続きが見たい」状態</span>にされて、公開日に映画館へ足が向く。
+                        全部見せたら映画館に行く必要はない。<span class="mark">見せる量と隠す量のバランス</span>こそティザーの技術です。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② レストランの前菜</h3>
+                    <p>
+                        お腹いっぱいにさせるのがゴールじゃなく、<span class="mark">メインに期待を向かわせる</span>のが前菜の役割。
+                        ティザーも同じで、ティザーだけで満足させずに「本編（ローンチ）を見たい」気持ちに誘導するのが目的。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ティザー＝<span class="mark">焦らしで期待を育てる仕掛け</span>。
+                    見せすぎると飽きられ、隠しすぎると忘れられる。
+                    <span class="mark">適度な小出し</span>がローンチ熱量を最大化する。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="pre-launch.html" class="nav-link">← 前の単語：プリプリ／プリローンチ</a>
+            <a href="lp.html" class="nav-link">次の単語：LP →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

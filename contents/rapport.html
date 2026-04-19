@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ラポール構築とは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ラポール構築をアニメーションで3秒で理解。見込み客との信頼残高を積み上げるプロセス。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 信頼残高のコイン積み上げ */
+        .hero-rap { position: relative; width: 100%; max-width: 420px; margin: 0 auto; }
+        .hero-rap .hr-jar {
+            position: relative;
+            width: 220px; height: 240px;
+            margin: 0 auto;
+            border: 3px solid var(--ink); border-top: none;
+            border-radius: 0 0 30px 30px;
+            overflow: hidden;
+            background: transparent;
+        }
+        .hero-rap .hr-jar::before {
+            content: 'TRUST';
+            position: absolute; top: 12px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono); font-size: 11px; letter-spacing: .15em;
+            color: var(--ink-mute);
+            z-index: 2;
+        }
+        .hero-rap .hr-coin {
+            position: absolute; left: 50%;
+            width: 100px; height: 22px;
+            border-radius: 11px;
+            background: var(--mark); border: 1.5px solid var(--ink);
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: hr-drop 5s ease-in infinite;
+        }
+        .hero-rap .hr-coin:nth-child(1) { bottom: 0;   animation-delay: 0s; }
+        .hero-rap .hr-coin:nth-child(2) { bottom: 26px; animation-delay: .8s; }
+        .hero-rap .hr-coin:nth-child(3) { bottom: 52px; animation-delay: 1.6s; }
+        .hero-rap .hr-coin:nth-child(4) { bottom: 78px; animation-delay: 2.4s; }
+        .hero-rap .hr-coin:nth-child(5) { bottom: 104px; animation-delay: 3.2s; background: #fff; }
+        .hero-rap .hr-label {
+            margin-top: 20px; text-align: center;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); letter-spacing: .08em;
+        }
+        .hero-rap .hr-coin-legend {
+            display: flex; justify-content: center; gap: 16px; margin-top: 10px;
+            font-size: 12px; color: var(--ink-warm);
+        }
+        .hero-rap .hr-coin-legend span::before {
+            content: '💰 '; margin-right: 4px;
+        }
+        @keyframes hr-drop {
+            0%, 10%  { opacity: 0; transform: translate(-50%, -60px) scale(.9); }
+            25%, 90% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+            100%     { opacity: 1; transform: translate(-50%, 0) scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">06 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Rapport Building</div>
+            <h1 class="detail-title">ラポール構築</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">見込み客との信頼残高を積み上げるプロセス</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-rap">
+                <div class="hr-jar">
+                    <div class="hr-coin"></div>
+                    <div class="hr-coin"></div>
+                    <div class="hr-coin"></div>
+                    <div class="hr-coin"></div>
+                    <div class="hr-coin"></div>
+                </div>
+                <div class="hr-label">信頼残高の瓶</div>
+                <div class="hr-coin-legend"><span>有益な発信</span><span>誠実な対応</span><span>価値提供</span></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">接触の度にコインが積まれ、売る瞬間に一気に引き出される。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ラポール構築ってそもそも何？</h2>
+            <p>
+                ラポール（rapport）はフランス語由来で「<span class="mark">信頼関係・親密な関係</span>」の意味。コンテンツ販売では、見込み客との間に<span class="mark">「この人なら信頼できる」という心理的な残高</span>を貯めていくプロセスを指します。
+                有益な発信・丁寧な返信・価値提供を重ねるたびに、相手の中で「信頼のコイン」が1枚ずつ積み上がる。
+                そして<span class="mark">販売の瞬間、そのコインを引き出して売上に変える</span>——これが信頼残高という考え方です。
+                普段の発信は「売る準備」。信頼残高が薄いまま売ろうとすると、あっという間に残高がマイナスになってブロックされます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 銀行口座の入出金</h3>
+                    <p>
+                        給料日ごとに少しずつ入金して、<span class="mark">必要な時にまとめて引き出す</span>のが銀行口座。
+                        信頼残高も同じで、普段の発信で<span class="mark">コツコツ入金</span>して、セールスの瞬間に<span class="mark">大きく引き出す</span>。
+                        残高ゼロで引き出そうとするからコンテンツ販売は失敗する。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 久しぶりに連絡してきた同級生</h3>
+                    <p>
+                        10年音沙汰なしの同級生から急に「<span class="mark">投資話があるんだけど</span>」と連絡が来ても、絶対乗らない。
+                        逆に近所で毎日挨拶してる人なら<span class="mark">ちょっとしたお願いも聞いてあげたくなる</span>。
+                        信頼残高の差がそのまま、セールスの通りやすさに直結します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ラポール＝<span class="mark">信頼の貯金箱</span>。
+                    売上は信頼残高の引き出し。<span class="mark">日々の発信＝入金</span>と考えれば、普段の発信の意味が変わります。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="nurturing.html" class="nav-link">← 前の単語：ナーチャリング</a>
+            <a href="attract-educate-sell.html" class="nav-link">次の単語：集客→教育→販売 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

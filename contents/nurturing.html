@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ナーチャリングとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ナーチャリングをアニメーションで3秒で理解。見込み客を教育して購買意欲を高めるプロセス。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 温度計が上がる */
+        .hero-nurt { display: flex; align-items: flex-end; gap: 40px; justify-content: center; }
+        .hero-nurt .hn-thermo { position: relative; width: 60px; height: 220px; }
+        .hero-nurt .hn-tube {
+            position: absolute; left: 50%; top: 0; bottom: 30px;
+            transform: translateX(-50%);
+            width: 24px; background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 14px 14px 0 0;
+            overflow: hidden;
+        }
+        .hero-nurt .hn-bulb {
+            position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--mark); border: 2px solid var(--ink);
+        }
+        .hero-nurt .hn-mercury {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, #f47174, var(--mark));
+            animation: hn-rise 5s ease-in-out infinite;
+        }
+        .hero-nurt .hn-scale { position: absolute; right: -44px; top: 0; bottom: 30px; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); }
+        .hero-nurt .hn-info { display: flex; flex-direction: column; gap: 18px; max-width: 200px; }
+        .hero-nurt .hn-step {
+            padding: 10px 14px;
+            background: #fff; border: 1.5px solid var(--ink); border-radius: 8px;
+            font-size: 13px;
+            opacity: .3;
+            animation: hn-step-hl 5s ease-in-out infinite;
+        }
+        .hero-nurt .hn-step:nth-child(1) { animation-delay: .5s; }
+        .hero-nurt .hn-step:nth-child(2) { animation-delay: 2s; }
+        .hero-nurt .hn-step:nth-child(3) { animation-delay: 3.5s; }
+        .hero-nurt .hn-step-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .06em; margin-bottom: 2px; }
+        @keyframes hn-rise {
+            0%         { height: 8%; }
+            30%        { height: 40%; }
+            60%        { height: 75%; }
+            90%, 100%  { height: 90%; }
+        }
+        @keyframes hn-step-hl {
+            0%, 20%, 100% { opacity: .3; background: #fff; }
+            25%, 50%      { opacity: 1; background: var(--mark); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">05 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Nurturing</div>
+            <h1 class="detail-title">ナーチャリング</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">見込み客を教育して購買意欲を高めるプロセス</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-nurt">
+                <div class="hn-thermo">
+                    <div class="hn-tube"><div class="hn-mercury"></div></div>
+                    <div class="hn-bulb"></div>
+                    <div class="hn-scale"><span>HOT</span><span>WARM</span><span>COLD</span></div>
+                </div>
+                <div class="hn-info">
+                    <div class="hn-step"><div class="hn-step-label">COLD</div>初めましての状態</div>
+                    <div class="hn-step"><div class="hn-step-label">WARM</div>内容に興味あり</div>
+                    <div class="hn-step"><div class="hn-step-label">HOT</div>今すぐ買いたい</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">冷たい見込み客を、段階的に温めていく。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ナーチャリングってそもそも何？</h2>
+            <p>
+                ナーチャリングは英語で<span class="mark">「育てる・養う」</span>という意味。マーケ用語では<span class="mark">見込み客を教育して、購買意欲を段階的に高めるプロセス</span>を指します。
+                登録直後の「初めまして」状態（COLD）では当然買ってもらえない。そこから価値提供と信頼構築を重ねて<span class="mark">「今すぐ欲しい」状態（HOT）まで温度を上げる</span>活動すべてがナーチャリング。
+                ステップ配信・無料コンテンツ・ライブ配信など、<span class="mark">触れるたびに信頼と理解が深まる設計</span>が鍵です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 友達→恋人になっていく過程</h3>
+                    <p>
+                        初対面でいきなり「付き合って」はNG。まず<span class="mark">共通の話題で盛り上がる→何度か会う→信頼が育つ</span>という温度上昇が必要。
+                        ナーチャリングも全く同じで、出会った瞬間からいきなり売り込まず、<span class="mark">時間をかけて信頼を築く</span>。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② お風呂のお湯張り</h3>
+                    <p>
+                        冷水からいきなり入ると寒い。<span class="mark">少しずつお湯を足して適温に持っていく</span>から快適に入れる。
+                        ナーチャリングも、見込み客を一気に「買え」と熱湯に突っ込むのではなく、段階的に温度を上げていく丁寧さが大事です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ナーチャリング＝<span class="mark">見込み客の温度を上げる教育プロセス</span>。
+                    いきなり売らず、価値提供で信頼を育てる。
+                    「売る」のではなく<span class="mark">「買いたくなる状態まで運ぶ」</span>のが上手い販売者の定石。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="list.html" class="nav-link">← 前の単語：リスト</a>
+            <a href="rapport.html" class="nav-link">次の単語：ラポール構築 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

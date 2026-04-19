@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プリプリ／プリローンチとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="プリプリ／プリローンチをアニメーションで3秒で理解。ローンチ前に期待感を醸成する準備フェーズ。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 3フェーズ タイムライン */
+        .hero-pre { position: relative; width: 100%; max-width: 480px; margin: 0 auto; }
+        .hero-pre .hpr-timeline {
+            position: relative;
+            display: flex; justify-content: space-between;
+            padding: 40px 0 20px;
+        }
+        .hero-pre .hpr-timeline::before {
+            content: '';
+            position: absolute; top: 50%; left: 10%; right: 10%;
+            height: 2px; background: var(--ink-mute);
+        }
+        .hero-pre .hpr-phase {
+            position: relative;
+            width: 90px; text-align: center;
+            z-index: 2;
+        }
+        .hero-pre .hpr-dot {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: #fff; border: 2px solid var(--ink);
+            margin: 0 auto 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+            animation: hpr-glow 5s ease-in-out infinite;
+        }
+        .hero-pre .hpr-phase:nth-child(1) .hpr-dot { animation-delay: 0s; }
+        .hero-pre .hpr-phase:nth-child(2) .hpr-dot { animation-delay: 1.5s; }
+        .hero-pre .hpr-phase:nth-child(3) .hpr-dot { animation-delay: 3s; }
+        .hero-pre .hpr-phase-label {
+            font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .06em;
+        }
+        .hero-pre .hpr-phase-name {
+            font-family: var(--font-serif); font-weight: 600; color: var(--ink-warm);
+            font-size: 13px; margin-top: 2px;
+        }
+        .hero-pre .hpr-detail {
+            margin-top: 28px;
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 13px; color: var(--ink-warm);
+            opacity: 0;
+            animation: hpr-show 5s ease-in-out infinite;
+        }
+        .hero-pre .hpr-detail.d1 { animation-delay: 0s; }
+        .hero-pre .hpr-detail.d2 { animation-delay: 1.5s; }
+        .hero-pre .hpr-detail.d3 { animation-delay: 3s; }
+        @keyframes hpr-glow {
+            0%, 22%, 100% { background: #fff; box-shadow: none; transform: scale(1); }
+            28%, 40%      { background: var(--mark); box-shadow: 0 0 0 6px rgba(253,236,200,.5); transform: scale(1.1); }
+        }
+        @keyframes hpr-show {
+            0%, 20%, 50%, 100% { opacity: 0; position: absolute; transform: translateY(4px); pointer-events: none; left: 0; right: 0; }
+            25%, 45%           { opacity: 1; position: absolute; transform: translateY(0); left: 0; right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">10 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Pre-Pre / Pre-Launch</div>
+            <h1 class="detail-title">プリプリ／プリローンチ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ローンチ前の準備フェーズで期待感を育てる</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-pre">
+                <div class="hpr-timeline">
+                    <div class="hpr-phase">
+                        <div class="hpr-dot">💭</div>
+                        <div class="hpr-phase-label">PHASE 1</div>
+                        <div class="hpr-phase-name">プリプリ</div>
+                    </div>
+                    <div class="hpr-phase">
+                        <div class="hpr-dot">📣</div>
+                        <div class="hpr-phase-label">PHASE 2</div>
+                        <div class="hpr-phase-name">プリローンチ</div>
+                    </div>
+                    <div class="hpr-phase">
+                        <div class="hpr-dot">🚀</div>
+                        <div class="hpr-phase-label">PHASE 3</div>
+                        <div class="hpr-phase-name">ローンチ</div>
+                    </div>
+                </div>
+                <div style="position: relative; height: 52px;">
+                    <div class="hpr-detail d1">関心を探る。アンケートや雑談で需要を確認。</div>
+                    <div class="hpr-detail d2">情報を小出しに公開。期待感をじわじわ上げる。</div>
+                    <div class="hpr-detail d3">販売開始。溜めた期待を一気に売上へ。</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">3段階で熱量を段階的に積み上げる設計。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">プリプリ／プリローンチってそもそも何？</h2>
+            <p>
+                プロダクトローンチは大きく<span class="mark">プリプリ → プリローンチ → ローンチ本番</span>の3段階で設計されます。
+                <span class="mark">プリプリ</span>はまだ商品を明かさず、アンケートや雑談で「どんな課題があるか」を探るリサーチ期間。
+                <span class="mark">プリローンチ</span>は商品の輪郭を小出しに公開し、コンテンツやライブで価値提供しながら期待感を醸成する期間。
+                そして本番のローンチで一気に販売——この3段階の仕込みがあるから<span class="mark">発売日に爆発的な売上が作れる</span>のです。
+                いきなり「販売開始！」では熱量が生まれない。プリプリ・プリローンチこそがローンチの土台を作る工程です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 結婚式までの準備期間</h3>
+                    <p>
+                        結婚が決まった瞬間にいきなり式場で披露宴はできない。
+                        <span class="mark">会場選び・招待状・衣装・リハーサル</span>を経て、当日に一番美しい形を披露する。
+                        プリプリ・プリローンチも同じで、<span class="mark">当日の成功は事前の仕込みが全て</span>です。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 映画の公開までの宣伝戦略</h3>
+                    <p>
+                        映画公開の1年前には既に<span class="mark">脚本執筆・キャスト決定・予告編撮影</span>が進んでいる。
+                        半年前に予告編解禁、3ヶ月前に主演インタビュー、直前に試写会——<span class="mark">公開日に向けて計画的に情報を解禁</span>する。
+                        プロダクトローンチはこの映画マーケティングをそのまま応用した手法です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    プリプリ／プリローンチ＝<span class="mark">ローンチ本番の"仕込み"</span>。
+                    ここをサボると、どんなに良い商品も売れない。
+                    <span class="mark">熱量は一夜で作れない、段階的に育てる</span>。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="product-launch.html" class="nav-link">← 前の単語：プロダクトローンチ</a>
+            <a href="teaser.html" class="nav-link">次の単語：ティザー →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

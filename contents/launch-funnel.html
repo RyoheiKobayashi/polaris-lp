@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ローンチファネルとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ローンチファネルをアニメーションで3秒で理解。ローンチ全体を売上最大化する設計図。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 3階層ファネル（初級・中級・上級） */
+        .hero-lf { position: relative; width: 100%; max-width: 440px; margin: 0 auto; }
+        .hero-lf .hlf-tier {
+            margin: 0 auto 8px;
+            padding: 18px 22px;
+            border: 2px solid var(--ink); border-radius: 10px;
+            background: #fff;
+            text-align: center;
+            opacity: 0;
+            animation: hlf-in 6s ease-in-out infinite;
+            position: relative;
+        }
+        .hero-lf .hlf-tier:nth-child(1) { width: 100%; animation-delay: 0s;   background: var(--bg-warm); }
+        .hero-lf .hlf-tier:nth-child(3) { width: 80%;  animation-delay: 1.2s; }
+        .hero-lf .hlf-tier:nth-child(5) { width: 60%;  animation-delay: 2.4s; background: var(--mark); }
+        .hero-lf .hlf-name {
+            font-family: var(--font-serif); font-weight: 600; color: var(--ink-warm); font-size: 16px;
+        }
+        .hero-lf .hlf-sub {
+            font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .08em;
+        }
+        .hero-lf .hlf-price {
+            display: inline-block; margin-top: 6px;
+            padding: 2px 10px;
+            border-radius: 10px; background: var(--ink); color: #fff;
+            font-size: 11px; font-family: var(--font-mono);
+        }
+        .hero-lf .hlf-arrow {
+            text-align: center; color: var(--ink-mute); font-size: 14px; height: 14px;
+            opacity: 0;
+            animation: hlf-arrow 6s ease-in-out infinite;
+        }
+        .hero-lf .hlf-arrow:nth-child(2) { animation-delay: .7s; }
+        .hero-lf .hlf-arrow:nth-child(4) { animation-delay: 1.9s; }
+        @keyframes hlf-in {
+            0%, 5%    { opacity: 0; transform: translateY(-6px); }
+            12%, 90%  { opacity: 1; transform: translateY(0); }
+            100%      { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hlf-arrow {
+            0%, 8%    { opacity: 0; }
+            15%, 90%  { opacity: .7; }
+            100%      { opacity: .7; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">16 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Launch Funnel</div>
+            <h1 class="detail-title">ローンチファネル</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ローンチ全体を売上最大化する設計図</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-lf">
+                <div class="hlf-tier">
+                    <div class="hlf-sub">TIER 1 · 初級</div>
+                    <div class="hlf-name">リード獲得＆教育</div>
+                    <div class="hlf-price">無料</div>
+                </div>
+                <div class="hlf-arrow">▼</div>
+                <div class="hlf-tier">
+                    <div class="hlf-sub">TIER 2 · 中級</div>
+                    <div class="hlf-name">セミナー・個別相談</div>
+                    <div class="hlf-price">準備</div>
+                </div>
+                <div class="hlf-arrow">▼</div>
+                <div class="hlf-tier">
+                    <div class="hlf-sub">TIER 3 · 上級</div>
+                    <div class="hlf-name">高単価商品の販売</div>
+                    <div class="hlf-price">成約</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">段階的に設計されたローンチ全体の導線図。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ローンチファネルってそもそも何？</h2>
+            <p>
+                ローンチファネルは、<span class="mark">ローンチ全体の売上を最大化するために設計された導線図</span>のこと。
+                単なる販売の流れ（セールスファネル）に<span class="mark">ローンチ特有の期待値醸成・プリローンチ・限定販売</span>の要素を組み込んだ、より複合的な設計です。
+                よく語られる「初級・中級・上級」の3テンプレでは、
+                <span class="mark">初級＝リード獲得＆教育、中級＝セミナー・個別相談、上級＝高単価販売</span>という段階を設計し、
+                見込み客を順番に引き上げていきます。自分のビジネスステージ・商品価格帯に合わせて、最適なファネルを選ぶのが戦略の要です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 大型ショッピングモールの動線設計</h3>
+                    <p>
+                        モールの1階は<span class="mark">無料試食・プロモーション</span>、2階は<span class="mark">気軽な買い物</span>、上階は<span class="mark">高級ブランド・レストラン</span>——
+                        計算された動線で、客の滞在時間と購買単価を最大化する。
+                        ローンチファネルも、<span class="mark">段階的にアップグレード</span>する導線設計そのもの。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② オリンピック予選 → 準決勝 → 決勝</h3>
+                    <p>
+                        全員がいきなり決勝には出られない。<span class="mark">予選→準決勝→決勝</span>と段階を絞り、残った選手だけが大舞台に立つ。
+                        ローンチファネルも<span class="mark">「段階ごとに最適な人だけが残る」仕組み</span>で、最後に高単価商品の購入者だけが残るよう設計されます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ローンチファネル＝<span class="mark">ローンチ全体の売上を最大化する導線図</span>。
+                    初級・中級・上級のテンプレを<span class="mark">自分の商品・ステージに合わせて選ぶ</span>のが定石。
+                    設計の緻密さが、そのまま売上の桁を変えます。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="lead-magnet.html" class="nav-link">← 前の単語：リードマグネット</a>
+            <a href="screening.html" class="nav-link">次の単語：スクリーニング →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
