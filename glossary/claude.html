@@ -46,18 +46,83 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Claude: Cの描画 */
-        .hero-claude svg { width: 140px; height: 140px; }
-        .hero-claude path {
-            fill: none; stroke: var(--ink-warm); stroke-width: 6; stroke-linecap: round;
-            stroke-dasharray: 280; stroke-dashoffset: 280;
-            animation: cl-draw 3.5s ease-out infinite;
+        /* Claude: 長文 → 核心抽出 */
+        .hero-claude { display: flex; align-items: center; gap: 20px; }
+        .cl-doc {
+            position: relative;
+            width: 200px; min-height: 180px;
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 18px 20px;
+            overflow: hidden;
         }
-        @keyframes cl-draw {
-            0%, 10%  { stroke-dashoffset: 280; opacity: 0; }
-            25%      { opacity: 1; }
-            70%, 90% { stroke-dashoffset: 0;   opacity: 1; }
-            100%     { stroke-dashoffset: 0;   opacity: 0; }
+        .cl-doc .title {
+            height: 6px; background: var(--ink-warm); border-radius: 2px;
+            width: 60%; margin-bottom: 12px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .cl-doc.stage-1 .title,
+        .cl-doc.stage-2 .title,
+        .cl-doc.stage-3 .title { opacity: 1; }
+        .cl-line {
+            height: 4px; background: var(--line); border-radius: 2px;
+            margin-bottom: 7px;
+            opacity: 0; transform: translateX(-4px);
+            transition: opacity .3s, transform .3s, background .3s;
+        }
+        .cl-doc.stage-1 .cl-line,
+        .cl-doc.stage-2 .cl-line,
+        .cl-doc.stage-3 .cl-line { opacity: 1; transform: translateX(0); }
+        .cl-line:nth-child(2) { transition-delay: 0.05s; }
+        .cl-line:nth-child(3) { transition-delay: 0.10s; }
+        .cl-line:nth-child(4) { transition-delay: 0.15s; width: 85%; }
+        .cl-line:nth-child(5) { transition-delay: 0.20s; }
+        .cl-line:nth-child(6) { transition-delay: 0.25s; width: 70%; }
+        .cl-line:nth-child(7) { transition-delay: 0.30s; }
+        .cl-line:nth-child(8) { transition-delay: 0.35s; width: 90%; }
+        .cl-line:nth-child(9) { transition-delay: 0.40s; width: 55%; }
+        .cl-scanner {
+            position: absolute; left: 0; right: 0;
+            height: 28px; top: -28px;
+            background: linear-gradient(180deg, transparent, var(--mark) 50%, transparent);
+            pointer-events: none;
+            opacity: 0;
+        }
+        .cl-doc.stage-2 .cl-scanner {
+            opacity: 1;
+            animation: cl-scan 1.4s ease-in-out forwards;
+        }
+        @keyframes cl-scan {
+            0%   { top: -28px; }
+            100% { top: 100%; }
+        }
+        .cl-doc.stage-3 .cl-line { background: var(--ink-mute); opacity: 0.4; }
+        .cl-arrow {
+            font-family: var(--font-mono); font-size: 22px; color: var(--ink-mute);
+            opacity: 0; transform: translateX(-6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-claude.stage-3 .cl-arrow {
+            opacity: 1; transform: translateX(0);
+        }
+        .cl-insight {
+            background: #fff; border: 1.5px solid var(--ink); border-radius: 8px;
+            padding: 14px 18px;
+            font-family: var(--font-mono); font-size: 13px; color: var(--ink);
+            min-width: 160px;
+            opacity: 0; transform: scale(0.9);
+            transition: opacity .4s, transform .4s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .hero-claude.stage-3 .cl-insight {
+            opacity: 1; transform: scale(1);
+        }
+        .cl-insight .mark {
+            background: linear-gradient(transparent 60%, var(--mark) 60%);
+            padding: 0 2px;
+        }
+        .cl-insight .label {
+            font-size: 9px; color: var(--ink-mute); letter-spacing: 0.08em;
+            margin-bottom: 6px; text-transform: uppercase;
         }
     </style>
 </head>
@@ -78,12 +143,48 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-claude">
-                <svg viewBox="0 0 140 140" aria-hidden="true">
-                    <path d="M 108 40 A 44 44 0 1 0 108 100" />
-                </svg>
+            <div class="hero-claude" id="hero-claude">
+                <div class="cl-doc" id="cl-doc">
+                    <div class="title"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-line"></div>
+                    <div class="cl-scanner"></div>
+                </div>
+                <span class="cl-arrow">→</span>
+                <div class="cl-insight">
+                    <div class="label">ESSENCE</div>
+                    <div>核心は、<span class="mark">これ</span>です</div>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-claude');
+            const doc = document.getElementById('cl-doc');
+            async function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+            async function play() {
+                hero.classList.remove('stage-3');
+                doc.classList.remove('stage-1', 'stage-2', 'stage-3');
+                await wait(100);
+                doc.classList.add('stage-1');  // 長文が並ぶ
+                await wait(900);
+                doc.classList.add('stage-2');  // スキャン
+                await wait(1500);
+                doc.classList.add('stage-3');  // ディム
+                hero.classList.add('stage-3'); // insight出現
+                await wait(2200);
+            }
+            async function autoLoop() { await play(); setTimeout(autoLoop, 600); }
+            setTimeout(autoLoop, 500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Claudeってそもそも何？</h2>

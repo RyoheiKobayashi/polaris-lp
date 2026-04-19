@@ -34,12 +34,40 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-cli { background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 22px; min-width: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .hero-cli .prompt { color: var(--mark); }
-        .hero-cli .cmd { display: inline-block; overflow: hidden; white-space: nowrap; animation: cli-type 3s steps(10, end) infinite; vertical-align: bottom; }
-        .hero-cli .caret { display: inline-block; width: 10px; height: 22px; background: #fff; vertical-align: middle; margin-left: 2px; animation: cc-blink 1s step-end infinite; }
-        @keyframes cli-type { 0%, 10% { width: 0; } 50%, 90% { width: 10ch; } 100% { width: 0; } }
+        /* CLI: 入力 → Enter → 結果 */
+        .hero-cli {
+            background: var(--ink-warm); color: #fff; border-radius: 10px;
+            padding: 24px 30px; font-family: var(--font-mono); font-size: 18px;
+            min-width: 380px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            line-height: 1.8;
+        }
+        .hero-cli .row { display: block; }
+        .hero-cli .prompt { color: var(--mark); margin-right: 10px; }
+        .hero-cli .cmd {
+            display: inline-block; overflow: hidden; white-space: nowrap;
+            width: 0;
+            vertical-align: bottom;
+        }
+        .hero-cli.stage-1 .cmd {
+            animation: cli-type 1.2s steps(14, end) forwards;
+        }
+        @keyframes cli-type { 0% { width: 0; } 100% { width: 14ch; } }
+        .hero-cli .caret {
+            display: inline-block; width: 9px; height: 20px;
+            background: #fff; vertical-align: middle; margin-left: 2px;
+            animation: cc-blink 1s step-end infinite;
+        }
         @keyframes cc-blink { 50% { opacity: 0; } }
+        .hero-cli.stage-2 .caret { display: none; }
+        .hero-cli .output {
+            display: block;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .4s, transform .4s;
+            color: #fff; font-size: 15px;
+            margin-top: 8px;
+        }
+        .hero-cli.stage-2 .output { opacity: 1; transform: translateY(0); }
+        .hero-cli .check { color: var(--mark); font-weight: 600; }
         
     </style>
 </head>
@@ -59,7 +87,29 @@
             <p class="mt-3" style="color: var(--ink-soft);">文字で操作するインターフェース</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-cli"><span class="prompt">$</span> <span class="cmd">claude run</span><span class="caret"></span></div></section>
+        <section class="anim-stage">
+            <div class="hero-cli" id="hero-cli">
+                <span class="row"><span class="prompt">$</span><span class="cmd">claude run skill</span><span class="caret"></span></span>
+                <span class="output"><span class="check">✓</span> スキル実行完了</span>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cli');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2');
+                await wait(100);
+                hero.classList.add('stage-1');  // タイピング
+                await wait(1400);
+                hero.classList.add('stage-2');  // Enter → 結果
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">CLIってそもそも何？</h2>

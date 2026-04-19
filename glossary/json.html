@@ -34,11 +34,40 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-json { background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 300px; }
-        .hero-json .key { color: var(--mark); }
-        .hero-json .brace { color: var(--ink-mute); }
-        .hero-json .fade { animation: js-fade 2.5s ease-in-out infinite; }
-        @keyframes js-fade { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        /* JSON: 散らかったテキスト → 構造化 */
+        .hero-json { display: flex; align-items: center; gap: 20px; }
+        .js-plain {
+            background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 16px 18px;
+            font-family: var(--font-mono); font-size: 13px;
+            color: var(--ink-warm); line-height: 1.7;
+            min-width: 180px;
+        }
+        .js-plain .line { opacity: 0; transition: opacity .25s; }
+        .hero-json.stage-1 .js-plain .line,
+        .hero-json.stage-2 .js-plain .line,
+        .hero-json.stage-3 .js-plain .line { opacity: 1; }
+        .js-plain .line:nth-child(2) { transition-delay: .15s; }
+        .js-plain .line:nth-child(3) { transition-delay: .30s; }
+        .js-arrow {
+            font-family: var(--font-mono); font-size: 22px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-json.stage-2 .js-arrow,
+        .hero-json.stage-3 .js-arrow { opacity: 1; }
+        .js-structured {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 8px; padding: 16px 20px;
+            font-family: var(--font-mono); font-size: 13px; line-height: 1.7;
+            min-width: 180px;
+            opacity: 0; transform: translateX(-8px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-json.stage-3 .js-structured {
+            opacity: 1; transform: translateX(0);
+        }
+        .js-structured .key { color: var(--mark); }
+        .js-structured .brace { color: var(--ink-mute); }
         
     </style>
 </head>
@@ -58,7 +87,42 @@
             <p class="mt-3" style="color: var(--ink-soft);">AIとの相性抜群なデータ形式</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-json"><div><span class="brace">{</span></div><div>&nbsp;&nbsp;<span class="key">"name"</span>: <span class="fade">"koba"</span>,</div><div>&nbsp;&nbsp;<span class="key">"role"</span>: <span class="fade">"ai-ura-kata"</span></div><div><span class="brace">}</span></div></div></section>
+        <section class="anim-stage">
+            <div class="hero-json" id="hero-json">
+                <div class="js-plain">
+                    <div class="line">名前: koba</div>
+                    <div class="line">役割: AI裏方</div>
+                    <div class="line">年齢: 36</div>
+                </div>
+                <span class="js-arrow">→</span>
+                <div class="js-structured">
+                    <div><span class="brace">{</span></div>
+                    <div>&nbsp;&nbsp;<span class="key">"name"</span>: "koba",</div>
+                    <div>&nbsp;&nbsp;<span class="key">"role"</span>: "ai-ura-kata",</div>
+                    <div>&nbsp;&nbsp;<span class="key">"age"</span>: 36</div>
+                    <div><span class="brace">}</span></div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-json');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 平文3行
+                await wait(900);
+                hero.classList.add('stage-2');  // 矢印
+                await wait(500);
+                hero.classList.add('stage-3');  // 構造化JSON
+                await wait(2200);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">JSONってそもそも何？</h2>

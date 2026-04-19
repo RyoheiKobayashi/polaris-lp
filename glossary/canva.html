@@ -46,28 +46,43 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Canva AI: タイル */
-        .hero-canva .grid {
-            display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-            gap: 12px; width: 240px; height: 170px;
+        /* Canva AI: 空のキャンバス → パーツ配置 → 完成ポスター */
+        .hero-canva {
+            position: relative;
+            width: 320px; height: 220px;
+            background: #fff; border: 2px dashed var(--ink-mute); border-radius: 10px;
+            transition: border-style .3s, border-color .3s;
         }
-        .hero-canva .tile {
-            background: #fff; border: 1px solid var(--line);
-            border-radius: 6px; position: relative; overflow: hidden;
+        .hero-canva.stage-3 { border-style: solid; border-color: var(--line); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .cv-el {
+            position: absolute;
+            opacity: 0; transform: translateY(10px) scale(0.9);
+            transition: opacity .4s, transform .4s;
         }
-        .hero-canva .tile::before {
-            content: ''; position: absolute; inset: 20% 15%;
-            border-radius: 4px;
-            animation: cv-fade 3.2s ease-in-out infinite;
+        .hero-canva.stage-1 .cv-el.title,
+        .hero-canva.stage-2 .cv-el.title,
+        .hero-canva.stage-3 .cv-el.title { opacity: 1; transform: translateY(0) scale(1); }
+        .hero-canva.stage-2 .cv-el.image,
+        .hero-canva.stage-3 .cv-el.image { opacity: 1; transform: translateY(0) scale(1); }
+        .hero-canva.stage-2 .cv-el.shape,
+        .hero-canva.stage-3 .cv-el.shape { opacity: 1; transform: translateY(0) scale(1); }
+        .hero-canva.stage-3 .cv-el.cta { opacity: 1; transform: translateY(0) scale(1); }
+        .cv-el.title {
+            top: 24px; left: 24px; right: 24px; height: 14px;
+            background: var(--ink-warm); border-radius: 3px;
         }
-        .hero-canva .tile:nth-child(1)::before { background: var(--ink-warm); animation-delay: 0s; }
-        .hero-canva .tile:nth-child(2)::before { background: var(--mark);     animation-delay: 0.25s; }
-        .hero-canva .tile:nth-child(3)::before { background: var(--ink-mute); animation-delay: 0.5s; }
-        .hero-canva .tile:nth-child(4)::before { background: var(--ink-warm); animation-delay: 0.75s; }
-        @keyframes cv-fade {
-            0%, 15%  { opacity: 0; transform: translateY(6px); }
-            45%, 80% { opacity: 1; transform: translateY(0); }
-            100%     { opacity: 0; transform: translateY(-6px); }
+        .cv-el.image {
+            top: 58px; left: 24px; width: 120px; height: 100px;
+            background: linear-gradient(135deg, var(--bg-warm) 50%, var(--mark) 50%);
+            border-radius: 6px; transition-delay: .1s;
+        }
+        .cv-el.shape {
+            top: 70px; right: 28px; width: 76px; height: 76px;
+            background: var(--mark); border-radius: 50%; transition-delay: .2s;
+        }
+        .cv-el.cta {
+            bottom: 28px; right: 24px; width: 100px; height: 24px;
+            background: var(--ink); border-radius: 4px; transition-delay: .1s;
         }
     </style>
 </head>
@@ -88,15 +103,32 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-canva">
-                <div class="grid">
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                    <div class="tile"></div>
-                </div>
+            <div class="hero-canva" id="hero-canva">
+                <div class="cv-el title"></div>
+                <div class="cv-el image"></div>
+                <div class="cv-el shape"></div>
+                <div class="cv-el cta"></div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-canva');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // タイトル出現
+                await wait(700);
+                hero.classList.add('stage-2');  // 画像・シェイプ配置
+                await wait(900);
+                hero.classList.add('stage-3');  // CTA追加、枠がポスター化
+                await wait(2200);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Canva AIってそもそも何？</h2>
