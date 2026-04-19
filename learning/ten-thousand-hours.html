@@ -123,7 +123,7 @@
             </div>
             <div class="text-center mt-8">
                 <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で1万時間を可視化</p>
-                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+                <button id="play-btn" style="display:none" class="btn btn-primary">▶ 再生</button>
             </div>
             <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">時間そのものより「意図的練習の質」が決定的という研究もある。</p>
         </section>
@@ -249,7 +249,8 @@
             btn.textContent = '▶ もう一度';
             running = false;
         }
-        btn.addEventListener('click', play);
+        async function autoLoop() { await play(); setTimeout(autoLoop, 2500); }
+        setTimeout(autoLoop, 800);
     })();
     </script>
 

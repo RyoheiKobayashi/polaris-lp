@@ -127,7 +127,7 @@
             </div>
             <div class="text-center mt-8">
                 <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で目標がSMART化されるプロセスを見る</p>
-                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+                <button id="play-btn" style="display:none" class="btn btn-primary">▶ 再生</button>
             </div>
             <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">5要素を満たして初めて、目標は実行可能になる。</p>
         </section>
@@ -248,7 +248,8 @@
             btn.textContent = '▶ もう一度';
             running = false;
         }
-        btn.addEventListener('click', play);
+        async function autoLoop() { await play(); setTimeout(autoLoop, 2500); }
+        setTimeout(autoLoop, 800);
     })();
     </script>
 
