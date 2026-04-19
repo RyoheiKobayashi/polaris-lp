@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDCAとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="PDCAサイクルをアニメーションで3秒で理解。計画→実行→検証→改善の改善サイクル。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-pdca { position: relative; width: 260px; height: 260px; margin: 0 auto; }
+        .hero-pdca .pc-ring { position: absolute; inset: 0; border: 3px dashed var(--ink-mute); border-radius: 50%; animation: pc-spin 8s linear infinite; }
+        .hero-pdca .pc-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--mark); width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 600; font-size: 22px; color: var(--ink); }
+        .hero-pdca .pc-letter { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 16px; animation: pc-blink 4s ease-in-out infinite; }
+        .hero-pdca .pc-letter.p { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .hero-pdca .pc-letter.d { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 1s; }
+        .hero-pdca .pc-letter.c { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 2s; }
+        .hero-pdca .pc-letter.a { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 3s; }
+        @keyframes pc-spin { to { transform: rotate(360deg); } }
+        @keyframes pc-blink { 0%, 100% { background: var(--ink); } 25% { background: var(--mark); color: var(--ink); } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">31 · I. 指標・分析</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Plan-Do-Check-Action</div>
+            <h1 class="detail-title">PDCA</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">計画→実行→検証→改善の改善サイクル</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-pdca">
+                <div class="pc-ring"></div>
+                <div class="pc-center">PDCA</div>
+                <div class="pc-letter p">P</div>
+                <div class="pc-letter d">D</div>
+                <div class="pc-letter c">C</div>
+                <div class="pc-letter a">A</div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">回し続けることで、少しずつ成果が積み上がる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">PDCAってそもそも何？</h2>
+            <p>
+                PDCAは<span class="mark">Plan（計画）→ Do（実行）→ Check（検証）→ Act（改善）</span>を繰り返す改善サイクル。
+                「とりあえず走ってから反省する」発想で、コンテンツ販売における改善の基本形です。
+                AIを使えばこのサイクルが<span class="mark">何倍にも高速化</span>でき、1ヶ月分の改善を1日で回せることも珍しくありません。
+                重要なのは<span class="mark">「回す"量"より"速度"」</span>。1回1回を完璧にやるより、数を多く回すのが結果的に速い。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ダイエットの体重管理</h3>
+                    <p>
+                        目標（P）→ 食事制限（D）→ 週次で計測（C）→ やり方を微調整（A）。
+                        これを繰り返すから<span class="mark">少しずつ成果</span>が出る。完璧な計画より、回す回数が効く。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ゲームの攻略</h3>
+                    <p>
+                        何度も死にながら、「ここに敵がいる → ここで避ければ勝てる」と覚える。
+                        <span class="mark">試行→失敗→改善</span>のループでクリアに近づく。コンテンツ販売も同じ。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    PDCA＝<span class="mark">改善を回す仕組み</span>。
+                    「完璧に計画」より「<span class="mark">高速で回す</span>」。AIの時代は速度がそのまま競争力です。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="cv.html" class="nav-link">← 前の単語：CV／コンバージョン</a>
+            <a href="cvr.html" class="nav-link">次の単語：CVR →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

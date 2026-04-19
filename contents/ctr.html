@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTRとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="CTR（クリック率）をアニメーションで3秒で理解。表示回数に対するクリック割合を示す指標。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-ctr { width: 100%; max-width: 360px; margin: 0 auto; text-align: center; }
+        .hero-ctr .hc-thumb { position: relative; width: 280px; height: 158px; margin: 0 auto 20px; background: var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-serif); font-size: 20px; font-weight: 600; overflow: hidden; }
+        .hero-ctr .hc-click { position: absolute; width: 30px; height: 30px; border: 3px solid var(--mark); border-radius: 50%; opacity: 0; animation: hc-click 2.4s ease-out infinite; }
+        .hero-ctr .hc-cursor { position: absolute; bottom: 30px; right: 30px; font-size: 24px; animation: hc-cursor-move 2.4s ease-in-out infinite; }
+        .hero-ctr .hc-stats { display: flex; justify-content: center; gap: 18px; font-family: var(--font-mono); font-size: 12px; }
+        .hero-ctr .hc-stats b { color: var(--ink); font-family: var(--font-serif); font-size: 16px; }
+        @keyframes hc-click { 0%, 60% { opacity: 0; transform: scale(.4); } 70%, 85% { opacity: 1; transform: scale(1.5); } 100% { opacity: 0; transform: scale(2); } }
+        @keyframes hc-cursor-move { 0%, 60% { transform: translate(0, 0); } 80% { transform: translate(-60px, -20px); } 100% { transform: translate(0, 0); } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">33 · I. 指標・分析</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Click Through Rate</div>
+            <h1 class="detail-title">CTR</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">表示回数に対するクリック割合</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-ctr">
+                <div class="hc-thumb">
+                    サムネ／タイトル
+                    <div class="hc-click" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                    <span class="hc-cursor">🖱</span>
+                </div>
+                <div class="hc-stats">
+                    <span>表示 <b>1,000</b></span>
+                    <span>→</span>
+                    <span>クリック <b>80</b></span>
+                    <span>＝</span>
+                    <span>CTR <b>8%</b></span>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">表示された中で何%がクリックしたか。サムネとタイトルの力。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">CTRってそもそも何？</h2>
+            <p>
+                CTRは「Click Through Rate」の略で、<span class="mark">「表示回数のうち何%がクリックしたか」</span>を示す指標。
+                YouTubeのサムネ、Xの投稿、Google広告——<span class="mark">「見られた中でどれだけ刺さったか」</span>を測る基本数値です。
+                CTRが低いと、どれだけ中身が良くても<span class="mark">誰にも見てもらえない</span>ので、サムネ・タイトル・広告文の改善が効率を大きく変えます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 本屋の表紙</h3>
+                    <p>
+                        書店で<span class="mark">表紙を見て手に取るかどうか</span>がCTR。
+                        中身がどんなに良くても、<span class="mark">表紙で選ばれなきゃレジに運ばれない</span>。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ビラの受け取り率</h3>
+                    <p>
+                        駅前で配ってるビラを受け取る人の割合がCTR。<span class="mark">デザインと渡し方</span>で数%変わる。
+                        同じ内容でも見せ方次第。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    CTR＝<span class="mark">サムネ・タイトルの引力</span>。
+                    CTRが低いとアクセスが増えない。まずはここで<span class="mark">興味を引く</span>仕組みが必要。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="cvr.html" class="nav-link">← 前の単語：CVR</a>
+            <a href="cpa.html" class="nav-link">次の単語：CPA →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

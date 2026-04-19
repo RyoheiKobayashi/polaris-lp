@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTVとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="LTV（顧客生涯価値）をアニメーションで3秒で理解。1顧客が生涯でもたらす総売上。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-ltv { width: 100%; max-width: 460px; margin: 0 auto; }
+        .hero-ltv .hl-timeline { display: flex; align-items: flex-end; gap: 4px; height: 160px; border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); padding: 10px; }
+        .hero-ltv .hl-bar { flex: 1; background: var(--mark); border: 1.5px solid var(--ink); border-radius: 4px 4px 0 0; transform-origin: bottom; animation: hl-rise 5s ease-out infinite; }
+        .hero-ltv .hl-bar:nth-child(1) { height: 20%; animation-delay: 0s; }
+        .hero-ltv .hl-bar:nth-child(2) { height: 35%; animation-delay: .3s; }
+        .hero-ltv .hl-bar:nth-child(3) { height: 50%; animation-delay: .6s; }
+        .hero-ltv .hl-bar:nth-child(4) { height: 65%; animation-delay: .9s; }
+        .hero-ltv .hl-bar:nth-child(5) { height: 80%; animation-delay: 1.2s; background: var(--ink); }
+        .hero-ltv .hl-bar:nth-child(6) { height: 95%; animation-delay: 1.5s; background: var(--ink); }
+        .hero-ltv .hl-caption { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); margin-top: 8px; padding: 0 10px; }
+        .hero-ltv .hl-total { text-align: center; margin-top: 16px; font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--ink); }
+        @keyframes hl-rise { 0% { transform: scaleY(0); } 30%, 90% { transform: scaleY(1); } 100% { transform: scaleY(1); } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">35 · I. 指標・分析</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Lifetime Value</div>
+            <h1 class="detail-title">LTV</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">1顧客が生涯でもたらす総売上</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-ltv">
+                <div class="hl-timeline"><div class="hl-bar"></div><div class="hl-bar"></div><div class="hl-bar"></div><div class="hl-bar"></div><div class="hl-bar"></div><div class="hl-bar"></div></div>
+                <div class="hl-caption"><span>1ヶ月目</span><span>購入を重ねるごとに積み上がる</span><span>2年目</span></div>
+                <div class="hl-total">合計売上 ¥320,000</div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">一度の購入だけじゃなく、継続購入トータルで顧客価値を見る。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">LTVってそもそも何？</h2>
+            <p>
+                LTVは「Lifetime Value」の略で、<span class="mark">1人の顧客が契約期間中（または生涯）にもたらす総売上</span>。
+                初回購入の5,000円だけで判断せず、その後の継続購入・アップセル・紹介を含めたトータルで見る指標です。
+                <span class="mark">LTVが高いビジネスは広告予算も厚くできる</span>ので、コンテンツ販売では「初回の売上」より「LTV」を重視するのが鉄則。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① スターバックスの常連客</h3>
+                    <p>
+                        1回500円のコーヒーでも、<span class="mark">毎朝通う常連は年間18万円</span>。5年通えば90万円。
+                        1人の顧客の生涯価値で見ると、スタバは薄利多売じゃない。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 美容院の指名客</h3>
+                    <p>
+                        カット6,000円×年10回×10年＝<span class="mark">60万円のLTV</span>。
+                        一度信頼を得ると、その後何年も通い続ける。これが常連商売の強さ。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    LTV＝<span class="mark">顧客一人の生涯価値</span>。
+                    初回だけで判断すると見誤る。<span class="mark">長期の総額で判断</span>するのが経営視点。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="cpa.html" class="nav-link">← 前の単語：CPA</a>
+            <a href="pv.html" class="nav-link">次の単語：PV →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

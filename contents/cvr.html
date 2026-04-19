@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVRとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="CVR（コンバージョン率）をアニメーションで3秒で理解。訪問者のうちCVに至った割合を示す指標。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-cvr { text-align: center; }
+        .hero-cvr .hv-ratio { font-family: var(--font-serif); font-size: 88px; font-weight: 600; color: var(--ink-warm); line-height: 1; }
+        .hero-cvr .hv-ratio span { color: var(--ink); }
+        .hero-cvr .hv-bar { width: 280px; height: 20px; background: var(--line); border-radius: 10px; margin: 22px auto 14px; overflow: hidden; }
+        .hero-cvr .hv-fill { width: 8%; height: 100%; background: var(--mark); border-radius: 10px; animation: hv-fill 3s ease-in-out infinite; }
+        .hero-cvr .hv-numbers { display: flex; justify-content: center; gap: 24px; font-family: var(--font-mono); font-size: 13px; }
+        .hero-cvr .hv-numbers span { color: var(--ink-warm); }
+        .hero-cvr .hv-numbers b { color: var(--ink); font-family: var(--font-serif); font-size: 18px; }
+        @keyframes hv-fill { 0% { width: 2%; } 50% { width: 8%; } 100% { width: 2%; } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">32 · I. 指標・分析</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Conversion Rate</div>
+            <h1 class="detail-title">CVR</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">訪問者のうちCVに至った割合</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-cvr">
+                <div class="hv-ratio">3.0<span>%</span></div>
+                <div class="hv-bar"><div class="hv-fill"></div></div>
+                <div class="hv-numbers"><span>訪問 <b>10,000</b></span><span>→</span><span>CV <b>300</b></span></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">1%の改善が、売上を3倍・10倍に変える指標。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">CVRってそもそも何？</h2>
+            <p>
+                CVRは「Conversion Rate（成約率）」の略で、<span class="mark">訪問者数に対してCVに至った割合</span>のこと。
+                1万人訪問して300人がCVなら、CVRは3%。
+                この数字は<span class="mark">1%改善するだけで売上が劇的に変わる</span>ので、LPや導線設計で最も注力するべき指標の一つ。
+                アクセスを増やすよりCVRを改善する方が、コストパフォーマンスがいいことも多いです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 店の前を通る人 vs 実際に買う人</h3>
+                    <p>
+                        駅前を1万人通って、入店して買う人が300人なら<span class="mark">CVR 3%</span>。
+                        看板（LP）を変えたら1%上がって入店が100人増える。<span class="mark">掲げ方1つで売上が変わる</span>のと同じ構造。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② バッティング打率</h3>
+                    <p>
+                        野球の打率も「打席数／ヒット数」で、CVRと同じ考え方。<span class="mark">打席を増やすだけじゃなく、打率を上げる</span>方に注目するのがプロ。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    CVR＝<span class="mark">訪問→CVの変換率</span>。
+                    アクセスを増やすより、<span class="mark">CVRを上げる方がコスパ良い</span>ケースが多い。LPのA/Bテストが効く理由はここ。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="pdca.html" class="nav-link">← 前の単語：PDCA</a>
+            <a href="ctr.html" class="nav-link">次の単語：CTR →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
