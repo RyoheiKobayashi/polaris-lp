@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2分ルールとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="2分ルールを、アニメーションで3秒で理解。「2分以内で終わるなら、今すぐやる」先延ばし撲滅の即時実行ルール。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .tm-stage {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 16px;
+            align-items: center;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .tm-task {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 13px;
+            color: var(--ink);
+            transition: opacity .5s ease, transform .5s ease, background .5s ease;
+            opacity: 1;
+        }
+        .tm-task .tm-time {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .tm-task.done {
+            background: var(--mark);
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        .tm-arrow {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            color: var(--ink-mute);
+            text-align: center;
+        }
+        .tm-result {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+            background: var(--bg-warm);
+            border: 1px dashed var(--ink-mute);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .tm-result.in { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">K · 時間管理</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Two-Minute Rule</div>
+            <h1 class="detail-title">2分ルール</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「2分で終わるなら、今すぐやる」</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="tm-stage">
+                <div class="tm-task" id="t1"><div class="tm-time">2分</div>メールに返信</div>
+                <div class="tm-arrow">→</div>
+                <div class="tm-result" id="r1">即実行：先延ばしゼロ</div>
+
+                <div class="tm-task" id="t2"><div class="tm-time">1分</div>食器を洗う</div>
+                <div class="tm-arrow">→</div>
+                <div class="tm-result" id="r2">即実行：シンクが綺麗</div>
+
+                <div class="tm-task" id="t3"><div class="tm-time">90秒</div>本を1ページ読む</div>
+                <div class="tm-arrow">→</div>
+                <div class="tm-result" id="r3">習慣の起動装置になる</div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で2分タスクの即実行を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">2分タスクをためると、心の負債が複利で増える。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">先延ばしの累積を防ぐシンプルなルール</h2>
+            <p>
+                生産性コンサルタントのデイビッド・アレンが『はじめてのGTD（Getting Things Done）』で提唱。
+                <span class="mark">「2分以内で終わるタスクは、今すぐやる」</span>。
+                これだけ。理由は明快で、2分の作業を「あとでやる」とToDoリストに入れる方が、
+                管理コストとメンタル負荷で <strong>2分以上の時間を消費</strong> するから。
+                ジェームズ・クリアー『Atomic Habits』では「習慣の入口を2分以内にする」という
+                応用版（"2-Minute Rule for Habits"）も提唱されています。
+                どちらも本質は同じ──<span class="mark">小さな実行を即起こす</span>こと。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① キッチンのシンク</h3>
+                    <p>
+                        食後すぐ洗えば30秒。「あとで」と放置すると油が固まって5分かかる。
+                        <span class="mark">2分タスクの先延ばしは、コストが膨らむ</span>。
+                        メール返信もLINE返信も同じ構造。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 「読書を始める」のハードル</h3>
+                    <p>
+                        「毎日30分読む」は重すぎて始まらない。
+                        「毎日1ページ読む」なら2分でできる。
+                        <span class="mark">習慣の入口を2分以内</span>に設計すれば、
+                        始まれば10分続いて、結果として30分読める日も出てくる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    2分ルール＝<span class="mark">2分で終わるなら今すぐやる／習慣の入口は2分以内に設計する</span>。
+                    「あとでやる」をToDoに入れる前に、本当に2分以上かかるか自問する。
+                    意外と、自分の人生は2分タスクの集合体です。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="pomodoro.html" class="nav-link">← 前：ポモドーロ・テクニック</a>
+            <a href="pareto.html" class="nav-link">次の用語：80:20の法則 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const tasks = ['t1','t2','t3'].map(id => document.getElementById(id));
+        const results = ['r1','r2','r3'].map(id => document.getElementById(id));
+        const labels = [
+            '2分タスクは「即実行」で消化',
+            'ためずに片付けると、心が軽い',
+            '習慣の入口も2分以内に設計'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            tasks.forEach(t => t.classList.remove('done'));
+            results.forEach(r => r.classList.remove('in'));
+            for (let i = 0; i < tasks.length; i++) {
+                await wait(700);
+                tasks[i].classList.add('done');
+                results[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(800);
+            status.innerHTML = '✓ <strong>2分タスクを溜めない</strong>のが、心の余白の源';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

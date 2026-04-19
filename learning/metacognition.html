@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メタ認知とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="メタ認知を、アニメーションで3秒で理解。「自分の思考をもう一段上から見る」力。学習効率を跳ね上げる自己観察スキル。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .mc-stage {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            height: 280px;
+            margin: 0 auto;
+        }
+        .mc-layer {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            transition: transform .8s ease, opacity .6s ease, box-shadow .6s ease;
+        }
+        .mc-l1 {
+            width: 220px; height: 220px;
+            top: 30px; left: 50%;
+            transform: translateX(-50%) scale(.7);
+            background: var(--ink);
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .mc-l1.in {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+        .mc-l2 {
+            width: 140px; height: 140px;
+            top: 70px; left: 50%;
+            transform: translateX(-50%) scale(.7);
+            background: #fff;
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            font-size: 12px;
+            opacity: 0;
+            z-index: 2;
+        }
+        .mc-l2.in {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+        .mc-l3 {
+            width: 70px; height: 70px;
+            top: 105px; left: 50%;
+            transform: translateX(-50%) scale(.4);
+            background: var(--mark);
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            font-size: 11px;
+            opacity: 0;
+            z-index: 3;
+            box-shadow: 0 0 0 0 rgba(253, 236, 200, 0);
+        }
+        .mc-l3.in {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            box-shadow: 0 0 0 8px rgba(253, 236, 200, 0.4);
+        }
+        .mc-arrow {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .mc-arrow.in { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">N · メタ認知・目標</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Metacognition</div>
+            <h1 class="detail-title">メタ認知</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「自分の思考を、もう一段上から見る」力</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="mc-stage">
+                <div class="mc-layer mc-l1" id="l1">思考</div>
+                <div class="mc-layer mc-l2" id="l2">思考を観察</div>
+                <div class="mc-layer mc-l3" id="l3">メタ認知</div>
+                <div class="mc-arrow" id="arrow">↑ もう一段上の視点</div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で3層構造（思考→観察→メタ認知）を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">「今、自分は何を分かっていないか？」を分かる力。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「分かったつもり」を抜け出すスキル</h2>
+            <p>
+                発達心理学者 John Flavell が1970年代に提唱した概念。
+                <span class="mark">「自分の認知（思考・記憶・理解）を、自分で観察・制御する力」</span>。
+                平たく言えば <strong>「今、自分が何をどこまで分かっているかを、自分で把握できる」</strong>能力。
+                メタ認知の高い人は、「ここまでは理解できた／ここから先は曖昧」という境界が明確で、
+                どこを重点的に学ぶべきかを判断できる。
+                逆にメタ認知が低いと「全部わかった気」になり、テストで撃沈する。
+                チェック方法は単純で、<span class="mark">「今読んだ内容を、見ずに3行で書けるか？」</span>を試すこと。
+                書けない部分が、メタ認知が捉えていない盲点です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① プレゼンの録画チェック</h3>
+                    <p>
+                        自分のプレゼンを録画して見直すと、本番では気づかなかった<span class="mark">「えーと」の連発</span>に気づく。
+                        これがメタ認知。「やっている自分」と「観察する自分」を分ける視点。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 怒っている自分を俯瞰する</h3>
+                    <p>
+                        怒りに飲まれている時は何も見えない。
+                        ふと <span class="mark">「あ、今オレ怒ってるな」</span>と気づける瞬間がメタ認知。
+                        気づけば、怒りそのものをコントロールできる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    メタ認知＝<span class="mark">「自分の思考を、もう一段上の視点から観察・制御する力」</span>。
+                    学習で最も効くのは <strong>「分かっていない部分を、分かっている」</strong> こと。
+                    日記・振り返り・録画・人に説明する、などすべてメタ認知の訓練になります。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="interleaving.html" class="nav-link">← 前：インターリービング</a>
+            <a href="feynman.html" class="nav-link">次の用語：ファインマン・テクニック →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const layers = ['l1','l2','l3'].map(id => document.getElementById(id));
+        const arrow = document.getElementById('arrow');
+        const labels = [
+            '第1層：思考そのもの（問題を解いている自分）',
+            '第2層：その思考を観察する自分',
+            '第3層：観察している自分すら、俯瞰する → メタ認知'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            layers.forEach(l => l.classList.remove('in'));
+            arrow.classList.remove('in');
+            for (let i = 0; i < layers.length; i++) {
+                await wait(700);
+                layers[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(400);
+            arrow.classList.add('in');
+            await wait(600);
+            status.innerHTML = '✓ <strong>「分かっていない部分を分かる」のが学習加速の鍵</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

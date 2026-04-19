@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アクティブリコールとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="アクティブリコールを、アニメーションで3秒で理解。読み返さず頭から強引に思い出す復習法。再読より圧倒的に記憶定着が高い。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ar-stage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .ar-side {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .ar-side h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .ar-side .ar-icon {
+            font-size: 28px;
+            margin: 8px 0;
+        }
+        .ar-side .ar-action {
+            font-size: 13px;
+            color: var(--ink);
+            margin-bottom: 14px;
+            min-height: 40px;
+        }
+        .ar-bar-wrap {
+            background: var(--bg-warm);
+            height: 14px;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        .ar-bar {
+            height: 100%;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 7px;
+            width: 0;
+        }
+        .ar-bar.passive { background: var(--ink-mute); }
+        .ar-bar.active { background: var(--mark); border: 1px solid var(--ink); }
+        .ar-percent {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            margin-top: 6px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">M · 記憶・定着</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Active Recall</div>
+            <h1 class="detail-title">アクティブ<br>リコール</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「思い出す」の負荷が、記憶を強くする</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="ar-stage">
+                <div class="ar-side">
+                    <h4>受動：再読</h4>
+                    <div class="ar-icon">📖</div>
+                    <div class="ar-action">教科書を読み返す</div>
+                    <div class="ar-bar-wrap"><div class="ar-bar passive" id="bar-p"></div></div>
+                    <div class="ar-percent" id="pct-p">0%</div>
+                </div>
+                <div class="ar-side">
+                    <h4>能動：思い出す</h4>
+                    <div class="ar-icon">🧠</div>
+                    <div class="ar-action">教科書を閉じて<br>頭から思い出す</div>
+                    <div class="ar-bar-wrap"><div class="ar-bar active" id="bar-a"></div></div>
+                    <div class="ar-percent" id="pct-a">0%</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で再読 vs 思い出すを比較</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">Karpicke et al., 2008 等の実験で、能動的想起の優位性が確認されている。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「読んだのに覚えてない」の正体</h2>
+            <p>
+                教育心理学者 Jeffrey Karpicke らの研究（2008）で広く知られるようになった学習法。
+                <span class="mark">「読み返す」のではなく「思い出す」</span>のが核心。
+                同じ内容を、<strong>受動的に読む</strong>グループと<strong>能動的に思い出す（テスト形式）</strong>グループで比較した実験では、
+                1週間後の記憶定着率は <strong>後者が約2倍</strong>。
+                理由は、思い出す行為そのものが脳に「これは大事な情報」というシグナルを送り、
+                神経回路を強化するから（テスト効果 Testing Effect）。
+                ハイライトを引いたり付箋を貼っても、<span class="mark">能動的に思い出さなければ記憶には残らない</span>のがポイント。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 試合と練習</h3>
+                    <p>
+                        試合経験のないスポーツ選手は強くならない。
+                        <span class="mark">「練習＝再読」「試合＝アクティブリコール」</span>。
+                        実戦で頭をフル回転させる経験が、本当の実力を作る。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② スピーチの暗記</h3>
+                    <p>
+                        スピーチを覚えるとき、<span class="mark">原稿を見ずに口で言ってみる</span>のが一番早い。
+                        原稿を黙読するだけでは、本番で詰まる。
+                        「思い出す筋肉」は、思い出す訓練でしか鍛えられない。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    アクティブリコール＝<span class="mark">教材を閉じて、頭から強引に思い出す</span>復習法。
+                    実装は簡単で、章の終わりに <strong>「今読んだ内容を3行で書け」</strong> と自分に出題するだけ。
+                    再読の2倍の定着率が手に入ります。間隔反復と組み合わせると最強。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="spaced-repetition.html" class="nav-link">← 前：間隔反復</a>
+            <a href="chunking.html" class="nav-link">次の用語：チャンキング →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const barP = document.getElementById('bar-p');
+        const barA = document.getElementById('bar-a');
+        const pctP = document.getElementById('pct-p');
+        const pctA = document.getElementById('pct-a');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        function animateBar(bar, pctEl, target, durationMs) {
+            return new Promise(resolve => {
+                bar.style.width = target + '%';
+                const steps = 30;
+                let step = 0;
+                const interval = setInterval(() => {
+                    step++;
+                    pctEl.textContent = Math.round((step / steps) * target) + '%';
+                    if (step >= steps) {
+                        clearInterval(interval);
+                        pctEl.textContent = target + '%';
+                        resolve();
+                    }
+                }, durationMs / steps);
+            });
+        }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            barP.style.width = '0';
+            barA.style.width = '0';
+            pctP.textContent = '0%';
+            pctA.textContent = '0%';
+            status.textContent = '受動：教科書を3回読み返す → 1週間後の定着率';
+            await wait(500);
+            await animateBar(barP, pctP, 28, 1100);
+            await wait(700);
+            status.textContent = '能動：頭から思い出す（テスト形式） → 1週間後の定着率';
+            await animateBar(barA, pctA, 65, 1300);
+            await wait(700);
+            status.innerHTML = '✓ <strong>能動的想起 ≒ 受動再読の2倍以上</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

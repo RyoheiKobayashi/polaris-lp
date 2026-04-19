@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インターリービングとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="インターリービング（交互練習）を、アニメーションで3秒で理解。複数の科目・トピックを交互に学ぶことで応用力が育つ。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .il-stage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .il-side h4 {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .il-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+        .il-block {
+            flex: 1;
+            height: 28px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            transition: opacity .4s ease, transform .4s ease;
+            opacity: 0;
+            transform: scale(.85);
+        }
+        .il-block.in { opacity: 1; transform: scale(1); }
+        .il-a { background: var(--ink); }
+        .il-b { background: #6b6b6b; }
+        .il-c { background: var(--mark); color: var(--ink); border: 1.5px solid var(--ink); }
+        .il-result {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            margin-top: 16px;
+            color: var(--ink-soft);
+        }
+        .il-result strong { color: var(--ink); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">M · 記憶・定着</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Interleaving</div>
+            <h1 class="detail-title">インター<br>リービング</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">複数のトピックを「交互に」学ぶ練習法</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="il-stage">
+                <div class="il-side">
+                    <h4>ブロック練習（×）</h4>
+                    <div class="il-row" id="blocked">
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-c">C</div>
+                        <div class="il-block il-c">C</div>
+                        <div class="il-block il-c">C</div>
+                    </div>
+                    <div class="il-result">短期パフォーマンス↑<br>長期定着&nbsp;<strong>低</strong></div>
+                </div>
+                <div class="il-side">
+                    <h4>インターリーブ（◎）</h4>
+                    <div class="il-row" id="interleaved">
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-c">C</div>
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-c">C</div>
+                        <div class="il-block il-a">A</div>
+                        <div class="il-block il-b">B</div>
+                        <div class="il-block il-c">C</div>
+                    </div>
+                    <div class="il-result">短期は遅く感じる<br>長期定着&nbsp;<strong>高</strong></div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で2つの練習方法を比較</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">Rohrer & Taylor, 2007 ほかで効果が確認されている。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「同じ問題ばかり解く」の落とし穴</h2>
+            <p>
+                教育心理学者 Doug Rohrer らの研究で広く知られるようになった学習法。
+                <span class="mark">複数のトピック・問題タイプを交互に練習する</span>と、長期的な学習効果が上がる。
+                対義語は「ブロック練習（A→A→A、B→B→B）」。
+                直感的にはブロック練習の方が効率良く感じる──同じ手順を繰り返すから速く解けるようになる。
+                でも実は、それは <span class="mark">「練習中の見せかけのスピード」</span> にすぎず、
+                テストや実戦で別タイプの問題が混ざると弱い。
+                インターリーブ練習は <strong>「どの方法を使うべきか判断する力」</strong> を鍛えるため、
+                応用問題への対応力が圧倒的に強くなります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① テニスの素振り vs 試合練習</h3>
+                    <p>
+                        フォアハンド100回、バックハンド100回の素振り＝ブロック練習。
+                        <span class="mark">フォア・バック・ボレーがランダムに来る</span>練習＝インターリーブ。
+                        試合で勝てるのは後者。本番が「混ざった状態」で来るから。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 数学の章末問題</h3>
+                    <p>
+                        各章を順番に解くより、<span class="mark">複数章の問題が混ざったランダム問題集</span>の方が
+                        実力が伸びる。「どの公式を使うか」の判断力が鍛えられるから。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    インターリービング＝<span class="mark">複数のトピックを交互に学ぶ練習法</span>。
+                    短期的には「遅く感じる」が、<strong>長期的な定着率と応用力は圧倒的に高い</strong>。
+                    1冊を順番にやるより、複数科目を日替わりで回す方が結果が出ます。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="chunking.html" class="nav-link">← 前：チャンキング</a>
+            <a href="metacognition.html" class="nav-link">次の用語：メタ認知 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const blockedItems = document.querySelectorAll('#blocked .il-block');
+        const interleavedItems = document.querySelectorAll('#interleaved .il-block');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            blockedItems.forEach(b => b.classList.remove('in'));
+            interleavedItems.forEach(b => b.classList.remove('in'));
+            status.textContent = '左：A→A→A → B→B→B → C→C→C（同種をまとめて練習）';
+            for (const b of blockedItems) {
+                b.classList.add('in');
+                await wait(120);
+            }
+            await wait(800);
+            status.textContent = '右：A→B→C→A→B→C…（タイプを混ぜて練習）';
+            for (const b of interleavedItems) {
+                b.classList.add('in');
+                await wait(120);
+            }
+            await wait(700);
+            status.innerHTML = '✓ <strong>混ぜると判断力が育ち、応用問題に強くなる</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

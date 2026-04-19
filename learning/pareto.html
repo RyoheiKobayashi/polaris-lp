@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>80:20の法則（パレートの法則）とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="80:20の法則（パレート）を、アニメーションで3秒で理解。成果の8割は原因の2割から生まれる。学習の「効く2割」に集中する。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pa-stage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .pa-side {
+            text-align: center;
+        }
+        .pa-side h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+            margin-bottom: 12px;
+        }
+        .pa-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            height: 140px;
+            margin-bottom: 12px;
+        }
+        .pa-bar {
+            width: 22px;
+            background: var(--ink-mute);
+            border-radius: 3px 3px 0 0;
+            transform-origin: bottom;
+            transform: scaleY(0);
+            transition: transform .8s cubic-bezier(0.4, 0, 0.2, 1), background .4s ease;
+        }
+        .pa-bar.in { transform: scaleY(1); }
+        .pa-bar.hot { background: var(--mark); border: 1.5px solid var(--ink); border-bottom: none; }
+        .pa-caption {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+        }
+        .pa-caption strong { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">K · 時間管理</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Pareto Principle</div>
+            <h1 class="detail-title">80:20の法則</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">成果の8割は、原因の2割から生まれる</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="pa-stage">
+                <div class="pa-side">
+                    <h4>原因（投入時間）</h4>
+                    <div class="pa-bars">
+                        <div class="pa-bar c1 hot" style="height: 100%;"></div>
+                        <div class="pa-bar c2" style="height: 25%;"></div>
+                        <div class="pa-bar c3" style="height: 22%;"></div>
+                        <div class="pa-bar c4" style="height: 18%;"></div>
+                        <div class="pa-bar c5" style="height: 15%;"></div>
+                    </div>
+                    <div class="pa-caption"><strong>20%</strong> が効く</div>
+                </div>
+                <div class="pa-side">
+                    <h4>成果（学習効果）</h4>
+                    <div class="pa-bars">
+                        <div class="pa-bar e1 hot" style="height: 95%;"></div>
+                        <div class="pa-bar e2 hot" style="height: 90%;"></div>
+                        <div class="pa-bar e3" style="height: 12%;"></div>
+                        <div class="pa-bar e4" style="height: 10%;"></div>
+                        <div class="pa-bar e5" style="height: 8%;"></div>
+                    </div>
+                    <div class="pa-caption"><strong>80%</strong> の成果</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で「効く2割」と「効かない8割」を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">「効く2割」を見極めて、そこに時間を集中させる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「ぜんぶ完璧にやる」をやめるための法則</h2>
+            <p>
+                イタリアの経済学者ヴィルフレド・パレートが、19世紀末に発見した経験則。
+                <span class="mark">「結果の80%は、原因の20%から生まれる」</span>。
+                もとはイタリアの土地所有の偏り（土地の80%は人口の20%が所有）の観察から始まり、
+                ビジネス・営業・学習・健康など <strong>あらゆる分野で観察される</strong> 法則になりました。
+                学習に当てはめると：
+                教科書全体の20%に、テストで問われる8割の内容が詰まっている。
+                自分の弱点ベスト2を潰せば、点数の8割は伸びる。
+                「<span class="mark">効く2割を見極めて集中する</span>」のが時間効率の本質です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① クローゼットの服</h3>
+                    <p>
+                        持ってる服の8割は着ない。実際に着回しているのは<span class="mark">お気に入りの2割</span>だけ。
+                        「効く2割」が集中している例。学習も同じ構造で、教材の20%が結果の80%を生む。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 英単語の頻出度</h3>
+                    <p>
+                        英語は<span class="mark">頻出単語2,000語</span>を覚えれば日常会話の80%がわかる、と言われる。
+                        全部の単語を均等に覚えるより、頻出2割を完璧にする方が圧倒的に効率がいい。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    80:20の法則＝<span class="mark">成果の8割は、行動の2割から生まれる</span>。
+                    すべてを均等にやらない。<strong>「効く2割」</strong> を見つけて、そこに時間と集中を寄せる。
+                    完璧主義の人ほど効果が大きいフレーム。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="two-minute-rule.html" class="nav-link">← 前：2分ルール</a>
+            <a href="deep-work.html" class="nav-link">次の用語：Deep Work →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const causeBars = document.querySelectorAll('.pa-bar.c1, .pa-bar.c2, .pa-bar.c3, .pa-bar.c4, .pa-bar.c5');
+        const effectBars = document.querySelectorAll('.pa-bar.e1, .pa-bar.e2, .pa-bar.e3, .pa-bar.e4, .pa-bar.e5');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            [...causeBars, ...effectBars].forEach(b => b.classList.remove('in'));
+            status.textContent = '原因（投入時間）：5項目に時間を分散';
+            await wait(500);
+            for (const b of causeBars) { b.classList.add('in'); await wait(150); }
+            await wait(700);
+            status.textContent = '成果（結果）：トップ2項目に8割の効果が集中';
+            for (const b of effectBars) { b.classList.add('in'); await wait(150); }
+            await wait(800);
+            status.innerHTML = '✓ <strong>「効く2割」</strong>に時間と集中を寄せる';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

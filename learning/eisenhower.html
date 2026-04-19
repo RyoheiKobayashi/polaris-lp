@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイゼンハワーマトリクスとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="アイゼンハワーマトリクスを、アニメーションで3秒で理解。タスクを「緊急×重要」の4象限で整理する優先順位フレーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .em-stage {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            grid-template-rows: 32px 1fr 1fr;
+            gap: 6px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .em-axis {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .em-cell {
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            padding: 14px 12px;
+            min-height: 120px;
+            background: #fff;
+            position: relative;
+            transition: background .4s ease;
+        }
+        .em-cell.highlight { background: var(--mark); }
+        .em-cell .em-quad {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-mute);
+            margin-bottom: 6px;
+        }
+        .em-cell .em-action {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .em-task {
+            display: inline-block;
+            font-size: 11px;
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            opacity: 0;
+            transform: scale(.8);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .em-task.in { opacity: 1; transform: scale(1); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">K · 時間管理</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Eisenhower Matrix</div>
+            <h1 class="detail-title">アイゼンハワー<br>マトリクス</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「緊急」と「重要」でタスクを4分割する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="em-stage">
+                <div></div>
+                <div class="em-axis">緊急</div>
+                <div class="em-axis">緊急でない</div>
+
+                <div class="em-axis">重要</div>
+                <div class="em-cell" id="q1">
+                    <div class="em-quad">第1象限</div>
+                    <div class="em-action">今すぐやる</div>
+                    <span class="em-task t1">締切1時間後</span>
+                    <span class="em-task t1">緊急トラブル</span>
+                </div>
+                <div class="em-cell" id="q2">
+                    <div class="em-quad">第2象限</div>
+                    <div class="em-action">計画してやる</div>
+                    <span class="em-task t2">学習</span>
+                    <span class="em-task t2">健康</span>
+                    <span class="em-task t2">人間関係</span>
+                </div>
+
+                <div class="em-axis">重要でない</div>
+                <div class="em-cell" id="q3">
+                    <div class="em-quad">第3象限</div>
+                    <div class="em-action">人に任せる</div>
+                    <span class="em-task t3">通知の返信</span>
+                    <span class="em-task t3">割込み</span>
+                </div>
+                <div class="em-cell" id="q4">
+                    <div class="em-quad">第4象限</div>
+                    <div class="em-action">やらない</div>
+                    <span class="em-task t4">SNS閲覧</span>
+                    <span class="em-task t4">惰性のTV</span>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で4象限の使い分けを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">学習は「重要だが緊急でない」第2象限。意識して時間を確保する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「忙しいのに成長しない」を抜け出すフレーム</h2>
+            <p>
+                第34代米国大統領アイゼンハワーが活用したことで知られる優先順位フレーム。
+                タスクを<span class="mark">「緊急性」と「重要性」の2軸</span>で4象限に分けて扱う。
+                多くの人は第1象限（緊急かつ重要）と第3象限（緊急だが重要でない）に追われて1日が終わる。
+                でも本当に成果を生むのは<span class="mark">第2象限（重要だが緊急でない）</span>。
+                学習・健康・人間関係はすべてここに入ります。
+                第2象限の時間を意識的に守ることが、長期的な成長の鍵。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 歯医者と歯磨き</h3>
+                    <p>
+                        歯が痛くなってからの歯医者通い＝第1象限（緊急＆重要）。
+                        毎日の歯磨き＝<span class="mark">第2象限（重要だが緊急でない）</span>。
+                        歯磨きをサボると、第1象限の地獄が待っている。学習も同じ構造。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② スマホ通知 vs 健康診断</h3>
+                    <p>
+                        通知音は緊急に感じるが、ほとんどは重要じゃない（第3象限）。
+                        逆に健康診断は重要だが緊急じゃないから後回しになる（第2象限）。
+                        <span class="mark">「緊急感」と「重要度」を混同しない</span>のがコツ。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    アイゼンハワーマトリクス＝<span class="mark">「緊急 × 重要」の4象限でタスクを仕分ける</span>。
+                    学習・健康・自己投資はすべて<strong>第2象限</strong>。
+                    意識して時間を確保しないと、永遠に第1・第3象限に追われる人生になります。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="parkinson.html" class="nav-link">← 前：パーキンソンの法則</a>
+            <a href="time-blocking.html" class="nav-link">次の用語：タイムブロッキング →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const cells = ['q1','q2','q3','q4'].map(id => document.getElementById(id));
+        const tasks = [1,2,3,4].map(n => document.querySelectorAll('.t' + n));
+        const labels = [
+            '第1象限：緊急＆重要 → 今すぐやる',
+            '第2象限：重要だが緊急でない → ★ここに時間を確保',
+            '第3象限：緊急だが重要でない → 人に任せる/減らす',
+            '第4象限：緊急でも重要でもない → やらない'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            cells.forEach(c => c.classList.remove('highlight'));
+            tasks.forEach(group => group.forEach(t => t.classList.remove('in')));
+            for (let i = 0; i < cells.length; i++) {
+                await wait(800);
+                cells[i].classList.add('highlight');
+                tasks[i].forEach(t => t.classList.add('in'));
+                status.textContent = labels[i];
+            }
+            await wait(900);
+            cells.forEach((c, i) => { if (i !== 1) c.classList.remove('highlight'); });
+            status.innerHTML = '✓ 学習は<strong>第2象限</strong>。意識して守らないと埋もれる';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

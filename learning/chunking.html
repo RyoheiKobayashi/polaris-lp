@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャンキングとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="チャンキングを、アニメーションで3秒で理解。情報を意味のある「かたまり」にまとめて、脳の容量を有効に使う記憶術。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ch-stage { max-width: 480px; margin: 0 auto; }
+        .ch-row {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .ch-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .ch-digits {
+            display: inline-flex;
+            gap: 4px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .ch-digit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px; height: 32px;
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 700;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 4px;
+            color: var(--ink);
+            transition: background .4s ease, transform .4s ease, box-shadow .4s ease;
+        }
+        .ch-digit.grouped {
+            background: var(--mark);
+        }
+        .ch-group {
+            display: inline-flex;
+            gap: 4px;
+            padding: 4px 8px;
+            background: rgba(253, 236, 200, 0.4);
+            border-radius: 8px;
+            margin: 0 4px;
+            transition: all .4s ease;
+        }
+        .ch-group.in {
+            background: rgba(253, 236, 200, 0.8);
+            box-shadow: 0 0 0 2px var(--ink);
+        }
+        .ch-counter {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink-warm);
+            margin-top: 12px;
+        }
+        .ch-counter strong { color: var(--ink); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">M · 記憶・定着</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Chunking</div>
+            <h1 class="detail-title">チャンキング</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">情報を「かたまり」にまとめて記憶する</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="ch-stage">
+                <div class="ch-row">
+                    <div class="ch-label">バラバラの11桁を覚える</div>
+                    <div class="ch-digits" id="d-flat">
+                        <span class="ch-digit">0</span><span class="ch-digit">9</span><span class="ch-digit">0</span><span class="ch-digit">1</span>
+                        <span class="ch-digit">2</span><span class="ch-digit">3</span><span class="ch-digit">4</span><span class="ch-digit">5</span>
+                        <span class="ch-digit">6</span><span class="ch-digit">7</span><span class="ch-digit">8</span>
+                    </div>
+                    <div class="ch-counter">処理単位: <strong id="cnt-flat">11個</strong></div>
+                </div>
+                <div class="ch-row">
+                    <div class="ch-label">3つのチャンクにまとめる</div>
+                    <div class="ch-digits" id="d-grouped">
+                        <span class="ch-group" id="g1"><span class="ch-digit">0</span><span class="ch-digit">9</span><span class="ch-digit">0</span></span>
+                        <span class="ch-group" id="g2"><span class="ch-digit">1</span><span class="ch-digit">2</span><span class="ch-digit">3</span><span class="ch-digit">4</span></span>
+                        <span class="ch-group" id="g3"><span class="ch-digit">5</span><span class="ch-digit">6</span><span class="ch-digit">7</span><span class="ch-digit">8</span></span>
+                    </div>
+                    <div class="ch-counter">処理単位: <strong id="cnt-grouped">3個</strong></div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でチャンク化のプロセスを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">電話番号が3-4桁で区切られているのも、チャンキング。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">脳の作業メモリは「個数」で数える</h2>
+            <p>
+                認知心理学者ジョージ・ミラーが1956年に発表した古典論文
+                「<span class="mark">マジカルナンバー7±2</span>」が起点。
+                人間の作業メモリには、一度に保持できる情報の <strong>個数</strong> に限界がある（最近の研究では4±1）。
+                ただし1個の単位（チャンク）の中に何文字含まれるかは可変。
+                例えば「I-B-M-N-A-S-A-F-B-I」は10文字に見えるが、「IBM・NASA・FBI」とまとめれば <strong>3チャンク</strong>。
+                <span class="mark">既知の意味で情報をくくり直すと、脳の処理コストが激減する</span>のがチャンキングの本質。
+                プログラミングの関数化、料理のレシピ化もすべて同じ原理です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 電話番号</h3>
+                    <p>
+                        「09012345678」より「090-1234-5678」の方が覚えやすい。
+                        後者は<span class="mark">3チャンクに分割</span>されているだけ。情報量は同じでも脳の負荷が違う。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 暗記カード</h3>
+                    <p>
+                        単語を1個ずつ覚えるより、<span class="mark">5語の例文</span>で覚える方が早い。
+                        例文という意味のチャンクに、5語が乗っているから。
+                        歴史の年号も、ストーリーで束ねれば一気に覚えられる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    チャンキング＝<span class="mark">情報を意味のある「かたまり」にまとめる記憶術</span>。
+                    脳の容量は <strong>「個数」で制限される</strong>ので、1個に詰める情報量を増やすほど効率が上がる。
+                    覚える前に「これは何のかたまりか？」と問うのがコツ。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="active-recall.html" class="nav-link">← 前：アクティブリコール</a>
+            <a href="interleaving.html" class="nav-link">次の用語：インターリービング →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const groups = ['g1','g2','g3'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            groups.forEach(g => g.classList.remove('in'));
+            status.textContent = '上：11桁をバラバラに覚えると → 容量オーバー';
+            await wait(1300);
+            status.textContent = '下：3チャンクにくくると…';
+            await wait(500);
+            for (const g of groups) {
+                g.classList.add('in');
+                await wait(500);
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>同じ情報量でも、3個なら覚えられる</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WOOPの法則とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="WOOPの法則を、アニメーションで3秒で理解。Wish/Outcome/Obstacle/Plan の4ステップで「障害を先回りして計画する」目標達成フレーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .wp-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+        .wp-step {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 16px;
+            align-items: center;
+            padding: 14px 16px;
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 8px;
+            opacity: 0.4;
+            transition: opacity .5s ease, border .5s ease, background .5s ease;
+        }
+        .wp-step.in {
+            opacity: 1;
+            border-color: var(--ink);
+        }
+        .wp-step.in.last { background: var(--mark); }
+        .wp-letter {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+            text-align: center;
+        }
+        .wp-content { font-size: 13px; color: var(--ink); line-height: 1.5; }
+        .wp-content strong { display: block; font-size: 11px; color: var(--ink-soft); font-family: var(--font-mono); margin-bottom: 4px; letter-spacing: 0.04em; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">N · メタ認知・目標</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">WOOP Method</div>
+            <h1 class="detail-title">WOOPの法則</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">障害を先回りして計画する、目標達成フレーム</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="wp-stage">
+                <div class="wp-step" id="ws1">
+                    <div class="wp-letter">W</div>
+                    <div class="wp-content"><strong>Wish · 願望</strong>達成したい挑戦的だが現実的な目標</div>
+                </div>
+                <div class="wp-step" id="ws2">
+                    <div class="wp-letter">O</div>
+                    <div class="wp-content"><strong>Outcome · 成果</strong>達成したときの最高の結果をイメージ</div>
+                </div>
+                <div class="wp-step" id="ws3">
+                    <div class="wp-letter">O</div>
+                    <div class="wp-content"><strong>Obstacle · 障害</strong>達成を妨げる「自分の中の障害」を特定</div>
+                </div>
+                <div class="wp-step last" id="ws4">
+                    <div class="wp-letter">P</div>
+                    <div class="wp-content"><strong>Plan · 計画</strong>「障害が起きたら○○する」を if-then で決める</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でWOOP 4ステップを順に見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">障害を先に潰すから、目標達成率が上がる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「ポジティブ思考」だけでは目標は達成しない</h2>
+            <p>
+                ニューヨーク大学の心理学者 Gabriele Oettingen が20年以上の研究を経て体系化した
+                目標達成法。原著『Rethinking Positive Thinking』(2014)。
+                「達成された姿だけを夢見るとむしろ達成率が下がる」という研究結果から発展。
+                <span class="mark">Wish → Outcome → Obstacle → Plan</span> の4ステップで、
+                <strong>「障害を先回りして対策を if-then で決めておく」</strong>のがコア。
+                例えば「英語学習を続けたい（W）→ 海外で活躍する自分（O）→ 残業で疲れる（O）
+                → <span class="mark">残業の日は朝5分だけやる（P）</span>」。
+                障害を直視することで、感情に流されず行動を継続できる。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ダイエットの誘惑対策</h3>
+                    <p>
+                        「痩せた自分を想像する」だけでは続かない。
+                        <span class="mark">「飲み会に誘われたら → サラダだけ頼む」</span>と if-then を決めておくと
+                        誘惑が来た瞬間に自動的に行動できる。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 雨の日の通勤</h3>
+                    <p>
+                        「雨が降ったら → 玄関の傘立てから〇〇の傘を取る」と決めておくと迷わない。
+                        <span class="mark">障害（雨）に対する反応（傘）を事前定義</span>するのがWOOP。
+                        意志力に頼らず、行動を自動化する。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    WOOP＝<span class="mark">Wish / Outcome / Obstacle / Plan の4ステップで目標達成を設計する</span>。
+                    肝は <strong>「障害を先に直視して、if-then プランを書いておく」</strong>こと。
+                    意志力に頼らず、状況に応じて自動的に行動できる仕組みが生まれます。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="smart-goals.html" class="nav-link">← 前：SMART目標</a>
+            <a href="ten-thousand-hours.html" class="nav-link">次の用語：1万時間の法則 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const steps = ['ws1','ws2','ws3','ws4'].map(id => document.getElementById(id));
+        const labels = [
+            'W：Wish → 達成したい目標を1つ書き出す',
+            'O：Outcome → 達成した時の最高の成果をイメージ',
+            'O：Obstacle → 達成を妨げる「自分の中の障害」を特定',
+            'P：Plan → 「障害が起きたら○○する」のif-thenを決める'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            steps.forEach(s => s.classList.remove('in'));
+            for (let i = 0; i < steps.length; i++) {
+                await wait(750);
+                steps[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(700);
+            status.innerHTML = '✓ <strong>障害を先に潰すから、達成率が跳ね上がる</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

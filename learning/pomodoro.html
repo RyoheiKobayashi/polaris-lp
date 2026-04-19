@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポモドーロ・テクニックとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="ポモドーロ・テクニックを、アニメーションで3秒で理解。25分集中→5分休憩を繰り返す、脳のスタミナを温存する集中法。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .pm-stage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .pm-timer {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+        .pm-circle {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(var(--mark) 0deg, var(--bg-warm) 0deg);
+            transition: background 0.5s ease;
+        }
+        .pm-inner {
+            position: absolute;
+            inset: 14px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            color: var(--ink);
+        }
+        .pm-time {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        .pm-mode {
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-top: 4px;
+        }
+        .pm-stem {
+            position: absolute;
+            top: -10px; left: 50%;
+            transform: translateX(-50%);
+            width: 20px; height: 12px;
+            background: var(--ink);
+            border-radius: 4px 4px 0 0;
+        }
+        .pm-info {
+            font-size: 14px;
+            color: var(--ink-soft);
+            text-align: left;
+            max-width: 200px;
+        }
+        .pm-info strong { color: var(--ink); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">K · 時間管理</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Pomodoro Technique</div>
+            <h1 class="detail-title">ポモドーロ・<br>テクニック</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">25分集中 → 5分休憩で脳のスタミナを保つ</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="pm-stage">
+                <div class="pm-timer">
+                    <div class="pm-stem"></div>
+                    <div class="pm-circle" id="circle"></div>
+                    <div class="pm-inner">
+                        <div class="pm-time" id="time">25:00</div>
+                        <div class="pm-mode" id="mode">FOCUS</div>
+                    </div>
+                </div>
+                <div class="pm-info">
+                    <strong>1ポモドーロ = 30分</strong><br>
+                    <span style="color: var(--ink-mute);">25分集中 + 5分休憩</span><br><br>
+                    4ポモドーロごとに<br>
+                    <strong>15-30分の長休憩</strong>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で1ポモドーロのサイクルを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">※ 動画は5秒で1ポモドーロを表現しています。実際は25分+5分。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">脳のスタミナを温存する集中法</h2>
+            <p>
+                1980年代後半にイタリアのフランチェスコ・シリロが考案した時間管理法。
+                <span class="mark">25分集中＋5分休憩を1セット（1ポモドーロ）</span>として繰り返す。
+                4ポモドーロ終わったら15-30分の長い休憩。
+                人間の集中力は連続2時間が限界と言われており、
+                強制的に短い休憩を挟むことで <strong>脳が疲れる前にリフレッシュ</strong> できる。
+                「やる気が出ない時も、25分だけならやれる」という<span class="mark">心理的ハードルの低さ</span>も強み。
+                Pomodoroはイタリア語で「トマト」、考案者がトマト型キッチンタイマーを使ったことが名前の由来。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① マラソンの給水</h3>
+                    <p>
+                        フルマラソンを水なしで走り切る人はいない。
+                        5kmごとに給水するから完走できる。
+                        ポモドーロは<span class="mark">脳の給水ポイント</span>。25分ごとに小休憩を挟む。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 筋トレのインターバル</h3>
+                    <p>
+                        筋トレも1時間ぶっ通しでやるより、セット間に60秒休む方が効果的。
+                        集中も同じで、<span class="mark">短いインターバル</span>を入れることで
+                        次のセットでまた高出力を出せる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ポモドーロ・テクニック＝<span class="mark">25分集中 + 5分休憩 × 4セット + 長休憩</span>。
+                    タイマーを使うのが必須。スマホ通知をオフにして、25分だけは1つの作業に集中する。
+                    「やる気がなくても25分だけ」と始められるのが最大の効能。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="time-blocking.html" class="nav-link">← 前：タイムブロッキング</a>
+            <a href="two-minute-rule.html" class="nav-link">次の用語：2分ルール →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const circle = document.getElementById('circle');
+        const time = document.getElementById('time');
+        const mode = document.getElementById('mode');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function animate(durationMs, startMin, endMin, modeText, color, statusText) {
+            mode.textContent = modeText;
+            status.textContent = statusText;
+            const steps = 30;
+            const stepMs = durationMs / steps;
+            for (let i = 0; i <= steps; i++) {
+                const progress = i / steps;
+                const deg = progress * 360;
+                circle.style.background = `conic-gradient(${color} ${deg}deg, var(--bg-warm) ${deg}deg)`;
+                const min = Math.round(startMin + (endMin - startMin) * progress);
+                time.textContent = String(min).padStart(2, '0') + ':00';
+                await wait(stepMs);
+            }
+        }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            await animate(3000, 25, 0, 'FOCUS', 'var(--ink)', '🍅 25分間 集中タイム');
+            await wait(300);
+            await animate(2000, 5, 0, 'BREAK', 'var(--mark)', '☕ 5分間 休憩');
+            await wait(400);
+            status.innerHTML = '✓ <strong>1ポモドーロ完了</strong>。これを4回で長休憩へ';
+            time.textContent = '25:00';
+            mode.textContent = 'READY';
+            circle.style.background = 'conic-gradient(var(--mark) 0deg, var(--bg-warm) 0deg)';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

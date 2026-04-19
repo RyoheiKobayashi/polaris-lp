@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1万時間の法則とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="1万時間の法則を、アニメーションで3秒で理解。プロ級になるには約1万時間の意図的練習が必要。批判もあるが「継続の質」を考える起点として有名。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .th-stage { max-width: 480px; margin: 0 auto; }
+        .th-bar-wrap {
+            position: relative;
+            height: 36px;
+            background: var(--bg-warm);
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .th-bar {
+            height: 100%;
+            background: var(--mark);
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0;
+        }
+        .th-counter {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink);
+            z-index: 5;
+        }
+        .th-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        .th-cell {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 8px;
+            text-align: center;
+            opacity: 0.5;
+            transition: opacity .4s ease, border .4s ease;
+        }
+        .th-cell.in { opacity: 1; border-color: var(--ink); }
+        .th-cell .th-h {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .th-cell .th-y {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">N · メタ認知・目標</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">10,000 Hour Rule</div>
+            <h1 class="detail-title">1万時間の法則</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">プロ級になるには、約1万時間の意図的練習</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="th-stage">
+                <p class="text-sm text-center mb-3" style="color: var(--ink-soft);">10,000時間 = ?</p>
+                <div class="th-bar-wrap">
+                    <div class="th-bar" id="bar"></div>
+                    <div class="th-counter" id="counter">0時間</div>
+                </div>
+                <div class="th-table">
+                    <div class="th-cell" id="c1">
+                        <div class="th-h">毎日1時間</div>
+                        <div class="th-y">約27年</div>
+                    </div>
+                    <div class="th-cell" id="c2">
+                        <div class="th-h">毎日3時間</div>
+                        <div class="th-y">約9年</div>
+                    </div>
+                    <div class="th-cell" id="c3">
+                        <div class="th-h">毎日8時間</div>
+                        <div class="th-y">約3.4年</div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で1万時間を可視化</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">時間そのものより「意図的練習の質」が決定的という研究もある。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「天才」を時間に翻訳した法則</h2>
+            <p>
+                心理学者 K. Anders Ericsson の研究を、ジャーナリストのマルコム・グラッドウェルが
+                ベストセラー『天才! 成功する人々の法則』(2008) で広めた概念。
+                <span class="mark">「ある分野で世界クラスのプロになるには、約1万時間の意図的練習が必要」</span>。
+                ビートルズの初期演奏時間、ビル・ゲイツのプログラミング時間など、
+                共通する数字として「1万時間」が浮かび上がった。
+                ただし、後に Ericsson 本人を含めた研究者たちが「<strong>時間より質</strong>」を強調するようになり、
+                単純に時間をかければ良いわけではない、と修正されています。
+                それでも <span class="mark">「継続の重要性」</span> を考える起点として広く知られる法則です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① プロのピアニスト</h3>
+                    <p>
+                        コンサートで活躍するプロピアニストは、5歳から1日4時間練習を継続して
+                        20代でようやく頂点に立つ。
+                        <span class="mark">時間×意図的練習</span>の積み上げが、別次元の演奏を生む。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 「3年で別人になる」</h3>
+                    <p>
+                        毎日8時間集中して取り組めば、<span class="mark">3年強で1万時間</span>に到達する。
+                        副業や転職を考える人にとって「人生を1度変えるのに必要な時間」のリアルな指標。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    1万時間の法則＝<span class="mark">プロ級になるには約1万時間の意図的練習が必要</span>という説。
+                    「時間より質」という反論もあるが、<strong>「継続の重さ」を可視化する起点</strong>として有用。
+                    毎日3時間なら9年、8時間なら3.4年。今日の30分が、その積み上げの一部になります。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="woop.html" class="nav-link">← 前：WOOPの法則</a>
+            <a href="index.html" class="nav-link">一覧に戻る →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const bar = document.getElementById('bar');
+        const counter = document.getElementById('counter');
+        const cells = ['c1','c2','c3'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            bar.style.width = '0';
+            counter.textContent = '0時間';
+            cells.forEach(c => c.classList.remove('in'));
+            status.textContent = '1万時間という時間を可視化…';
+            await wait(400);
+            bar.style.width = '100%';
+            const start = Date.now();
+            const duration = 1800;
+            const interval = setInterval(() => {
+                const elapsed = Date.now() - start;
+                const ratio = Math.min(elapsed / duration, 1);
+                counter.textContent = Math.round(ratio * 10000).toLocaleString() + '時間';
+                if (ratio >= 1) clearInterval(interval);
+            }, 30);
+            await wait(2000);
+            status.textContent = '到達するまでの年数：練習時間によって変わる';
+            for (const c of cells) {
+                c.classList.add('in');
+                await wait(400);
+            }
+            await wait(700);
+            status.innerHTML = '✓ <strong>「時間×意図的練習の質」</strong>で人生を変える';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

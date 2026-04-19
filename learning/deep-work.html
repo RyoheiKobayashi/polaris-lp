@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Work（深い仕事）とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="Deep Workを、アニメーションで3秒で理解。通知・雑音を遮断して高難度タスクに没頭する状態。学びの質はここで決まる。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .dw-stage {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            height: 240px;
+            margin: 0 auto;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .dw-core {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px; height: 110px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            transition: box-shadow .8s ease, transform .8s ease;
+            z-index: 5;
+        }
+        .dw-core .dw-sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: var(--mark);
+            margin-top: 4px;
+        }
+        .dw-core.deep {
+            box-shadow: 0 0 0 12px rgba(253, 236, 200, 0.5);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .dw-noise {
+            position: absolute;
+            background: #fff;
+            border: 1.5px solid var(--ink-mute);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--ink-soft);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+        .dw-noise.hidden {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">L · 集中・没頭</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Deep Work</div>
+            <h1 class="detail-title">Deep Work<br>（深い仕事）</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">通知を遮断し、高難度タスクに没頭する状態</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="dw-stage">
+                <div class="dw-noise" style="top: 16px; left: 18px;">📩 メール</div>
+                <div class="dw-noise" style="top: 22px; right: 18px;">🔔 通知</div>
+                <div class="dw-noise" style="bottom: 22px; left: 24px;">💬 Slack</div>
+                <div class="dw-noise" style="bottom: 22px; right: 22px;">📱 SNS</div>
+                <div class="dw-noise" style="top: 50%; left: 8px; transform: translateY(-50%);">🌐 ブラウザ</div>
+                <div class="dw-noise" style="top: 50%; right: 8px; transform: translateY(-50%);">☎️ 電話</div>
+                <div class="dw-core" id="core">
+                    集中
+                    <div class="dw-sub">SHALLOW</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で雑音を遮断するプロセスを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">通知を消した瞬間、脳は深い集中モードに入れる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「浅い仕事」では学びは深まらない</h2>
+            <p>
+                ジョージタウン大学のコンピュータ科学者カル・ニューポートが、
+                同名書籍『Deep Work』(2016) で提唱した概念。
+                <span class="mark">「認知能力を限界まで使う集中状態」</span>を Deep Work と呼ぶ。
+                対義語が「Shallow Work（浅い仕事）」──メールチェック、Slack返信、SNSなど
+                認知負荷の低い作業の繰り返し。現代人は仕事の8割が Shallow になりがちで、
+                <strong>深い学びや独創的な成果が生まれにくい</strong>。
+                Deep Work に入るには、通知を完全遮断し、最低90分連続で1つのテーマに没頭する環境を作ること。
+                スマホを別室に置く・集中ルームを使う・朝の2時間を確保する、などが定番の手法です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 潜水と浮き輪</h3>
+                    <p>
+                        浮き輪で海面をプカプカ漂うのが Shallow Work。
+                        装備を整えて<span class="mark">深く潜って初めて見える景色</span>が Deep Work。
+                        通知を消して90分潜らないと、本当の理解は得られない。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 料理人の仕込み時間</h3>
+                    <p>
+                        一流のシェフは、開店前の<span class="mark">誰にも邪魔されない数時間</span>に仕込みをする。
+                        客が来る時間帯は Shallow Work の連続。
+                        Deep Work の質が、その日の料理の質を決める。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Deep Work＝<span class="mark">通知を全遮断して、認知能力を限界まで使う集中状態</span>。
+                    Shallow Work（浅い仕事）の連続では深い学びは得られない。
+                    1日90分でいいから、Deep Work の時間を確保する設計を作りましょう。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="pareto.html" class="nav-link">← 前：80:20の法則</a>
+            <a href="flow.html" class="nav-link">次の用語：フロー →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const noises = document.querySelectorAll('.dw-noise');
+        const core = document.getElementById('core');
+        const sub = core.querySelector('.dw-sub');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            noises.forEach(n => n.classList.remove('hidden'));
+            core.classList.remove('deep');
+            sub.textContent = 'SHALLOW';
+            status.textContent = '通知・SNS・メールに囲まれた状態 → 浅い仕事';
+            await wait(1000);
+            for (const n of noises) {
+                n.classList.add('hidden');
+                await wait(180);
+            }
+            await wait(300);
+            core.classList.add('deep');
+            sub.textContent = 'DEEP';
+            status.innerHTML = '✓ 雑音を遮断 → <strong>Deep Work モード突入</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

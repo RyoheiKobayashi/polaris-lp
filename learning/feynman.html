@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファインマン・テクニックとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="ファインマン・テクニックを、アニメーションで3秒で理解。「子どもに説明できるか」で理解度を測る最強の学習法。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .fy-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+        .fy-step {
+            display: grid;
+            grid-template-columns: 32px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 16px;
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 8px;
+            opacity: 0.4;
+            transform: translateX(-6px);
+            transition: opacity .5s ease, transform .5s ease, border .5s ease, background .5s ease;
+        }
+        .fy-step.in {
+            opacity: 1;
+            transform: translateX(0);
+            border-color: var(--ink);
+        }
+        .fy-step.in.last { background: var(--mark); }
+        .fy-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px; height: 32px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .fy-content {
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+        .fy-content strong { font-weight: 700; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">N · メタ認知・目標</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Feynman Technique</div>
+            <h1 class="detail-title">ファインマン・<br>テクニック</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「子どもに説明できる」が、本物の理解</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="fy-stage">
+                <div class="fy-step" id="s1">
+                    <div class="fy-num">1</div>
+                    <div class="fy-content"><strong>選ぶ：</strong>学んだ概念を1つ選ぶ</div>
+                </div>
+                <div class="fy-step" id="s2">
+                    <div class="fy-num">2</div>
+                    <div class="fy-content"><strong>説明する：</strong>子どもに教えるつもりで紙に書く</div>
+                </div>
+                <div class="fy-step" id="s3">
+                    <div class="fy-num">3</div>
+                    <div class="fy-content"><strong>詰まる：</strong>説明できない部分を見つける ＝ 理解の穴</div>
+                </div>
+                <div class="fy-step last" id="s4">
+                    <div class="fy-num">4</div>
+                    <div class="fy-content"><strong>戻って学び直す：</strong>穴を埋め、もう一度説明する</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で4ステップを順に見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">説明できないと感じた瞬間、自分の理解の穴が見える。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ノーベル物理学者の「最強の学習法」</h2>
+            <p>
+                ノーベル物理学賞受賞者リチャード・ファインマンの学習スタイルから抽出された手法。
+                <span class="mark">「子どもに説明できなければ、本当には理解していない」</span>という考えが核心。
+                4ステップで実践する：①概念を選ぶ → ②子どもに教えるつもりで書く →
+                ③詰まった部分が「理解の穴」 → ④原典に戻って学び直す。
+                <strong>専門用語を使わずに説明する</strong>のが鉄則。
+                難しい言葉に逃げると、理解の穴が隠れてしまう。
+                Twitter/X で「100文字で説明する」訓練も、本質的に同じテクニックです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 子どもの「なんで？」攻撃</h3>
+                    <p>
+                        子どもに「なんで空は青いの？」と聞かれて<span class="mark">専門用語に逃げず</span>に答えられるか？
+                        答えられないなら、自分も本当には理解していない証拠。
+                        ファインマン・テクニックは、これを意図的にやる。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 新人教育</h3>
+                    <p>
+                        ベテランほど「説明するのが下手」と言われるのは、<span class="mark">専門用語で説明する癖</span>がついているから。
+                        新人にゼロから教える経験は、自分の理解を再構築する最高の機会。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ファインマン・テクニック＝<span class="mark">「子どもに説明できるか」で理解度を測る学習法</span>。
+                    詰まった瞬間が、<strong>「本当はわかっていなかった」</strong>のサイン。
+                    SNSで100文字解説、Notionで自分用解説ページ、誰かに口頭で説明──実装方法は何でもOK。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="metacognition.html" class="nav-link">← 前：メタ認知</a>
+            <a href="smart-goals.html" class="nav-link">次の用語：SMART目標 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const steps = ['s1','s2','s3','s4'].map(id => document.getElementById(id));
+        const labels = [
+            'STEP 1：概念を1つ選ぶ',
+            'STEP 2：子どもに教えるつもりで紙に書く',
+            'STEP 3：詰まった部分 ＝ 理解の穴',
+            'STEP 4：穴を埋めて、もう一度説明 → 真の理解'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            steps.forEach(s => s.classList.remove('in'));
+            for (let i = 0; i < steps.length; i++) {
+                await wait(700);
+                steps[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(700);
+            status.innerHTML = '✓ <strong>説明できる ＝ 本当に理解している</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART目標とは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="SMART目標を、アニメーションで3秒で理解。Specific/Measurable/Achievable/Relevant/Time-boundの5要素を満たす目標設定フレーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .sg-stage {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .sg-letter {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            padding: 12px 6px;
+            text-align: center;
+            transition: background .4s ease, transform .4s ease, box-shadow .4s ease;
+            opacity: 0.4;
+        }
+        .sg-letter.in {
+            opacity: 1;
+            background: var(--mark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 0 var(--ink);
+        }
+        .sg-letter .sg-l {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+        .sg-letter .sg-en {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--ink-soft);
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+        .sg-card {
+            margin: 24px auto 0;
+            max-width: 460px;
+            padding: 16px 20px;
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--ink);
+            min-height: 80px;
+        }
+        .sg-card .sg-bad {
+            text-decoration: line-through;
+            color: var(--ink-mute);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">N · メタ認知・目標</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">SMART Goals</div>
+            <h1 class="detail-title">SMART目標</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">「達成できる目標」の5要素</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="sg-stage">
+                <div class="sg-letter" id="ls">
+                    <div class="sg-l">S</div>
+                    <div class="sg-en">Specific<br>具体的</div>
+                </div>
+                <div class="sg-letter" id="lm">
+                    <div class="sg-l">M</div>
+                    <div class="sg-en">Measurable<br>測定可能</div>
+                </div>
+                <div class="sg-letter" id="la">
+                    <div class="sg-l">A</div>
+                    <div class="sg-en">Achievable<br>達成可能</div>
+                </div>
+                <div class="sg-letter" id="lr">
+                    <div class="sg-l">R</div>
+                    <div class="sg-en">Relevant<br>関連性</div>
+                </div>
+                <div class="sg-letter" id="lt">
+                    <div class="sg-l">T</div>
+                    <div class="sg-en">Time-bound<br>期限</div>
+                </div>
+            </div>
+            <div class="sg-card" id="card">
+                <span class="sg-bad">「英語を勉強する」</span><br>
+                ↓ SMART化していく…
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で目標がSMART化されるプロセスを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">5要素を満たして初めて、目標は実行可能になる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「頑張る」だけの目標は、達成されない</h2>
+            <p>
+                1981年にビジネスコンサルタント George T. Doran が論文で提唱した目標設定フレーム。
+                目標を <span class="mark">5つの基準</span> で評価する：
+                <strong>Specific（具体的）</strong>、<strong>Measurable（測定可能）</strong>、
+                <strong>Achievable（達成可能）</strong>、<strong>Relevant（関連性がある）</strong>、
+                <strong>Time-bound（期限がある）</strong>。
+                例えば「英語を勉強する」はSMARTではない。
+                「TOEIC で <span class="mark">3ヶ月後に 700点</span> を取るため、毎日30分の問題演習を継続する」が SMART な目標。
+                曖昧な目標は実行できないが、SMART化すると「今日何をやるべきか」が自動的に決まります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 「痩せたい」 vs 「6ヶ月で5kg」</h3>
+                    <p>
+                        「痩せたい」では何をすべきか分からない。
+                        「<span class="mark">6ヶ月で5kg減量。週3でジム、1日1500kcal以内</span>」なら、毎日の行動が決まる。
+                        SMART化が「やる気」を「行動」に翻訳する。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② カーナビと住所</h3>
+                    <p>
+                        「東京方面」では辿り着けない。
+                        「<span class="mark">東京都渋谷区〇〇 1-2-3</span>」と入力して初めて、ルートが計算される。
+                        目標も同じで、具体的に書けるレベルにすることで初めて経路が見える。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    SMART目標＝<span class="mark">Specific / Measurable / Achievable / Relevant / Time-bound の5基準を満たす目標</span>。
+                    「英語を勉強する」ではなく <strong>「3ヶ月後にTOEIC 700点を取る、毎日30分」</strong>。
+                    具体化＝行動化。曖昧さを潰すと、目標は自動的に動き出します。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="feynman.html" class="nav-link">← 前：ファインマン・テクニック</a>
+            <a href="woop.html" class="nav-link">次の用語：WOOPの法則 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const card = document.getElementById('card');
+        const letters = ['ls','lm','la','lr','lt'].map(id => document.getElementById(id));
+        const messages = [
+            { letter: 0, label: 'S：英語のうち「TOEIC」に絞る → 具体化', card: '<span class="sg-bad">英語を勉強する</span><br>→ TOEIC のスコアを上げる' },
+            { letter: 1, label: 'M：「700点」と数値化 → 測定可能', card: '→ TOEIC で <strong>700点</strong> を取る' },
+            { letter: 2, label: 'A：現在500点なら200点UPは現実的 → 達成可能', card: '→ 現在 500点 → <strong>700点</strong>（+200点で達成可能）' },
+            { letter: 3, label: 'R：仕事で英語を使うため → 関連性◎', card: '→ <strong>仕事で必要な英語力</strong>のため、TOEIC 700点' },
+            { letter: 4, label: 'T：「3ヶ月後」と期限設定 → 期限あり', card: '✓ <strong>3ヶ月後</strong>のTOEIC で <strong>700点</strong>。毎日30分の演習。' }
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            letters.forEach(l => l.classList.remove('in'));
+            card.innerHTML = '<span class="sg-bad">「英語を勉強する」</span><br>↓ SMART化していく…';
+            for (const m of messages) {
+                await wait(900);
+                letters[m.letter].classList.add('in');
+                card.innerHTML = m.card;
+                status.textContent = m.label;
+            }
+            await wait(600);
+            status.innerHTML = '✓ <strong>5要素を満たすと、目標が「実行可能」になる</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

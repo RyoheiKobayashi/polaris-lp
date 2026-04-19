@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フローとは｜見たら一発でわかる学習方法用語</title>
+    <meta name="description" content="フロー（チクセントミハイ）を、アニメーションで3秒で理解。難易度とスキルが釣り合うときに発生する最高の集中状態。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .fl-stage {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            height: 280px;
+            margin: 0 auto;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            border: 1px solid var(--line);
+        }
+        .fl-axis-x, .fl-axis-y {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+        }
+        .fl-axis-x { bottom: 8px; right: 14px; }
+        .fl-axis-y { top: 8px; left: 14px; transform-origin: top left; }
+        .fl-zone {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-mute);
+            text-align: center;
+            line-height: 1.3;
+        }
+        .fl-zone.anxiety { top: 30px; right: 30px; }
+        .fl-zone.boredom { bottom: 30px; left: 30px; }
+        .fl-flow-band {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 80%; height: 70px;
+            background: var(--mark);
+            border: 1.5px dashed var(--ink);
+            border-radius: 8px;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--ink);
+            opacity: 0.6;
+        }
+        .fl-marker {
+            position: absolute;
+            width: 18px; height: 18px;
+            background: var(--ink);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            transition: top .8s ease, left .8s ease;
+            z-index: 5;
+            box-shadow: 0 0 0 2px var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Learning · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">L · 集中・没頭</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Flow</div>
+            <h1 class="detail-title">フロー</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">時間を忘れて没頭する、最高の集中状態</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="fl-stage">
+                <div class="fl-axis-y">難易度 ↑</div>
+                <div class="fl-axis-x">スキル →</div>
+                <div class="fl-zone anxiety">不安<br>(難しすぎる)</div>
+                <div class="fl-zone boredom">退屈<br>(簡単すぎる)</div>
+                <div class="fl-flow-band">FLOW ZONE</div>
+                <div class="fl-marker" id="marker" style="top: 60px; left: 60px;"></div>
+            </div>
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でフロー状態に入る軌跡を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">難易度とスキルが釣り合うラインに、フロー状態がある。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「気づいたら3時間経ってた」を意図的に作る</h2>
+            <p>
+                ハンガリー出身の心理学者ミハイ・チクセントミハイが1970年代に提唱。
+                <span class="mark">時間を忘れて活動に没入し、最高のパフォーマンスを発揮する状態</span>。
+                発生条件は2つ──<strong>難易度が自分のスキルより少し上</strong>であること、
+                <strong>明確な目標とフィードバック</strong>があること。
+                簡単すぎると退屈になり、難しすぎると不安になる。
+                その間の<span class="mark">「ちょうどいい挑戦」</span>のラインにフローが生まれる。
+                スポーツ選手の「ゾーン」、職人の「無心」も本質的に同じ状態です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ゲームの没頭</h3>
+                    <p>
+                        ゲームは絶妙にフローを設計している。<span class="mark">少しずつ難易度が上がり、即座にフィードバックが返る</span>。
+                        だから「あと1ステージだけ」と何時間も止まらない。学習も同じ設計が使える。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② スポーツの「ゾーン」</h3>
+                    <p>
+                        テニスや野球の選手が「ボールが止まって見えた」と言う、あの状態。
+                        実力に対して<span class="mark">ちょうどいい強敵</span>と対戦している瞬間に発生する。
+                        弱すぎる相手や強すぎる相手では、ゾーンには入らない。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    フロー＝<span class="mark">「自分のスキル＜やや難しい挑戦」のときに生まれる没入状態</span>。
+                    簡単すぎる課題（退屈）でも難しすぎる課題（不安）でも入れない。
+                    教材の難易度を <strong>「ちょっと背伸び」</strong> に調整するのが、学習設計のコツです。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="deep-work.html" class="nav-link">← 前：Deep Work</a>
+            <a href="cognitive-load.html" class="nav-link">次の用語：認知負荷 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../contents/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: コンテンツ販売用語集</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const marker = document.getElementById('marker');
+        const positions = [
+            { top: '180px', left: '50px',  label: '難易度↓ × スキル↓ → 退屈ゾーン' },
+            { top: '50px',  left: '60px',  label: '難易度↑ × スキル↓ → 不安ゾーン' },
+            { top: '120px', left: '210px', label: '難易度↗ × スキル↗ → ★FLOWゾーン' }
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            for (const p of positions) {
+                marker.style.top = p.top;
+                marker.style.left = p.left;
+                status.textContent = p.label;
+                await wait(1100);
+            }
+            await wait(400);
+            status.innerHTML = '✓ <strong>「ちょうどいい挑戦」のラインがフロー</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
