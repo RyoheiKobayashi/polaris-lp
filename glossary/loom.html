@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loom（ルーム）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="画面録画と動画メッセージ共有ツール「Loom」を、アニメーションで3秒で理解。テキストで伝えにくい操作を動画で共有。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date()); gtag('config', 'G-EQR100H021');
+    </script>
+    <style>
+        :root {
+            --bg: #ffffff; --bg-warm: #f7f6f3; --surface: #ffffff;
+            --ink: #191919; --ink-warm: #37352f; --ink-soft: #787774; --ink-mute: #9b9a97;
+            --line: #e9e9e7; --accent: #2383e2; --mark: #fdecc8;
+            --callout-yellow: #fdecc8;
+            --font-serif: "Noto Serif JP", ui-serif, Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); font-size: 17px; line-height: 1.75; }
+        h1, h2, h3 { font-family: var(--font-serif); color: var(--ink-warm); line-height: 1.25; font-weight: 500; }
+        p { color: var(--ink-warm); }
+        a { color: var(--accent); }
+        .cat-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+        .mono { font-family: var(--font-mono); }
+        .mark { background: linear-gradient(transparent 60%, var(--mark) 60%); padding: 0 2px; }
+        .hairline { border-top: 1px solid var(--line); }
+        .callout { display: flex; gap: 14px; padding: 18px 22px; border-radius: 6px; line-height: 1.7; }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+        .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+        .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
+        .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
+
+        /* Loom: 録画 + 再生 */
+        .hero-loom { display: flex; align-items: center; gap: 40px; }
+        .hero-loom .rec {
+            width: 30px; height: 30px; background: var(--ink); border-radius: 50%;
+            animation: loom-pulse 1.2s ease-in-out infinite;
+        }
+        @keyframes loom-pulse {
+            0%, 100% { transform: scale(1);    opacity: 1; }
+            50%      { transform: scale(1.3);  opacity: 0.5; }
+        }
+        .hero-loom .play {
+            width: 0; height: 0;
+            border-left: 34px solid var(--ink-warm);
+            border-top: 22px solid transparent;
+            border-bottom: 22px solid transparent;
+        }
+        .hero-loom .arrow {
+            font-family: var(--font-mono); font-size: 24px; color: var(--ink-mute);
+        }
+    </style>
+</head>
+<body>
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">52 · D. AIツール・サービス</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Loom</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">Loom</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ルーム</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="hero-loom">
+                <div class="rec"></div>
+                <span class="arrow">→</span>
+                <div class="play"></div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">Loomってそもそも何？</h2>
+            <p>
+                <span class="mark">画面録画と動画メッセージをワンクリックで共有できるツール</span>です。
+                ボタンを押すと画面 + 自分の顔 + 音声を録画、
+                録画が終わると同時にURLが発行されて、相手にその場で共有できます。
+                テキストで長々と説明していた操作手順やフィードバックが、
+                <span class="mark">「動画を見てください」の一言</span>で済むようになります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① ボイスメモの動画版</h3>
+                    <p>
+                        「ちょっと見せたい画面がある」「会議するほどじゃないけど伝えたい」時に、
+                        <span class="mark">ボイスメモを送る感覚で動画を送れる</span>ツール。
+                        同期的なMTGを減らせるので、遠隔チームの鉄板アイテム。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 伝達コストが1/10になる</h3>
+                    <p>
+                        操作手順をテキストで書くと500文字。
+                        Loomなら<span class="mark">30秒しゃべって終わり</span>。
+                        受け取る側も動画を倍速で見れば1分で理解できる。
+                        誤解・往復も減るので、サポート対応にも強い。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p>
+                    Loomは、<span class="mark">画面+声で伝わる「動画メッセージ」</span>。
+                    チャットで説明が長引いている工程は、だいたいLoomに置き換えるとラクになります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="claude-code.html" class="nav-link">← Claude Code</a>
+            <a href="vrew.html" class="nav-link">次：Vrew →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

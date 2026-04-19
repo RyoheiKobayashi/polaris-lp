@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>groq（グロック）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="超高速AI推論プラットフォーム「groq」を、アニメーションで3秒で理解。独自チップで通常の数十倍の速度を実現。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date()); gtag('config', 'G-EQR100H021');
+    </script>
+    <style>
+        :root {
+            --bg: #ffffff; --bg-warm: #f7f6f3; --surface: #ffffff;
+            --ink: #191919; --ink-warm: #37352f; --ink-soft: #787774; --ink-mute: #9b9a97;
+            --line: #e9e9e7; --accent: #2383e2; --mark: #fdecc8;
+            --callout-yellow: #fdecc8;
+            --font-serif: "Noto Serif JP", ui-serif, Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+        }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); font-size: 17px; line-height: 1.75; }
+        h1, h2, h3 { font-family: var(--font-serif); color: var(--ink-warm); line-height: 1.25; font-weight: 500; }
+        p { color: var(--ink-warm); }
+        a { color: var(--accent); }
+        .cat-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+        .mono { font-family: var(--font-mono); }
+        .mark { background: linear-gradient(transparent 60%, var(--mark) 60%); padding: 0 2px; }
+        .hairline { border-top: 1px solid var(--line); }
+        .callout { display: flex; gap: 14px; padding: 18px 22px; border-radius: 6px; line-height: 1.7; }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+        .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+        .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
+        .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
+
+        /* groq: 高速バー */
+        .hero-groq { width: 320px; }
+        .hero-groq .label {
+            display: flex; justify-content: space-between;
+            font-family: var(--font-mono); font-size: 13px;
+            color: var(--ink-soft); margin-bottom: 10px;
+        }
+        .hero-groq .track {
+            height: 10px; background: var(--line);
+            border-radius: 5px; overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .hero-groq .fill {
+            height: 100%; background: var(--ink); width: 0%;
+            animation: groq-fast 1.2s cubic-bezier(.25,.1,.25,1) infinite;
+        }
+        @keyframes groq-fast {
+            0%, 10%   { width: 0%;   opacity: 1; }
+            30%       { width: 100%; opacity: 1; }
+            60%, 100% { width: 100%; opacity: 0; }
+        }
+        .hero-groq .lines { display: flex; gap: 6px; }
+        .hero-groq .lines span {
+            width: 20px; height: 3px;
+            background: var(--ink-mute); border-radius: 2px;
+            animation: groq-line .8s ease-out infinite;
+        }
+        .hero-groq .lines span:nth-child(2) { animation-delay: .06s; }
+        .hero-groq .lines span:nth-child(3) { animation-delay: .12s; }
+        @keyframes groq-line {
+            0%, 100% { transform: translateX(0);    opacity: 1; }
+            50%      { transform: translateX(16px); opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">57 · D. AIツール・サービス</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">groq</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">groq</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">グロック</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="hero-groq">
+                <div class="label"><span>GENERATE</span><span>0.3s</span></div>
+                <div class="track"><div class="fill"></div></div>
+                <div class="lines"><span></span><span></span><span></span></div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">groqってそもそも何？</h2>
+            <p>
+                <span class="mark">超高速なAI推論を実現するプラットフォーム</span>です。
+                ChatGPTなどと違って独自の「LPU」というチップでAIモデルを動かすため、
+                <span class="mark">通常のクラウドAIの数十倍の速さ</span>で応答が返ってきます。
+                リアルタイム処理が必要な場面（音声アシスタント、チャットボット、自動化パイプライン）で真価を発揮します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 新幹線 vs F1</h3>
+                    <p>
+                        ChatGPTが新幹線（高速で実用的）なら、groqは<span class="mark">F1マシン</span>。
+                        日常使いなら新幹線で十分ですが、
+                        「ミリ秒の遅れが命取り」のアプリケーションでは、groqが必要になる。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② AIの「リアルタイム性」を担う裏方</h3>
+                    <p>
+                        音声で対話するAIアシスタント、瞬時にフィードバックするシステムなど、
+                        <span class="mark">体感ゼロ秒でAIが反応する</span>体験は、
+                        groqのような高速推論基盤があってこそ成立しています。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p>
+                    groqは、<span class="mark">独自チップで超高速にAIを動かすプラットフォーム</span>。
+                    普段のチャットAIには不要でも、「待ち時間がゼロに近いと嬉しい」場面では圧倒的な選択肢になります。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="cursor.html" class="nav-link">← Cursor</a>
+            <a href="whisper.html" class="nav-link">次：Whisper →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
