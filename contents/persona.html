@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ペルソナとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ペルソナをアニメーションで3秒で理解。理想的な顧客像を具体的に描いた設計の土台。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-ps { width: 100%; max-width: 380px; margin: 0 auto; background: #fff; border: 2px solid var(--ink); border-radius: 12px; padding: 24px 26px; }
+        .hero-ps .hp-top { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+        .hero-ps .hp-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--mark); border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 30px; }
+        .hero-ps .hp-name { font-family: var(--font-serif); font-weight: 600; font-size: 18px; color: var(--ink-warm); }
+        .hero-ps .hp-sub { font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute); }
+        .hero-ps .hp-row { display: flex; gap: 10px; font-size: 13px; margin-bottom: 6px; }
+        .hero-ps .hp-key { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .06em; min-width: 50px; padding-top: 2px; }
+        .hero-ps .hp-val { flex: 1; color: var(--ink-warm); }
+        .hero-ps .hp-row { animation: hp-in 6s ease-in infinite; opacity: 0; }
+        .hero-ps .hp-row:nth-child(1) { animation-delay: .3s; }
+        .hero-ps .hp-row:nth-child(2) { animation-delay: 1s; }
+        .hero-ps .hp-row:nth-child(3) { animation-delay: 1.7s; }
+        .hero-ps .hp-row:nth-child(4) { animation-delay: 2.4s; }
+        @keyframes hp-in { 0%, 10% { opacity: 0; } 20%, 90% { opacity: 1; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">24 · K. 戦略・商品設計</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Persona</div>
+            <h1 class="detail-title">ペルソナ</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">理想的な顧客像を具体的に描いたもの</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-ps">
+                <div class="hp-top">
+                    <div class="hp-avatar">👩</div>
+                    <div>
+                        <div class="hp-name">鈴木はるか</div>
+                        <div class="hp-sub">35歳 / 個人事業主</div>
+                    </div>
+                </div>
+                <div class="hp-row"><span class="hp-key">悩み</span><span class="hp-val">AI勉強したいけど時間がない</span></div>
+                <div class="hp-row"><span class="hp-key">欲求</span><span class="hp-val">家族と過ごす時間を増やしたい</span></div>
+                <div class="hp-row"><span class="hp-key">予算</span><span class="hp-val">月1〜3万円の自己投資</span></div>
+                <div class="hp-row"><span class="hp-key">情報源</span><span class="hp-val">X（業界発信者フォロー中）</span></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">具体的な1人に向けて書くから、言葉に力が宿る。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ペルソナってそもそも何？</h2>
+            <p>
+                ペルソナは、<span class="mark">「この商品を誰に届けたいか」を、架空の一人の人物像として具体化したもの</span>。
+                年齢・職業・悩み・価値観まで設定する理由は、<span class="mark">"全員"に向けた発信は誰にも響かない</span>から。
+                「30〜60代の起業家」では広すぎる。「<span class="mark">35歳・個人事業主・子育てと両立に悩むはるかさん</span>」まで絞ると、途端にメッセージが鋭くなります。
+                たった一人に向けて語ることで、<span class="mark">同じ属性の全員に刺さる言葉</span>が生まれるのがペルソナの不思議な力です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 友達への誕プレ選び</h3>
+                    <p>
+                        「<span class="mark">あの友達の好きなもの</span>」を思い浮かべると、選ぶのが早い。でも「誰か適当に」だと決まらない。
+                        ペルソナは<span class="mark">選ぶ基準を一人に固定</span>する発想。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ラブレターの書き方</h3>
+                    <p>
+                        誰にでも当てはまるラブレターは誰の心も動かない。<span class="mark">あの人のあの性格・あの思い出に向けて書く</span>から、読む人の心を震わせる。
+                        ペルソナも同じで、<span class="mark">一人に向けた手紙</span>として書くのが基本姿勢です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ペルソナ＝<span class="mark">届けたい一人を具体化する</span>。
+                    全員に向けるほど誰にも届かなくなる。<span class="mark">一人に絞る勇気</span>こそ、刺さるメッセージの源です。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="copywriting.html" class="nav-link">← 前の単語：コピーライティング</a>
+            <a href="personalization.html" class="nav-link">次の単語：属人性 →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

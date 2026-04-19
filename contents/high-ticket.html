@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高単価戦略とは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="高単価戦略をアニメーションで3秒で理解。単価を高く設定して少数顧客で高収益を実現する戦略。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 低単価 vs 高単価の対比 */
+        .hero-ht { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+        .hero-ht .hh-card {
+            flex: 1; min-width: 160px; max-width: 200px;
+            background: #fff; border: 2px solid var(--ink); border-radius: 12px;
+            padding: 22px 18px;
+            position: relative;
+        }
+        .hero-ht .hh-card.low { }
+        .hero-ht .hh-card.high { background: var(--mark); }
+        .hero-ht .hh-title { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-mute); margin-bottom: 8px; }
+        .hero-ht .hh-price { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--ink-warm); margin-bottom: 4px; }
+        .hero-ht .hh-x { display: inline-block; font-family: var(--font-mono); color: var(--ink-soft); margin: 8px 0 4px; }
+        .hero-ht .hh-num {
+            font-family: var(--font-serif); font-size: 22px; color: var(--ink);
+            animation: hh-count 4s steps(10, end) infinite;
+        }
+        .hero-ht .hh-card.low .hh-num { font-size: 28px; }
+        .hero-ht .hh-equal { font-family: var(--font-mono); color: var(--ink-soft); margin: 12px 0 4px; }
+        .hero-ht .hh-total {
+            font-family: var(--font-serif); font-size: 20px; font-weight: 600;
+            padding: 6px 0;
+            border-top: 2px solid var(--ink);
+        }
+        @keyframes hh-count {
+            0%   { opacity: .4; }
+            50%  { opacity: 1; transform: scale(1.05); }
+            100% { opacity: .4; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">19 · K. 戦略・商品設計</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">High-Ticket Strategy</div>
+            <h1 class="detail-title">高単価戦略</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">少数顧客で高収益を実現する戦略</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-ht">
+                <div class="hh-card low">
+                    <div class="hh-title">LOW PRICE</div>
+                    <div class="hh-price">¥5,000</div>
+                    <div class="hh-x">×</div>
+                    <div class="hh-num">100人</div>
+                    <div class="hh-equal">＝</div>
+                    <div class="hh-total">¥500,000</div>
+                </div>
+                <div class="hh-card high">
+                    <div class="hh-title">HIGH PRICE</div>
+                    <div class="hh-price">¥100,000</div>
+                    <div class="hh-x">×</div>
+                    <div class="hh-num">10人</div>
+                    <div class="hh-equal">＝</div>
+                    <div class="hh-total">¥1,000,000</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">少ない顧客数でも、単価が高ければ売上は跳ね上がる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">高単価戦略ってそもそも何？</h2>
+            <p>
+                「<span class="mark">大量の客を薄く売る</span>」のではなく、「<span class="mark">少数の客に高く売る</span>」のが高単価戦略。
+                同じ100万円を作るのに、5,000円×200人と10万円×10人では、<span class="mark">運営負荷が20倍違う</span>。
+                サポート・クレーム・返金対応・リソース消費すべて顧客数に比例するので、個人規模のコンテンツ販売では<span class="mark">圧倒的に高単価の方が楽で利益が残る</span>のです。
+                「安くしないと売れない」という思い込みの逆張りが、コンテンツビジネスで伸びる販売者の共通点。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 高級フレンチ vs ファミレス</h3>
+                    <p>
+                        高級フレンチは1日20組で100万円、ファミレスは1日400組で100万円。<span class="mark">同じ売上でも運営負荷が20倍違う</span>。
+                        個人のコンテンツ販売者はファミレス運営は無理。<span class="mark">高級フレンチモデル</span>で戦うしかない。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 高級腕時計メーカー</h3>
+                    <p>
+                        ロレックスは量販店ではなく、<span class="mark">厳選された人にだけ高単価で売る</span>。安く売ろうと思えばできるけど、やらない。
+                        単価が高いからこそブランドが保たれ、<span class="mark">顧客満足度も高くなる</span>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    高単価戦略＝<span class="mark">少数精鋭で高収益</span>。
+                    薄利多売は個人には無理。高単価は<span class="mark">「値付けする勇気」</span>がある人だけが手にする世界。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="backend-upsell.html" class="nav-link">← 前の単語：バックエンド／アップセル</a>
+            <a href="downsell.html" class="nav-link">次の単語：ダウンセル →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クロスセルとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="クロスセルをアニメーションで3秒で理解。購入者に関連商品を追加提案し顧客単価を引き上げる手法。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-cs { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .hero-cs .hc-main { background: var(--mark); border: 2px solid var(--ink); border-radius: 12px; padding: 18px 20px; text-align: center; min-width: 140px; }
+        .hero-cs .hc-plus { font-size: 30px; color: var(--ink); font-family: var(--font-serif); animation: hc-blink 2s ease-in-out infinite; }
+        .hero-cs .hc-related { display: flex; gap: 8px; flex-direction: column; }
+        .hero-cs .hc-item { background: #fff; border: 1.5px solid var(--ink); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: var(--ink-warm); opacity: 0; animation: hc-in 3s ease-out infinite; }
+        .hero-cs .hc-item:nth-child(1) { animation-delay: 0s; }
+        .hero-cs .hc-item:nth-child(2) { animation-delay: .5s; }
+        .hero-cs .hc-item:nth-child(3) { animation-delay: 1s; }
+        .hero-cs .hc-icon { font-size: 28px; margin-bottom: 4px; }
+        .hero-cs .hc-name { font-weight: 600; font-size: 13px; color: var(--ink-warm); }
+        @keyframes hc-blink { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+        @keyframes hc-in {
+            0%, 20%  { opacity: 0; transform: translateX(-6px); }
+            35%, 90% { opacity: 1; transform: translateX(0); }
+            100%     { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">21 · K. 戦略・商品設計</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Cross-sell</div>
+            <h1 class="detail-title">クロスセル</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">購入者に関連商品を追加提案する手法</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-cs">
+                <div class="hc-main">
+                    <div class="hc-icon">📚</div>
+                    <div class="cat-label">買った</div>
+                    <div class="hc-name">AIマーケ講座</div>
+                </div>
+                <div class="hc-plus">+</div>
+                <div class="hc-related">
+                    <div class="hc-item">📝 テンプレ集</div>
+                    <div class="hc-item">🎧 音声教材</div>
+                    <div class="hc-item">💬 個別相談券</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">買った人にだけ「これも一緒にどう？」と関連商品を提案。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">クロスセルってそもそも何？</h2>
+            <p>
+                クロスセルは、<span class="mark">買ってくれた顧客に関連商品を追加提案</span>する手法。アップセル（より高いメイン商品）と違い、<span class="mark">横展開の関連商品</span>を売るのが特徴です。
+                本を買った人に「関連する別ジャンルの本」、スマホを買った人に「ケース・充電器」など、<span class="mark">顧客単価・LTV（生涯顧客価値）を引き上げる</span>施策。
+                新規獲得コストを下げる効果も大きいので、<span class="mark">既存顧客への追加提案こそがコスパ最強</span>のマーケです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① Amazonの「よく一緒に購入されている商品」</h3>
+                    <p>
+                        本を買うと<span class="mark">関連本・セット商品</span>が表示される。ついで買いの積み重ねでAmazonは膨大な売上を作っている。
+                        コンテンツ販売も同じで、関連性の高い商品をさりげなく提案するだけで顧客単価が上がる。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② マクドナルドの「お飲み物はどうされますか？」</h3>
+                    <p>
+                        ハンバーガーを選んだ客に<span class="mark">ドリンク・ポテトを追加</span>提案。
+                        単品では出ない売上が、<span class="mark">追加提案</span>一つで大きく変わる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    クロスセル＝<span class="mark">横展開の関連商品で顧客単価UP</span>。
+                    既存顧客は新規より説得コストが安い。<span class="mark">一人あたりの売上を最大化</span>する発想が大事。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="downsell.html" class="nav-link">← 前の単語：ダウンセル</a>
+            <a href="evergreen-launch.html" class="nav-link">次の単語：エバーグリーンローンチ →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

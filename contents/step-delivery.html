@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ステップ配信とは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="ステップ配信をアニメーションで3秒で理解。登録日を起点に事前設定メッセージを自動で段階配信する仕組み。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-sd { width: 100%; max-width: 420px; margin: 0 auto; }
+        .hero-sd .hd-day { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: #fff; border: 1.5px solid var(--ink); border-radius: 10px; margin-bottom: 10px; opacity: 0; animation: hd-in 6s ease-in infinite; }
+        .hero-sd .hd-day:nth-child(1) { animation-delay: 0s; }
+        .hero-sd .hd-day:nth-child(2) { animation-delay: 1.2s; }
+        .hero-sd .hd-day:nth-child(3) { animation-delay: 2.4s; }
+        .hero-sd .hd-day:nth-child(4) { animation-delay: 3.6s; background: var(--mark); }
+        .hero-sd .hd-badge { background: var(--ink); color: #fff; border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; flex: none; }
+        .hero-sd .hd-title { font-size: 13px; color: var(--ink-warm); font-weight: 600; }
+        .hero-sd .hd-sub { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); }
+        @keyframes hd-in { 0%, 5% { opacity: 0; transform: translateX(-6px); } 15%, 90% { opacity: 1; transform: translateX(0); } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">29 · K. 戦略・商品設計</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Step Delivery</div>
+            <h1 class="detail-title">ステップ配信</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">自動で段階的にメッセージを送る仕組み</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-sd">
+                <div class="hd-day"><div class="hd-badge">D1</div><div><div class="hd-title">自己紹介＆特典配布</div><div class="hd-sub">登録直後に送信</div></div></div>
+                <div class="hd-day"><div class="hd-badge">D3</div><div><div class="hd-title">価値提供コンテンツ</div><div class="hd-sub">3日後・朝9時</div></div></div>
+                <div class="hd-day"><div class="hd-badge">D5</div><div><div class="hd-title">事例紹介＆教育</div><div class="hd-sub">5日後・夜20時</div></div></div>
+                <div class="hd-day"><div class="hd-badge">D7</div><div><div class="hd-title">セミナー告知</div><div class="hd-sub">7日後・オファー</div></div></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">登録日を基準に、全員に同じ流れを自動で届ける。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">ステップ配信ってそもそも何？</h2>
+            <p>
+                ステップ配信は、<span class="mark">登録日を起点として、事前に設定したメッセージを順番に自動配信する仕組み</span>。
+                LINE公式・UTAGE・メルマガツールで標準機能として実装されています。
+                新規登録者全員に<span class="mark">同じ"教育シナリオ"を確実に届けられる</span>のが最大のメリット。
+                「1日目は自己紹介、3日目は特典配布、5日目はセミナー告知」といった流れを一度設計すれば、<span class="mark">あとは自動で完結</span>。属人性を下げつつ教育効率を上げる、仕組み化の代表例です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 英会話スクールの初級カリキュラム</h3>
+                    <p>
+                        新規生徒はみんな<span class="mark">「Week1：挨拶 → Week2：自己紹介 → Week3：簡単な会話」</span>と同じ順で学ぶ。
+                        ステップ配信も同じで、<span class="mark">「この順で理解すれば買いたくなる」</span>教育シナリオを用意しておく。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② Netflixのオンボーディング</h3>
+                    <p>
+                        新規会員には、<span class="mark">登録直後・3日後・1週間後</span>と段階的に「おすすめ作品」メールが届く。
+                        放置するより定期接点を作る方が、継続率が上がる。ステップ配信の典型です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    ステップ配信＝<span class="mark">教育シナリオを自動で届ける仕組み</span>。
+                    全員に同じ質の教育を届けられるので、<span class="mark">販売者が寝てる間にも信頼が育つ</span>。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="systematization.html" class="nav-link">← 前の単語：仕組み化</a>
+            <a href="cv.html" class="nav-link">次の単語：CV →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
