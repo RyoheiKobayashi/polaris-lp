@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Brain（ブレイン）を、アニメーションで3秒で理解。迫佑樹さんが創業し、おさるさんが参画した知識共有プラットフォーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        /* Brain-specific: 脳→知識→お金の流れ */
+        .br-flow { display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 420px; margin: 0 auto; }
+        .br-node {
+            width: 100%;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 12px;
+            padding: 16px 22px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .5s, transform .5s;
+        }
+        .br-node.in { opacity: 1; transform: translateY(0); }
+        .br-node.seller { background: var(--bg-warm); }
+        .br-node.platform { background: var(--mark); border-color: var(--ink); }
+        .br-node.buyer { background: #fff; }
+        .br-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .08em; margin-bottom: 4px; }
+        .br-big { font-size: 18px; font-weight: 600; color: var(--ink-warm); }
+        .br-arrow { color: var(--ink-mute); font-size: 14px; }
+
+        /* 運営者タグ */
+        .founder-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+        .founder-tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 12px; border-radius: 999px;
+            background: var(--bg-warm); border: 1px solid var(--line);
+            font-size: 12px; color: var(--ink);
+        }
+        .founder-tag::before {
+            content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mark);
+        }
+
+        /* 比較表 */
+        .comparison { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+        .comparison th, .comparison td {
+            border: 1px solid var(--line); padding: 10px 12px; text-align: left;
+        }
+        .comparison th {
+            background: var(--bg-warm); font-weight: 600; color: var(--ink-warm);
+            font-size: 13px;
+        }
+        .comparison .check { color: var(--ink); font-weight: 700; }
+        .comparison .cross { color: var(--ink-mute); }
+        .comparison .star { color: var(--ink); font-weight: 700; }
+
+        /* メタツッコミ用 */
+        .meta-joke {
+            margin-top: 48px; padding: 24px 28px;
+            background: #fff; border: 2px dashed var(--ink-mute);
+            border-radius: 12px;
+            color: var(--ink-soft);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .meta-joke strong { color: var(--ink); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">G · プラットフォーム・ツール</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Brain</div>
+            <h1 class="detail-title">Brain</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">知識コンテンツの販売・購入ができるプラットフォーム</p>
+
+            <div class="founder-row">
+                <span class="founder-tag">創業: 迫佑樹</span>
+                <span class="founder-tag">業務提携: おさる</span>
+                <span class="founder-tag">誕生: 2020年</span>
+            </div>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="br-flow">
+                <div class="br-node seller" id="b1">
+                    <div class="br-label">① 販売者</div>
+                    <div class="br-big">知識コンテンツを出品</div>
+                </div>
+                <div class="br-arrow">↓</div>
+                <div class="br-node platform" id="b2">
+                    <div class="br-label">② Brain（プラットフォーム）</div>
+                    <div class="br-big">決済・配信・レビュー</div>
+                </div>
+                <div class="br-arrow">↓</div>
+                <div class="br-node buyer" id="b3">
+                    <div class="br-label">③ 購入者</div>
+                    <div class="br-big">学びを受け取る</div>
+                </div>
+                <div class="br-arrow">↓</div>
+                <div class="br-node" id="b4" style="background: var(--ink); color: #fff; border-color: var(--ink);">
+                    <div class="br-label" style="color: rgba(255,255,255,.6);">④ アフィリエイター</div>
+                    <div class="br-big" style="color: #fff;">紹介報酬を獲得</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でBrainの流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">販売・購入・紹介が1つのプラットフォームで完結する。</p>
+        </section>
+
+        <!-- 概要 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">Brainとは</h2>
+            <p>
+                Brainは、<span class="mark">知識・ノウハウ・テンプレート等のデジタルコンテンツ</span>を販売・購入できる国産プラットフォーム。
+                2020年に<span class="mark">迫佑樹さん</span>が立ち上げ、note・Kindleとは違う「<span class="mark">販売者・購入者・紹介者の三方良し</span>」のエコシステムで急成長しました。
+                2024年以降、動画教材の領域で圧倒的な発信力を持つ<span class="mark">おさるさん</span>が業務提携に参画し、
+                コンテンツ販売業界における「最強タッグ」のプラットフォームとして一気に存在感を増しています。
+            </p>
+        </section>
+
+        <!-- 歴史 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">Brainの歩み（ざっくり年表）</h2>
+            <div class="space-y-3">
+                <div class="card p-5">
+                    <div class="cat-label mb-1">2020</div>
+                    <p class="m-0">迫佑樹さんが立ち上げ。プログラミング系コンテンツを中心にスタート。</p>
+                </div>
+                <div class="card p-5">
+                    <div class="cat-label mb-1">2021〜2023</div>
+                    <p class="m-0">ビジネス・マーケ・SNS運用系の販売者が一気に流入。高額アフィリエイト報酬と購入者レビュー機能で話題に。</p>
+                </div>
+                <div class="card p-5">
+                    <div class="cat-label mb-1">2024〜</div>
+                    <p class="m-0"><span class="mark">おさるさんが業務提携参画</span>。動画教材販売との親和性が極大化。コンテンツ販売プラットフォームとしての地位を固める。</p>
+                </div>
+                <div class="card p-5">
+                    <div class="cat-label mb-1">現在</div>
+                    <p class="m-0">講座販売者・個人事業主・副業実践者が集まる<span class="mark">事実上のコンテンツ販売インフラ</span>に。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特徴 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">Brainの特徴（他と何が違うか）</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">① 高額アフィリエイト報酬</h3>
+                    <p>
+                        販売者は購入額の最大<span class="mark">50%</span>までを紹介者へ還元する設定が可能。
+                        noteやKindleには無い「<span class="mark">紹介者が本気で勧めたくなる報酬構造</span>」が強み。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">② 購入者レビュー機能</h3>
+                    <p>
+                        Amazonのような<span class="mark">星評価とレビュー</span>が購入前に見える。
+                        情報商材に対する不信感が根強い中で「買って良かった声」を可視化し、購入ハードルを下げています。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">③ 販売者の収益性が高い</h3>
+                    <p>
+                        手数料は販売額の<span class="mark">12%</span>程度。Udemy（50%〜）やKindle（30%〜70%）と比べて<span class="mark">販売者の取り分が大きい</span>。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">④ ブランド力と集客力</h3>
+                    <p>
+                        迫佑樹さん・おさるさんをはじめ、<span class="mark">業界トップ層の発信者</span>が集まる場。Brain内のランキングに載ればそれだけで集客になる。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">⑤ Xとの親和性が高い</h3>
+                    <p>
+                        購入者が感想をXでシェア→紹介報酬が動く、という<span class="mark">拡散ループ</span>が組み込まれている。SNS集客との相性が抜群。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 比較表 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">他プラットフォームとの比較</h2>
+
+            <div style="overflow-x: auto;">
+                <table class="comparison">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Brain</th>
+                            <th>note</th>
+                            <th>Kindle</th>
+                            <th>Udemy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>販売者手数料</td>
+                            <td class="check">約12%</td>
+                            <td>10〜20%</td>
+                            <td class="cross">30〜70%</td>
+                            <td class="cross">50%〜</td>
+                        </tr>
+                        <tr>
+                            <td>アフィリエイト</td>
+                            <td class="star">最大50%</td>
+                            <td class="cross">なし</td>
+                            <td class="cross">なし</td>
+                            <td class="cross">限定的</td>
+                        </tr>
+                        <tr>
+                            <td>レビュー機能</td>
+                            <td class="check">あり</td>
+                            <td class="cross">なし</td>
+                            <td class="check">あり</td>
+                            <td class="check">あり</td>
+                        </tr>
+                        <tr>
+                            <td>コンテンツ形式</td>
+                            <td>テキスト/動画</td>
+                            <td>テキスト中心</td>
+                            <td>電子書籍</td>
+                            <td>動画講座</td>
+                        </tr>
+                        <tr>
+                            <td>Xとの親和性</td>
+                            <td class="star">◎</td>
+                            <td class="check">○</td>
+                            <td class="cross">△</td>
+                            <td class="cross">△</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 身近な例え -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 知識版メルカリ</h3>
+                    <p>
+                        メルカリが<span class="mark">個人間でモノを売り買いできる場</span>を提供したように、
+                        Brainは<span class="mark">個人が知識・ノウハウを売り買いできる場</span>を提供する存在。
+                        「売る側」「買う側」「紹介する側」の三者で経済圏が回る仕組み。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② アフィリエイター付きのKindle</h3>
+                    <p>
+                        Kindleに<span class="mark">紹介報酬と星レビューを足した</span>イメージ。
+                        「読んで良かった！」と紹介した人にも利益が入るので、販売者・紹介者・購入者の3者にWin-Win-Winが生まれる。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例③ コンテンツ版の楽天市場</h3>
+                    <p>
+                        楽天市場が<span class="mark">モノを売る店舗の集まり</span>なら、Brainは<span class="mark">知識を売るショップの集合体</span>。
+                        プラットフォームが集客を担い、出品者は自分のコンテンツ作りと販売に集中できる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 使い方 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">Brainの使い方（購入側）</h2>
+            <ol class="space-y-3" style="padding-left: 24px; list-style: decimal;">
+                <li><span class="mark">Brain公式サイト</span>にアクセスして、気になるコンテンツを探す</li>
+                <li>レビュー・評価・プレビューを確認する（購入前に一部内容を閲覧できる）</li>
+                <li>クレジットカード等で決済</li>
+                <li>購入後すぐにコンテンツが閲覧可能に</li>
+                <li>（任意）感想をXで投稿して、紹介報酬を得ることも可能</li>
+            </ol>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">Brainの使い方（販売側）</h2>
+            <ol class="space-y-3" style="padding-left: 24px; list-style: decimal;">
+                <li>Brainに販売者登録</li>
+                <li>コンテンツ作成（テキスト + 動画 + PDF等、複合的に載せられる）</li>
+                <li>価格設定と<span class="mark">アフィリエイト還元率</span>（0〜50%）を決める</li>
+                <li>販売ページを整える（サムネ・キャッチコピー・レビューをもらえる仕組み）</li>
+                <li>公開 → X等で告知 → 購入者とアフィリエイターが動き出す</li>
+            </ol>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Brain＝<span class="mark">知識販売に特化した三方良しプラットフォーム</span>。
+                    迫佑樹さん創業、おさるさんが業務提携で参画し、
+                    講座販売者・個人事業主・副業実践者の<span class="mark">事実上のインフラ</span>になりつつあります。
+                    販売者手数料の低さ・最大50%のアフィ還元・レビュー機能・X親和性という4点セットで、他プラットフォームとの差別化を保っています。
+                </p>
+            </div>
+        </div>
+
+        <!-- メタツッコミ -->
+        <div class="meta-joke">
+            <p class="m-0">
+                <strong>※ ここまで読んだあなたへ</strong>：<br>
+                「他のツール用語ページ、1スクロールで終わるのに<span class="mark">Brainだけやたら長くない…？</span>」と思ったあなた、大正解です。
+                Brain、さこゆき×おさるタッグで<span class="mark">情報量バグってる</span>ので、用語集側も釣られて情報量がバグりました。
+                コンテンツ販売界隈の動向を語るうえで、Brainを無視することはもはやできません。<strong>察してください</strong>。
+            </p>
+        </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <a href="utage.html" class="nav-link">次の用語：UTAGE →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const nodes = ['b1','b2','b3','b4'].map(id => document.getElementById(id));
+        const labels = [
+            '① 販売者が知識コンテンツを出品',
+            '② Brainが決済・配信・レビューを処理',
+            '③ 購入者が学びを受け取る',
+            '✓ アフィリエイターが紹介報酬を獲得'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            nodes.forEach(n => n.classList.remove('in'));
+            for (let i = 0; i < nodes.length; i++) {
+                await wait(500);
+                nodes[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ 販売・購入・紹介が <strong>Brain 1つで循環</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
