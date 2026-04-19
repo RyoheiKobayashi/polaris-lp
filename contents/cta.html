@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTAとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="CTA（Call To Action）をアニメーションで3秒で理解。ユーザーに具体的な行動を促すボタンや仕掛け。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: CTAボタン＋矢印＋クリック波紋 */
+        .hero-cta { position: relative; width: 100%; max-width: 360px; margin: 0 auto; padding: 20px 0; }
+        .hero-cta .hc-page {
+            position: relative;
+            background: #fff; border: 1.5px solid var(--line); border-radius: 12px;
+            padding: 40px 32px 48px;
+        }
+        .hero-cta .hc-line {
+            height: 8px; background: var(--line); border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .hero-cta .hc-line.short { width: 70%; }
+        .hero-cta .hc-line.long  { width: 100%; margin-bottom: 28px; }
+        .hero-cta .hc-btn {
+            display: flex; align-items: center; justify-content: center;
+            padding: 14px 28px;
+            background: var(--ink); color: #fff;
+            border-radius: 8px;
+            font-size: 15px; font-weight: 600;
+            margin: 0 auto; max-width: 240px;
+            position: relative;
+            animation: hc-pulse 2.2s ease-in-out infinite;
+        }
+        .hero-cta .hc-btn::after {
+            content: '';
+            position: absolute; inset: -6px;
+            border: 2px solid var(--ink);
+            border-radius: 12px; opacity: 0;
+            animation: hc-ripple 2.2s ease-out infinite;
+        }
+        .hero-cta .hc-arrow {
+            position: absolute;
+            top: 50%; left: -8px;
+            transform: translateY(-50%);
+            font-size: 28px;
+            color: var(--ink-warm);
+            animation: hc-point 2.2s ease-in-out infinite;
+        }
+        @keyframes hc-pulse {
+            0%, 100% { transform: scale(1);    box-shadow: 0 0 0 rgba(0,0,0,0); }
+            50%      { transform: scale(1.04); box-shadow: 0 6px 20px rgba(25,25,25,.18); }
+        }
+        @keyframes hc-ripple {
+            0%   { opacity: .6; transform: scale(.95); }
+            70%  { opacity: 0;  transform: scale(1.1); }
+            100% { opacity: 0;  transform: scale(1.1); }
+        }
+        @keyframes hc-point {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50%      { transform: translateY(-50%) translateX(4px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">13 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Call To Action</div>
+            <h1 class="detail-title">CTA</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ユーザーに具体的な行動を促す仕掛け</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-cta">
+                <div class="hc-page">
+                    <div class="hc-line long"></div>
+                    <div class="hc-line short"></div>
+                    <div class="hc-line short"></div>
+                    <div class="hc-line long"></div>
+                    <div class="hc-btn">
+                        今すぐ無料で受け取る
+                        <span class="hc-arrow">👉</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">ページ内で「次の一歩」を明確に示す存在。迷わせない設計が成約率を左右する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">CTAってそもそも何？</h2>
+            <p>
+                CTAは「Call To Action」の略で、<span class="mark">ユーザーに「次に何をしてほしいか」を明確に伝える仕掛け</span>のこと。
+                ボタン・リンク・フォーム誘導など形式はさまざまですが、共通するのは<span class="mark">「迷わせずに次の行動へ進ませる」</span>役割。
+                どれだけ良い商品でも、「買う」導線が見つけにくければユーザーは離脱します。CTAの文言・色・配置・タイミングで<span class="mark">CVR（成約率）が2倍・3倍変わる</span>のが当たり前の世界。
+                ここを設計するのは、コンテンツ販売で最も費用対効果の高い作業のひとつです。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① コンビニのレジ「こちらへどうぞ」</h3>
+                    <p>
+                        店員さんが「<span class="mark">こちらのレジ空いてますよ</span>」と声をかけてくれないと、客はどこに並べばいいのか迷って立ち止まる。
+                        CTAはこの店員さんと同じ。「次はこのボタンを押してください」と<span class="mark">明確な指差し</span>をする存在です。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 駅の案内矢印</h3>
+                    <p>
+                        出口・乗り換え・トイレ…何度も見る「<span class="mark">→</span>」が無かったら、駅でみんな迷子になる。
+                        LPやWebページも同じで、「ここを押せばゴール」と示してあげないと、ユーザーは次に進めない。
+                        CTAは<span class="mark">案内矢印の役割</span>を果たしています。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    CTA＝<span class="mark">「次の一歩」を迷わせない仕掛け</span>。
+                    文言（「購入する」より「今すぐ無料で受け取る」の方が動く）、色（目立つ／浮く）、配置（1ページに1つ）で効果が激変します。
+                    <span class="mark">テスト文化</span>を持って育てるのがセオリー。
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="lp.html" class="nav-link">← 前の単語：LP</a>
+            <a href="one-lp-one-cta.html" class="nav-link">次の単語：1LP1CTA →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

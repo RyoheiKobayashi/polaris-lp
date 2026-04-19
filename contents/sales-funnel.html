@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セールスファネルとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="セールスファネルをアニメーションで3秒で理解。見込み客が認知→興味→検討→購入と段階的に絞り込まれる流れ。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        /* ヒーロー: 漏斗 4段階 */
+        .hero-funnel { position: relative; width: 100%; max-width: 440px; margin: 0 auto; }
+        .hero-funnel .hf-layer {
+            position: relative;
+            margin: 0 auto 6px;
+            height: 58px;
+            border: 2px solid var(--ink);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 22px;
+            background: #fff;
+            opacity: 0;
+            transform: translateY(-4px);
+            animation: hf-drop 8s ease-in-out infinite;
+        }
+        .hero-funnel .hf-layer:nth-child(1) { width: 100%;  animation-delay: 0s;   background: var(--bg-warm); }
+        .hero-funnel .hf-layer:nth-child(2) { width: 80%;   animation-delay: 1.5s; }
+        .hero-funnel .hf-layer:nth-child(3) { width: 60%;   animation-delay: 3s;   background: var(--bg-warm); }
+        .hero-funnel .hf-layer:nth-child(4) { width: 42%;   animation-delay: 4.5s; background: var(--mark); }
+        .hero-funnel .hf-stage {
+            font-family: var(--font-mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.06em;
+        }
+        .hero-funnel .hf-count { font-family: var(--font-serif); font-size: 18px; color: var(--ink-warm); font-weight: 600; }
+        .hero-funnel .hf-arrow {
+            text-align: center; color: var(--ink-mute); font-size: 14px; height: 14px;
+            margin: -2px 0; opacity: 0;
+            animation: hf-arrow-show 8s ease-in-out infinite;
+        }
+        .hero-funnel .hf-arrow:nth-of-type(1) { animation-delay: 1s; }
+        .hero-funnel .hf-arrow:nth-of-type(2) { animation-delay: 2.5s; }
+        .hero-funnel .hf-arrow:nth-of-type(3) { animation-delay: 4s; }
+        @keyframes hf-drop {
+            0%, 6%    { opacity: 0; transform: translateY(-6px) scale(.96); }
+            10%, 85%  { opacity: 1; transform: translateY(0) scale(1); }
+            100%      { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes hf-arrow-show {
+            0%, 6%    { opacity: 0; }
+            12%, 85%  { opacity: .6; }
+            100%      { opacity: .6; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">01 · H. マーケティング基礎構造</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Sales Funnel</div>
+            <h1 class="detail-title">セールスファネル</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">見込み客が段階的に絞り込まれる流れの図式</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-funnel">
+                <div class="hf-layer"><span class="hf-stage">① 認知</span><span class="hf-count">10,000</span></div>
+                <div class="hf-arrow">▼</div>
+                <div class="hf-layer"><span class="hf-stage">② 興味</span><span class="hf-count">2,000</span></div>
+                <div class="hf-arrow">▼</div>
+                <div class="hf-layer"><span class="hf-stage">③ 検討</span><span class="hf-count">500</span></div>
+                <div class="hf-arrow">▼</div>
+                <div class="hf-layer"><span class="hf-stage">④ 購入</span><span class="hf-count">50</span></div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">1万人見た中で、最終的に購入するのは50人。段階ごとに離脱が起きる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">セールスファネルってそもそも何？</h2>
+            <p>
+                セールスファネルは、商品を買ってくれそうな人が<span class="mark">「認知→興味→検討→購入」</span>と段階的に絞り込まれていく流れを、漏斗（ろうと・じょうご）の形で可視化した図式です。
+                上の段は大勢いるのに、下にいくほど人数がどんどん減っていく。これは<span class="mark">各段階で一定の離脱が発生する</span>からです。
+                コンテンツ販売では、「なぜこの段階で人が離れるのか」を分解して、段階ごとに違う打ち手を用意することで<span class="mark">最終的な売上を最大化</span>していきます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 駅前のラーメン屋さん</h3>
+                    <p>
+                        駅前を<span class="mark">1万人</span>通るうち、店に気づくのは2,000人（認知）。匂いが気になって足を止めるのが500人（興味）。メニューを見るのが100人（検討）。実際に入店して食べるのが50人（購入）。
+                        通行量が多くても、最終購入者は1%以下。これがまさにファネル構造です。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 大学入試の倍率</h3>
+                    <p>
+                        募集要項を見た人（認知）→ 資料請求（興味）→ オープンキャンパス参加（検討）→ 受験（購入）。
+                        各段階で脱落があり、<span class="mark">最終的に受験するのはごく一部</span>。どこで何人減ったかを把握できれば、次の対策が見えてきます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    セールスファネルは<span class="mark">「どこで客が減ってるか」を見える化する道具</span>。全体で見ると売上が伸びない理由がわからなくても、段階別に分解すれば打ち手が具体的になります。
+                    コンテンツ販売者が最初に持つべき思考の型のひとつ。
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="n8n.html" class="nav-link">← 前の単語：n8n</a>
+            <a href="drm.html" class="nav-link">次の単語：DRM →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
