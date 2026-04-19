@@ -47,12 +47,43 @@ DOMAINS = {
     '📦 物理モノ': ['鎖', '檻', 'ダイヤル錠', 'パズル', '型紙', '模型', '回転扉', '自動ドア'],
 }
 
-# 弱い候補マーカー
+# 弱い候補マーカー（4カテゴリ）
 WEAK_KEYWORDS = {
-    '業界用語': ['編集プロダクション', 'SES', 'ファネル', 'CVR', 'LTV', 'HACCP', 'COPPA', 'OAuth', 'Docker'],
-    '年代依存の可能性': ['書留', '普通郵便', '手紙', '電報', 'ダイヤル錠', '口述筆記', '型紙', '文字起こし業者'],
-    '技術寄り・AI者限定': ['HTTP', 'API', 'HTTPS', 'エンジン', 'USB-C', 'コンパイラ'],
+    '業界用語': [
+        '編集プロダクション', 'SES', 'ファネル', 'CVR', 'LTV', 'CPA', 'ROAS', 'ROI', 'PV', 'CV',
+        'HACCP', 'COPPA', 'OAuth', 'Docker', 'ORM', 'bcrypt', 'Argon2',
+        "Let's Encrypt", 'Vercel', 'Netlify', 'Kubernetes',
+        'OWASP', 'XSS', 'SQLインジェクション', 'CSRF',
+        'プレースホルダ', 'エスケープ処理', 'ハッシュ関数', 'ソルト',
+    ],
+    '世代依存': [
+        '書留', '普通郵便', '手紙を書', '電報', 'ダイヤル錠', '口述筆記',
+        '型紙', '文字起こし業者', '速記', 'ワープロ',
+        'hunter2', 'password123',  # 業界ネタ
+    ],
+    '技術寄り・AI者限定': [
+        'HTTPS', 'HTTP', 'API', 'エンジン', 'USB-C', 'コンパイラ',
+        'JSON', 'YAML', 'Markdown', 'HTML',
+        'GitHub', 'ORM', 'DB',
+    ],
 }
+
+# パターンで検出する弱さ（補足知識型・AI業界内言い換え）
+WEAK_PATTERNS = [
+    # 例えじゃなく補足説明になってる
+    ('補足知識型', r'AI(を使うと|だと|も同じで|が|なら)尚更'),
+    ('補足知識型', r'と考えると(分か|理解|イメージ)'),
+    ('補足知識型', r'AI時代の(標準|基本|常識)'),
+    ('補足知識型', r'やらない理由がない'),
+    ('補足知識型', r'AI(活用|運用|ビジネス|開発)で'),
+
+    # AI業界内の言い換え(例えになってない)
+    ('AI業界内の言い換え', r'の?AI版'),
+    ('AI業界内の言い換え', r'AIも同じ(で|こと)'),
+    ('AI業界内の言い換え', r'同じ(く|ことが)AI'),
+    ('AI業界内の言い換え', r'AIに(頼む|書かせる|コード)時'),
+    ('AI業界内の言い換え', r'AIに「.*」と(頼|指示|添え)'),
+]
 
 
 def classify_domain(text: str) -> str:
@@ -70,11 +101,20 @@ def classify_domain(text: str) -> str:
 def detect_weak(text: str) -> list:
     """弱いマーカーを検出して、理由リストを返す。"""
     reasons = []
+    seen = set()
     for reason, kws in WEAK_KEYWORDS.items():
         for kw in kws:
-            if kw in text:
+            if kw in text and reason not in seen:
                 reasons.append(f'{reason}: "{kw}"')
-                break  # 同じ理由で複数検出はしない
+                seen.add(reason)
+                break
+    for reason, pat in WEAK_PATTERNS:
+        if reason in seen:
+            continue
+        m = re.search(pat, text)
+        if m:
+            reasons.append(f'{reason}: "{m.group(0)}"')
+            seen.add(reason)
     return reasons
 
 
@@ -173,7 +213,16 @@ def main():
     out.append('# 身近な例え 監査')
     out.append('')
     out.append(f'全{len(pages)}用語 × 例え2本 = {len(pages) * 2}件を棚卸し。')
-    out.append('判定基準：「小学生でも家族でも通じるか？」')
+    out.append('')
+    out.append('## 判定基準（NGリスト）')
+    out.append('')
+    out.append('身近な例えとして機能しないものを4カテゴリで機械判定する。')
+    out.append('最終判断は人間。ターゲットは30-60代の非エンジニア大人。')
+    out.append('')
+    out.append('1. **業界用語** — HACCP・Let\'s Encrypt・OWASP・編集プロダクション・CVR・LTVなど')
+    out.append('2. **世代依存** — 型紙・口述筆記・書留・ダイヤル錠・電報など')
+    out.append('3. **補足知識型** — 「AIを使うと尚更〜」「〜と考えると分かる」（例えじゃなく追加説明）')
+    out.append('4. **AI業界内の言い換え** — 「〇〇のAI版」「AIに頼むときは〜」（例えになってない）')
     out.append('')
     out.append('## 判定ドメイン')
     for d in list(DOMAINS.keys()) + ['❓ その他']:
