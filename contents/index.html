@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>動きでわかるコンテンツ販売用語集</title>
-    <meta name="description" content="コンテンツ販売のWikipedia。UTAGE、Chatwork、Zoom、Notion、n8nなど、講座運営で使うツールを動きで3秒で理解。">
+    <title>見たら一発でわかるコンテンツ販売用語集</title>
+    <meta name="description" content="文字を読むより、動きで見る。UTAGE、Chatwork、Zoom、Notion、n8nなど、講座運営で使うツールを動きで3秒で理解。">
 
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../images/icon.png">
@@ -757,6 +757,182 @@
             100% { transform: translateY(-50%); }
         }
 
+        /* ========= 共有サムネ: S9. target（標的・ペルソナ） ========= */
+        .thumb-s-target .st-stage { position: relative; width: 90px; height: 90px; }
+        .thumb-s-target .st-ring {
+            position: absolute; border: 2px solid var(--ink); border-radius: 50%;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            animation: st-pulse 2.4s ease-in-out infinite;
+        }
+        .thumb-s-target .st-ring:nth-child(1) { width: 80px; height: 80px; animation-delay: 0s; }
+        .thumb-s-target .st-ring:nth-child(2) { width: 54px; height: 54px; animation-delay: .2s; border-color: var(--ink-soft); }
+        .thumb-s-target .st-ring:nth-child(3) { width: 28px; height: 28px; animation-delay: .4s; background: var(--mark); }
+        .thumb-s-target .st-arrow {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px; height: 6px;
+            background: var(--ink); border-radius: 50%;
+            z-index: 2;
+        }
+        @keyframes st-pulse {
+            0%, 100% { opacity: .5; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= 共有サムネ: S10. lightbulb（ひらめき） ========= */
+        .thumb-s-lightbulb .sl-stage { position: relative; width: 80px; height: 90px; }
+        .thumb-s-lightbulb .sl-bulb {
+            position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+            width: 44px; height: 50px;
+            background: var(--mark);
+            border: 2px solid var(--ink);
+            border-radius: 50% 50% 40% 40% / 55% 55% 45% 45%;
+            animation: sl-glow 2.2s ease-in-out infinite;
+        }
+        .thumb-s-lightbulb .sl-base {
+            position: absolute; top: 56px; left: 50%; transform: translateX(-50%);
+            width: 22px; height: 8px;
+            background: var(--ink);
+            border-radius: 2px;
+        }
+        .thumb-s-lightbulb .sl-ray {
+            position: absolute; top: 4px; width: 2px; height: 10px;
+            background: var(--ink-soft);
+            border-radius: 1px;
+            animation: sl-ray 2.2s ease-in-out infinite;
+        }
+        .thumb-s-lightbulb .sl-ray:nth-child(3) { left: 14px; transform: rotate(-30deg); animation-delay: 0s; }
+        .thumb-s-lightbulb .sl-ray:nth-child(4) { left: 50%; transform: translateX(-50%); animation-delay: .2s; }
+        .thumb-s-lightbulb .sl-ray:nth-child(5) { right: 14px; transform: rotate(30deg); animation-delay: .4s; }
+        @keyframes sl-glow {
+            0%, 100% { background: #fff; box-shadow: none; }
+            50%      { background: var(--mark); box-shadow: 0 0 20px rgba(253, 236, 200, .8); }
+        }
+        @keyframes sl-ray {
+            0%, 100% { opacity: 0; transform-origin: bottom; }
+            50%      { opacity: 1; }
+        }
+
+        /* ========= 共有サムネ: S11. graph（右肩上がりグラフ） ========= */
+        .thumb-s-graph .sg-stage {
+            position: relative;
+            width: 120px; height: 80px;
+            border-left: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+        }
+        .thumb-s-graph .sg-line {
+            position: absolute; bottom: 0; left: 0;
+            width: 2px; height: 2px;
+            background: var(--ink);
+            animation: sg-grow 3s ease-out infinite;
+            transform-origin: bottom left;
+        }
+        .thumb-s-graph .sg-dot {
+            position: absolute; width: 8px; height: 8px;
+            background: var(--mark); border: 1.5px solid var(--ink); border-radius: 50%;
+            animation: sg-pop 3s ease-out infinite;
+            opacity: 0;
+        }
+        .thumb-s-graph .sg-dot:nth-child(1) { bottom: 10px; left: 14px; animation-delay: .2s; }
+        .thumb-s-graph .sg-dot:nth-child(2) { bottom: 28px; left: 44px; animation-delay: .8s; }
+        .thumb-s-graph .sg-dot:nth-child(3) { bottom: 54px; left: 80px; animation-delay: 1.4s; }
+        .thumb-s-graph .sg-dot:nth-child(4) { bottom: 72px; right: 4px; animation-delay: 2s; background: var(--ink); }
+        @keyframes sg-grow {
+            0%   { transform: scale(1, 0); }
+            100% { transform: scale(1, 1); }
+        }
+        @keyframes sg-pop {
+            0%, 100% { opacity: 0; transform: scale(.6); }
+            10%, 90% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ========= 共有サムネ: S12. clock（時計・カウントダウン） ========= */
+        .thumb-s-clock .scl-stage { position: relative; width: 90px; height: 90px; }
+        .thumb-s-clock .scl-face {
+            position: absolute; top: 0; left: 0;
+            width: 86px; height: 86px;
+            border: 2px solid var(--ink);
+            border-radius: 50%;
+            background: #fff;
+        }
+        .thumb-s-clock .scl-hand {
+            position: absolute; top: 50%; left: 50%;
+            transform-origin: bottom center;
+            background: var(--ink);
+            border-radius: 2px;
+        }
+        .thumb-s-clock .scl-hand.hour {
+            width: 3px; height: 22px;
+            margin-left: -1.5px; margin-top: -22px;
+            animation: scl-spin-slow 6s linear infinite;
+        }
+        .thumb-s-clock .scl-hand.min {
+            width: 2px; height: 32px;
+            margin-left: -1px; margin-top: -32px;
+            background: var(--ink-soft);
+            animation: scl-spin 2s linear infinite;
+        }
+        .thumb-s-clock .scl-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px; height: 6px;
+            background: var(--mark); border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        @keyframes scl-spin      { to { transform: rotate(360deg); } }
+        @keyframes scl-spin-slow { to { transform: rotate(360deg); } }
+
+        /* ========= 共有サムネ: S13. shield（盾・信頼） ========= */
+        .thumb-s-shield .ssh-stage { position: relative; width: 80px; height: 90px; }
+        .thumb-s-shield .ssh-body {
+            position: absolute; top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 64px; height: 80px;
+            background: var(--mark);
+            border: 2px solid var(--ink);
+            border-radius: 8px 8px 50% 50% / 8px 8px 40% 40%;
+            animation: ssh-pulse 2.6s ease-in-out infinite;
+        }
+        .thumb-s-shield .ssh-check {
+            position: absolute; top: 28px; left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 10px; height: 20px;
+            border-right: 3px solid var(--ink);
+            border-bottom: 3px solid var(--ink);
+            z-index: 2;
+        }
+        @keyframes ssh-pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: none; }
+            50%      { transform: translateX(-50%) scale(1.06); box-shadow: 0 0 0 6px rgba(253, 236, 200, .6); }
+        }
+
+        /* ========= 共有サムネ: S14. wave（波・リーチ拡散） ========= */
+        .thumb-s-wave .sw-stage { position: relative; width: 120px; height: 80px; }
+        .thumb-s-wave .sw-center {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px; height: 14px;
+            background: var(--ink); border-radius: 50%;
+            z-index: 2;
+        }
+        .thumb-s-wave .sw-ripple {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px; height: 14px;
+            border: 2px solid var(--ink);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sw-ripple 2.4s ease-out infinite;
+        }
+        .thumb-s-wave .sw-ripple:nth-child(2) { animation-delay: 0s; }
+        .thumb-s-wave .sw-ripple:nth-child(3) { animation-delay: .4s; }
+        .thumb-s-wave .sw-ripple:nth-child(4) { animation-delay: .8s; }
+        @keyframes sw-ripple {
+            0%   { opacity: .8; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0;  transform: translate(-50%, -50%) scale(5); }
+        }
+
         /* ========= カテゴリ見出し ========= */
         .cat-section { margin-bottom: 80px; }
         .cat-section:last-child { margin-bottom: 0; }
@@ -842,8 +1018,7 @@
             コンテンツ販売用語。
         </h1>
         <p class="text-lg md:text-xl" style="color: var(--ink-soft);">
-            文字を読むより、動きで見る。<br>
-            コンテンツ販売界隈の<span class="mark">Wikipedia</span>。
+            文字を読むより、動きで見る。
         </p>
     </header>
 
@@ -855,9 +1030,11 @@
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
             <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">87</span></button>
-            <button class="cat-btn" data-filter="G">ツール・SaaS<span class="cat-count">11</span></button>
-            <button class="cat-btn" data-filter="H">マーケ基礎<span class="cat-count">31</span></button>
-            <button class="cat-btn" data-filter="I">指標・心理<span class="cat-count">19</span></button>
+            <button class="cat-btn" data-filter="G">プラットフォーム・ツール<span class="cat-count">11</span></button>
+            <button class="cat-btn" data-filter="H">マーケ基礎<span class="cat-count">17</span></button>
+            <button class="cat-btn" data-filter="K">戦略・商品設計<span class="cat-count">12</span></button>
+            <button class="cat-btn" data-filter="I">指標・分析<span class="cat-count">11</span></button>
+            <button class="cat-btn" data-filter="L">心理トリガー<span class="cat-count">10</span></button>
             <button class="cat-btn" data-filter="J">SNS・制作<span class="cat-count">26</span></button>
         </div>
     </div>
@@ -868,8 +1045,8 @@
         <!-- Category G -->
         <section class="cat-section" data-cat="G">
             <header class="cat-head mb-8">
-                <div class="cat-tag">G · Platform / SaaS</div>
-                <h2 class="cat-heading">ツール・プラットフォーム</h2>
+                <div class="cat-tag">G · Platform / Tool</div>
+                <h2 class="cat-heading">プラットフォーム・ツール</h2>
                 <p class="cat-lead">講座運営やビジネスで使うプラットフォーム・サービス群。AI活用と組み合わせることで業務効率が飛躍的に向上します。</p>
             </header>
 
@@ -1116,7 +1293,7 @@
                     <div class="card-body"><h3>ナーチャリング</h3><p class="desc">見込み客を<span class="mark">教育</span>して購買意欲を高めるプロセス。信頼を築き購入準備を整える。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">♡</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-shield"><div class="thumb-inner"><div class="ssh-stage"><div class="ssh-body"></div><div class="ssh-check"></div></div></div></div>
                     <div class="card-body"><h3>ラポール構築</h3><p class="desc">見込み客との<span class="mark">信頼関係</span>を構築すること。信頼残高を貯めセールスで引き出す。</p></div>
                 </div>
 
@@ -1128,7 +1305,7 @@
                     <div class="card-body"><h3>オプトイン</h3><p class="desc">見込み客が自ら<span class="mark">連絡先を提供</span>する行為。ファネルの入口で最重要指標。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">🚀</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">LAUNCH</div></div></div></div>
                     <div class="card-body"><h3>プロダクトローンチ</h3><p class="desc">段階的に情報公開し<span class="mark">期待感を最大化</span>して一気に販売する手法。</p></div>
                 </div>
 
@@ -1136,7 +1313,7 @@
                     <div class="card-body"><h3>プリプリ／プリローンチ</h3><p class="desc">ローンチ前の<span class="mark">準備フェーズ</span>。情報を小出しにして期待感を醸成。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">T</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-clock"><div class="thumb-inner"><div class="scl-stage"><div class="scl-face"></div><div class="scl-hand hour"></div><div class="scl-hand min"></div><div class="scl-center"></div></div></div></div>
                     <div class="card-body"><h3>ティザー</h3><p class="desc">ローンチ前に<span class="mark">チラ見せ</span>して期待感を高める投稿。30日分を計画的に配置。</p></div>
                 </div>
 
@@ -1148,7 +1325,7 @@
                     <div class="card-body"><h3>CTA</h3><p class="desc">ユーザーに<span class="mark">具体的な行動</span>を促す仕掛け。文言・配置・デザインでCV率が変わる。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">1:1</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>1LP1CTA</h3><p class="desc">1つのLPには<span class="mark">1つのCTAだけ</span>置く鉄則。選択肢が多いと迷いで離脱する。</p></div>
                 </div>
 
@@ -1157,18 +1334,31 @@
                 </div>
 
                 <div class="term-card"><div class="thumb thumb-s-funnel"><div class="thumb-inner"><div class="sf-stage"><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div></div></div></div>
-                    <div class="card-body"><h3>ローンチファネル</h3><p class="desc">おさる式<span class="mark">売上最大化</span>のファネル設計図。初級・中級・上級の3テンプレ。</p></div>
+                    <div class="card-body"><h3>ローンチファネル</h3><p class="desc">ローンチ全体を<span class="mark">売上最大化</span>する設計図。初級・中級・上級の3テンプレ構成が一般的。</p></div>
                 </div>
 
                 <div class="term-card"><div class="thumb thumb-s-funnel"><div class="thumb-inner"><div class="sf-stage"><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div><div class="sf-layer"></div></div></div></div>
                     <div class="card-body"><h3>スクリーニング</h3><p class="desc">本気度の高い見込み客だけを<span class="mark">選別</span>するプロセス。フォーム審査等で実施。</p></div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- Category K: 戦略・商品設計 -->
+        <section class="cat-section" data-cat="K">
+            <header class="cat-head mb-8">
+                <div class="cat-tag">K · Strategy / Product</div>
+                <h2 class="cat-heading">戦略・商品設計</h2>
+                <p class="cat-lead">商品ラインナップ・価格・ブランド設計に関わる用語。売上の天井を決めるレイヤーです。</p>
+            </header>
+
+            <div class="term-grid">
+
                 <div class="term-card"><div class="thumb thumb-s-stack"><div class="thumb-inner"><div class="sk-stage"><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div></div></div></div>
                     <div class="card-body"><h3>バックエンド／アップセル</h3><p class="desc">購入後に<span class="mark">さらに高額商品</span>を提案する施策。利益の源泉でLTV最大化。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-stack"><div class="thumb-inner"><div class="sk-stage"><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>高単価戦略</h3><p class="desc">単価を高く設定し<span class="mark">少数顧客で高収益</span>を実現する戦略。安売り競争から脱却。</p></div>
                 </div>
 
@@ -1176,7 +1366,7 @@
                     <div class="card-body"><h3>ダウンセル</h3><p class="desc">メイン商品を断った人に<span class="mark">低価格商品</span>を提案し機会損失を防ぐ手法。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-stack"><div class="thumb-inner"><div class="sk-stage"><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div><div class="sk-layer"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-magnet"><div class="thumb-inner"><div class="sm-stage"><div class="sm-dot"></div><div class="sm-dot"></div><div class="sm-dot"></div><div class="sm-magnet"></div></div></div></div>
                     <div class="card-body"><h3>クロスセル</h3><p class="desc">購入者に<span class="mark">関連商品</span>を追加提案し顧客単価とLTVを引き上げる手法。</p></div>
                 </div>
 
@@ -1184,11 +1374,11 @@
                     <div class="card-body"><h3>エバーグリーンローンチ</h3><p class="desc">ローンチを<span class="mark">自動化</span>し登録者ごとに疑似ローンチ体験を24時間提供する仕組み。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-feed"><div class="thumb-inner"><div class="sd-stage"><div class="sd-track"><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-lightbulb"><div class="thumb-inner"><div class="sl-stage"><div class="sl-bulb"></div><div class="sl-base"></div><div class="sl-ray"></div><div class="sl-ray"></div><div class="sl-ray"></div></div></div></div>
                     <div class="card-body"><h3>コピーライティング</h3><p class="desc">読者の<span class="mark">行動を促す</span>文章技術。LP・配信文の成約率を左右する最重要スキル。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">P</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>ペルソナ</h3><p class="desc">理想的な顧客像を具体的に描いたもの。<span class="mark">年齢・悩み・欲求</span>を設定しコンテンツの土台に。</p></div>
                 </div>
 
@@ -1196,7 +1386,7 @@
                     <div class="card-body"><h3>属人性</h3><p class="desc">特定の個人に依存するビジネスの性質。<span class="mark">「あなただから買う」</span>は強みだが仕組み化とバランスが必要。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">USP</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>USP</h3><p class="desc"><span class="mark">「自分から買う理由」</span>を一言で表現したもの。差別化の核心。</p></div>
                 </div>
 
@@ -1212,23 +1402,15 @@
                     <div class="card-body"><h3>ステップ配信</h3><p class="desc">登録日を起点に事前設定メッセージを<span class="mark">自動で段階配信</span>する仕組み。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
-                    <div class="card-body"><h3>ROI</h3><p class="desc"><span class="mark">投資に対するリターン</span>の指標。ROIが高い施策にリソースを集中させる。</p></div>
-                </div>
-
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
-                    <div class="card-body"><h3>ROAS</h3><p class="desc"><span class="mark">広告費1円あたりの売上</span>金額。ROAS500%=1万円で売上5万円。広告運用の必須指標。</p></div>
-                </div>
-
             </div>
         </section>
 
-        <!-- Category I: 指標・分析・心理トリガー -->
+        <!-- Category I: 指標・分析 -->
         <section class="cat-section" data-cat="I">
             <header class="cat-head mb-8">
-                <div class="cat-tag">I · Metrics & Psychology</div>
-                <h2 class="cat-heading">指標・分析・心理トリガー</h2>
-                <p class="cat-lead">数字で判断し、人間心理で動かす。成果を最大化するための指標と心理テクニック。</p>
+                <div class="cat-tag">I · Metrics & Analysis</div>
+                <h2 class="cat-heading">指標・分析</h2>
+                <p class="cat-lead">数字で判断するための指標群。成果を最大化するために何を追い、どう改善するか。</p>
             </header>
 
             <div class="term-grid">
@@ -1249,11 +1431,11 @@
                     <div class="card-body"><h3>CTR</h3><p class="desc">表示回数に対する<span class="mark">クリック割合</span>。サムネ・タイトル・CTAの効果を測定。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>CPA</h3><p class="desc"><span class="mark">顧客1人の獲得コスト</span>。CPAがLTVを下回れば広告は利益を生んでいる。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>LTV</h3><p class="desc">1顧客が<span class="mark">生涯でもたらす総売上</span>。LTVが高いほど広告費をかけても利益が出る。</p></div>
                 </div>
 
@@ -1261,39 +1443,60 @@
                     <div class="card-body"><h3>PV</h3><p class="desc">Webページの<span class="mark">閲覧回数</span>。アクセス量を測る基本指標。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>KPI</h3><p class="desc">目標達成のために追跡する<span class="mark">中間指標</span>。最終目標に直結する数字を設定。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>KGI</h3><p class="desc">最終的に達成すべき<span class="mark">ゴール指標</span>。KPIはKGI達成のための分解指標。</p></div>
                 </div>
+
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
+                    <div class="card-body"><h3>ROI</h3><p class="desc"><span class="mark">投資に対するリターン</span>の指標。ROIが高い施策にリソースを集中させる。</p></div>
+                </div>
+
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
+                    <div class="card-body"><h3>ROAS</h3><p class="desc"><span class="mark">広告費1円あたりの売上</span>金額。ROAS500%=1万円で売上5万円。広告運用の必須指標。</p></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Category L: 心理トリガー -->
+        <section class="cat-section" data-cat="L">
+            <header class="cat-head mb-8">
+                <div class="cat-tag">L · Psychology Triggers</div>
+                <h2 class="cat-heading">心理トリガー</h2>
+                <p class="cat-lead">人間心理を動かすテクニック。セールスコピーやLP設計の肝になる要素群。</p>
+            </header>
+
+            <div class="term-grid">
 
                 <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">⚡</div></div></div></div>
                     <div class="card-body"><h3>心理トリガー</h3><p class="desc">購買行動を引き起こす<span class="mark">心理的スイッチ</span>。セールスコピーやLP設計に組み込む。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">🚫</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">NO</div></div></div></div>
                     <div class="card-body"><h3>カリギュラ効果</h3><p class="desc"><span class="mark">禁止されるほど</span>やりたくなる心理。「閲覧注意」等で注目を集める。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">👑</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-shield"><div class="thumb-inner"><div class="ssh-stage"><div class="ssh-body"></div><div class="ssh-check"></div></div></div></div>
                     <div class="card-body"><h3>権威への服従</h3><p class="desc"><span class="mark">専門家や実績者</span>の言葉を信じやすい傾向。実績数値・推薦文で信頼性を高める。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">👥</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-shield"><div class="thumb-inner"><div class="ssh-stage"><div class="ssh-body"></div><div class="ssh-check"></div></div></div></div>
                     <div class="card-body"><h3>社会的証明</h3><p class="desc"><span class="mark">みんなが選んでいる</span>と安心する心理。受講生の声・成果報告で購入を後押しする。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">3席</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-clock"><div class="thumb-inner"><div class="scl-stage"><div class="scl-face"></div><div class="scl-hand hour"></div><div class="scl-hand min"></div><div class="scl-center"></div></div></div></div>
                     <div class="card-body"><h3>希少性</h3><p class="desc">数量が限られると<span class="mark">価値が上がる</span>心理。「残り3席」で行動を促進する。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">⏰</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-clock"><div class="thumb-inner"><div class="scl-stage"><div class="scl-face"></div><div class="scl-hand hour"></div><div class="scl-hand min"></div><div class="scl-center"></div></div></div></div>
                     <div class="card-body"><h3>緊急性</h3><p class="desc"><span class="mark">今すぐ動かないと損</span>と感じさせる心理。期限設定で先延ばしを防ぐ。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">🎁</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">♡</div></div></div></div>
                     <div class="card-body"><h3>返報性</h3><p class="desc"><span class="mark">もらったらお返し</span>したい心理。無料で価値を提供し有料購入につなげる。</p></div>
                 </div>
 
@@ -1305,7 +1508,7 @@
                     <div class="card-body"><h3>性弱説</h3><p class="desc">人間は<span class="mark">弱い前提</span>でマーケを設計。リマインド・ステップ配信で怠惰・忘却を補完。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">★</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>センターピン</h3><p class="desc">倒せば<span class="mark">連鎖的に全体が動く</span>最重要ポイント。最もレバレッジの効く課題に集中。</p></div>
                 </div>
 
@@ -1330,15 +1533,15 @@
                     <div class="card-body"><h3>インプレッション</h3><p class="desc">投稿がタイムラインに<span class="mark">表示された回数</span>。認知拡大の基本指標。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-wave"><div class="thumb-inner"><div class="sw-stage"><div class="sw-center"></div><div class="sw-ripple"></div><div class="sw-ripple"></div><div class="sw-ripple"></div></div></div></div>
                     <div class="card-body"><h3>エンゲージメント</h3><p class="desc">いいね・リポスト・コメント等の<span class="mark">ユーザー反応</span>の総称。率が高いほど優遇される。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">CH</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-lightbulb"><div class="thumb-inner"><div class="sl-stage"><div class="sl-bulb"></div><div class="sl-base"></div><div class="sl-ray"></div><div class="sl-ray"></div><div class="sl-ray"></div></div></div></div>
                     <div class="card-body"><h3>コンテンツホルダー</h3><p class="desc">知識や経験を<span class="mark">コンテンツ化して販売</span>する人。講座受講生全員が該当。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">◎</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-lightbulb"><div class="thumb-inner"><div class="sl-stage"><div class="sl-bulb"></div><div class="sl-base"></div><div class="sl-ray"></div><div class="sl-ray"></div><div class="sl-ray"></div></div></div></div>
                     <div class="card-body"><h3>コンセプト設計</h3><p class="desc">ブランドの<span class="mark">世界観・差別化軸</span>・提供価値を設計すること。ここがブレると全てブレる。</p></div>
                 </div>
 
@@ -1354,7 +1557,7 @@
                     <div class="card-body"><h3>LINEオープンチャット</h3><p class="desc">LINEの<span class="mark">匿名参加型グループ</span>。リスト獲得の入口としても活用できる。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-pulse"><div class="thumb-inner"><div class="sp-stage"><div class="sp-wave"></div><div class="sp-wave"></div><div class="sp-core">▶</div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-target"><div class="thumb-inner"><div class="st-stage"><div class="st-ring"></div><div class="st-ring"></div><div class="st-ring"></div><div class="st-arrow"></div></div></div></div>
                     <div class="card-body"><h3>サムネイル</h3><p class="desc">動画の顔となる縮小画像。<span class="mark">CTRを大きく左右</span>する最重要要素。</p></div>
                 </div>
 
@@ -1374,23 +1577,23 @@
                     <div class="card-body"><h3>X投稿</h3><p class="desc">X（旧Twitter）での投稿。<span class="mark">140文字・長文・スレッド</span>など目的別に使い分ける。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-feed"><div class="thumb-inner"><div class="sd-stage"><div class="sd-track"><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-wave"><div class="thumb-inner"><div class="sw-stage"><div class="sw-center"></div><div class="sw-ripple"></div><div class="sw-ripple"></div><div class="sw-ripple"></div></div></div></div>
                     <div class="card-body"><h3>ショート動画</h3><p class="desc">60秒以下の縦型短尺動画。<span class="mark">拡散力が高く</span>認知獲得の入口として有効。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>SEO</h3><p class="desc">Google検索で<span class="mark">上位表示</span>を狙う施策。キーワード設計が基本。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>VSEO</h3><p class="desc">YouTube検索で<span class="mark">上位表示</span>を狙う施策。タイトル・タグ・説明文を最適化。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-graph"><div class="thumb-inner"><div class="sg-stage"><div class="sg-line"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div><div class="sg-dot"></div></div></div></div>
                     <div class="card-body"><h3>MEO</h3><p class="desc">Googleマップ検索で<span class="mark">上位表示</span>を狙う施策。店舗・対面ビジネスで重要。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-bar"><div class="thumb-inner"><div class="sb-stage"><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div><div class="sb-col"></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-wave"><div class="thumb-inner"><div class="sw-stage"><div class="sw-center"></div><div class="sw-ripple"></div><div class="sw-ripple"></div><div class="sw-ripple"></div></div></div></div>
                     <div class="card-body"><h3>リーチ</h3><p class="desc">投稿が届いた<span class="mark">ユニークユーザー数</span>。インプレ=表示回数、リーチ=届いた人数。</p></div>
                 </div>
 
@@ -1414,7 +1617,7 @@
                     <div class="card-body"><h3>アフィリエイト</h3><p class="desc">他人の商品を紹介し<span class="mark">成約報酬</span>を得る仕組み。コンテンツビジネスの入口にも。</p></div>
                 </div>
 
-                <div class="term-card"><div class="thumb thumb-s-feed"><div class="thumb-inner"><div class="sd-stage"><div class="sd-track"><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div><div class="sd-item"><div class="sd-ava"></div><div class="sd-line"></div></div></div></div></div></div>
+                <div class="term-card"><div class="thumb thumb-s-wave"><div class="thumb-inner"><div class="sw-stage"><div class="sw-center"></div><div class="sw-ripple"></div><div class="sw-ripple"></div><div class="sw-ripple"></div></div></div></div>
                     <div class="card-body"><h3>インフルエンサーマーケ</h3><p class="desc">影響力のある発信者を活用し<span class="mark">集客を加速</span>させるマーケティング手法。</p></div>
                 </div>
 
@@ -1460,6 +1663,7 @@
                 <span>運営: 株式会社レベルアップ</span>
                 <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
                 <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <a href="../learning/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: 学習方法用語集</a>
                 <span class="ml-auto">© 2025-2026</span>
             </div>
         </div>
