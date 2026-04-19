@@ -77,7 +77,7 @@
 
             <div class="text-center mt-8">
                 <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で積み上げの流れを見る</p>
-                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+                <button id="play-btn" style="display:none" class="btn btn-primary">▶ 再生</button>
             </div>
 
             <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">3種類のナレッジを順に積むと、AI活用基盤が完成する。</p>
@@ -87,9 +87,9 @@
             <h2 class="text-2xl mb-4">3種類のナレッジを順番に積む</h2>
             <p>
                 ナレッジ構築とは、AIに渡すための情報を<span class="mark">体系的に整理・作成するプロセス全体</span>のこと。
-                講座では <strong>パーソナルナレッジ</strong>（自分の情報）、<strong>プロダクトナレッジ</strong>（商品情報）、
+                体系的に整理すると <strong>パーソナルナレッジ</strong>（自分の情報）、<strong>プロダクトナレッジ</strong>（商品情報）、
                 <strong>コンテンツナレッジ</strong>（発信情報）の3種類に分けて構築します。
-                ナレッジの質がAI出力の質を直接左右するため、<span class="mark">講座の最重要パートの一つ</span>です。
+                ナレッジの質がAI出力の質を直接左右するため、<span class="mark">AI活用の最重要パートの一つ</span>です。
             </p>
         </section>
 
@@ -126,6 +126,22 @@
                 </p>
             </div>
         </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
             <a href="project.html" class="nav-link">← 前の用語：プロジェクト機能</a>
@@ -171,7 +187,8 @@
             btn.textContent = '▶ もう一度';
             running = false;
         }
-        btn.addEventListener('click', play);
+        async function autoLoop() { await play(); setTimeout(autoLoop, 2500); }
+        setTimeout(autoLoop, 800);
     })();
     </script>
 

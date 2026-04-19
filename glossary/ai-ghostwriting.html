@@ -120,7 +120,7 @@
 
             <div class="text-center mt-8">
                 <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でゴーストが書き上げる様子</p>
-                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+                <button id="play-btn" style="display:none" class="btn btn-primary">▶ 再生</button>
             </div>
 
             <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">自分の名前で、自分が書いたようにAIに書かせる。</p>
@@ -131,7 +131,7 @@
             <p>
                 AIゴーストライティングとは、AIに自分の<span class="mark">文体・知識・考え方を学習させ、自分の代わりに文章を書かせる手法</span>。
                 パーソナルナレッジとコンテンツナレッジを組み合わせることで実現します。
-                講座の最終的なゴールの一つであり、<span class="mark">プロンプト力とナレッジの質の両方が求められる</span>上級テクニック。
+                AI活用の最終的なゴールの一つであり、<span class="mark">プロンプト力とナレッジの質の両方が求められる</span>上級テクニック。
                 ここに到達すると「自分の発信量を倍にしながら、自分の時間を増やす」運用が可能になります。
             </p>
         </section>
@@ -165,10 +165,26 @@
                 <p>
                     AIゴーストライティング＝<span class="mark">AIに自分の代わりに書かせる</span>運用。
                     パーソナルナレッジ＋コンテンツナレッジ＋プロンプト力の総合格闘技。
-                    講座のゴール地点の一つです。
+                    AI活用のゴール地点の一つです。
                 </p>
             </div>
         </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
             <a href="transcript.html" class="nav-link">← 前の用語：文字起こし</a>
@@ -214,7 +230,8 @@
             btn.textContent = '▶ もう一度';
             running = false;
         }
-        btn.addEventListener('click', play);
+        async function autoLoop() { await play(); setTimeout(autoLoop, 2500); }
+        setTimeout(autoLoop, 800);
     })();
     </script>
 
