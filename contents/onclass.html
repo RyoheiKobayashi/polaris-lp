@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オンクラスとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="オンクラスを、アニメーションで3秒で理解。やまもとりゅうけん監修の講座ホスティング・学習管理プラットフォーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .oc-flow { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 420px; margin: 0 auto; }
+        .oc-node {
+            width: 100%;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 12px;
+            padding: 14px 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s, transform .5s;
+        }
+        .oc-node.in { opacity: 1; transform: translateY(0); }
+        .oc-node.highlight { background: var(--mark); border-color: var(--ink); }
+        .oc-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: .08em; margin-bottom: 4px; }
+        .oc-big { font-size: 16px; font-weight: 600; color: var(--ink-warm); }
+        .oc-arrow { color: var(--ink-mute); font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">G · プラットフォーム・ツール</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Onclass</div>
+            <h1 class="detail-title">オンクラス</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">講座ホスティング・学習管理プラットフォーム</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="oc-flow">
+                <div class="oc-node" id="o1">
+                    <div class="oc-label">① 講師</div>
+                    <div class="oc-big">講座を作成（動画・テキスト）</div>
+                </div>
+                <div class="oc-arrow">↓</div>
+                <div class="oc-node highlight" id="o2">
+                    <div class="oc-label">② オンクラス</div>
+                    <div class="oc-big">LP・決済・配信・受講管理</div>
+                </div>
+                <div class="oc-arrow">↓</div>
+                <div class="oc-node" id="o3">
+                    <div class="oc-label">③ 受講生</div>
+                    <div class="oc-big">学習進捗を管理して受講</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でオンクラスの流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">講座運営に必要な機能がオールインワン。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">オンクラスとは</h2>
+            <p>
+                オンクラスは、<span class="mark">やまもとりゅうけんさん監修</span>の講座ホスティング・学習管理プラットフォーム。
+                Brainが「<span class="mark">知識のマーケットプレイス</span>」であるのに対し、オンクラスは「<span class="mark">自分の講座を運営する基盤</span>」という位置付け。
+                講座作成・LP構築・販売・受講管理・進捗トラッキングまでを<span class="mark">1つのツール内で完結</span>できます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">オンクラスの特徴</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">① オールインワンの講座運営</h3>
+                    <p>
+                        動画・テキスト・課題・小テストを<span class="mark">1つの受講画面に集約</span>。LMS（学習管理システム）としての完成度が高い。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">② 受講生のモチベ維持機能</h3>
+                    <p>
+                        進捗バー・修了証・コミュニティ機能等、<span class="mark">受講生を学習完了まで導く仕組み</span>が豊富。コンプリート率を高めやすい。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">③ 外部決済との連携</h3>
+                    <p>
+                        Stripeをはじめとする決済と連携し、<span class="mark">購入者を自動で受講者として招待</span>。購入→受講の動線がスムーズ。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">④ フリープランあり</h3>
+                    <p>
+                        受講生5名・1コースまでは<span class="mark">無料</span>で使える。小さく始めて、スケールしたら有料プランに移行できる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">Brainとの違い</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">Brain＝マーケットプレイス</h3>
+                    <p>
+                        楽天市場のように<span class="mark">Brain側が集客を担う</span>場。他人の紹介（アフィ）で広がる。単発のコンテンツ販売に強い。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">オンクラス＝自分の講座の基盤</h3>
+                    <p>
+                        自前の<span class="mark">学習管理システム</span>を持つイメージ。集客は自分でやるが、講座受講・進捗管理に強い。継続型講座・長期コンテンツ向き。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    オンクラス＝<span class="mark">講座ホスティング＋学習管理</span>に特化したプラットフォーム。
+                    Brainが「売る場」なら、オンクラスは「学ばせる場」。
+                    長期講座・カリキュラム型のコンテンツ運営に向いています。
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">発信チャンネル</span>があります。用語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        発信チャンネルを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="brain.html" class="nav-link">← 前の用語：Brain</a>
+            <a href="utage.html" class="nav-link">次の用語：UTAGE →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const nodes = ['o1','o2','o3'].map(id => document.getElementById(id));
+        const labels = [
+            '① 講師が動画・テキストで講座を作成',
+            '② オンクラスがLP・決済・配信・受講管理を担当',
+            '✓ 受講生が進捗を管理しながら学習完了'
+        ];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            nodes.forEach(n => n.classList.remove('in'));
+            for (let i = 0; i < nodes.length; i++) {
+                await wait(500);
+                nodes[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ 講座運営が <strong>オンクラス 1つで完結</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

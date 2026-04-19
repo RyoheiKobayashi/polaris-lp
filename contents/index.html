@@ -546,6 +546,57 @@
             100%     { opacity: 0; transform: translateX(4px); }
         }
 
+        /* ========= 12. オンクラス: 講座モニター + 再生 ========= */
+        .thumb-onclass .oc-stage { position: relative; width: 130px; height: 90px; }
+        .thumb-onclass .oc-screen {
+            position: absolute; inset: 0;
+            background: #fff;
+            border: 2px solid var(--ink);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-onclass .oc-bar {
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 10px;
+            background: var(--ink);
+            border-radius: 6px 6px 0 0;
+            display: flex; align-items: center; padding-left: 6px; gap: 3px;
+        }
+        .thumb-onclass .oc-bar::before,
+        .thumb-onclass .oc-bar::after {
+            content: ''; width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.5);
+        }
+        .thumb-onclass .oc-play {
+            width: 0; height: 0;
+            border-left: 18px solid var(--ink);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 6px;
+            animation: oc-pulse 2s ease-in-out infinite;
+        }
+        .thumb-onclass .oc-progress {
+            position: absolute; bottom: 6px; left: 10px; right: 10px;
+            height: 3px;
+            background: var(--line);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .thumb-onclass .oc-progress::after {
+            content: ''; position: absolute; top: 0; left: 0; height: 100%;
+            background: var(--mark);
+            border-radius: 2px;
+            animation: oc-fill 3.2s ease-in-out infinite;
+        }
+        @keyframes oc-pulse {
+            0%, 100% { opacity: .7; transform: scale(1); }
+            50%      { opacity: 1; transform: scale(1.12); }
+        }
+        @keyframes oc-fill {
+            0%   { width: 0%; }
+            90%  { width: 85%; }
+            100% { width: 0%; }
+        }
+
         /* ========= 11. Brain: 脳 SVG + ひらめき ========= */
         .thumb-brain .br-stage {
             position: relative;
@@ -1029,8 +1080,8 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">87</span></button>
-            <button class="cat-btn" data-filter="G">プラットフォーム・ツール<span class="cat-count">11</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">88</span></button>
+            <button class="cat-btn" data-filter="G">プラットフォーム・ツール<span class="cat-count">12</span></button>
             <button class="cat-btn" data-filter="H">マーケ基礎<span class="cat-count">17</span></button>
             <button class="cat-btn" data-filter="K">戦略・商品設計<span class="cat-count">12</span></button>
             <button class="cat-btn" data-filter="I">指標・分析<span class="cat-count">11</span></button>
@@ -1076,6 +1127,25 @@
                     <div class="card-body">
                         <h3>Brain</h3>
                         <p class="desc">迫佑樹さんが運営する<span class="mark">知識共有プラットフォーム</span>。学びを販売・購入できる。</p>
+                    </div>
+                </a>
+
+                <!-- 02. オンクラス -->
+                <a href="onclass.html" class="term-card">
+                    <div class="thumb thumb-onclass">
+                        <div class="thumb-inner">
+                            <div class="oc-stage">
+                                <div class="oc-screen">
+                                    <div class="oc-bar"></div>
+                                    <div class="oc-play"></div>
+                                    <div class="oc-progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>オンクラス</h3>
+                        <p class="desc">やまもとりゅうけんさん監修の<span class="mark">講座ホスティング・学習管理</span>プラットフォーム。</p>
                     </div>
                 </a>
 
