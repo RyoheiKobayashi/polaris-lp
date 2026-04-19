@@ -46,32 +46,55 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* スラッシュコマンド: 大 */
-        .hero-slash .term {
+        /* スラッシュコマンド: /打鍵 → メニュー出現 → 選択実行 */
+        .hero-slash {
             background: var(--ink-warm); color: #fff;
-            border-radius: 10px; padding: 24px 30px;
-            font-family: var(--font-mono); font-size: 24px;
-            min-width: 340px;
+            border-radius: 10px; padding: 20px 24px;
+            font-family: var(--font-mono); font-size: 15px;
+            min-width: 360px; line-height: 1.7;
             box-shadow: 0 8px 24px rgba(0,0,0,0.12);
         }
         .hero-slash .slash { color: var(--mark); }
-        .hero-slash .cmd {
-            display: inline-block;
-            overflow: hidden; white-space: nowrap;
-            animation: sl-type 3s steps(8, end) infinite;
-            vertical-align: bottom;
+        .hero-slash .input-line {
+            display: flex; align-items: center;
         }
         .hero-slash .caret {
-            display: inline-block; width: 10px; height: 22px;
-            background: #fff; vertical-align: middle; margin-left: 2px;
+            display: inline-block; width: 9px; height: 18px;
+            background: #fff; vertical-align: middle;
             animation: cc-blink 1s step-end infinite;
         }
-        @keyframes sl-type {
-            0%, 10%   { width: 0; }
-            50%, 90%  { width: 8ch; }
-            100%      { width: 0; }
-        }
         @keyframes cc-blink { 50% { opacity: 0; } }
+        .hero-slash.stage-2 .caret, .hero-slash.stage-3 .caret { display: none; }
+        .hero-slash .menu {
+            margin-top: 10px;
+            background: #fff; border-radius: 8px;
+            padding: 4px 0;
+            max-height: 0; overflow: hidden;
+            transition: max-height .4s, padding .4s;
+        }
+        .hero-slash.stage-2 .menu,
+        .hero-slash.stage-3 .menu {
+            max-height: 200px;
+            padding: 6px 0;
+        }
+        .hero-slash .item {
+            padding: 6px 14px;
+            color: var(--ink-warm); font-size: 12px;
+            transition: background .2s;
+        }
+        .hero-slash .item.selected {
+            background: var(--mark); color: var(--ink); font-weight: 600;
+        }
+        .hero-slash .exec {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: var(--ink); color: var(--mark);
+            border-radius: 6px;
+            font-size: 13px;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-slash.stage-3 .exec { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -91,12 +114,35 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-slash">
-                <div class="term">
-                    <span class="slash">/</span><span class="cmd">x-post</span><span class="caret"></span>
+            <div class="hero-slash" id="hero-slash">
+                <div class="input-line"><span class="slash">/</span><span class="caret"></span></div>
+                <div class="menu">
+                    <div class="item">/todoist</div>
+                    <div class="item selected">/x-post</div>
+                    <div class="item">/youtube</div>
                 </div>
+                <div class="exec">✓ /x-post 実行</div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-slash');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // / 入力
+                await wait(800);
+                hero.classList.add('stage-2');  // メニュー出現
+                await wait(1400);
+                hero.classList.add('stage-3');  // 実行
+                await wait(1800);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">スラッシュコマンドってそもそも何？</h2>

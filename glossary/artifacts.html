@@ -46,33 +46,71 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Artifacts: コード → プレビュー */
-        .hero-af { display: flex; align-items: center; gap: 18px; }
-        .hero-af .code {
+        /* Artifacts: コード書く → 即プレビュー → インタラクティブ */
+        .hero-af { display: flex; align-items: stretch; gap: 16px; height: 180px; }
+        .af-code {
             background: var(--ink-warm); color: #fff;
-            border-radius: 8px; padding: 18px 22px;
-            font-family: var(--font-mono); font-size: 14px;
-            min-width: 140px; line-height: 1.6;
+            border-radius: 8px; padding: 16px 18px;
+            font-family: var(--font-mono); font-size: 11px;
+            width: 180px; line-height: 1.7;
+            overflow: hidden;
         }
-        .hero-af .code .tag { color: var(--mark); }
-        .hero-af .arrow {
-            font-family: var(--font-mono); color: var(--ink-warm); font-size: 24px;
+        .af-code .tag { color: var(--mark); }
+        .af-code .str { color: var(--ink-mute); }
+        .af-code .line {
+            opacity: 0; transform: translateX(-4px);
+            transition: opacity .3s, transform .3s;
         }
-        .hero-af .preview {
-            width: 160px; height: 130px;
-            background: #fff; border: 1px solid var(--line); border-radius: 8px;
+        .hero-af.stage-1 .af-code .line,
+        .hero-af.stage-2 .af-code .line,
+        .hero-af.stage-3 .af-code .line { opacity: 1; transform: translateX(0); }
+        .af-code .line:nth-child(1) { transition-delay: 0s; }
+        .af-code .line:nth-child(2) { transition-delay: .08s; }
+        .af-code .line:nth-child(3) { transition-delay: .16s; }
+        .af-code .line:nth-child(4) { transition-delay: .24s; }
+        .af-code .line:nth-child(5) { transition-delay: .32s; }
+        .af-preview {
+            flex: 1; min-width: 170px;
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
             position: relative; overflow: hidden;
+            opacity: 0;
+            transition: opacity .4s;
         }
-        .hero-af .preview::before {
-            content: ''; position: absolute; inset: 12px;
-            background: linear-gradient(135deg, var(--bg-warm) 50%, var(--mark) 50%);
+        .hero-af.stage-2 .af-preview,
+        .hero-af.stage-3 .af-preview { opacity: 1; }
+        .af-preview-header {
+            height: 20px; background: var(--bg-warm);
+            border-bottom: 1px solid var(--line);
+            display: flex; align-items: center; padding: 0 8px; gap: 4px;
+        }
+        .af-preview-header .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--ink-mute);
+        }
+        .af-preview-body {
+            padding: 14px; display: flex; flex-direction: column; gap: 8px;
+        }
+        .af-preview-body .t {
+            height: 6px; background: var(--ink-warm); border-radius: 2px;
+            width: 50%;
+        }
+        .af-preview-body .b {
+            height: 40px; background: linear-gradient(135deg, var(--bg-warm), var(--mark));
             border-radius: 4px;
-            animation: af-render 2.8s ease-in-out infinite;
         }
-        @keyframes af-render {
-            0%, 20%  { opacity: 0; transform: scale(0.85); }
-            50%, 80% { opacity: 1; transform: scale(1); }
-            100%     { opacity: 0; transform: scale(0.85); }
+        .af-preview-body .btn {
+            height: 20px; width: 70px;
+            background: var(--ink); border-radius: 3px;
+            transition: transform .2s;
+        }
+        .hero-af.stage-3 .af-preview-body .btn {
+            animation: af-click 1.4s ease-in-out infinite;
+        }
+        @keyframes af-click {
+            0%, 60% { transform: scale(1); }
+            70%     { transform: scale(0.92); background: var(--mark); }
+            80%     { transform: scale(1); }
+            100%    { transform: scale(1); }
         }
     </style>
 </head>
@@ -93,12 +131,47 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-af">
-                <div class="code"><span class="tag">&lt;html&gt;</span><br>...<br><span class="tag">&lt;/html&gt;</span></div>
-                <span class="arrow">→</span>
-                <div class="preview"></div>
+            <div class="hero-af" id="hero-af">
+                <div class="af-code">
+                    <div class="line"><span class="tag">&lt;button</span></div>
+                    <div class="line">&nbsp;&nbsp;onClick={<span class="str">"..."</span>}</div>
+                    <div class="line"><span class="tag">&gt;</span></div>
+                    <div class="line">&nbsp;&nbsp;Click me</div>
+                    <div class="line"><span class="tag">&lt;/button&gt;</span></div>
+                </div>
+                <div class="af-preview">
+                    <div class="af-preview-header">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="af-preview-body">
+                        <div class="t"></div>
+                        <div class="b"></div>
+                        <div class="btn"></div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-af');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // コード書く
+                await wait(900);
+                hero.classList.add('stage-2');  // プレビュー出現
+                await wait(1000);
+                hero.classList.add('stage-3');  // ボタンクリック（インタラクティブ）
+                await wait(2200);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Artifactsってそもそも何？</h2>

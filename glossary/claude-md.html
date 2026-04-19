@@ -46,28 +46,64 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* CLAUDE.md: 大 */
-        .hero-cm .doc {
-            width: 260px; background: #fff; border: 1px solid var(--line);
-            border-radius: 8px; padding: 20px 26px;
-            font-family: var(--font-mono); font-size: 14px; color: var(--ink-warm);
+        /* CLAUDE.md: セッション開始 → AIが自動読み込み → ルールに従う */
+        .hero-cm { display: flex; align-items: center; gap: 20px; }
+        .cm-doc {
+            width: 180px; background: #fff; border: 1.5px solid var(--line);
+            border-radius: 8px; padding: 16px 18px;
+            font-family: var(--font-mono); font-size: 11px; color: var(--ink-warm);
+            position: relative;
+            transition: border-color .3s, box-shadow .3s;
         }
-        .hero-cm .name {
-            color: var(--ink); font-weight: 600; margin-bottom: 14px;
-            border-bottom: 1px solid var(--line); padding-bottom: 8px;
-            font-size: 15px;
+        .hero-cm.stage-2 .cm-doc,
+        .hero-cm.stage-3 .cm-doc {
+            border-color: var(--ink);
+            box-shadow: 0 0 0 3px var(--mark);
         }
-        .hero-cm .line {
-            height: 5px; background: var(--line); border-radius: 2px; margin-bottom: 8px;
+        .cm-doc .name {
+            color: var(--ink); font-weight: 600;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px; margin-bottom: 10px;
+            font-size: 13px;
         }
-        .hero-cm .line:last-child { margin-bottom: 0; width: 65%; }
-        .hero-cm .line.fade {
-            animation: cm-fade 3s ease-in-out infinite;
+        .cm-doc .rule {
+            display: flex; align-items: center; gap: 6px;
+            margin-bottom: 6px;
+            opacity: 0.5; transition: opacity .3s;
         }
-        @keyframes cm-fade {
-            0%, 100% { opacity: 0.3; background: var(--line); }
-            50%      { opacity: 1; background: var(--mark); }
+        .hero-cm.stage-2 .cm-doc .rule,
+        .hero-cm.stage-3 .cm-doc .rule { opacity: 1; }
+        .cm-doc .rule::before {
+            content: ''; width: 4px; height: 4px; border-radius: 50%;
+            background: var(--ink); flex-shrink: 0;
         }
+        .cm-arrow {
+            font-family: var(--font-mono); font-size: 18px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-cm.stage-3 .cm-arrow { opacity: 1; }
+        .cm-ai {
+            width: 64px; height: 64px; border-radius: 16px;
+            background: var(--ink); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+            opacity: 0; transform: scale(0.9);
+            transition: opacity .35s, transform .35s;
+        }
+        .hero-cm.stage-1 .cm-ai,
+        .hero-cm.stage-2 .cm-ai,
+        .hero-cm.stage-3 .cm-ai { opacity: 1; transform: scale(1); }
+        .cm-read {
+            position: absolute; top: -28px; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono); font-size: 10px; color: var(--ink);
+            background: var(--mark); padding: 3px 8px; border-radius: 4px;
+            opacity: 0;
+            transition: opacity .3s;
+            white-space: nowrap;
+        }
+        .hero-cm.stage-2 .cm-read { opacity: 1; }
+        .hero-cm.stage-3 .cm-read { opacity: 0; }
     </style>
 </head>
 <body>
@@ -87,17 +123,38 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-cm">
-                <div class="doc">
+            <div class="hero-cm" id="hero-cm">
+                <div class="cm-doc">
+                    <div class="cm-read">自動読み込み中</div>
                     <div class="name">CLAUDE.md</div>
-                    <div class="line"></div>
-                    <div class="line fade"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+                    <div class="rule">敬語ベース</div>
+                    <div class="rule">一人称「私」</div>
+                    <div class="rule">snake_case</div>
+                    <div class="rule">日付命名</div>
                 </div>
+                <span class="cm-arrow">→</span>
+                <div class="cm-ai">AI</div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cm');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // AI起動
+                await wait(600);
+                hero.classList.add('stage-2');  // CLAUDE.md自動読み込み
+                await wait(1400);
+                hero.classList.add('stage-3');  // AIがルールに従って動く
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">CLAUDE.mdってそもそも何？</h2>

@@ -46,32 +46,65 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* サブエージェント: 分業 大 */
+        /* サブエージェント: メインAI → 並列分業 → 結果集約 */
         .hero-sa { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-        .hero-sa .main {
+        .sa-main {
             background: var(--ink); color: #fff;
             padding: 12px 28px; border-radius: 8px;
-            font-family: var(--font-mono); font-size: 16px; font-weight: 600;
+            font-family: var(--font-mono); font-size: 15px; font-weight: 600;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .35s, transform .35s;
         }
-        .hero-sa .line {
-            width: 2px; height: 20px; background: var(--ink-mute);
+        .hero-sa.stage-1 .sa-main,
+        .hero-sa.stage-2 .sa-main,
+        .hero-sa.stage-3 .sa-main { opacity: 1; transform: translateY(0); }
+        .sa-pipes {
+            position: relative; width: 240px; height: 20px;
+            opacity: 0; transition: opacity .3s;
         }
-        .hero-sa .subs {
+        .hero-sa.stage-2 .sa-pipes,
+        .hero-sa.stage-3 .sa-pipes { opacity: 1; }
+        .sa-pipes::before, .sa-pipes::after {
+            content: ''; position: absolute; top: 0;
+            width: 2px; height: 100%; background: var(--ink-mute);
+        }
+        .sa-pipes::before { left: 10%; }
+        .sa-pipes::after { right: 10%; }
+        .sa-pipes > span {
+            position: absolute; top: 0; left: 50%;
+            width: 2px; height: 100%; background: var(--ink-mute);
+            transform: translateX(-50%);
+        }
+        .sa-subs {
             display: flex; gap: 14px;
         }
-        .hero-sa .sub {
-            background: #fff; border: 2px solid var(--line);
+        .sa-sub {
+            background: #fff; border: 1.5px solid var(--line);
             padding: 10px 16px; border-radius: 6px;
             font-family: var(--font-mono); font-size: 13px; color: var(--ink-warm);
-            animation: sa-blink 2.4s ease-in-out infinite;
+            position: relative;
+            opacity: 0; transform: translateY(4px);
+            transition: opacity .35s, transform .35s, border-color .3s, background .3s;
         }
-        .hero-sa .sub:nth-child(1) { animation-delay: 0s; }
-        .hero-sa .sub:nth-child(2) { animation-delay: 0.4s; }
-        .hero-sa .sub:nth-child(3) { animation-delay: 0.8s; }
-        @keyframes sa-blink {
-            0%, 100% { border-color: var(--line);    background: #fff;           color: var(--ink-warm); }
-            50%      { border-color: var(--ink);     background: var(--mark);    color: var(--ink); }
+        .hero-sa.stage-2 .sa-sub,
+        .hero-sa.stage-3 .sa-sub { opacity: 1; transform: translateY(0); }
+        .sa-sub:nth-child(1) { transition-delay: 0s; }
+        .sa-sub:nth-child(2) { transition-delay: .1s; }
+        .sa-sub:nth-child(3) { transition-delay: .2s; }
+        .hero-sa.stage-3 .sa-sub {
+            border-color: var(--ink); background: var(--mark);
         }
+        .sa-sub::after {
+            content: '✓';
+            position: absolute; top: -8px; right: -8px;
+            background: var(--ink); color: var(--mark);
+            width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px;
+            opacity: 0; transform: scale(0);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-sa.stage-3 .sa-sub::after { opacity: 1; transform: scale(1); }
     </style>
 </head>
 <body>
@@ -91,16 +124,35 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-sa">
-                <div class="main">メインAI</div>
-                <div class="line"></div>
-                <div class="subs">
-                    <div class="sub">リサーチ</div>
-                    <div class="sub">執筆</div>
-                    <div class="sub">校正</div>
+            <div class="hero-sa" id="hero-sa">
+                <div class="sa-main">メインAI</div>
+                <div class="sa-pipes"><span></span></div>
+                <div class="sa-subs">
+                    <div class="sa-sub">リサーチ</div>
+                    <div class="sa-sub">執筆</div>
+                    <div class="sa-sub">校正</div>
                 </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-sa');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // メインAI
+                await wait(700);
+                hero.classList.add('stage-2');  // 3サブに分配
+                await wait(1000);
+                hero.classList.add('stage-3');  // 各サブ完了（✓）
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">サブエージェントってそもそも何？</h2>

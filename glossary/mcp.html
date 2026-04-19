@@ -46,30 +46,56 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* MCP: ハブ大 */
-        .hero-mcp { position: relative; width: 280px; height: 200px; }
-        .hero-mcp .center {
+        /* MCP: 指示 → ハブ → 4サービスへ分配 → 結果集約 */
+        .hero-mcp { position: relative; width: 320px; height: 240px; }
+        .mcp-center {
             position: absolute; top: 50%; left: 50%;
-            width: 60px; height: 60px; border-radius: 10px;
+            width: 72px; height: 72px; border-radius: 18px;
             background: var(--ink); color: #fff;
             font-family: var(--font-mono); font-size: 13px; font-weight: 600;
             display: flex; align-items: center; justify-content: center;
-            transform: translate(-50%, -50%); z-index: 2;
+            transform: translate(-50%, -50%) scale(0.7);
+            opacity: 0;
+            transition: opacity .35s, transform .35s;
+            z-index: 3;
         }
-        .hero-mcp .node {
-            position: absolute; width: 36px; height: 36px; border-radius: 50%;
-            background: #fff; border: 1.5px solid var(--ink-warm);
+        .hero-mcp.stage-1 .mcp-center,
+        .hero-mcp.stage-2 .mcp-center,
+        .hero-mcp.stage-3 .mcp-center {
+            opacity: 1; transform: translate(-50%, -50%) scale(1);
+        }
+        .mcp-node {
+            position: absolute; width: 52px; height: 52px; border-radius: 50%;
+            background: #fff; border: 1.5px solid var(--line);
             font-family: var(--font-mono); font-size: 10px; color: var(--ink-warm);
             display: flex; align-items: center; justify-content: center;
-            animation: mcp-ping 2.4s ease-in-out infinite;
+            opacity: 0; transform: scale(0.7);
+            transition: opacity .35s, transform .35s, border-color .3s, background .3s;
         }
-        .hero-mcp .node:nth-child(2) { top: 10px;    left: 20px;  animation-delay: 0s; }
-        .hero-mcp .node:nth-child(3) { top: 10px;    right: 20px; animation-delay: 0.3s; }
-        .hero-mcp .node:nth-child(4) { bottom: 10px; left: 20px;  animation-delay: 0.6s; }
-        .hero-mcp .node:nth-child(5) { bottom: 10px; right: 20px; animation-delay: 0.9s; }
-        @keyframes mcp-ping {
-            0%, 100% { transform: scale(1);    border-color: var(--line);    background: #fff; }
-            50%      { transform: scale(1.15); border-color: var(--ink);     background: var(--mark); }
+        .hero-mcp.stage-2 .mcp-node,
+        .hero-mcp.stage-3 .mcp-node { opacity: 1; transform: scale(1); }
+        .mcp-node:nth-child(2) { top: 10px;    left: 20px;   transition-delay: 0s; }
+        .mcp-node:nth-child(3) { top: 10px;    right: 20px;  transition-delay: .1s; }
+        .mcp-node:nth-child(4) { bottom: 10px; left: 20px;   transition-delay: .2s; }
+        .mcp-node:nth-child(5) { bottom: 10px; right: 20px;  transition-delay: .3s; }
+        .hero-mcp.stage-3 .mcp-node {
+            border-color: var(--ink); background: var(--mark);
+        }
+        .mcp-beam {
+            position: absolute; top: 50%; left: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--ink);
+            opacity: 0;
+            z-index: 2;
+        }
+        .hero-mcp.stage-3 .mcp-beam { animation: mcp-travel 1.4s ease-in-out infinite; }
+        .mcp-beam:nth-child(6)  { --x: -100px; --y: -80px; }
+        .mcp-beam:nth-child(7)  { --x:  100px; --y: -80px; animation-delay: .3s !important; }
+        .mcp-beam:nth-child(8)  { --x: -100px; --y:  80px; animation-delay: .6s !important; }
+        .mcp-beam:nth-child(9)  { --x:  100px; --y:  80px; animation-delay: .9s !important; }
+        @keyframes mcp-travel {
+            0%   { opacity: 1; transform: translate(0,0); }
+            100% { opacity: 0; transform: translate(var(--x), var(--y)); }
         }
     </style>
 </head>
@@ -90,14 +116,37 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-mcp">
-                <div class="center">MCP</div>
-                <div class="node">Gmail</div>
-                <div class="node">Slack</div>
-                <div class="node">Drive</div>
-                <div class="node">Notion</div>
+            <div class="hero-mcp" id="hero-mcp">
+                <div class="mcp-center">MCP</div>
+                <div class="mcp-node">Gmail</div>
+                <div class="mcp-node">Slack</div>
+                <div class="mcp-node">Drive</div>
+                <div class="mcp-node">Notion</div>
+                <div class="mcp-beam"></div>
+                <div class="mcp-beam"></div>
+                <div class="mcp-beam"></div>
+                <div class="mcp-beam"></div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-mcp');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // MCPハブ
+                await wait(600);
+                hero.classList.add('stage-2');  // 4ノード出現
+                await wait(900);
+                hero.classList.add('stage-3');  // データが四方に走る
+                await wait(2400);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">MCPってそもそも何？</h2>

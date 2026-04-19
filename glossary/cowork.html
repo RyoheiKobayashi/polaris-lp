@@ -46,22 +46,61 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* Cowork: 配布 */
-        .hero-cowork { display: flex; align-items: center; gap: 24px; }
-        .hero-cowork .box {
-            background: #fff; border: 2px solid var(--line); border-radius: 8px;
-            padding: 18px 22px; font-family: var(--font-mono); font-size: 14px;
-            color: var(--ink); min-width: 120px; text-align: center;
+        /* Cowork: スキル作成 → 配布 → 複数ユーザーが受け取る */
+        .hero-cowork { display: flex; align-items: center; gap: 20px; }
+        .cw-creator {
+            background: #fff; border: 2px solid var(--ink); border-radius: 10px;
+            padding: 14px 18px; font-family: var(--font-mono); font-size: 13px;
+            color: var(--ink); text-align: center;
+            opacity: 0; transform: scale(0.9);
+            transition: opacity .35s, transform .35s;
         }
-        .hero-cowork .box.highlight { border-color: var(--ink); }
-        .hero-cowork .arrow {
-            font-family: var(--font-mono); font-size: 28px; color: var(--ink-warm);
-            animation: cw-slide 2s ease-in-out infinite;
+        .hero-cowork.stage-1 .cw-creator,
+        .hero-cowork.stage-2 .cw-creator,
+        .hero-cowork.stage-3 .cw-creator { opacity: 1; transform: scale(1); }
+        .cw-creator .label {
+            font-size: 9px; color: var(--ink-mute); margin-bottom: 4px;
+            letter-spacing: .08em; text-transform: uppercase;
         }
-        @keyframes cw-slide {
-            0%, 100% { transform: translateX(0);   opacity: 0.4; }
-            50%      { transform: translateX(8px); opacity: 1; }
+        .cw-pipe {
+            position: relative;
+            flex: 1; height: 2px; min-width: 50px;
+            background: var(--line);
         }
+        .cw-pipe::before {
+            content: ''; position: absolute; left: -10px; top: -3px;
+            width: 14px; height: 8px; background: var(--ink);
+            border-radius: 2px;
+            opacity: 0;
+            animation: none;
+        }
+        .hero-cowork.stage-2 .cw-pipe::before,
+        .hero-cowork.stage-3 .cw-pipe::before {
+            animation: cw-pkg-travel 1.2s ease-in-out infinite;
+        }
+        @keyframes cw-pkg-travel {
+            0%   { opacity: 0; left: -10px; }
+            15%  { opacity: 1; }
+            85%  { opacity: 1; left: calc(100% - 4px); }
+            100% { opacity: 0; left: calc(100% + 10px); }
+        }
+        .cw-users {
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .cw-user {
+            background: #fff; border: 1.5px solid var(--line);
+            padding: 6px 12px; border-radius: 6px;
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--ink-warm);
+            display: flex; align-items: center; gap: 6px;
+            opacity: 0; transform: translateX(6px);
+            transition: opacity .35s, transform .35s, border-color .3s, background .3s;
+        }
+        .cw-user::before { content: '👤'; }
+        .hero-cowork.stage-3 .cw-user { opacity: 1; transform: translateX(0); border-color: var(--ink); background: var(--mark); }
+        .cw-user:nth-child(1) { transition-delay: 0s; }
+        .cw-user:nth-child(2) { transition-delay: .15s; }
+        .cw-user:nth-child(3) { transition-delay: .3s; }
     </style>
 </head>
 <body>
@@ -81,12 +120,38 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-cowork">
-                <div class="box highlight">skill.md</div>
-                <span class="arrow">→</span>
-                <div class="box">users</div>
+            <div class="hero-cowork" id="hero-cowork">
+                <div class="cw-creator">
+                    <div class="label">CREATOR</div>
+                    skill.md
+                </div>
+                <div class="cw-pipe"></div>
+                <div class="cw-users">
+                    <div class="cw-user">user A</div>
+                    <div class="cw-user">user B</div>
+                    <div class="cw-user">user C</div>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cowork');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 作成者
+                await wait(700);
+                hero.classList.add('stage-2');  // パッケージが流れる
+                await wait(1100);
+                hero.classList.add('stage-3');  // 受信者が受け取る
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Coworkってそもそも何？</h2>

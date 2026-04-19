@@ -46,38 +46,64 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* プラグイン: パズルピース 大 */
-        .hero-plugin { display: flex; align-items: center; }
-        .hero-plugin .base {
-            width: 130px; height: 110px;
+        /* プラグイン: ベース → ピース装着 → 新機能追加 */
+        .hero-plugin { display: flex; align-items: center; gap: 20px; }
+        .pg-stage { display: flex; align-items: center; position: relative; }
+        .pg-base {
+            width: 120px; height: 110px;
             background: var(--bg-warm); border: 3px solid var(--ink-warm);
             border-radius: 8px; position: relative;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-warm);
         }
-        .hero-plugin .base::after {
+        .pg-base::after {
             content: ''; position: absolute; top: 50%; right: -18px;
             width: 20px; height: 40px;
             background: var(--bg-warm); border: 3px solid var(--ink-warm);
             border-left: none; border-radius: 0 8px 8px 0;
             transform: translateY(-50%);
         }
-        .hero-plugin .piece {
-            width: 110px; height: 90px; margin-left: 40px;
+        .pg-piece {
+            width: 100px; height: 90px; margin-left: 38px;
             background: var(--mark); border: 3px solid var(--ink-warm);
             border-radius: 8px; position: relative;
-            animation: pg-snap 3s ease-in-out infinite;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink);
+            transform: translateX(40px);
+            opacity: 0.5;
+            transition: transform .8s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity .4s;
         }
-        .hero-plugin .piece::before {
+        .pg-piece::before {
             content: ''; position: absolute; top: 50%; left: -18px;
             width: 20px; height: 40px;
             background: var(--mark); border: 3px solid var(--ink-warm);
             border-right: none; border-radius: 8px 0 0 8px;
             transform: translateY(-50%);
         }
-        @keyframes pg-snap {
-            0%, 15%   { transform: translateX(28px); opacity: 0.5; }
-            50%, 85%  { transform: translateX(0);    opacity: 1; }
-            100%      { transform: translateX(28px); opacity: 0.5; }
+        .hero-plugin.stage-2 .pg-piece,
+        .hero-plugin.stage-3 .pg-piece {
+            transform: translateX(0); opacity: 1;
         }
+        .pg-features {
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .pg-feat {
+            background: #fff; border: 1.5px solid var(--line);
+            padding: 6px 12px; border-radius: 6px;
+            font-family: var(--font-mono); font-size: 10px;
+            color: var(--ink-warm);
+            opacity: 0; transform: translateX(-6px);
+            transition: opacity .35s, transform .35s, border-color .3s, background .3s;
+        }
+        .pg-feat::before { content: '+ '; color: var(--ink-mute); }
+        .hero-plugin.stage-3 .pg-feat {
+            opacity: 1; transform: translateX(0);
+            border-color: var(--ink); background: var(--mark);
+        }
+        .pg-feat:nth-child(1) { transition-delay: 0s; }
+        .pg-feat:nth-child(2) { transition-delay: .1s; }
+        .pg-feat:nth-child(3) { transition-delay: .2s; }
     </style>
 </head>
 <body>
@@ -97,11 +123,37 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-plugin">
-                <div class="base"></div>
-                <div class="piece"></div>
+            <div class="hero-plugin" id="hero-plugin">
+                <div class="pg-stage">
+                    <div class="pg-base">Claude</div>
+                    <div class="pg-piece">Plugin</div>
+                </div>
+                <div class="pg-features">
+                    <div class="pg-feat">/x-post</div>
+                    <div class="pg-feat">/todoist</div>
+                    <div class="pg-feat">/youtube</div>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-plugin');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // ベースだけ
+                await wait(700);
+                hero.classList.add('stage-2');  // ピースが装着
+                await wait(900);
+                hero.classList.add('stage-3');  // 新機能3つ
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">プラグインってそもそも何？</h2>

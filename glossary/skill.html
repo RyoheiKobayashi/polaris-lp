@@ -46,22 +46,51 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* スキル: 大 */
-        .hero-skill { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-        .hero-skill .slash {
+        /* スキル: /コマンド → スキル展開 → タスク実行 */
+        .hero-skill { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 360px; }
+        .sk-cmd {
+            background: var(--ink-warm); color: var(--mark);
+            padding: 8px 16px; border-radius: 6px;
+            font-family: var(--font-mono); font-size: 15px;
+            opacity: 0; transform: translateY(-4px);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-skill.stage-1 .sk-cmd,
+        .hero-skill.stage-2 .sk-cmd,
+        .hero-skill.stage-3 .sk-cmd { opacity: 1; transform: translateY(0); }
+        .sk-arrow {
             font-family: var(--font-mono); font-size: 18px; color: var(--ink-mute);
-            letter-spacing: 0.06em;
+            opacity: 0; transition: opacity .3s;
         }
-        .hero-skill .pkg {
-            background: #fff; border: 2px solid var(--line); border-radius: 10px;
-            padding: 16px 28px; font-family: var(--font-mono); font-size: 18px;
-            color: var(--ink); min-width: 220px; text-align: center;
-            animation: sk-pulse 2.8s ease-in-out infinite;
+        .hero-skill.stage-2 .sk-arrow,
+        .hero-skill.stage-3 .sk-arrow { opacity: 1; }
+        .sk-pkg {
+            background: #fff; border: 2px solid var(--ink); border-radius: 10px;
+            padding: 12px 20px; font-family: var(--font-mono); font-size: 13px;
+            color: var(--ink); min-width: 240px; text-align: center;
+            opacity: 0; transform: scale(0.9);
+            transition: opacity .35s, transform .35s;
         }
-        @keyframes sk-pulse {
-            0%, 100% { transform: scale(1); border-color: var(--line); }
-            50%      { transform: scale(1.03); border-color: var(--ink); }
+        .hero-skill.stage-2 .sk-pkg,
+        .hero-skill.stage-3 .sk-pkg { opacity: 1; transform: scale(1); }
+        .sk-steps {
+            display: flex; gap: 8px;
         }
+        .sk-step {
+            background: #fff; border: 1.5px solid var(--line);
+            padding: 6px 12px; border-radius: 6px;
+            font-family: var(--font-mono); font-size: 11px;
+            color: var(--ink-warm);
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .35s, transform .35s, border-color .3s, background .3s;
+        }
+        .hero-skill.stage-3 .sk-step { opacity: 1; transform: translateY(0); }
+        .hero-skill.stage-3 .sk-step {
+            border-color: var(--ink); background: var(--mark);
+        }
+        .sk-step:nth-child(1) { transition-delay: 0s; }
+        .sk-step:nth-child(2) { transition-delay: .1s; }
+        .sk-step:nth-child(3) { transition-delay: .2s; }
     </style>
 </head>
 <body>
@@ -81,11 +110,36 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-skill">
-                <div class="slash">/x-post</div>
-                <div class="pkg">skill.md</div>
+            <div class="hero-skill" id="hero-skill">
+                <div class="sk-cmd">/x-post</div>
+                <div class="sk-arrow">↓</div>
+                <div class="sk-pkg">x-post-skill.md</div>
+                <div class="sk-steps">
+                    <div class="sk-step">✓ リサーチ</div>
+                    <div class="sk-step">✓ 執筆</div>
+                    <div class="sk-step">✓ 校正</div>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-skill');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // /command
+                await wait(700);
+                hero.classList.add('stage-2');  // skill展開
+                await wait(700);
+                hero.classList.add('stage-3');  // 3ステップ実行
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">スキルってそもそも何？</h2>
