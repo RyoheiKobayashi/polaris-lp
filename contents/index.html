@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="コンテンツ販売のWikipedia。UTAGE、Chatwork、Zoom、Notion、n8nなど、講座運営で使うツールを動きで3秒で理解。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        /* ========= グリッド ========= */
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* ========= カード ========= */
+        .term-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .term-card:hover {
+            border-color: var(--ink-mute);
+            transform: translateY(-2px);
+        }
+        .term-card .card-body {
+            padding: 22px 26px 26px;
+        }
+        .term-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-warm);
+            margin: 0 0 10px;
+            line-height: 1.3;
+        }
+        .term-card .desc {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--ink-soft);
+            margin: 0;
+        }
+
+        /* ========= サムネ共通 ========= */
+        .thumb {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .thumb-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+        }
+
+        /* ========= 01. UTAGE: ファネル ========= */
+        .thumb-utage .ut-stage {
+            position: relative;
+            width: 160px;
+            height: 100px;
+        }
+        .thumb-utage .ut-funnel {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 70px solid transparent;
+            border-top: 80px solid var(--ink);
+        }
+        .thumb-utage .ut-bar {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 6px;
+            background: var(--mark);
+            border-radius: 2px;
+            animation: ut-flow 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        .thumb-utage .ut-bar:nth-child(2) { top: 8px;  width: 110px; animation-delay: 0s; }
+        .thumb-utage .ut-bar:nth-child(3) { top: 28px; width: 80px;  animation-delay: .3s; }
+        .thumb-utage .ut-bar:nth-child(4) { top: 48px; width: 50px;  animation-delay: .6s; }
+        .thumb-utage .ut-yen {
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+            animation: ut-fall 3s ease-in-out infinite;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        @keyframes ut-flow {
+            0%, 10%  { opacity: 0; transform: translateX(-50%) scaleX(0.4); }
+            30%, 75% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+            100%     { opacity: 0; transform: translateX(-50%) scaleX(1); }
+        }
+        @keyframes ut-fall {
+            0%, 40%  { opacity: 0; transform: translate(-50%, -12px); }
+            60%, 85% { opacity: 1; transform: translate(-50%, 0); }
+            100%     { opacity: 0; transform: translate(-50%, 6px); }
+        }
+
+        /* ========= 02. Chatwork: チャット点滅 ========= */
+        .thumb-chatwork .cw-stage {
+            position: relative;
+            width: 180px;
+            height: 100px;
+        }
+        .thumb-chatwork .cw-bubble {
+            position: absolute;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            max-width: 90px;
+            line-height: 1.3;
+            opacity: 0;
+            animation: cw-chat 4s ease-in-out infinite;
+        }
+        .thumb-chatwork .cw-bubble.a {
+            top: 0; left: 0;
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            border-top-left-radius: 2px;
+            animation-delay: 0s;
+        }
+        .thumb-chatwork .cw-bubble.b {
+            top: 32px; right: 0;
+            background: var(--ink);
+            color: #fff;
+            border-top-right-radius: 2px;
+            animation-delay: 1s;
+        }
+        .thumb-chatwork .cw-bubble.c {
+            bottom: 0; left: 10px;
+            background: #fff;
+            border: 1px solid var(--line);
+            color: var(--ink);
+            border-top-left-radius: 2px;
+            animation-delay: 2s;
+        }
+        @keyframes cw-chat {
+            0%, 15%  { opacity: 0; transform: translateY(4px); }
+            25%, 60% { opacity: 1; transform: translateY(0); }
+            80%, 100% { opacity: 0.3; transform: translateY(0); }
+        }
+
+        /* ========= 03. Zoom: 4分割タイル ========= */
+        .thumb-zoom .zm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            width: 120px;
+            height: 90px;
+        }
+        .thumb-zoom .zm-tile {
+            background: var(--bg-warm);
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            position: relative;
+            animation: zm-light 3s ease-in-out infinite;
+        }
+        .thumb-zoom .zm-tile::before {
+            content: '';
+            position: absolute;
+            top: 40%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px; height: 16px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+        .thumb-zoom .zm-tile::after {
+            content: '';
+            position: absolute;
+            bottom: 4px; left: 50%;
+            transform: translateX(-50%);
+            width: 22px; height: 10px;
+            background: var(--ink);
+            border-radius: 11px 11px 0 0;
+        }
+        .thumb-zoom .zm-tile:nth-child(1) { animation-delay: 0s; }
+        .thumb-zoom .zm-tile:nth-child(2) { animation-delay: .3s; }
+        .thumb-zoom .zm-tile:nth-child(3) { animation-delay: .6s; }
+        .thumb-zoom .zm-tile:nth-child(4) { animation-delay: .9s; }
+        @keyframes zm-light {
+            0%, 40%, 100% { background: var(--bg-warm); border-color: var(--ink-mute); }
+            60%, 80%      { background: var(--mark); border-color: var(--ink); }
+        }
+
+        /* ========= 04. Google Drive: クラウド吸い込み ========= */
+        .thumb-drive .dr-stage {
+            position: relative;
+            width: 160px;
+            height: 100px;
+        }
+        .thumb-drive .dr-cloud {
+            position: absolute;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 80px; height: 44px;
+            background: var(--ink);
+            border-radius: 22px;
+        }
+        .thumb-drive .dr-cloud::before {
+            content: '';
+            position: absolute;
+            top: -14px; left: 14px;
+            width: 26px; height: 26px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+        .thumb-drive .dr-cloud::after {
+            content: '';
+            position: absolute;
+            top: -18px; right: 14px;
+            width: 34px; height: 34px;
+            background: var(--ink);
+            border-radius: 50%;
+        }
+        .thumb-drive .dr-file {
+            position: absolute;
+            bottom: 0;
+            width: 14px; height: 18px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 2px;
+            animation: dr-up 3s ease-in-out infinite;
+            opacity: 0;
+        }
+        .thumb-drive .dr-file:nth-child(2) { left: 30%; animation-delay: 0s; }
+        .thumb-drive .dr-file:nth-child(3) { left: 50%; transform: translateX(-50%); animation-delay: .4s; }
+        .thumb-drive .dr-file:nth-child(4) { right: 30%; animation-delay: .8s; }
+        @keyframes dr-up {
+            0%, 10%  { bottom: -10px; opacity: 0; }
+            30%, 60% { bottom: 10px; opacity: 1; }
+            85%      { bottom: 40px; opacity: 0.5; transform: scale(0.7); }
+            100%     { bottom: 50px; opacity: 0; transform: scale(0.3); }
+        }
+
+        /* ========= 05. Sheets: グリッド埋め ========= */
+        .thumb-sheets .sh-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 2px;
+            width: 140px;
+            height: 90px;
+            border: 1.5px solid var(--ink);
+            padding: 2px;
+            background: var(--ink);
+        }
+        .thumb-sheets .sh-cell {
+            background: #fff;
+            animation: sh-fill 4s ease-in-out infinite;
+        }
+        .thumb-sheets .sh-cell:nth-child(1)  { animation-delay: 0s; }
+        .thumb-sheets .sh-cell:nth-child(2)  { animation-delay: .1s; }
+        .thumb-sheets .sh-cell:nth-child(3)  { animation-delay: .2s; }
+        .thumb-sheets .sh-cell:nth-child(4)  { animation-delay: .3s; }
+        .thumb-sheets .sh-cell:nth-child(5)  { animation-delay: .4s; }
+        .thumb-sheets .sh-cell:nth-child(6)  { animation-delay: .5s; }
+        .thumb-sheets .sh-cell:nth-child(7)  { animation-delay: .6s; }
+        .thumb-sheets .sh-cell:nth-child(8)  { animation-delay: .7s; }
+        .thumb-sheets .sh-cell:nth-child(9)  { animation-delay: .8s; }
+        .thumb-sheets .sh-cell:nth-child(10) { animation-delay: .9s; }
+        @keyframes sh-fill {
+            0%, 20%   { background: #fff; }
+            40%, 85%  { background: var(--mark); }
+            100%      { background: #fff; }
+        }
+
+        /* ========= 06. Notion: 入れ子ブロック ========= */
+        .thumb-notion .nt-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 150px;
+        }
+        .thumb-notion .nt-block {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: translateX(-6px);
+            animation: nt-in 3.5s ease-in-out infinite;
+        }
+        .thumb-notion .nt-block .mark-char {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-mute);
+        }
+        .thumb-notion .nt-block .bar {
+            height: 8px;
+            border-radius: 2px;
+            background: var(--ink);
+        }
+        .thumb-notion .nt-block.lv1 { padding-left: 0;   animation-delay: 0s; }
+        .thumb-notion .nt-block.lv1 .bar { width: 80px; }
+        .thumb-notion .nt-block.lv2 { padding-left: 14px; animation-delay: .3s; }
+        .thumb-notion .nt-block.lv2 .bar { width: 60px; background: var(--ink-warm); height: 6px; }
+        .thumb-notion .nt-block.lv3 { padding-left: 28px; animation-delay: .6s; }
+        .thumb-notion .nt-block.lv3 .bar { width: 45px; background: var(--ink-soft); height: 5px; }
+        @keyframes nt-in {
+            0%, 8%  { opacity: 0; transform: translateX(-6px); }
+            20%, 85% { opacity: 1; transform: translateX(0); }
+            100%    { opacity: 0; transform: translateX(0); }
+        }
+
+        /* ========= 07. Todoist: チェックリスト ========= */
+        .thumb-todoist .td-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 160px;
+        }
+        .thumb-todoist .td-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .thumb-todoist .td-check {
+            width: 16px; height: 16px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            animation: td-check 4s ease-in-out infinite;
+        }
+        .thumb-todoist .td-check::after {
+            content: '✓';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #fff;
+            opacity: 0;
+            animation: td-tick 4s ease-in-out infinite;
+        }
+        .thumb-todoist .td-row:nth-child(1) .td-check { animation-delay: 0s; }
+        .thumb-todoist .td-row:nth-child(2) .td-check { animation-delay: .5s; }
+        .thumb-todoist .td-row:nth-child(3) .td-check { animation-delay: 1s; }
+        .thumb-todoist .td-row:nth-child(1) .td-check::after { animation-delay: 0s; }
+        .thumb-todoist .td-row:nth-child(2) .td-check::after { animation-delay: .5s; }
+        .thumb-todoist .td-row:nth-child(3) .td-check::after { animation-delay: 1s; }
+        .thumb-todoist .td-bar {
+            height: 6px;
+            background: var(--ink-mute);
+            border-radius: 2px;
+            opacity: .5;
+            animation: td-strike 4s ease-in-out infinite;
+        }
+        .thumb-todoist .td-bar.a { width: 90px; }
+        .thumb-todoist .td-bar.b { width: 110px; }
+        .thumb-todoist .td-bar.c { width: 80px; }
+        .thumb-todoist .td-row:nth-child(1) .td-bar { animation-delay: 0s; }
+        .thumb-todoist .td-row:nth-child(2) .td-bar { animation-delay: .5s; }
+        .thumb-todoist .td-row:nth-child(3) .td-bar { animation-delay: 1s; }
+        @keyframes td-check {
+            0%, 30%  { background: #fff; border-color: var(--ink); }
+            50%, 85% { background: var(--ink); border-color: var(--ink); }
+            100%     { background: #fff; border-color: var(--ink); }
+        }
+        @keyframes td-tick {
+            0%, 40%  { opacity: 0; }
+            50%, 85% { opacity: 1; }
+            100%     { opacity: 0; }
+        }
+        @keyframes td-strike {
+            0%, 40%  { opacity: .5; }
+            50%, 85% { opacity: .2; }
+            100%     { opacity: .5; }
+        }
+
+        /* ========= 08. 公式LINE: 放射状配信 ========= */
+        .thumb-line .ln-stage {
+            position: relative;
+            width: 160px;
+            height: 100px;
+        }
+        .thumb-line .ln-source {
+            position: absolute;
+            top: 50%; left: 24px;
+            transform: translateY(-50%);
+            width: 40px; height: 40px;
+            background: #06c755;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            animation: ln-pulse 2.4s ease-in-out infinite;
+        }
+        .thumb-line .ln-dot {
+            position: absolute;
+            right: 8px;
+            width: 10px; height: 10px;
+            background: #06c755;
+            border-radius: 50%;
+            opacity: 0;
+            animation: ln-send 2.4s ease-in-out infinite;
+        }
+        .thumb-line .ln-dot:nth-child(2) { top: 10px;  animation-delay: 0s; }
+        .thumb-line .ln-dot:nth-child(3) { top: 45px;  animation-delay: .3s; }
+        .thumb-line .ln-dot:nth-child(4) { bottom: 10px; animation-delay: .6s; }
+        @keyframes ln-pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50%      { transform: translateY(-50%) scale(1.08); box-shadow: 0 0 0 4px rgba(6, 199, 85, 0.2); }
+        }
+        @keyframes ln-send {
+            0%, 20%  { opacity: 0; transform: translateX(-60px); }
+            50%, 70% { opacity: 1; transform: translateX(-10px); }
+            95%      { opacity: 0; transform: translateX(0); }
+        }
+
+        /* ========= 09. Discord: コミュニティの輪 ========= */
+        .thumb-discord .dc-stage {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .thumb-discord .dc-core {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px; height: 44px;
+            background: var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            z-index: 2;
+        }
+        .thumb-discord .dc-sat {
+            position: absolute;
+            width: 16px; height: 16px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            animation: dc-pulse 2.8s ease-in-out infinite;
+        }
+        .thumb-discord .dc-sat:nth-child(2) { top: 0;     left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+        .thumb-discord .dc-sat:nth-child(3) { top: 50%;   right: 0;  transform: translateY(-50%); animation-delay: .35s; }
+        .thumb-discord .dc-sat:nth-child(4) { bottom: 0;  left: 50%; transform: translateX(-50%); animation-delay: .7s; }
+        .thumb-discord .dc-sat:nth-child(5) { top: 50%;   left: 0;   transform: translateY(-50%); animation-delay: 1.05s; }
+        @keyframes dc-pulse {
+            0%, 100% { background: #fff; }
+            50%      { background: var(--mark); box-shadow: 0 0 0 3px rgba(253, 236, 200, 0.5); }
+        }
+
+        /* ========= 10. n8n: ワークフロー ========= */
+        .thumb-n8n .n8-stage {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .thumb-n8n .n8-node {
+            width: 34px; height: 34px;
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            animation: n8-node 3s ease-in-out infinite;
+        }
+        .thumb-n8n .n8-node:nth-child(1) { animation-delay: 0s; }
+        .thumb-n8n .n8-node:nth-child(3) { animation-delay: .4s; }
+        .thumb-n8n .n8-node:nth-child(5) { animation-delay: .8s; }
+        .thumb-n8n .n8-line {
+            width: 18px; height: 2px;
+            background: var(--ink-mute);
+            position: relative;
+            opacity: 0;
+            animation: n8-flow 3s ease-in-out infinite;
+        }
+        .thumb-n8n .n8-line::after {
+            content: '';
+            position: absolute;
+            right: -1px; top: -3px;
+            width: 0; height: 0;
+            border-left: 5px solid var(--ink-mute);
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        .thumb-n8n .n8-line:nth-of-type(1) { animation-delay: .15s; }
+        .thumb-n8n .n8-line:nth-of-type(2) { animation-delay: .55s; }
+        @keyframes n8-node {
+            0%, 50%, 100% { background: #fff; border-color: var(--ink); }
+            70%, 85%      { background: var(--mark); border-color: var(--ink); }
+        }
+        @keyframes n8-flow {
+            0%, 15%  { opacity: 0; transform: translateX(-4px); }
+            35%, 85% { opacity: 1; transform: translateX(0); }
+            100%     { opacity: 0; transform: translateX(4px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 上部ナビ -->
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-6xl">
+            <span class="cat-label">Contents · Visual Glossary</span>
+            <a href="disclaimer.html" class="nav-link text-xs">免責事項</a>
+        </div>
+    </div>
+
+    <!-- ヒーロー -->
+    <header class="container mx-auto px-6 pt-16 md:pt-24 pb-12 max-w-3xl">
+        <h1 class="text-4xl md:text-6xl mb-6" style="letter-spacing: -0.01em;">
+            コンテンツ販売用語、<span class="mark">動きで見ると</span><br>
+            一発でわかる。
+        </h1>
+        <p class="text-lg md:text-xl" style="color: var(--ink-soft);">
+            文字を読むより、動きで見る。<br>
+            コンテンツ販売界隈の<span class="mark">Wikipedia</span>。
+        </p>
+    </header>
+
+    <div class="container mx-auto px-6 max-w-3xl">
+        <div class="hairline"></div>
+    </div>
+
+    <!-- 用語一覧 -->
+    <main class="container mx-auto px-6 pt-12 pb-24 max-w-6xl">
+
+        <section class="cat-section">
+            <header class="cat-head mb-8">
+                <div class="cat-tag">Platform · SaaS</div>
+                <h2 class="cat-heading">プラットフォーム・SaaS</h2>
+                <p class="cat-lead">講座運営やビジネスで使うプラットフォーム・サービス群。AI活用と組み合わせることで業務効率が飛躍的に向上します。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 01. UTAGE -->
+                <a href="utage.html" class="term-card">
+                    <div class="thumb thumb-utage">
+                        <div class="thumb-inner">
+                            <div class="ut-stage">
+                                <div class="ut-funnel"></div>
+                                <div class="ut-bar"></div>
+                                <div class="ut-bar"></div>
+                                <div class="ut-bar"></div>
+                                <div class="ut-yen">¥</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>UTAGE</h3>
+                        <p class="desc">ファネル・LP・配信・決済を<span class="mark">一元管理</span>するマーケ基盤。</p>
+                    </div>
+                </a>
+
+                <!-- 02. Chatwork -->
+                <a href="chatwork.html" class="term-card">
+                    <div class="thumb thumb-chatwork">
+                        <div class="thumb-inner">
+                            <div class="cw-stage">
+                                <div class="cw-bubble a">質問です</div>
+                                <div class="cw-bubble b">返信します</div>
+                                <div class="cw-bubble c">了解です</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Chatwork</h3>
+                        <p class="desc">ビジネス向けチャット。<span class="mark">受講生サポート</span>・チーム連絡で使用。</p>
+                    </div>
+                </a>
+
+                <!-- 03. Zoom -->
+                <a href="zoom.html" class="term-card">
+                    <div class="thumb thumb-zoom">
+                        <div class="thumb-inner">
+                            <div class="zm-grid">
+                                <div class="zm-tile"></div>
+                                <div class="zm-tile"></div>
+                                <div class="zm-tile"></div>
+                                <div class="zm-tile"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Zoom</h3>
+                        <p class="desc">会議・ウェビナー。録画→<span class="mark">文字起こし</span>でナレッジ化。</p>
+                    </div>
+                </a>
+
+                <!-- 04. Google Drive -->
+                <a href="google-drive.html" class="term-card">
+                    <div class="thumb thumb-drive">
+                        <div class="thumb-inner">
+                            <div class="dr-stage">
+                                <div class="dr-cloud"></div>
+                                <div class="dr-file"></div>
+                                <div class="dr-file"></div>
+                                <div class="dr-file"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Google Drive</h3>
+                        <p class="desc">クラウドストレージ。AI生成物を<span class="mark">チームで即共有</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 05. スプレッドシート -->
+                <a href="sheets.html" class="term-card">
+                    <div class="thumb thumb-sheets">
+                        <div class="thumb-inner">
+                            <div class="sh-grid">
+                                <div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div>
+                                <div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div>
+                                <div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div>
+                                <div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div><div class="sh-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>スプレッドシート</h3>
+                        <p class="desc">オンライン表計算。<span class="mark">GeminiやGAS</span>と連携しやすい。</p>
+                    </div>
+                </a>
+
+                <!-- 06. Notion -->
+                <a href="notion.html" class="term-card">
+                    <div class="thumb thumb-notion">
+                        <div class="thumb-inner">
+                            <div class="nt-stage">
+                                <div class="nt-block lv1"><span class="mark-char">#</span><div class="bar"></div></div>
+                                <div class="nt-block lv2"><span class="mark-char">##</span><div class="bar"></div></div>
+                                <div class="nt-block lv3"><span class="mark-char">###</span><div class="bar"></div></div>
+                                <div class="nt-block lv2"><span class="mark-char">##</span><div class="bar"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Notion</h3>
+                        <p class="desc">Docs＋DB＋タスクの統合。<span class="mark">MCP経由でClaude Code連携</span>も可。</p>
+                    </div>
+                </a>
+
+                <!-- 07. Todoist -->
+                <a href="todoist.html" class="term-card">
+                    <div class="thumb thumb-todoist">
+                        <div class="thumb-inner">
+                            <div class="td-stage">
+                                <div class="td-row"><div class="td-check"></div><div class="td-bar a"></div></div>
+                                <div class="td-row"><div class="td-check"></div><div class="td-bar b"></div></div>
+                                <div class="td-row"><div class="td-check"></div><div class="td-bar c"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Todoist</h3>
+                        <p class="desc">シンプル高機能なタスク管理。<span class="mark">Claude Codeから操作</span>もできる。</p>
+                    </div>
+                </a>
+
+                <!-- 08. 公式LINE -->
+                <a href="line-official.html" class="term-card">
+                    <div class="thumb thumb-line">
+                        <div class="thumb-inner">
+                            <div class="ln-stage">
+                                <div class="ln-source">LINE</div>
+                                <div class="ln-dot"></div>
+                                <div class="ln-dot"></div>
+                                <div class="ln-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>公式LINE</h3>
+                        <p class="desc">ビジネス向けLINE。<span class="mark">一斉・ステップ配信</span>でリマインド自動化。</p>
+                    </div>
+                </a>
+
+                <!-- 09. Discord -->
+                <a href="discord.html" class="term-card">
+                    <div class="thumb thumb-discord">
+                        <div class="thumb-inner">
+                            <div class="dc-stage">
+                                <div class="dc-core">COMMU</div>
+                                <div class="dc-sat"></div>
+                                <div class="dc-sat"></div>
+                                <div class="dc-sat"></div>
+                                <div class="dc-sat"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Discord</h3>
+                        <p class="desc">コミュニティ運営向けチャット。<span class="mark">テキスト・音声・画面共有</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 10. n8n -->
+                <a href="n8n.html" class="term-card">
+                    <div class="thumb thumb-n8n">
+                        <div class="thumb-inner">
+                            <div class="n8-stage">
+                                <div class="n8-node">A</div>
+                                <span class="n8-line"></span>
+                                <div class="n8-node">B</div>
+                                <span class="n8-line"></span>
+                                <div class="n8-node">C</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>n8n</h3>
+                        <p class="desc">ノーコードでワークフロー自動化。<span class="mark">API・Webhook連携</span>。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-6xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

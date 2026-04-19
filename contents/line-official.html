@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公式LINEとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="LINE公式アカウント（公式LINE）を、アニメーションで3秒で理解。ビジネス用LINE。一斉配信・ステップ配信でリマインド自動化。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ln-stage { max-width: 520px; margin: 0 auto; }
+        .ln-center {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .ln-source {
+            width: 80px; height: 80px;
+            background: #06c755;
+            color: #fff;
+            border-radius: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .ln-source .label { font-size: 9px; letter-spacing: 0.1em; margin-top: 4px; opacity: 0.8; }
+        .ln-recipients {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .ln-recipient {
+            background: #fff;
+            border: 1.5px solid var(--line);
+            border-radius: 10px;
+            padding: 10px 8px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-soft);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity .4s ease, transform .4s ease, border-color .4s ease, color .4s ease;
+        }
+        .ln-recipient.in {
+            opacity: 1;
+            transform: translateY(0);
+            border-color: #06c755;
+            color: var(--ink);
+        }
+        .ln-recipient .icon { font-size: 18px; margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">08 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">LINE Official Account</div>
+            <h1 class="detail-title">公式LINE</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ビジネス用LINEアカウント</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ln-stage">
+                <div class="ln-center">
+                    <div class="ln-source">配信<div class="label">BROADCAST</div></div>
+                </div>
+                <div class="ln-recipients">
+                    <div class="ln-recipient" id="r1"><div class="icon">●</div>田中</div>
+                    <div class="ln-recipient" id="r2"><div class="icon">●</div>佐藤</div>
+                    <div class="ln-recipient" id="r3"><div class="icon">●</div>鈴木</div>
+                    <div class="ln-recipient" id="r4"><div class="icon">●</div>高橋</div>
+                    <div class="ln-recipient" id="r5"><div class="icon">●</div>渡辺</div>
+                    <div class="ln-recipient" id="r6"><div class="icon">●</div>伊藤</div>
+                    <div class="ln-recipient" id="r7"><div class="icon">●</div>山本</div>
+                    <div class="ln-recipient" id="r8"><div class="icon">●</div>中村</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」で一斉配信の様子を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">1通書けば、登録者全員に同時に届く。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「見込み客の受け皿」</h2>
+            <p>
+                LINE公式アカウント（公式LINE）は、ビジネス用のLINEアカウントで、
+                <span class="mark">見込み客への一斉配信やステップ配信</span>が可能。
+                コンテンツ販売では「LPで友だち追加→特典配布→教育配信→販売」のファネルで中核を担います。
+                UTAGEと連携して<span class="mark">セミナー告知やリマインド配信を自動化</span>することで、
+                受講生の参加率を大幅に上げることができます。
+                開封率がメールより遥かに高く、日本では必須の見込み客ストック手段です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 郵便局の一斉配達</h3>
+                    <p>
+                        1通書けば、全国の登録住所に郵便を一斉に届けられる。
+                        公式LINEも<span class="mark">1メッセージで全友だちに同時配信</span>できるデジタル郵便です。
+                        しかも開封率はメールの10倍以上。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② テレビ局の放送波</h3>
+                    <p>
+                        テレビは一方向的に全国の視聴者に届く。
+                        公式LINEは<span class="mark">一方通行の配信（放送）もできるし、個別会話（通信）もできる</span>
+                        ハイブリッド。コンテンツ販売と相性抜群です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    公式LINE＝<span class="mark">見込み客へのデジタル郵便局</span>。
+                    UTAGEと連携してステップ配信・セミナーリマインドを自動化するのが定石。
+                    <span class="mark">開封率の高さ</span>が武器で、日本のコンテンツ販売では必須級のツールです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="todoist.html" class="nav-link">← 前の用語：Todoist</a>
+            <a href="discord.html" class="nav-link">次の用語：Discord →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const recipients = ['r1','r2','r3','r4','r5','r6','r7','r8'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            recipients.forEach(r => r.classList.remove('in'));
+            status.textContent = '1通の配信を全員に送信…';
+            for (let i = 0; i < recipients.length; i++) {
+                await wait(150);
+                recipients[i].classList.add('in');
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>登録者全員に一斉到達</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

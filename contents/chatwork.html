@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatworkとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Chatwork（チャットワーク）を、アニメーションで3秒で理解。ビジネス向けチャットツール。受講生サポート・チーム連絡の要。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .cw-stage { max-width: 520px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .cw-msg {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .cw-msg.in { opacity: 1; transform: translateY(0); }
+        .cw-avatar {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .cw-msg.me .cw-avatar { background: var(--ink-warm); }
+        .cw-bubble {
+            flex: 1;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.55;
+        }
+        .cw-meta { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">02 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Chatwork</div>
+            <h1 class="detail-title">Chatwork</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ビジネス向けチャットツール</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="cw-stage">
+                <div class="cw-msg" id="c1">
+                    <div class="cw-avatar">S</div>
+                    <div class="cw-bubble"><div class="cw-meta">受講生</div>動画の第3章が再生できません</div>
+                </div>
+                <div class="cw-msg me" id="c2">
+                    <div class="cw-avatar">Y</div>
+                    <div class="cw-bubble"><div class="cw-meta">講師</div>確認します。こちらから返信します</div>
+                </div>
+                <div class="cw-msg" id="c3">
+                    <div class="cw-avatar">T</div>
+                    <div class="cw-bubble"><div class="cw-meta">チーム</div>動画URLの設定を修正しました</div>
+                </div>
+                <div class="cw-msg me" id="c4">
+                    <div class="cw-avatar">Y</div>
+                    <div class="cw-bubble"><div class="cw-meta">講師</div>修正済みです。確認ください</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でサポートのやりとりを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">質問 → 受付 → 対応 → 回答、全てがチャット内で完結。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">講座運営の「共通言語」</h2>
+            <p>
+                Chatworkは、<span class="mark">ビジネス向けのチャットツール</span>。
+                講座内の受講生サポート・質問対応・チーム連絡に使用されます。
+                受講生ごとに個別チャット、運営スタッフには別のグループチャットと、<span class="mark">タスクを整理しながら会話できる</span>のが特徴。
+                AIと連携して配信文の自動生成、質問の自動仕分け、よくある質問への自動応答まで構築できます。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① オフィスの会議室</h3>
+                    <p>
+                        案件ごとに会議室を分けることで、話が混ざらず進行できる。
+                        Chatworkのチャットルームは、<span class="mark">オンライン版の会議室</span>。
+                        受講生ごと・プロジェクトごとに分けて使えます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② ホテルのフロント</h3>
+                    <p>
+                        宿泊客の質問はフロントが一次受付、専門担当に引き継ぐ。
+                        Chatworkも<span class="mark">一次受付から専門対応への引き継ぎ</span>をチャット上で完結できる、
+                        講座運営のフロントデスクです。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Chatwork＝<span class="mark">講座運営の業務チャット基盤</span>。
+                    LINEはお客様窓口、Chatworkは社内/チーム用、と<span class="mark">役割を分けて使う</span>のが基本。
+                    タスク機能を使えば会話と業務管理を1つに統合できます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="utage.html" class="nav-link">← 前の用語：UTAGE</a>
+            <a href="zoom.html" class="nav-link">次の用語：Zoom →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const msgs = ['c1','c2','c3','c4'].map(id => document.getElementById(id));
+        const labels = ['受講生から質問が届く', '講師が受付して返信', 'チーム内で対応依頼', '✓ 解決して受講生に連絡'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            msgs.forEach(m => m.classList.remove('in'));
+            for (let i = 0; i < msgs.length; i++) {
+                await wait(600);
+                msgs[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>1つのチャットで完結</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

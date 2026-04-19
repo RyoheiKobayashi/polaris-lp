@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTAGEとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="UTAGE（ウタゲ）を、アニメーションで3秒で理解。ファネル構築・LP・決済・配信を一元管理するマーケティングプラットフォーム。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .ut-stage { max-width: 500px; margin: 0 auto; }
+        .ut-funnel-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .ut-stage-bar {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 13px;
+            color: var(--ink);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .ut-stage-bar.in { opacity: 1; transform: translateY(0); }
+        .ut-stage-bar.w1 { width: 90%; }
+        .ut-stage-bar.w2 { width: 75%; }
+        .ut-stage-bar.w3 { width: 55%; }
+        .ut-stage-bar.w4 { width: 35%; background: var(--ink); color: #fff; }
+        .ut-arrow { color: var(--ink-mute); font-size: 14px; }
+        .ut-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.08em; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">01 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Utage</div>
+            <h1 class="detail-title">UTAGE</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">ファネル・LP・配信・決済を一元管理</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="ut-stage">
+                <div class="ut-funnel-row">
+                    <div class="ut-stage-bar w1" id="u1"><div class="ut-label">① リード獲得</div>LP・無料プレゼント</div>
+                    <div class="ut-arrow">↓</div>
+                    <div class="ut-stage-bar w2" id="u2"><div class="ut-label">② 教育</div>ステップ配信・ウェビナー</div>
+                    <div class="ut-arrow">↓</div>
+                    <div class="ut-stage-bar w3" id="u3"><div class="ut-label">③ オファー</div>セミナー・個別相談</div>
+                    <div class="ut-arrow">↓</div>
+                    <div class="ut-stage-bar w4" id="u4"><div class="ut-label">④ 決済</div>商品購入</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でファネルの流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">見込み客 → 顧客まで、1つのツール内で完結する。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">コンテンツ販売の「全部入り」プラットフォーム</h2>
+            <p>
+                UTAGEは、<span class="mark">ファネル構築・LP作成・メルマガ/LINE配信・決済</span>を一元管理できる
+                マーケティングプラットフォーム。
+                従来はLP作成（ペライチ）、配信（マイスピー）、決済（Stripe）などツールをバラバラに組み合わせる必要がありましたが、
+                UTAGEなら<span class="mark">1つのアカウントで見込み客獲得から商品販売まで完結</span>します。
+                コンテンツビジネスの中核ツールとして、講座のセールスページ、ステップ配信、決済すべての運用基盤になります。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 百貨店のワンストップショップ</h3>
+                    <p>
+                        食品フロア、衣料フロア、家電フロアが<span class="mark">1つの建物に集約</span>されているから、顧客は移動せずに買い物が完結する。
+                        UTAGEは、コンテンツ販売に必要な機能を<span class="mark">1つの屋根の下</span>に揃えた百貨店のような存在です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 統合キッチン</h3>
+                    <p>
+                        コンロ・シンク・オーブン・冷蔵庫がバラバラの部屋だと料理が進まない。
+                        <span class="mark">全部が1つのキッチンに集約されている</span>から、一流シェフも手際良く調理できる。
+                        UTAGEはコンテンツ販売のための「統合キッチン」です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    UTAGE＝<span class="mark">コンテンツ販売の中核プラットフォーム</span>。
+                    LP・配信・決済を1つにまとめることで、ツール選定の時間と費用をまるごと節約できます。
+                    公式LINEとの連携で<span class="mark">セミナー告知やリマインド配信の自動化</span>も実現。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <a href="chatwork.html" class="nav-link">次の用語：Chatwork →</a>
+            <span></span>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const bars = ['u1','u2','u3','u4'].map(id => document.getElementById(id));
+        const labels = ['① LP・無料プレゼントでリード獲得', '② ステップ配信・ウェビナーで教育', '③ セミナー・個別相談でオファー', '✓ 決済で顧客化'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            bars.forEach(b => b.classList.remove('in'));
+            for (let i = 0; i < bars.length; i++) {
+                await wait(500);
+                bars[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ 全部 <strong>UTAGE 1つで完結</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

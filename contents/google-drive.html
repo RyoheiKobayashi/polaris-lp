@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Driveとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Google Drive（グーグルドライブ）を、アニメーションで3秒で理解。クラウドストレージ。AI生成物をチームで即共有する運用基盤。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .dr-stage { max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: 1fr 40px 1fr; gap: 16px; align-items: center; }
+        .dr-side {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 12px;
+            padding: 16px;
+            min-height: 140px;
+            position: relative;
+        }
+        .dr-label { font-family: var(--font-mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.06em; margin-bottom: 10px; }
+        .dr-file {
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 6px 10px;
+            margin-bottom: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .dr-file.in { opacity: 1; transform: translateY(0); }
+        .dr-file .chip { background: var(--mark); font-size: 9px; padding: 1px 4px; border-radius: 2px; }
+        .dr-arrow { text-align: center; font-size: 18px; color: var(--ink-mute); }
+        .dr-cloud {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+        .dr-cloud-icon { font-size: 28px; margin-bottom: 6px; font-family: var(--font-serif); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">04 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Drive</div>
+            <h1 class="detail-title">Google Drive</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">クラウドストレージ</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="dr-stage">
+                <div class="dr-side">
+                    <div class="dr-label">AI生成物</div>
+                    <div class="dr-file" id="f1"><span class="chip">DOC</span>台本v1.docx</div>
+                    <div class="dr-file" id="f2"><span class="chip">MD</span>ナレッジ.md</div>
+                    <div class="dr-file" id="f3"><span class="chip">MP3</span>録音.mp3</div>
+                </div>
+                <div class="dr-arrow">→</div>
+                <div class="dr-cloud" id="cloud">
+                    <div class="dr-cloud-icon">☁</div>
+                    <div>Drive</div>
+                    <div style="margin-top: 4px; opacity: .7;">全員がリアルタイムで<br>同じファイルを参照</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でファイル同期の流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">AIの出力 → チーム全員のデバイスに即同期。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">チームの「共有倉庫」</h2>
+            <p>
+                Google Driveは、Googleが提供する<span class="mark">クラウドストレージ</span>サービス。
+                ファイルの保存・共有・リアルタイム同期が可能で、AIが生成したファイルをチームで<span class="mark">即座に共有できる運用基盤</span>として活用します。
+                ドキュメント・スプレッドシート・動画・音声など、あらゆるファイル形式を扱え、
+                権限設定（閲覧のみ/編集可）も柔軟に変更できます。
+                「メールで添付→最新版がわからない」問題から解放されるのが最大の価値です。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 銀行の貸金庫（共有版）</h3>
+                    <p>
+                        重要書類を自宅に置くリスクを、銀行の貸金庫に預けることで回避する。
+                        しかも<span class="mark">鍵を持つ家族全員が同じ金庫を開けられる</span>のがDriveの発想。
+                        個人PCでのデータ消失リスクから解放されます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 図書館の開架閲覧</h3>
+                    <p>
+                        図書館は誰でもアクセスでき、借りられる。
+                        <span class="mark">権限を持つ人なら誰でも参照できる</span>書架として、Driveはチーム全員の知識資産を保管します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Google Drive＝<span class="mark">チームの共有倉庫</span>。
+                    AI生成物の即共有、ナレッジの蓄積、過去資料のアーカイブに最適。
+                    スプレッドシートやドキュメントと組み合わせて、<span class="mark">Googleエコシステム全体の基盤</span>として機能します。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="zoom.html" class="nav-link">← 前の用語：Zoom</a>
+            <a href="sheets.html" class="nav-link">次の用語：スプレッドシート →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const files = ['f1','f2','f3'].map(id => document.getElementById(id));
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            files.forEach(f => f.classList.remove('in'));
+            status.textContent = 'AIがファイルを生成…';
+            for (let i = 0; i < files.length; i++) {
+                await wait(500);
+                files[i].classList.add('in');
+            }
+            await wait(600);
+            status.innerHTML = '✓ Driveで <strong>チーム全員に即同期</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

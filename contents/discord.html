@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discordとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Discord（ディスコード）を、アニメーションで3秒で理解。コミュニティ運営に適したチャットプラットフォーム。テキスト・音声・画面共有が可能。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .dc-stage { max-width: 520px; margin: 0 auto; display: grid; grid-template-columns: 140px 1fr; gap: 0; border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; }
+        .dc-sidebar {
+            background: var(--bg-warm);
+            padding: 14px 12px;
+            border-right: 1px solid var(--line);
+        }
+        .dc-channel-group {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-mute);
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            margin-top: 12px;
+        }
+        .dc-channel-group:first-child { margin-top: 0; }
+        .dc-channel {
+            padding: 5px 8px;
+            font-size: 12px;
+            color: var(--ink-soft);
+            border-radius: 4px;
+            transition: background .3s ease, color .3s ease;
+            font-family: var(--font-mono);
+        }
+        .dc-channel.active { background: var(--ink); color: #fff; }
+        .dc-channel.voice::before { content: '🔊 '; }
+        .dc-channel.text::before { content: '# '; }
+        .dc-main {
+            padding: 16px;
+            background: #fff;
+            min-height: 220px;
+        }
+        .dc-msg {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .dc-msg.in { opacity: 1; transform: translateY(0); }
+        .dc-av {
+            width: 24px; height: 24px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        .dc-body { flex: 1; font-size: 12px; color: var(--ink); }
+        .dc-body .name { font-weight: 600; color: var(--ink-warm); margin-right: 6px; }
+        .dc-body .time { font-size: 9px; color: var(--ink-mute); }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">09 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Discord</div>
+            <h1 class="detail-title">Discord</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">コミュニティ運営プラットフォーム</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="dc-stage">
+                <div class="dc-sidebar">
+                    <div class="dc-channel-group">TEXT</div>
+                    <div class="dc-channel text active" id="ch1">general</div>
+                    <div class="dc-channel text" id="ch2">質問</div>
+                    <div class="dc-channel text" id="ch3">成果報告</div>
+                    <div class="dc-channel-group">VOICE</div>
+                    <div class="dc-channel voice" id="ch4">作業部屋</div>
+                    <div class="dc-channel voice" id="ch5">雑談</div>
+                </div>
+                <div class="dc-main">
+                    <div class="dc-msg" id="m1">
+                        <div class="dc-av">A</div>
+                        <div class="dc-body"><span class="name">A</span><span class="time">たった今</span><br>第3章終わった！</div>
+                    </div>
+                    <div class="dc-msg" id="m2">
+                        <div class="dc-av">B</div>
+                        <div class="dc-body"><span class="name">B</span><span class="time">1分前</span><br>おめ🎉 自分も続きます</div>
+                    </div>
+                    <div class="dc-msg" id="m3">
+                        <div class="dc-av">C</div>
+                        <div class="dc-body"><span class="name">C</span><span class="time">2分前</span><br>今夜作業部屋入ります</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でコミュニティの盛り上がりを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">チャンネルで話題を整理。テキストも音声もOK。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">受講生コミュニティの「居場所」</h2>
+            <p>
+                Discordは、<span class="mark">コミュニティ運営に適したチャットプラットフォーム</span>。
+                テキスト・音声・画面共有が可能で、講座のコミュニティや情報共有チャンネルとして活用できます。
+                チャンネル単位で話題を整理でき、<span class="mark">「質問」「成果報告」「雑談」「作業部屋」</span>など用途別に分けて運営可能。
+                音声チャンネルは「作業BGM」「もくもく会」としても使え、
+                受講生同士のコミットメントを高める装置として機能します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 学校の部室</h3>
+                    <p>
+                        部室があるから仲間と集まれる、話せる、一緒に作業できる。
+                        Discordは<span class="mark">デジタル部室</span>。
+                        チャンネル＝部屋と考えると構造が見えてきます。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② カフェの常連席</h3>
+                    <p>
+                        気軽に立ち寄れて、誰かが必ずいる。
+                        Discordの音声チャンネルは<span class="mark">24時間開いてる常連席</span>。
+                        受講生が一人で作業したくない時、居場所になります。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Discord＝<span class="mark">受講生コミュニティの居場所</span>。
+                    LINEは「配信」、Chatworkは「業務」、Discordは「コミュニティ」と<span class="mark">役割を明確に分ける</span>のが運営のコツ。
+                    ボット・BOT連携で自動化もできる、拡張性の高いプラットフォームです。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="line-official.html" class="nav-link">← 前の用語：公式LINE</a>
+            <a href="n8n.html" class="nav-link">次の用語：n8n →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const msgs = ['m1','m2','m3'].map(id => document.getElementById(id));
+        const labels = ['受講生Aが成果報告', '受講生Bが反応', '受講生Cが作業部屋へ'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            msgs.forEach(m => m.classList.remove('in'));
+            for (let i = 0; i < msgs.length; i++) {
+                await wait(600);
+                msgs[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            status.innerHTML = '✓ <strong>コミュニティが動いている</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>

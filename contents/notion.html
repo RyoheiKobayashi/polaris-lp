@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notionとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Notion（ノーション）を、アニメーションで3秒で理解。Docs + DB + タスク管理のオールインワンツール。MCP経由でClaude Code連携も可能。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .nt-stage { max-width: 520px; margin: 0 auto; }
+        .nt-page {
+            background: #fff;
+            border: 1.5px solid var(--ink);
+            border-radius: 10px;
+            padding: 20px 24px;
+        }
+        .nt-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--ink-warm);
+            margin-bottom: 16px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .nt-title.in { opacity: 1; }
+        .nt-block {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 6px 0;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .4s ease, transform .4s ease;
+        }
+        .nt-block.in { opacity: 1; transform: translateY(0); }
+        .nt-block .mark { font-family: var(--font-mono); color: var(--ink-mute); font-size: 13px; min-width: 24px; flex-shrink: 0; }
+        .nt-block .text { color: var(--ink); font-size: 14px; line-height: 1.6; flex: 1; }
+        .nt-block.h1 .text { font-family: var(--font-serif); font-size: 18px; font-weight: 500; color: var(--ink-warm); }
+        .nt-block.h2 .text { font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--ink-warm); }
+        .nt-block.indent1 { padding-left: 18px; }
+        .nt-block.indent2 { padding-left: 36px; }
+        .nt-db {
+            margin-top: 16px;
+            padding: 12px 14px;
+            background: var(--bg-warm);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .nt-db.in { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">06 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Notion</div>
+            <h1 class="detail-title">Notion</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">オールインワンのワークスペース</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="nt-stage">
+                <div class="nt-page">
+                    <div class="nt-title" id="n0">📄 講座運営ナレッジ</div>
+                    <div class="nt-block h1" id="n1"><span class="mark">#</span><span class="text">ナレッジベース</span></div>
+                    <div class="nt-block h2 indent1" id="n2"><span class="mark">##</span><span class="text">パーソナルナレッジ</span></div>
+                    <div class="nt-block indent2" id="n3"><span class="mark">-</span><span class="text">経歴・価値観・文体</span></div>
+                    <div class="nt-block h2 indent1" id="n4"><span class="mark">##</span><span class="text">プロダクトナレッジ</span></div>
+                    <div class="nt-block indent2" id="n5"><span class="mark">-</span><span class="text">価格・特徴・FAQ</span></div>
+                    <div class="nt-db" id="ndb">🔗 MCP経由でClaude Codeから直接編集可能</div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でページが構築される様子を見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">Docs・DB・タスクが入れ子で整理される。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">「情報の家」を建てるツール</h2>
+            <p>
+                Notionは、<span class="mark">ドキュメント・データベース・タスク管理を統合したオールインワンツール</span>。
+                ナレッジベースの構築やプロジェクト管理、個人メモから会社のWikiまで、ありとあらゆる情報を1つのワークスペースに集約できます。
+                階層構造（見出しレベル）による整理が強力で、<span class="mark">AIに渡すナレッジを構造化する</span>のに最適。
+                MCP（Model Context Protocol）を通じてClaude Codeから直接操作することも可能で、
+                AI時代の「情報インフラ」として位置づけられています。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 設計図のある家</h3>
+                    <p>
+                        部屋が明確に分かれていれば、誰でも目的の場所にたどり着ける。
+                        Notionは<span class="mark">情報の家に明確な間取り</span>を与えるツール。
+                        「パーソナルナレッジはこの部屋」と決めれば、AIも人間も迷いません。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 組織の本棚</h3>
+                    <p>
+                        本棚は分類されていて、章立てで中身が整理されている本が並ぶ。
+                        Notionも<span class="mark">章（ページ）・節（小見出し）・項目（箇条書き）</span>の
+                        構造で情報を整理できます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    Notion＝<span class="mark">AI時代のナレッジ基盤</span>。
+                    階層構造が得意な設計のため、ナレッジを体系化する土台として最強。
+                    MCPで<span class="mark">Claude Codeから直接操作</span>できるので、
+                    「書く」と「整理する」を一気通貫で自動化できます。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="sheets.html" class="nav-link">← 前の用語：スプレッドシート</a>
+            <a href="todoist.html" class="nav-link">次の用語：Todoist →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const blocks = ['n0','n1','n2','n3','n4','n5'].map(id => document.getElementById(id));
+        const db = document.getElementById('ndb');
+        const labels = ['ページタイトルを作成', '# 大見出し', '## 中見出し（パーソナル）', '- 詳細項目', '## 中見出し（プロダクト）', '- 詳細項目'];
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            blocks.forEach(b => b.classList.remove('in'));
+            db.classList.remove('in');
+            for (let i = 0; i < blocks.length; i++) {
+                await wait(400);
+                blocks[i].classList.add('in');
+                status.textContent = labels[i];
+            }
+            await wait(500);
+            db.classList.add('in');
+            status.innerHTML = '✓ <strong>Claude Codeから直接編集</strong>もOK';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
