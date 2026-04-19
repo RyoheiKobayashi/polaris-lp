@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アルゴリズムとは｜知ってる言葉でわかるコンテンツ販売の単語</title>
+    <meta name="description" content="SNSアルゴリズムをアニメーションで3秒で理解。表示順や拡散範囲を決める仕組み。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        .hero-al { width: 100%; max-width: 380px; margin: 0 auto; text-align: center; }
+        .hero-al .ha-box { position: relative; background: var(--ink); color: #fff; border-radius: 14px; padding: 30px 20px; font-family: var(--font-serif); font-size: 24px; font-weight: 600; }
+        .hero-al .ha-flow { display: flex; justify-content: space-between; margin-top: 20px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-warm); }
+        .hero-al .ha-in { padding: 8px 12px; background: #fff; border: 1.5px solid var(--ink); border-radius: 8px; animation: ha-pulse 2s ease-in-out infinite; }
+        .hero-al .ha-out { padding: 8px 12px; background: var(--mark); border: 1.5px solid var(--ink); border-radius: 8px; animation: ha-pulse 2s ease-in-out infinite; animation-delay: 1s; }
+        .hero-al .ha-arrow { align-self: center; color: var(--ink-mute); }
+        @keyframes ha-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+        <header class="mb-14">
+            <div class="cat-label mb-3">51 · J. SNS・コンテンツ制作</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Algorithm</div>
+            <h1 class="detail-title">アルゴリズム</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">SNSが表示順・拡散範囲を決める仕組み</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+            <div class="hero-al">
+                <div class="ha-box">ALGORITHM</div>
+                <div class="ha-flow">
+                    <div class="ha-in">投稿①<br>投稿②<br>投稿③</div>
+                    <div class="ha-arrow">→</div>
+                    <div class="ha-out">投稿②<br>投稿③<br>投稿①</div>
+                </div>
+            </div>
+            <p class="text-center text-xs mt-8" style="color: var(--ink-mute);">入力（投稿）が入って、アルゴリズムが並べ替えて出す。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">アルゴリズムってそもそも何？</h2>
+            <p>
+                SNSでの「アルゴリズム」は、<span class="mark">「どの投稿を、誰に、どの順で見せるか」を決めるロジック</span>のこと。
+                投稿の質・反応率・新しさ・視聴者の興味——複数の要素を組み合わせて、<span class="mark">各ユーザーに最適化された順番</span>でフィードに表示します。
+                アルゴリズムは<span class="mark">常に変化</span>するので、小手先のテクニックより「<span class="mark">本質的に価値ある発信</span>」の方が長期的に安定します。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 海の潮の流れ</h3>
+                    <p>
+                        潮は<span class="mark">常に変化し続ける</span>ので、その日の潮に合わせて漁をする。
+                        アルゴリズムも同じで、<span class="mark">今の流れを読んで発信</span>するしかない。昨日効いた方法が今日効くとは限らない。
+                    </p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② レストランの店員の"オススメ"</h3>
+                    <p>
+                        店員はお客の表情・好みを見て「<span class="mark">この人にはこの料理</span>」とおすすめする。
+                        SNSアルゴリズムも、ユーザーの過去の反応データから<span class="mark">その人向け</span>に投稿を選んでくる。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    アルゴリズム＝<span class="mark">SNSが投稿を選別して届ける仕組み</span>。
+                    テクニックに頼るより、<span class="mark">本質的な価値提供</span>が長期では最も効く。
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。</p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">オープンチャットを見る →</a>
+                </div>
+            </div>
+        </section>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="center-pin.html" class="nav-link">← 前の単語：センターピン</a>
+            <a href="impression.html" class="nav-link">次の単語：インプレッション →</a>
+        </nav>
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
