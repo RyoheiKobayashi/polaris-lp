@@ -34,10 +34,10 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-html {{ background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 30px 40px; font-family: var(--font-mono); font-size: 20px; color: var(--ink-warm); line-height: 1.8; }}
-        .hero-html .tag {{ color: var(--ink); font-weight: 500; }}
-        .hero-html .bar {{ display: inline-block; width: 60px; height: 6px; background: var(--ink-mute); border-radius: 3px; vertical-align: middle; margin: 0 8px; animation: ht-grow 2.5s ease-in-out infinite; transform-origin: left; }}
-        @keyframes ht-grow {{ 0%, 15% {{ transform: scaleX(0); }} 50%, 85% {{ transform: scaleX(1); }} 100% {{ transform: scaleX(0); }} }}
+        .hero-html { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 30px 40px; font-family: var(--font-mono); font-size: 20px; color: var(--ink-warm); line-height: 1.8; }
+        .hero-html .tag { color: var(--ink); font-weight: 500; }
+        .hero-html .bar { display: inline-block; width: 60px; height: 6px; background: var(--ink-mute); border-radius: 3px; vertical-align: middle; margin: 0 8px; animation: ht-grow 2.5s ease-in-out infinite; transform-origin: left; }
+        @keyframes ht-grow { 0%, 15% { transform: scaleX(0); } 50%, 85% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
         
     </style>
 </head>
@@ -51,7 +51,7 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">73 · G. エンジニアリング・技術</div>
+            <div class="cat-label mb-3">73 · G. エンジニアリング</div>
             <div class="mono text-sm mb-3" style="color: var(--ink-soft);">HyperText Markup Language</div>
             <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">HTML</h1>
             <p class="mt-3" style="color: var(--ink-soft);">Webページの骨組みを記述する言語</p>

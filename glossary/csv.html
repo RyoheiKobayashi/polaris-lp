@@ -34,11 +34,11 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-cv {{ display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2px; background: var(--ink-mute); border: 2px solid var(--ink-mute); width: 280px; height: 180px; border-radius: 6px; overflow: hidden; }}
-        .hero-cv .cell {{ background: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; color: var(--ink); }}
-        .hero-cv .cell.header {{ background: var(--bg-warm); font-weight: 600; }}
-        .hero-cv .cell.highlight {{ background: var(--mark); animation: cv-blink 2.2s ease-in-out infinite; }}
-        @keyframes cv-blink {{ 0%, 100% {{ opacity: 0.5; }} 50% {{ opacity: 1; }} }}
+        .hero-cv { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2px; background: var(--ink-mute); border: 2px solid var(--ink-mute); width: 280px; height: 180px; border-radius: 6px; overflow: hidden; }
+        .hero-cv .cell { background: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; color: var(--ink); }
+        .hero-cv .cell.header { background: var(--bg-warm); font-weight: 600; }
+        .hero-cv .cell.highlight { background: var(--mark); animation: cv-blink 2.2s ease-in-out infinite; }
+        @keyframes cv-blink { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
         
     </style>
 </head>
@@ -52,7 +52,7 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">84 · G. エンジニアリング・技術</div>
+            <div class="cat-label mb-3">84 · G. エンジニアリング</div>
             <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Comma-Separated Values</div>
             <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">CSV</h1>
             <p class="mt-3" style="color: var(--ink-soft);">カンマで区切った表データ</p>

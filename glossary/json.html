@@ -34,11 +34,11 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-json {{ background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 300px; }}
-        .hero-json .key {{ color: var(--mark); }}
-        .hero-json .brace {{ color: var(--ink-mute); }}
-        .hero-json .fade {{ animation: js-fade 2.5s ease-in-out infinite; }}
-        @keyframes js-fade {{ 0%, 100% {{ opacity: 0.4; }} 50% {{ opacity: 1; }} }}
+        .hero-json { background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 300px; }
+        .hero-json .key { color: var(--mark); }
+        .hero-json .brace { color: var(--ink-mute); }
+        .hero-json .fade { animation: js-fade 2.5s ease-in-out infinite; }
+        @keyframes js-fade { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
         
     </style>
 </head>
@@ -52,17 +52,17 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">74 · G. エンジニアリング・技術</div>
+            <div class="cat-label mb-3">74 · G. エンジニアリング</div>
             <div class="mono text-sm mb-3" style="color: var(--ink-soft);">JavaScript Object Notation</div>
             <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">JSON</h1>
             <p class="mt-3" style="color: var(--ink-soft);">AIとの相性抜群なデータ形式</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-json"><div><span class="brace">{{</span></div><div>&nbsp;&nbsp;<span class="key">"name"</span>: <span class="fade">"koba"</span>,</div><div>&nbsp;&nbsp;<span class="key">"role"</span>: <span class="fade">"ai-ura-kata"</span></div><div><span class="brace">}}</span></div></div></section>
+        <section class="anim-stage"><div class="hero-json"><div><span class="brace">{</span></div><div>&nbsp;&nbsp;<span class="key">"name"</span>: <span class="fade">"koba"</span>,</div><div>&nbsp;&nbsp;<span class="key">"role"</span>: <span class="fade">"ai-ura-kata"</span></div><div><span class="brace">}</span></div></div></section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">JSONってそもそも何？</h2>
-            <p><span class="mark">データを構造化して記述する軽量フォーマット</span>です。<code class="mono text-sm">{{"キー": "値"}}</code>のペアでデータを表現します。APIのリクエスト・レスポンスで最もよく使われる形式で、<span class="mark">プログラムとAIの共通言語</span>のようなもの。AIに「JSONで出力して」と指示すると、ツールで扱いやすいデータが返ってきます。</p>
+            <p><span class="mark">データを構造化して記述する軽量フォーマット</span>です。<code class="mono text-sm">{"キー": "値"}</code>のペアでデータを表現します。APIのリクエスト・レスポンスで最もよく使われる形式で、<span class="mark">プログラムとAIの共通言語</span>のようなもの。AIに「JSONで出力して」と指示すると、ツールで扱いやすいデータが返ってきます。</p>
         </section>
 
         <section class="mb-12">
