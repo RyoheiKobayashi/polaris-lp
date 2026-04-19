@@ -7,13 +7,13 @@ glossary 運用用のツール置き場。
 | ファイル | 用途 |
 |---|---|
 | `detail-page-template.html` | 詳細ページの雛形（穴埋めプレースホルダ付き） |
-| `audit-examples.py` | 全用語の「身近な例え」を抽出して `examples-audit.md` に出力 |
+| `audit-examples.py` | 全単語の「身近な例え」を抽出して `examples-audit.md` に出力 |
 
 ---
 
 ## 詳細ページの追加手順
 
-新しい用語を追加する時の流れ。
+新しい単語を追加する時の流れ。
 
 ### 1. プレースホルダの中身を決める
 
@@ -32,10 +32,10 @@ glossary 運用用のツール置き場。
 | `{{EX1_TITLE}}` / `{{EX1_BODY}}` | 例①のタイトルと本文 | 「家の合鍵」など身近なもの |
 | `{{EX2_TITLE}}` / `{{EX2_BODY}}` | 例② | 同上 |
 | `{{SUMMARY}}` | まとめ（黄コールアウト内） | 1〜2文でまとめ |
-| `{{PREV}}` | 前の用語ファイル名 | `prompt-injection.html` |
-| `{{PREV_LABEL}}` | 前の用語表示名 | `プロンプトインジェクション` |
-| `{{NEXT}}` | 次の用語ファイル名 | `jailbreak.html` |
-| `{{NEXT_LABEL}}` | 次の用語表示名 | `次：ジェイルブレイク →` |
+| `{{PREV}}` | 前の単語ファイル名 | `prompt-injection.html` |
+| `{{PREV_LABEL}}` | 前の単語表示名 | `プロンプトインジェクション` |
+| `{{NEXT}}` | 次の単語ファイル名 | `jailbreak.html` |
+| `{{NEXT_LABEL}}` | 次の単語表示名 | `次：ジェイルブレイク →` |
 
 ### 2. プレースホルダを埋める（Python例）
 
@@ -70,7 +70,7 @@ with open('glossary/prompt-injection.html', 'w') as f:
 
 ### 4. 前後ナビの繋ぎ直し
 
-新用語の前後のページの `{{NEXT}}` / `{{PREV}}` も更新する。
+新単語の前後のページの `{{NEXT}}` / `{{PREV}}` も更新する。
 
 ---
 
