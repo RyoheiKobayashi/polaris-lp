@@ -1,0 +1,202 @@
+/* Notion-inspired glossary design tokens & components
+ * Shared stylesheet for all glossary pages.
+ */
+
+:root {
+    --bg: #ffffff;
+    --bg-warm: #f7f6f3;
+    --surface: #ffffff;
+    --ink: #191919;
+    --ink-warm: #37352f;
+    --ink-soft: #787774;
+    --ink-mute: #9b9a97;
+    --line: #e9e9e7;
+    --accent: #2383e2;
+    --mark: #fdecc8;
+    --callout-bg: #f1f1ef;
+    --callout-blue: #e7f3f8;
+    --callout-yellow: #fdecc8;
+    --font-serif: "Noto Serif JP", ui-serif, "Lyon Text", Georgia, serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", "Helvetica Neue", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+* { -webkit-font-smoothing: antialiased; }
+html { font-feature-settings: "palt" 1; }
+body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 17px;
+    line-height: 1.75;
+}
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    color: var(--ink-warm);
+    line-height: 1.25;
+    font-weight: 500;
+}
+p { color: var(--ink-warm); }
+a { color: var(--accent); text-underline-offset: 3px; }
+
+.cat-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+}
+.mono { font-family: var(--font-mono); }
+.mark {
+    background: linear-gradient(transparent 60%, var(--mark) 60%);
+    padding: 0 2px;
+}
+.hairline { border-top: 1px solid var(--line); }
+
+/* ナビ */
+.nav-link {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 14px;
+}
+.nav-link:hover { color: var(--ink); text-decoration: underline; }
+
+.top-nav {
+    border-bottom: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+
+/* カード */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+/* コールアウト（Notion風） */
+.callout {
+    display: flex;
+    gap: 14px;
+    padding: 18px 22px;
+    border-radius: 6px;
+    line-height: 1.7;
+}
+.callout-blue   { background: var(--callout-blue); }
+.callout-yellow { background: var(--callout-yellow); }
+.callout-gray   { background: var(--callout-bg); }
+.callout-icon   { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.callout-title  { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+
+/* ボタン */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s, background .2s, border-color .2s;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-size: 15px;
+}
+.btn-primary {
+    background: var(--ink);
+    color: #fff;
+}
+.btn-primary:hover:not(:disabled) { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.5; cursor: default; }
+.btn-secondary {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line);
+}
+.btn-secondary:hover:not(:disabled) { border-color: var(--ink-mute); }
+
+/* 用語一覧カード（3カラムグリッド） */
+.term-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+@media (min-width: 640px) {
+    .term-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+}
+@media (min-width: 900px) {
+    .term-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+}
+
+.term-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    height: 100%;
+    min-height: 220px;
+}
+.term-card:hover {
+    border-color: var(--ink-mute);
+    transform: translateY(-2px);
+}
+.term-card .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+    letter-spacing: 0.08em;
+}
+.term-card h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ink-warm);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+.term-card .en {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+}
+.term-card .desc {
+    color: var(--ink-soft);
+    font-size: 14px;
+    line-height: 1.7;
+    flex: 1;
+}
+.term-card .read {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-mute);
+}
+
+/* 詳細ページ共通レイアウト */
+.detail-title {
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+}
+
+/* アニメコンテナ共通 */
+.anim-stage {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 48px;
+}
+@media (min-width: 768px) {
+    .anim-stage { padding: 40px; }
+}

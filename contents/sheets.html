@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スプレッドシートとは｜動きでわかるコンテンツ販売用語集</title>
+    <meta name="description" content="Google Sheets（スプレッドシート）を、アニメーションで3秒で理解。オンライン表計算。GeminiやGASと連携してAI活用の幅が広がる。">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EQR100H021');
+    </script>
+
+    <style>
+        .sh-stage { max-width: 520px; margin: 0 auto; }
+        .sh-table {
+            border: 1.5px solid var(--ink);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--ink);
+        }
+        .sh-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        .sh-table th, .sh-table td {
+            border: 1px solid var(--line);
+            padding: 10px 12px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-align: left;
+        }
+        .sh-table th {
+            background: var(--bg-warm);
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+            font-weight: 500;
+        }
+        .sh-table td {
+            color: var(--ink);
+            opacity: 0;
+            transition: opacity .4s ease, background .4s ease;
+        }
+        .sh-table td.in { opacity: 1; }
+        .sh-table td.sum { background: var(--mark); font-weight: 600; }
+        .sh-note {
+            margin-top: 14px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-soft);
+            opacity: 0;
+            transition: opacity .5s ease;
+        }
+        .sh-note.in { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">Contents · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <header class="mb-14">
+            <div class="cat-label mb-3">05 · プラットフォーム・SaaS</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Sheets</div>
+            <h1 class="detail-title">スプレッドシート</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">オンライン表計算</p>
+        </header>
+
+        <section class="anim-stage">
+            <div class="cat-label mb-5">Animation</div>
+
+            <div class="sh-stage">
+                <div class="sh-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>月</th>
+                                <th>受講生</th>
+                                <th>売上</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="c1">4月</td>
+                                <td id="c2">32</td>
+                                <td id="c3">¥960,000</td>
+                            </tr>
+                            <tr>
+                                <td id="c4">5月</td>
+                                <td id="c5">47</td>
+                                <td id="c6">¥1,410,000</td>
+                            </tr>
+                            <tr>
+                                <td id="c7">6月</td>
+                                <td id="c8">58</td>
+                                <td id="c9">¥1,740,000</td>
+                            </tr>
+                            <tr>
+                                <td id="c10" class="sum">合計</td>
+                                <td id="c11" class="sum">137</td>
+                                <td id="c12" class="sum">¥4,110,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sh-note" id="note">GAS + Gemini で自動集計・レポート生成まで可能</div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p id="status" class="text-sm min-h-[1.5rem] mb-4" style="color: var(--ink-soft);">「再生」でデータ集計の流れを見る</p>
+                <button id="play-btn" class="btn btn-primary">▶ 再生</button>
+            </div>
+
+            <p class="text-center text-xs mt-6" style="color: var(--ink-mute);">数字を並べるだけで、AIが読んで分析できる。</p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">AIと一番相性がいい「データ基盤」</h2>
+            <p>
+                スプレッドシートは、Googleが提供する<span class="mark">オンライン表計算ツール</span>。
+                受講生データ・売上管理・リサーチ結果の集計などに使います。
+                コンテンツ販売の現場では「受講生一覧」「売上記録」「広告データ」「競合リサーチ」など、
+                <span class="mark">数字を扱う業務の大半</span>がスプレッドシートで回ります。
+                GeminiやGAS（Google Apps Script）と連携することで、<span class="mark">AI活用の幅が大幅に広がります</span>。
+                例：行を追加したら自動でChatwork通知、数字が閾値超えたらメール、AIに自動集計させる、など。
+            </p>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 経理の帳簿</h3>
+                    <p>
+                        手書き帳簿の時代は集計も手動。Excelで計算が自動化。
+                        スプレッドシートは<span class="mark">それがクラウド化＋AI連携まで進化</span>した最新形。
+                        数字を書けば、あとは全自動です。
+                    </p>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② 野球のスコアブック</h3>
+                    <p>
+                        試合の記録があるから、後から分析できる。
+                        スプレッドシートに<span class="mark">日々の数字を記録</span>するだけで、
+                        AIが「今月は伸びてる」「この施策が効いてる」と分析してくれる時代です。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="callout-title">まとめ</div>
+                <p>
+                    スプレッドシート＝<span class="mark">AI時代のデータ基盤</span>。
+                    Gemini・GAS・Claude Code との連携で、
+                    「数字を入力する」以外の作業を全自動化できます。<span class="mark">自分がやるのは入力だけ</span>、
+                    分析・通知・レポートはAIに任せる運用が理想。
+                </p>
+            </div>
+        </div>
+
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="google-drive.html" class="nav-link">← 前の用語：Google Drive</a>
+            <a href="notion.html" class="nav-link">次の用語：Notion →</a>
+            <a href="index.html" class="nav-link">他の用語一覧 →</a>
+        </nav>
+
+    </main>
+
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <a href="../glossary/index.html" class="hover:underline" style="color: var(--ink-soft);">姉妹サイト: AI用語集</a>
+                <span class="ml-auto">© 2025-2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('play-btn');
+        const status = document.getElementById('status');
+        const cells = Array.from({length: 12}, (_, i) => document.getElementById('c' + (i + 1)));
+        const note = document.getElementById('note');
+        let running = false;
+        function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+        async function play() {
+            if (running) return;
+            running = true;
+            btn.disabled = true;
+            btn.textContent = '再生中…';
+            cells.forEach(c => c.classList.remove('in'));
+            note.classList.remove('in');
+            status.textContent = '数字を順に入力…';
+            for (let i = 0; i < 9; i++) {
+                await wait(200);
+                cells[i].classList.add('in');
+            }
+            await wait(500);
+            status.textContent = '合計行が自動計算';
+            for (let i = 9; i < 12; i++) {
+                await wait(300);
+                cells[i].classList.add('in');
+            }
+            await wait(500);
+            note.classList.add('in');
+            status.innerHTML = '✓ <strong>AIと連携して自動化</strong>';
+            btn.disabled = false;
+            btn.textContent = '▶ もう一度';
+            running = false;
+        }
+        btn.addEventListener('click', play);
+    })();
+    </script>
+
+</body>
+</html>
