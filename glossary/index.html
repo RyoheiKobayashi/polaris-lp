@@ -1768,6 +1768,554 @@
             100%     { opacity: 0; }
         }
 
+        /* ========= D-1. ChatGPT: チャット入力 ========= */
+        .thumb-chatgpt .cg-bubble {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink);
+            min-width: 140px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .thumb-chatgpt .cg-text {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: cg-type 4s steps(8, end) infinite;
+            width: 0;
+        }
+        .thumb-chatgpt .cg-caret {
+            display: inline-block;
+            width: 7px; height: 14px;
+            background: var(--ink);
+            margin-left: 2px;
+            animation: cg-blink 1s step-end infinite;
+        }
+        @keyframes cg-type {
+            0%, 10%   { width: 0; }
+            50%, 90%  { width: 8ch; }
+            100%      { width: 0; }
+        }
+        @keyframes cg-blink {
+            50% { opacity: 0; }
+        }
+
+        /* ========= D-2. Gemini: 双星 ========= */
+        .thumb-gemini .gm-wrap {
+            position: relative;
+            width: 110px; height: 60px;
+        }
+        .thumb-gemini .gm-star {
+            position: absolute;
+            top: 50%;
+            font-size: 22px;
+            color: var(--ink);
+            transform: translateY(-50%);
+            animation: gm-fade 3.5s ease-in-out infinite;
+        }
+        .thumb-gemini .gm-star:nth-child(1) { left: 8px; }
+        .thumb-gemini .gm-star:nth-child(2) { right: 8px; animation-delay: -1.75s; }
+        .thumb-gemini .gm-link {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 40px; height: 1px;
+            background: var(--ink-mute);
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+        @keyframes gm-fade {
+            0%, 100% { opacity: 0.25; transform: translateY(-50%) scale(1); }
+            50%      { opacity: 1;    transform: translateY(-50%) scale(1.15); }
+        }
+
+        /* ========= D-3. Claude: Cの描画 ========= */
+        .thumb-claude .cl-svg {
+            width: 64px; height: 64px;
+        }
+        .thumb-claude .cl-svg path {
+            fill: none;
+            stroke: var(--ink-warm);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            stroke-dasharray: 130;
+            stroke-dashoffset: 130;
+            animation: cl-draw 3.5s ease-out infinite;
+        }
+        @keyframes cl-draw {
+            0%, 10%   { stroke-dashoffset: 130; opacity: 0; }
+            25%       { opacity: 1; }
+            70%, 90%  { stroke-dashoffset: 0;   opacity: 1; }
+            100%      { stroke-dashoffset: 0;   opacity: 0; }
+        }
+
+        /* ========= D-4. Google AI Studio: スライダー ========= */
+        .thumb-gas .gas-wrap { width: 150px; }
+        .thumb-gas .gas-row {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--ink-soft);
+        }
+        .thumb-gas .gas-row:last-child { margin-bottom: 0; }
+        .thumb-gas .gas-track {
+            height: 2px;
+            background: var(--line);
+            border-radius: 1px;
+            position: relative;
+        }
+        .thumb-gas .gas-handle {
+            position: absolute;
+            top: 50%;
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: var(--ink);
+            transform: translateY(-50%);
+            animation: gas-move 4s ease-in-out infinite;
+        }
+        .thumb-gas .gas-row:nth-child(1) .gas-handle { animation-delay: 0s; }
+        .thumb-gas .gas-row:nth-child(2) .gas-handle { animation-delay: -1s; }
+        .thumb-gas .gas-row:nth-child(3) .gas-handle { animation-delay: -2s; }
+        @keyframes gas-move {
+            0%, 100% { left: 20%; }
+            50%      { left: 75%; }
+        }
+
+        /* ========= D-5. NotebookLM: ノート + ハイライト ========= */
+        .thumb-nlm .nlm-book {
+            width: 120px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 10px 12px;
+        }
+        .thumb-nlm .nlm-line {
+            height: 3px;
+            background: var(--line);
+            border-radius: 1px;
+            margin-bottom: 5px;
+        }
+        .thumb-nlm .nlm-line:last-child { margin-bottom: 0; }
+        .thumb-nlm .nlm-highlight {
+            background: var(--mark);
+            animation: nlm-sweep 3.5s ease-in-out infinite;
+            width: 0%;
+        }
+        @keyframes nlm-sweep {
+            0%, 10%   { width: 0%; }
+            55%, 90%  { width: 100%; }
+            100%      { width: 0%; }
+        }
+
+        /* ========= D-6. Genspark: 検索 + スパーク ========= */
+        .thumb-gen .gen-wrap {
+            position: relative;
+            width: 70px; height: 70px;
+        }
+        .thumb-gen .gen-glass {
+            width: 44px; height: 44px;
+            border: 2.5px solid var(--ink);
+            border-radius: 50%;
+            position: absolute;
+            top: 5px; left: 5px;
+        }
+        .thumb-gen .gen-handle {
+            position: absolute;
+            bottom: 6px; right: 6px;
+            width: 18px; height: 2.5px;
+            background: var(--ink);
+            border-radius: 2px;
+            transform: rotate(45deg);
+            transform-origin: right center;
+        }
+        .thumb-gen .gen-spark {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink);
+            animation: gen-twinkle 1.6s ease-in-out infinite;
+        }
+        .thumb-gen .gen-spark:nth-child(3) { top: 6px;  right: -4px; }
+        .thumb-gen .gen-spark:nth-child(4) { top: 24px; right: -10px; animation-delay: .6s; }
+        .thumb-gen .gen-spark:nth-child(5) { top: 14px; left: -8px; animation-delay: 1s; }
+        @keyframes gen-twinkle {
+            0%, 100% { opacity: 0.15; transform: scale(0.8); }
+            50%      { opacity: 1;    transform: scale(1.3); }
+        }
+
+        /* ========= D-7. AquaVoice: マイク + 波紋 ========= */
+        .thumb-av .av-wrap {
+            position: relative;
+            width: 100px; height: 100px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-av .av-mic {
+            width: 22px; height: 30px;
+            border: 2px solid var(--ink);
+            border-radius: 11px;
+            position: relative;
+            z-index: 2;
+            background: #fff;
+        }
+        .thumb-av .av-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 28px; height: 28px;
+            border: 1.5px solid var(--ink-warm);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: av-pulse 2.4s ease-out infinite;
+        }
+        .thumb-av .av-ring:nth-child(2) { animation-delay: .8s; }
+        .thumb-av .av-ring:nth-child(3) { animation-delay: 1.6s; }
+        @keyframes av-pulse {
+            0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
+        }
+
+        /* ========= D-8. Claude Code: ターミナル ========= */
+        .thumb-cc .cc-term {
+            background: var(--ink-warm);
+            color: #fff;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            min-width: 160px;
+        }
+        .thumb-cc .cc-prompt { color: var(--mark); margin-right: 6px; }
+        .thumb-cc .cc-cmd { color: #fff; }
+        .thumb-cc .cc-caret {
+            display: inline-block;
+            width: 7px; height: 13px;
+            background: #fff;
+            vertical-align: middle;
+            margin-left: 2px;
+            animation: cc-blink 1s step-end infinite;
+        }
+        @keyframes cc-blink {
+            50% { opacity: 0; }
+        }
+
+        /* ========= D-9. Loom: 録画 + 再生 ========= */
+        .thumb-loom .loom-wrap {
+            display: flex; align-items: center; gap: 16px;
+        }
+        .thumb-loom .loom-rec {
+            width: 16px; height: 16px;
+            background: var(--ink);
+            border-radius: 50%;
+            animation: loom-pulse 1.2s ease-in-out infinite;
+        }
+        @keyframes loom-pulse {
+            0%, 100% { transform: scale(1);    opacity: 1; }
+            50%      { transform: scale(1.3);  opacity: 0.5; }
+        }
+        .thumb-loom .loom-play {
+            width: 0; height: 0;
+            border-left: 16px solid var(--ink-warm);
+            border-top: 11px solid transparent;
+            border-bottom: 11px solid transparent;
+        }
+
+        /* ========= D-10. Vrew: 動画 + キャプション ========= */
+        .thumb-vrew .vr-frame {
+            width: 120px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px;
+        }
+        .thumb-vrew .vr-screen {
+            height: 36px;
+            background: var(--bg-warm);
+            border-radius: 3px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .thumb-vrew .vr-screen::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            border-left: 10px solid var(--ink-mute);
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            transform: translate(-50%, -50%);
+        }
+        .thumb-vrew .vr-cap {
+            height: 3px;
+            background: var(--ink-warm);
+            border-radius: 1px;
+            margin: 0 auto;
+            width: 0%;
+            animation: vr-type 3s ease-in-out infinite;
+        }
+        @keyframes vr-type {
+            0%, 15%  { width: 0%; }
+            55%, 90% { width: 80%; }
+            100%     { width: 0%; }
+        }
+
+        /* ========= D-11. Lovart: 画像生成 ========= */
+        .thumb-lovart .lv-frame {
+            width: 110px; height: 72px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--bg-warm);
+            position: relative;
+            overflow: hidden;
+        }
+        .thumb-lovart .lv-stroke {
+            position: absolute;
+            left: 10%; top: 50%;
+            width: 80%; height: 2.5px;
+            background: var(--ink-warm);
+            border-radius: 2px;
+            transform: translateY(-50%) rotate(-6deg) scaleX(0);
+            transform-origin: left center;
+            animation: lv-paint 3.5s ease-in-out infinite;
+        }
+        @keyframes lv-paint {
+            0%, 10%  { transform: translateY(-50%) rotate(-6deg) scaleX(0); opacity: 1; }
+            60%, 80% { transform: translateY(-50%) rotate(-6deg) scaleX(1); opacity: 1; }
+            100%     { transform: translateY(-50%) rotate(-6deg) scaleX(1); opacity: 0; }
+        }
+        .thumb-lovart .lv-star {
+            position: absolute;
+            top: 10px; right: 12px;
+            font-size: 12px;
+            color: var(--ink-mute);
+            animation: gen-twinkle 2s ease-in-out infinite;
+        }
+
+        /* ========= D-12. NanoBanana: 画像グリッド ========= */
+        .thumb-nb .nb-frame {
+            width: 108px; height: 72px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+        }
+        .thumb-nb .nb-cell {
+            border-radius: 3px;
+            opacity: 0;
+            animation: nb-appear 3.2s ease-in-out infinite;
+        }
+        .thumb-nb .nb-cell:nth-child(1) { background: var(--ink-warm); animation-delay: 0s; }
+        .thumb-nb .nb-cell:nth-child(2) { background: var(--mark);     animation-delay: 0.15s; }
+        .thumb-nb .nb-cell:nth-child(3) { background: var(--ink-mute); animation-delay: 0.3s; }
+        .thumb-nb .nb-cell:nth-child(4) { background: var(--ink-mute); animation-delay: 0.45s; }
+        .thumb-nb .nb-cell:nth-child(5) { background: var(--ink-warm); animation-delay: 0.6s; }
+        .thumb-nb .nb-cell:nth-child(6) { background: var(--mark);     animation-delay: 0.75s; }
+        @keyframes nb-appear {
+            0%, 15%   { opacity: 0; transform: scale(0.85); }
+            40%, 75%  { opacity: 1; transform: scale(1); }
+            100%      { opacity: 0; transform: scale(0.85); }
+        }
+
+        /* ========= D-13. Cursor: コード行 ========= */
+        .thumb-cursor .cur-code {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-warm);
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 10px 14px;
+            white-space: nowrap;
+        }
+        .thumb-cursor .cur-kw { color: var(--ink); font-weight: 500; }
+        .thumb-cursor .cur-mute { color: var(--ink-mute); }
+        .thumb-cursor .cur-suggest {
+            color: var(--ink-mute);
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: bottom;
+            white-space: nowrap;
+            animation: cur-suggest 3.2s steps(14, end) infinite;
+            width: 0;
+        }
+        .thumb-cursor .cur-caret {
+            display: inline-block;
+            width: 2px; height: 13px;
+            background: var(--ink);
+            vertical-align: middle;
+            animation: cc-blink 1s step-end infinite;
+        }
+        @keyframes cur-suggest {
+            0%, 15%   { width: 0; }
+            55%, 90%  { width: 14ch; }
+            100%      { width: 0; }
+        }
+
+        /* ========= D-14. groq: 高速処理 ========= */
+        .thumb-groq .groq-wrap { width: 150px; }
+        .thumb-groq .groq-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        .thumb-groq .groq-track {
+            height: 5px;
+            background: var(--line);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .thumb-groq .groq-fill {
+            height: 100%;
+            background: var(--ink);
+            width: 0%;
+            animation: groq-fast 1.2s cubic-bezier(.25, .1, .25, 1) infinite;
+        }
+        @keyframes groq-fast {
+            0%, 10%  { width: 0%;   opacity: 1; }
+            30%      { width: 100%; opacity: 1; }
+            60%, 100%{ width: 100%; opacity: 0; }
+        }
+        .thumb-groq .groq-lines {
+            display: flex;
+            gap: 3px;
+        }
+        .thumb-groq .groq-lines span {
+            width: 10px; height: 1.5px;
+            background: var(--ink-mute);
+            animation: groq-line .8s ease-out infinite;
+        }
+        .thumb-groq .groq-lines span:nth-child(2) { animation-delay: .06s; }
+        .thumb-groq .groq-lines span:nth-child(3) { animation-delay: .12s; }
+        @keyframes groq-line {
+            0%, 100% { transform: translateX(0);   opacity: 1; }
+            50%      { transform: translateX(8px); opacity: 0.3; }
+        }
+
+        /* ========= D-15. Whisper: 音声→文字 ========= */
+        .thumb-whisper .ws-wrap {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .thumb-whisper .ws-wave {
+            display: flex; align-items: center; gap: 2px;
+            height: 32px;
+        }
+        .thumb-whisper .ws-wave span {
+            width: 2.5px;
+            background: var(--ink);
+            border-radius: 2px;
+            animation: ws-bounce 1s ease-in-out infinite;
+        }
+        .thumb-whisper .ws-wave span:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .thumb-whisper .ws-wave span:nth-child(2) { height: 22px; animation-delay: .1s; }
+        .thumb-whisper .ws-wave span:nth-child(3) { height: 30px; animation-delay: .2s; }
+        .thumb-whisper .ws-wave span:nth-child(4) { height: 18px; animation-delay: .3s; }
+        .thumb-whisper .ws-wave span:nth-child(5) { height: 12px; animation-delay: .4s; }
+        @keyframes ws-bounce {
+            0%, 100% { transform: scaleY(0.4); }
+            50%      { transform: scaleY(1); }
+        }
+        .thumb-whisper .ws-arrow {
+            color: var(--ink-mute);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        .thumb-whisper .ws-text {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink);
+            border-bottom: 1px solid var(--ink-mute);
+            padding-bottom: 2px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ========= D-16. Canva AI: デザインタイル ========= */
+        .thumb-canva .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 5px;
+            width: 100px; height: 72px;
+        }
+        .thumb-canva .cv-tile {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+        .thumb-canva .cv-tile::before {
+            content: '';
+            position: absolute;
+            inset: 20% 15%;
+            border-radius: 2px;
+            animation: cv-fade 3.2s ease-in-out infinite;
+        }
+        .thumb-canva .cv-tile:nth-child(1)::before { background: var(--ink-warm); animation-delay: 0s; }
+        .thumb-canva .cv-tile:nth-child(2)::before { background: var(--mark);     animation-delay: 0.25s; }
+        .thumb-canva .cv-tile:nth-child(3)::before { background: var(--ink-mute); animation-delay: 0.5s; }
+        .thumb-canva .cv-tile:nth-child(4)::before { background: var(--ink-warm); animation-delay: 0.75s; }
+        @keyframes cv-fade {
+            0%, 15%  { opacity: 0; transform: translateY(3px); }
+            45%, 80% { opacity: 1; transform: translateY(0); }
+            100%     { opacity: 0; transform: translateY(-3px); }
+        }
+
+        /* ========= D-17. Perplexity: 検索 + 引用 ========= */
+        .thumb-plx .plx-wrap { width: 150px; }
+        .thumb-plx .plx-search {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--ink-soft);
+            margin-bottom: 10px;
+        }
+        .thumb-plx .plx-glass {
+            width: 10px; height: 10px;
+            border: 1.5px solid var(--ink-soft);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .thumb-plx .plx-cites {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+        .thumb-plx .plx-cite {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            padding: 2px 7px;
+            border: 1px solid var(--ink-mute);
+            border-radius: 3px;
+            color: var(--ink-soft);
+            opacity: 0;
+            animation: plx-cite-in 3.2s ease-in-out infinite;
+        }
+        .thumb-plx .plx-cite:nth-child(1) { animation-delay: 0.8s; }
+        .thumb-plx .plx-cite:nth-child(2) { animation-delay: 1.1s; }
+        .thumb-plx .plx-cite:nth-child(3) { animation-delay: 1.4s; }
+        @keyframes plx-cite-in {
+            0%, 20%  { opacity: 0; transform: translateY(4px); }
+            50%, 85% { opacity: 1; transform: translateY(0); }
+            100%     { opacity: 0; transform: translateY(-4px); }
+        }
+
         /* ========= カテゴリフィルタ ========= */
         .cat-filter {
             display: flex;
@@ -1833,10 +2381,11 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">43</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">60</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
             <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
+            <button class="cat-btn" data-filter="D">AIツール<span class="cat-count">17</span></button>
         </div>
     </div>
 
@@ -2672,6 +3221,308 @@
                     <div class="card-body">
                         <h3>Q&Aボット</h3>
                         <p class="desc">FAQをナレッジ化して<span class="mark">自動応答させる</span>AI。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Category D -->
+        <section class="cat-section" data-cat="D">
+            <header class="cat-head">
+                <div class="cat-tag">D · AI Tools & Services</div>
+                <h2 class="cat-heading">AIツール・サービス</h2>
+                <p class="cat-lead">講座で使用するAIサービスやツール。それぞれの得意分野を理解して使い分けることが重要です。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 44. ChatGPT -->
+                <a href="chatgpt.html" class="term-card">
+                    <div class="thumb thumb-chatgpt">
+                        <div class="thumb-inner">
+                            <div class="cg-bubble">
+                                <span class="cg-text">質問してね</span><span class="cg-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ChatGPT</h3>
+                        <p class="desc">OpenAIの<span class="mark">チャット型AI</span>。講座のメインツール。</p>
+                    </div>
+                </a>
+
+                <!-- 45. Gemini -->
+                <a href="gemini.html" class="term-card">
+                    <div class="thumb thumb-gemini">
+                        <div class="thumb-inner">
+                            <div class="gm-wrap">
+                                <div class="gm-link"></div>
+                                <span class="gm-star">✦</span>
+                                <span class="gm-star">✦</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Gemini</h3>
+                        <p class="desc">Googleの双子AI。<span class="mark">Google連携</span>が強み。</p>
+                    </div>
+                </a>
+
+                <!-- 46. Claude -->
+                <a href="claude.html" class="term-card">
+                    <div class="thumb thumb-claude">
+                        <div class="thumb-inner">
+                            <svg class="cl-svg" viewBox="0 0 64 64" aria-hidden="true">
+                                <path d="M 50 18 A 20 20 0 1 0 50 46" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Claude</h3>
+                        <p class="desc">Anthropicの<span class="mark">長文処理に強い</span>AI。</p>
+                    </div>
+                </a>
+
+                <!-- 47. Google AI Studio -->
+                <a href="google-ai-studio.html" class="term-card">
+                    <div class="thumb thumb-gas">
+                        <div class="thumb-inner">
+                            <div class="gas-wrap">
+                                <div class="gas-row"><span>temp</span><div class="gas-track"><div class="gas-handle"></div></div></div>
+                                <div class="gas-row"><span>topP</span><div class="gas-track"><div class="gas-handle"></div></div></div>
+                                <div class="gas-row"><span>len</span><div class="gas-track"><div class="gas-handle"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Google AI Studio</h3>
+                        <p class="desc">Geminiの<span class="mark">細かい挙動を調整</span>できる実験環境。</p>
+                    </div>
+                </a>
+
+                <!-- 48. NotebookLM -->
+                <a href="notebooklm.html" class="term-card">
+                    <div class="thumb thumb-nlm">
+                        <div class="thumb-inner">
+                            <div class="nlm-book">
+                                <div class="nlm-line"></div>
+                                <div class="nlm-line nlm-highlight"></div>
+                                <div class="nlm-line"></div>
+                                <div class="nlm-line" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>NotebookLM</h3>
+                        <p class="desc">資料を読み込ませて<span class="mark">対話できる</span>Google製AI。</p>
+                    </div>
+                </a>
+
+                <!-- 49. Genspark -->
+                <a href="genspark.html" class="term-card">
+                    <div class="thumb thumb-gen">
+                        <div class="thumb-inner">
+                            <div class="gen-wrap">
+                                <div class="gen-glass"></div>
+                                <div class="gen-handle"></div>
+                                <span class="gen-spark">✦</span>
+                                <span class="gen-spark">✦</span>
+                                <span class="gen-spark">✦</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Genspark</h3>
+                        <p class="desc">AIが検索結果を<span class="mark">まとめて回答</span>する検索ツール。</p>
+                    </div>
+                </a>
+
+                <!-- 50. AquaVoice -->
+                <a href="aqua-voice.html" class="term-card">
+                    <div class="thumb thumb-av">
+                        <div class="thumb-inner">
+                            <div class="av-wrap">
+                                <div class="av-ring"></div>
+                                <div class="av-ring"></div>
+                                <div class="av-ring"></div>
+                                <div class="av-mic"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>AquaVoice</h3>
+                        <p class="desc">話すだけで<span class="mark">テキスト入力</span>できる高精度な音声入力。</p>
+                    </div>
+                </a>
+
+                <!-- 51. Claude Code -->
+                <a href="claude-code.html" class="term-card">
+                    <div class="thumb thumb-cc">
+                        <div class="thumb-inner">
+                            <div class="cc-term">
+                                <span class="cc-prompt">$</span><span class="cc-cmd">claude</span><span class="cc-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Claude Code</h3>
+                        <p class="desc">ターミナルから動く<span class="mark">AI開発環境</span>。上級ステップ。</p>
+                    </div>
+                </a>
+
+                <!-- 52. Loom -->
+                <a href="loom.html" class="term-card">
+                    <div class="thumb thumb-loom">
+                        <div class="thumb-inner">
+                            <div class="loom-wrap">
+                                <div class="loom-rec"></div>
+                                <div class="loom-play"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Loom</h3>
+                        <p class="desc">画面録画 + 動画メッセージを<span class="mark">手軽に共有</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 53. Vrew -->
+                <a href="vrew.html" class="term-card">
+                    <div class="thumb thumb-vrew">
+                        <div class="thumb-inner">
+                            <div class="vr-frame">
+                                <div class="vr-screen"></div>
+                                <div class="vr-cap"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Vrew</h3>
+                        <p class="desc">AIで<span class="mark">字幕自動生成</span>できる動画編集ツール。</p>
+                    </div>
+                </a>
+
+                <!-- 54. Lovart -->
+                <a href="lovart.html" class="term-card">
+                    <div class="thumb thumb-lovart">
+                        <div class="thumb-inner">
+                            <div class="lv-frame">
+                                <div class="lv-stroke"></div>
+                                <span class="lv-star">✦</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Lovart</h3>
+                        <p class="desc">テキストから<span class="mark">高品質な画像</span>を生成するAIサービス。</p>
+                    </div>
+                </a>
+
+                <!-- 55. NanoBanana -->
+                <a href="nanobanana.html" class="term-card">
+                    <div class="thumb thumb-nb">
+                        <div class="thumb-inner">
+                            <div class="nb-frame">
+                                <div class="nb-cell"></div>
+                                <div class="nb-cell"></div>
+                                <div class="nb-cell"></div>
+                                <div class="nb-cell"></div>
+                                <div class="nb-cell"></div>
+                                <div class="nb-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>NanoBanana</h3>
+                        <p class="desc">Gemini APIで<span class="mark">スライド図解画像</span>を自動生成。</p>
+                    </div>
+                </a>
+
+                <!-- 56. Cursor -->
+                <a href="cursor.html" class="term-card">
+                    <div class="thumb thumb-cursor">
+                        <div class="thumb-inner">
+                            <div class="cur-code">
+                                <span class="cur-kw">const</span> <span class="cur-mute">ai</span> = <span class="cur-suggest">"北極星"</span><span class="cur-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Cursor</h3>
+                        <p class="desc">AIが<span class="mark">コードを提案</span>するエディタ。</p>
+                    </div>
+                </a>
+
+                <!-- 57. groq -->
+                <a href="groq.html" class="term-card">
+                    <div class="thumb thumb-groq">
+                        <div class="thumb-inner">
+                            <div class="groq-wrap">
+                                <div class="groq-label"><span>GENERATE</span><span>0.3s</span></div>
+                                <div class="groq-track"><div class="groq-fill"></div></div>
+                                <div class="groq-lines"><span></span><span></span><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>groq</h3>
+                        <p class="desc">独自チップで<span class="mark">超高速</span>にAI推論を実行。</p>
+                    </div>
+                </a>
+
+                <!-- 58. Whisper -->
+                <a href="whisper.html" class="term-card">
+                    <div class="thumb thumb-whisper">
+                        <div class="thumb-inner">
+                            <div class="ws-wrap">
+                                <div class="ws-wave"><span></span><span></span><span></span><span></span><span></span></div>
+                                <span class="ws-arrow">→</span>
+                                <span class="ws-text">konnichiwa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Whisper</h3>
+                        <p class="desc">OpenAIの<span class="mark">高精度な文字起こし</span>モデル。</p>
+                    </div>
+                </a>
+
+                <!-- 59. Canva AI -->
+                <a href="canva.html" class="term-card">
+                    <div class="thumb thumb-canva">
+                        <div class="thumb-inner">
+                            <div class="cv-grid">
+                                <div class="cv-tile"></div>
+                                <div class="cv-tile"></div>
+                                <div class="cv-tile"></div>
+                                <div class="cv-tile"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Canva AI</h3>
+                        <p class="desc">AI機能が入った<span class="mark">ノーコードデザイン</span>ツール。</p>
+                    </div>
+                </a>
+
+                <!-- 60. Perplexity -->
+                <a href="perplexity.html" class="term-card">
+                    <div class="thumb thumb-plx">
+                        <div class="thumb-inner">
+                            <div class="plx-wrap">
+                                <div class="plx-search"><div class="plx-glass"></div><span>AI活用法は?</span></div>
+                                <div class="plx-cites">
+                                    <span class="plx-cite">[1]</span>
+                                    <span class="plx-cite">[2]</span>
+                                    <span class="plx-cite">[3]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Perplexity</h3>
+                        <p class="desc">回答に<span class="mark">引用元を明示</span>するAI検索エンジン。</p>
                     </div>
                 </a>
 
