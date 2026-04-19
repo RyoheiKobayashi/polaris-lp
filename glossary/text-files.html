@@ -34,11 +34,43 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-tx { display: flex; gap: 24px; }
-        .hero-tx .file { width: 100px; height: 130px; background: #fff; border: 2px solid var(--line); border-radius: 8px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 18px; color: var(--ink-warm); font-weight: 600; animation: tx-pulse 3s ease-in-out infinite; }
-        .hero-tx .file::before { content: ''; position: absolute; top: 0; right: 0; width: 22px; height: 22px; background: var(--bg-warm); border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); }
-        .hero-tx .file:nth-child(2) { animation-delay: 0.5s; background: var(--mark); }
-        @keyframes tx-pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        /* .md/.txt: ファイル → AIが読み込む → 内容が理解される */
+        .hero-tx { display: flex; align-items: center; gap: 18px; }
+        .tx-file {
+            width: 110px; background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 16px; position: relative;
+            display: flex; flex-direction: column; align-items: center;
+            transition: border-color .3s;
+        }
+        .tx-file::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 18px; height: 18px; background: var(--bg-warm);
+            border-left: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line);
+            border-bottom-left-radius: 4px;
+        }
+        .tx-file .name { font-family: var(--font-mono); font-size: 14px; color: var(--ink-warm); font-weight: 600; }
+        .tx-file .lines { width: 100%; margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+        .tx-file .lines span { height: 4px; background: var(--line); border-radius: 2px; }
+        .tx-file .lines span:nth-child(1) { width: 80%; }
+        .tx-file .lines span:nth-child(2) { width: 60%; }
+        .tx-file .lines span:nth-child(3) { width: 70%; }
+        .hero-tx.stage-2 .tx-file, .hero-tx.stage-3 .tx-file { border-color: var(--ink); }
+        .hero-tx.stage-3 .tx-file .lines span { background: var(--mark); }
+        .tx-arrow {
+            font-family: var(--font-mono); font-size: 14px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-tx.stage-2 .tx-arrow, .hero-tx.stage-3 .tx-arrow { opacity: 1; }
+        .tx-ai {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--ink); color: var(--mark);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 600; font-family: var(--font-mono);
+            opacity: 0; transform: scale(0.9);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-tx.stage-2 .tx-ai, .hero-tx.stage-3 .tx-ai { opacity: 1; transform: scale(1); }
+        .hero-tx.stage-3 .tx-ai { background: var(--mark); color: var(--ink); }
         
     </style>
 </head>
@@ -58,7 +90,35 @@
             <p class="mt-3" style="color: var(--ink-soft);">AIと相性抜群のファイル形式</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-tx"><div class="file">.md</div><div class="file">.txt</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-tx" id="hero-tx">
+                <div class="tx-file">
+                    <span class="name">.md</span>
+                    <div class="lines"><span></span><span></span><span></span></div>
+                </div>
+                <span class="tx-arrow">→</span>
+                <div class="tx-ai">AI</div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-tx');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // ファイル登場
+                await wait(800);
+                hero.classList.add('stage-2');  // AIが読み始める
+                await wait(1000);
+                hero.classList.add('stage-3');  // 内容が伝わる
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">.md / .txtってそもそも何？</h2>

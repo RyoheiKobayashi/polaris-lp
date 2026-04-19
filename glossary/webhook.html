@@ -34,12 +34,35 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-wh { display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 16px; }
-        .hero-wh .event { background: var(--mark); color: var(--ink); padding: 14px 22px; border-radius: 8px; border: 2px solid var(--ink-warm); animation: wh-fire 2.8s ease-in-out infinite; }
-        .hero-wh .arrow { color: var(--ink-warm); font-size: 24px; }
-        .hero-wh .bell { background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 8px; animation: wh-ring 2.8s ease-in-out infinite; }
-        @keyframes wh-fire { 0%, 15% { transform: scale(1); opacity: 0.6; } 30% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); opacity: 0.6; } }
-        @keyframes wh-ring { 0%, 55% { transform: rotate(0); opacity: 0.6; } 65% { transform: rotate(-8deg); opacity: 1; } 75% { transform: rotate(8deg); opacity: 1; } 85% { transform: rotate(0); opacity: 1; } 100% { transform: rotate(0); opacity: 0.6; } }
+        /* Webhook: イベント発生 → HTTP通知 → 受信側で処理 */
+        .hero-wh { display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: 13px; }
+        .wh-box {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 16px 18px; text-align: center; min-width: 90px;
+            transition: border-color .3s, background .3s;
+        }
+        .wh-box .ico { font-size: 20px; margin-bottom: 4px; }
+        .wh-box .label { font-size: 11px; color: var(--ink-soft); }
+        .hero-wh.stage-1 .wh-box.event,
+        .hero-wh.stage-2 .wh-box.event,
+        .hero-wh.stage-3 .wh-box.event { border-color: var(--ink); background: var(--mark); }
+        .hero-wh.stage-3 .wh-box.receiver { border-color: var(--ink); background: var(--ink); color: #fff; }
+        .hero-wh.stage-3 .wh-box.receiver .label { color: var(--ink-mute); }
+        .wh-pipe {
+            position: relative; width: 52px; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden;
+        }
+        .wh-pipe::before {
+            content: ''; position: absolute; left: -14px; top: 0;
+            width: 14px; height: 100%; background: var(--ink); opacity: 0;
+        }
+        .hero-wh.stage-2 .wh-pipe::before { animation: wh-flow 0.7s ease-out forwards; }
+        .hero-wh.stage-3 .wh-pipe::before { left: 100%; opacity: 0; }
+        @keyframes wh-flow { 0% { left: -14px; opacity: 1; } 100% { left: 100%; opacity: 1; } }
+        .wh-payload {
+            font-size: 10px; color: var(--ink-mute); margin-top: 4px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-wh.stage-2 .wh-payload, .hero-wh.stage-3 .wh-payload { opacity: 1; }
         
     </style>
 </head>
@@ -59,7 +82,38 @@
             <p class="mt-3" style="color: var(--ink-soft);">イベント発生で自動通知</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-wh"><div class="event">UTAGEに申込</div><span class="arrow">→</span><div class="bell">Chatwork通知</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-wh" id="hero-wh">
+                <div class="wh-box event">
+                    <div class="ico">📝</div>
+                    <div class="label">申込発生</div>
+                </div>
+                <div class="wh-pipe"></div>
+                <div class="wh-box receiver">
+                    <div class="ico">💬</div>
+                    <div class="label">Chatwork</div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-wh');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // イベント発火
+                await wait(800);
+                hero.classList.add('stage-2');  // 通知送信
+                await wait(800);
+                hero.classList.add('stage-3');  // 受信側反応
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">Webhookってそもそも何？</h2>

@@ -34,10 +34,38 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-xss { background: #fff; border: 1.5px solid var(--line); border-radius: 10px; padding: 22px 28px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 320px; }
-        .hero-xss .normal { color: var(--ink-mute); }
-        .hero-xss .evil { color: var(--ink); background: var(--mark); padding: 2px 6px; border-radius: 3px; display: inline-block; animation: xss-inj 3s ease-in-out infinite; }
-        @keyframes xss-inj { 0%, 20% { opacity: 0; transform: translateY(-4px); } 50%, 90% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(4px); } }
+        /* XSS: コメント投稿 → scriptタグ混入 → 別ユーザーで発火 */
+        .hero-xss { display: flex; flex-direction: column; gap: 10px; width: 360px; font-family: var(--font-mono); font-size: 12px; }
+        .xss-form {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 12px 14px;
+        }
+        .xss-form .label { font-size: 10px; color: var(--ink-soft); margin-bottom: 6px; }
+        .xss-form .normal { color: var(--ink-warm); line-height: 1.6; }
+        .xss-form .evil {
+            display: block; margin-top: 4px;
+            background: var(--mark); color: var(--ink);
+            padding: 3px 6px; border-radius: 3px;
+            border-left: 3px solid #e74c3c;
+            opacity: 0; transform: translateY(-3px);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-xss.stage-2 .xss-form .evil,
+        .hero-xss.stage-3 .xss-form .evil { opacity: 1; transform: translateY(0); }
+        .xss-victim {
+            background: var(--ink-warm); color: var(--mark);
+            border-radius: 8px; padding: 12px 14px;
+            text-align: center;
+            opacity: 0; transform: scale(0.97);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-xss.stage-3 .xss-victim { opacity: 1; transform: scale(1); }
+        .xss-victim .label { font-size: 10px; color: var(--ink-mute); margin-bottom: 4px; }
+        .xss-arrow {
+            text-align: center; color: var(--ink-mute); font-size: 14px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-xss.stage-3 .xss-arrow { opacity: 1; }
 
     </style>
 </head>
@@ -57,7 +85,39 @@
             <p class="mt-3" style="color: var(--ink-soft);">Webページに悪意のコードを注入</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-xss"><div class="normal">コメント欄：</div><div>素敵な記事ですね！</div><div><span class="evil">&lt;script&gt;stealCookie()&lt;/script&gt;</span></div></div></section>
+        <section class="anim-stage">
+            <div class="hero-xss" id="hero-xss">
+                <div class="xss-form">
+                    <div class="label">コメント投稿</div>
+                    <div class="normal">素敵な記事ですね！</div>
+                    <span class="evil">&lt;script&gt;stealCookie()&lt;/script&gt;</span>
+                </div>
+                <div class="xss-arrow">↓ 別ユーザーが閲覧</div>
+                <div class="xss-victim">
+                    <div class="label">VICTIM BROWSER</div>
+                    🍪 Cookie送信中…
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-xss');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 普通のコメント
+                await wait(700);
+                hero.classList.add('stage-2');  // script混入
+                await wait(1000);
+                hero.classList.add('stage-3');  // 被害者ブラウザで発火
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">XSSってそもそも何？</h2>

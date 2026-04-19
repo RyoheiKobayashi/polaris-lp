@@ -34,11 +34,41 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-2fa { display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 18px; }
-        .hero-2fa .pw { background: #fff; border: 2px solid var(--line); padding: 14px 28px; border-radius: 8px; color: var(--ink-warm); letter-spacing: 0.3em; }
-        .hero-2fa .plus { color: var(--ink-mute); font-size: 20px; }
-        .hero-2fa .code { background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 8px; letter-spacing: 0.2em; font-weight: 600; animation: fa-recv 2.5s ease-in-out infinite; }
-        @keyframes fa-recv { 0%, 40% { opacity: 0; transform: translateY(-6px); } 60%, 95% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-6px); } }
+        /* 2段階認証: ①パスワード入力 → ②スマホコード → ✓ 認証成功 */
+        .hero-2fa { display: flex; flex-direction: column; gap: 10px; width: 320px; font-family: var(--font-mono); font-size: 12px; }
+        .fa-step {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 10px 14px;
+            display: flex; align-items: center; gap: 10px;
+            opacity: 0.4;
+            transition: opacity .3s, border-color .3s, background .3s;
+        }
+        .fa-step .num {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--bg-warm); color: var(--ink-soft);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 600;
+            flex-shrink: 0;
+        }
+        .fa-step .label { color: var(--ink-soft); font-size: 10px; }
+        .fa-step .val { color: var(--ink-warm); letter-spacing: 0.2em; }
+        .hero-2fa.stage-1 .fa-step.p1,
+        .hero-2fa.stage-2 .fa-step.p1,
+        .hero-2fa.stage-2 .fa-step.p2,
+        .hero-2fa.stage-3 .fa-step { opacity: 1; }
+        .hero-2fa.stage-1 .fa-step.p1,
+        .hero-2fa.stage-2 .fa-step { border-color: var(--ink); }
+        .hero-2fa.stage-2 .fa-step.p2 .num,
+        .hero-2fa.stage-3 .fa-step.p2 .num { background: var(--mark); color: var(--ink); }
+        .hero-2fa.stage-3 .fa-step.p1 .num { background: var(--ink); color: #fff; }
+        .fa-result {
+            background: var(--ink); color: var(--mark);
+            border-radius: 8px; padding: 10px 14px;
+            text-align: center; font-weight: 600;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-2fa.stage-3 .fa-result { opacity: 1; transform: translateY(0); }
 
     </style>
 </head>
@@ -58,7 +88,44 @@
             <p class="mt-3" style="color: var(--ink-soft);">パスワード + もう1つの鍵</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-2fa"><div class="pw">••••••••</div><span class="plus">+</span><div class="code">492 837</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-2fa" id="hero-2fa">
+                <div class="fa-step p1">
+                    <div class="num">1</div>
+                    <div>
+                        <div class="label">パスワード</div>
+                        <div class="val">●●●●●●●●</div>
+                    </div>
+                </div>
+                <div class="fa-step p2">
+                    <div class="num">2</div>
+                    <div>
+                        <div class="label">📱 スマホの6桁コード</div>
+                        <div class="val">492 837</div>
+                    </div>
+                </div>
+                <div class="fa-result">✓ 認証成功</div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-2fa');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // ①入力
+                await wait(800);
+                hero.classList.add('stage-2');  // ②コード受信
+                await wait(900);
+                hero.classList.add('stage-3');  // 認証成功
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">2段階認証 / MFAってそもそも何？</h2>

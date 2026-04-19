@@ -34,11 +34,35 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-ssl { display: flex; align-items: center; gap: 14px; background: #fff; border: 2px solid var(--line); border-radius: 30px; padding: 14px 28px; font-family: var(--font-mono); font-size: 18px; color: var(--ink-warm); min-width: 340px; }
-        .hero-ssl .lock { width: 22px; height: 22px; border: 3px solid var(--ink); border-radius: 4px; position: relative; animation: sl-lock 2.5s ease-in-out infinite; }
-        .hero-ssl .lock::before { content: ''; position: absolute; top: -10px; left: 50%; width: 14px; height: 12px; border: 3px solid var(--ink); border-bottom: none; border-radius: 7px 7px 0 0; transform: translateX(-50%); }
-        @keyframes sl-lock { 0%, 100% { background: transparent; } 50% { background: var(--mark); } }
-        .hero-ssl .prefix { color: var(--ink); font-weight: 600; }
+        /* SSL/TLS: 平文 → 暗号化トンネル → 安全な到達 */
+        .hero-ssl { display: flex; flex-direction: column; gap: 10px; width: 340px; font-family: var(--font-mono); font-size: 12px; }
+        .ssl-row { display: flex; align-items: center; gap: 12px; }
+        .ssl-user, .ssl-server {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 12px; text-align: center; min-width: 90px;
+        }
+        .ssl-user .ico, .ssl-server .ico { font-size: 20px; margin-bottom: 2px; }
+        .ssl-user .label, .ssl-server .label { font-size: 10px; color: var(--ink-soft); }
+        .ssl-pipe {
+            flex: 1; height: 4px; background: var(--line); border-radius: 2px;
+            position: relative; overflow: hidden;
+            transition: background .3s;
+        }
+        .hero-ssl.stage-2 .ssl-pipe, .hero-ssl.stage-3 .ssl-pipe { background: var(--ink); }
+        .ssl-pipe::before {
+            content: ''; position: absolute; left: -14px; top: 0;
+            width: 14px; height: 100%; background: var(--mark); opacity: 0;
+        }
+        .hero-ssl.stage-3 .ssl-pipe::before { animation: ssl-flow 1s ease-out forwards; }
+        @keyframes ssl-flow { 0% { left: -14px; opacity: 1; } 100% { left: 100%; opacity: 1; } }
+        .ssl-status {
+            text-align: center; padding: 10px 14px;
+            background: var(--bg-warm); color: var(--ink-soft);
+            border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background .3s, color .3s;
+        }
+        .hero-ssl.stage-2 .ssl-status, .hero-ssl.stage-3 .ssl-status { background: var(--ink); color: var(--mark); }
+        .ssl-status .lock { font-size: 14px; }
 
     </style>
 </head>
@@ -58,7 +82,38 @@
             <p class="mt-3" style="color: var(--ink-soft);">通信を暗号化する標準技術</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-ssl"><div class="lock"></div><span><span class="prefix">https://</span>polaris-app.jp</span></div></section>
+        <section class="anim-stage">
+            <div class="hero-ssl" id="hero-ssl">
+                <div class="ssl-row">
+                    <div class="ssl-user"><div class="ico">👤</div><div class="label">browser</div></div>
+                    <div class="ssl-pipe"></div>
+                    <div class="ssl-server"><div class="ico">🖥</div><div class="label">server</div></div>
+                </div>
+                <div class="ssl-status">
+                    <span class="lock">🔒</span>
+                    <span>https:// 暗号化通信</span>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-ssl');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 端点
+                await wait(600);
+                hero.classList.add('stage-2');  // トンネル形成
+                await wait(700);
+                hero.classList.add('stage-3');  // データ流れる
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">SSL/TLSってそもそも何？</h2>

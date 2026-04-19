@@ -34,13 +34,34 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-rl { width: 320px; }
-        .hero-rl .label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
-        .hero-rl .track { height: 12px; background: var(--line); border-radius: 6px; overflow: hidden; position: relative; }
-        .hero-rl .fill { height: 100%; width: 0%; background: var(--ink); animation: rl-fill 3s ease-in-out infinite; }
-        @keyframes rl-fill { 0%, 10% { width: 0%; background: var(--ink); } 60% { width: 80%; background: var(--ink); } 70%, 100% { width: 100%; background: var(--ink-warm); } }
-        .hero-rl .blocked { font-family: var(--font-mono); font-size: 13px; color: var(--ink); margin-top: 10px; text-align: right; opacity: 0; animation: rl-block 3s ease-in-out infinite; }
-        @keyframes rl-block { 0%, 65% { opacity: 0; } 80%, 95% { opacity: 1; } 100% { opacity: 0; } }
+        /* レート制限: リクエスト増加 → 閾値到達 → 429拒否 */
+        .hero-rl { width: 340px; display: flex; flex-direction: column; gap: 10px; font-family: var(--font-mono); font-size: 12px; }
+        .rl-meta { display: flex; justify-content: space-between; color: var(--ink-soft); font-size: 11px; }
+        .rl-meta .count { transition: color .3s; }
+        .hero-rl.stage-3 .rl-meta .count { color: #e74c3c; font-weight: 600; }
+        .rl-track {
+            height: 14px; background: var(--bg-warm);
+            border: 1px solid var(--line); border-radius: 8px;
+            overflow: hidden; position: relative;
+        }
+        .rl-fill {
+            height: 100%; width: 0%; background: var(--ink);
+            transition: width .8s ease-out, background .3s;
+        }
+        .hero-rl.stage-1 .rl-fill { width: 30%; }
+        .hero-rl.stage-2 .rl-fill { width: 80%; background: var(--ink-warm); }
+        .hero-rl.stage-3 .rl-fill { width: 100%; background: #e74c3c; }
+        .rl-threshold {
+            position: absolute; top: -4px; bottom: -4px; left: 100%;
+            width: 2px; background: var(--ink); transform: translateX(-2px);
+        }
+        .rl-status {
+            padding: 10px 14px; border-radius: 6px;
+            background: var(--bg-warm); color: var(--ink-soft);
+            text-align: center;
+            transition: background .3s, color .3s;
+        }
+        .hero-rl.stage-3 .rl-status { background: var(--ink); color: var(--mark); }
 
     </style>
 </head>
@@ -60,7 +81,44 @@
             <p class="mt-3" style="color: var(--ink-soft);">大量アクセスを一定で遮断する守り</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-rl"><div class="label"><span>requests</span><span>limit: 100 / min</span></div><div class="track"><div class="fill"></div></div><div class="blocked">429 Too Many Requests</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-rl" id="hero-rl">
+                <div class="rl-meta">
+                    <span>requests / min</span>
+                    <span class="count">limit: 100</span>
+                </div>
+                <div class="rl-track">
+                    <div class="rl-fill"></div>
+                    <div class="rl-threshold"></div>
+                </div>
+                <div class="rl-status">
+                    <span id="rl-text">✓ 正常受付</span>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-rl');
+            const text = document.getElementById('rl-text');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                text.textContent = '✓ 正常受付';
+                await wait(100);
+                hero.classList.add('stage-1');
+                await wait(700);
+                hero.classList.add('stage-2');
+                text.textContent = '⚠ 閾値接近';
+                await wait(800);
+                hero.classList.add('stage-3');
+                text.textContent = '⛔ 429 Too Many Requests';
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">レート制限ってそもそも何？</h2>

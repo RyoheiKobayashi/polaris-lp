@@ -34,15 +34,31 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-bf { display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 16px; }
-        .hero-bf .try { background: #fff; border: 1.5px solid var(--line); padding: 10px 24px; border-radius: 6px; min-width: 180px; text-align: center; color: var(--ink-warm); }
-        .hero-bf .cycle { opacity: 0; animation: bf-cyc 3s ease-in-out infinite; }
-        .hero-bf .cycle:nth-child(1) { animation-delay: 0s; }
-        .hero-bf .cycle:nth-child(2) { animation-delay: 0.8s; }
-        .hero-bf .cycle:nth-child(3) { animation-delay: 1.6s; }
-        @keyframes bf-cyc { 0%, 5% { opacity: 0; } 15%, 25% { opacity: 1; } 35%, 100% { opacity: 0; } }
-        .hero-bf .hit { background: var(--mark); border-color: var(--ink); opacity: 0; animation: bf-got 3s ease-in-out infinite; font-weight: 600; }
-        @keyframes bf-got { 0%, 60% { opacity: 0; transform: scale(0.9); } 75%, 95% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; } }
+        /* ブルートフォース: 高速試行 → 当たり発見 → 侵入 */
+        .hero-bf { display: flex; flex-direction: column; gap: 10px; width: 300px; font-family: var(--font-mono); font-size: 13px; }
+        .bf-try {
+            background: #fff; border: 1.5px solid var(--line);
+            padding: 8px 14px; border-radius: 6px;
+            text-align: center; color: var(--ink-soft);
+            display: flex; justify-content: space-between; align-items: center;
+            opacity: 0;
+            transition: opacity .25s, background .3s, border-color .3s, color .3s;
+        }
+        .bf-try .status { font-size: 11px; }
+        .bf-try.fail .status { color: #e74c3c; }
+        .hero-bf.stage-1 .bf-try.t1,
+        .hero-bf.stage-2 .bf-try.t1,
+        .hero-bf.stage-2 .bf-try.t2,
+        .hero-bf.stage-2 .bf-try.t3,
+        .hero-bf.stage-3 .bf-try { opacity: 1; }
+        .hero-bf .bf-try.t2 { transition-delay: .05s; }
+        .hero-bf .bf-try.t3 { transition-delay: .1s; }
+        .hero-bf .bf-try.t4 { transition-delay: .15s; }
+        .bf-try.hit {
+            background: var(--mark); border-color: var(--ink);
+            color: var(--ink); font-weight: 600;
+        }
+        .bf-try.hit .status { color: var(--ink); }
 
     </style>
 </head>
@@ -62,7 +78,33 @@
             <p class="mt-3" style="color: var(--ink-soft);">総当たりで鍵を破る古典的攻撃</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-bf"><div class="try cycle">0000</div><div class="try cycle">1234</div><div class="try cycle">pass</div><div class="try hit">hunter2 ✓</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-bf" id="hero-bf">
+                <div class="bf-try t1 fail"><span>password: 0000</span><span class="status">✗</span></div>
+                <div class="bf-try t2 fail"><span>password: 1234</span><span class="status">✗</span></div>
+                <div class="bf-try t3 fail"><span>password: qwerty</span><span class="status">✗</span></div>
+                <div class="bf-try t4 hit"><span>password: hunter2</span><span class="status">✓ 開錠</span></div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-bf');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 1回目失敗
+                await wait(500);
+                hero.classList.add('stage-2');  // 連続失敗
+                await wait(900);
+                hero.classList.add('stage-3');  // 当たり
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">ブルートフォース攻撃ってそもそも何？</h2>

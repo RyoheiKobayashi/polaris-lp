@@ -46,18 +46,38 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        /* API: 大 */
-        .hero-api { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 16px; }
-        .hero-api .box { background: #fff; border: 2px solid var(--line); padding: 14px 22px; border-radius: 8px; color: var(--ink); }
-        .hero-api .box.api { background: var(--ink); color: #fff; border-color: var(--ink); }
-        .hero-api .pipe { width: 36px; height: 3px; background: var(--ink-mute); position: relative; overflow: hidden; }
-        .hero-api .pipe::before {
-            content: ''; position: absolute; left: -10px; top: 0;
-            width: 10px; height: 100%; background: var(--ink);
-            animation: api-flow 1.8s linear infinite;
+        /* API: リクエスト発射 → 受け取る → レスポンス返却 */
+        .hero-api { display: flex; align-items: center; gap: 14px; font-family: var(--font-mono); font-size: 15px; }
+        .api-box {
+            background: #fff; border: 2px solid var(--line); padding: 16px 22px;
+            border-radius: 8px; color: var(--ink); text-align: center;
+            transition: border-color .3s, background .3s;
+        }
+        .api-box.api { background: var(--ink); color: #fff; border-color: var(--ink); }
+        .hero-api.stage-2 .api-box.app { border-color: var(--ink); }
+        .hero-api.stage-3 .api-box.service { border-color: var(--ink); background: var(--mark); }
+        .api-pipe {
+            width: 56px; height: 3px; background: var(--line);
+            position: relative; overflow: hidden;
+            border-radius: 2px;
+        }
+        .api-pipe::before {
+            content: ''; position: absolute; left: -12px; top: 0;
+            width: 12px; height: 100%; background: var(--ink);
+            opacity: 0;
+        }
+        .hero-api.stage-1 .api-pipe.req::before { animation: api-flow 0.8s ease-out forwards; }
+        .hero-api.stage-2 .api-pipe.req::before, .hero-api.stage-3 .api-pipe.req::before { left: 100%; opacity: 0; }
+        .hero-api.stage-3 .api-pipe.res::before {
+            animation: api-flow-rev 0.8s ease-out forwards;
         }
         @keyframes api-flow {
-            0% { left: -10px; } 100% { left: 100%; }
+            0% { left: -12px; opacity: 1; }
+            100% { left: 100%; opacity: 1; }
+        }
+        @keyframes api-flow-rev {
+            0% { left: 100%; opacity: 1; }
+            100% { left: -12px; opacity: 1; }
         }
     </style>
 </head>
@@ -78,14 +98,33 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-api">
-                <div class="box">app</div>
-                <div class="pipe"></div>
-                <div class="box api">API</div>
-                <div class="pipe"></div>
-                <div class="box">service</div>
+            <div class="hero-api" id="hero-api">
+                <div class="api-box app">app</div>
+                <div class="api-pipe req"></div>
+                <div class="api-box api">API</div>
+                <div class="api-pipe res"></div>
+                <div class="api-box service">service</div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-api');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // リクエスト発射
+                await wait(900);
+                hero.classList.add('stage-2');  // API受け取り
+                await wait(600);
+                hero.classList.add('stage-3');  // レスポンス返却
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">APIってそもそも何？</h2>

@@ -34,14 +34,36 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-sc { display: flex; align-items: center; gap: 20px; }
-        .hero-sc .page { width: 100px; height: 130px; background: #fff; border: 2px solid var(--line); border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
-        .hero-sc .page span { height: 6px; background: var(--line); border-radius: 2px; }
-        .hero-sc .page span:nth-child(2) { width: 70%; background: var(--mark); animation: sc-extract 2.5s ease-in-out infinite; }
-        .hero-sc .page span:nth-child(4) { width: 60%; background: var(--mark); animation: sc-extract 2.5s ease-in-out infinite 0.3s; }
-        @keyframes sc-extract { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        .hero-sc .arrow { font-family: var(--font-mono); color: var(--ink-mute); font-size: 24px; }
-        .hero-sc .data { font-family: var(--font-mono); font-size: 14px; background: var(--ink-warm); color: var(--mark); padding: 14px 18px; border-radius: 6px; line-height: 1.5; }
+        /* スクレイピング: Webページ → 要素ハイライト → 抽出データ */
+        .hero-sc { display: flex; align-items: center; gap: 18px; }
+        .sc-page { width: 150px; background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 14px; }
+        .sc-page .browser-bar { display: flex; gap: 4px; margin-bottom: 10px; }
+        .sc-page .browser-bar span { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-mute); }
+        .sc-page .row {
+            height: 6px; background: var(--line); border-radius: 2px; margin-bottom: 6px;
+            transition: background .3s, transform .3s;
+        }
+        .sc-page .row.r1 { width: 80%; }
+        .sc-page .row.r2 { width: 60%; }
+        .sc-page .row.r3 { width: 90%; }
+        .sc-page .row.r4 { width: 55%; }
+        .hero-sc.stage-2 .sc-page .row.r2,
+        .hero-sc.stage-2 .sc-page .row.r4,
+        .hero-sc.stage-3 .sc-page .row.r2,
+        .hero-sc.stage-3 .sc-page .row.r4 { background: var(--mark); transform: scaleX(1.02); }
+        .sc-arrow {
+            font-family: var(--font-mono); font-size: 14px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-sc.stage-3 .sc-arrow { opacity: 1; }
+        .sc-data {
+            font-family: var(--font-mono); font-size: 11px;
+            background: var(--ink-warm); color: var(--mark);
+            padding: 12px 14px; border-radius: 6px; line-height: 1.6;
+            opacity: 0; transform: translateX(-6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-sc.stage-3 .sc-data { opacity: 1; transform: translateX(0); }
         
     </style>
 </head>
@@ -61,7 +83,38 @@
             <p class="mt-3" style="color: var(--ink-soft);">Webから自動でデータを集める</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-sc"><div class="page"><span></span><span></span><span></span><span></span><span></span></div><span class="arrow">→</span><div class="data">[data]<br>[data]<br>[data]</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-sc" id="hero-sc">
+                <div class="sc-page">
+                    <div class="browser-bar"><span></span><span></span><span></span></div>
+                    <div class="row r1"></div>
+                    <div class="row r2"></div>
+                    <div class="row r3"></div>
+                    <div class="row r4"></div>
+                </div>
+                <span class="sc-arrow">→</span>
+                <div class="sc-data">title: "..."<br>price: 980<br>url: "..."</div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-sc');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // ページ表示
+                await wait(800);
+                hero.classList.add('stage-2');  // 要素ハイライト
+                await wait(1000);
+                hero.classList.add('stage-3');  // データ抽出
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">スクレイピングってそもそも何？</h2>

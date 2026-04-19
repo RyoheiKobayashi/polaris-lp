@@ -34,12 +34,64 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-ak { display: flex; align-items: center; gap: 28px; }
-        .hero-ak .key { width: 40px; height: 40px; border-radius: 50%; border: 7px solid var(--ink); position: relative; }
-        .hero-ak .key::after { content: ''; position: absolute; top: 50%; left: 100%; width: 48px; height: 7px; background: var(--ink); transform: translateY(-50%); }
-        .hero-ak .key::before { content: ''; position: absolute; top: 50%; left: 92px; width: 7px; height: 14px; background: var(--ink); transform: translateY(-50%); }
-        .hero-ak .env { font-family: var(--font-mono); font-size: 18px; color: var(--ink-warm); background: var(--bg-warm); padding: 14px 22px; border-radius: 6px; border: 2px dashed var(--ink-mute); margin-left: 60px; animation: ak-blink 2s ease-in-out infinite; }
-        @keyframes ak-blink { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        /* APIキー: 露出コード → .envに隔離 → 安全 */
+        .hero-ak { display: flex; flex-direction: column; gap: 12px; width: 360px; }
+        .ak-code {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 8px; padding: 14px 18px;
+            font-family: var(--font-mono); font-size: 12px;
+            position: relative;
+            transition: background .4s;
+        }
+        .ak-code .key-val {
+            color: var(--mark);
+            transition: opacity .3s, filter .3s;
+        }
+        .hero-ak.stage-2 .ak-code .key-val,
+        .hero-ak.stage-3 .ak-code .key-val {
+            opacity: 0;
+            filter: blur(3px);
+        }
+        .ak-code .env-ref {
+            color: var(--ink-mute);
+            opacity: 0;
+            position: absolute; left: 18px;
+            transition: opacity .3s .3s;
+        }
+        .hero-ak.stage-2 .ak-code .env-ref,
+        .hero-ak.stage-3 .ak-code .env-ref { opacity: 1; }
+        .ak-code .danger {
+            position: absolute; top: -12px; right: 12px;
+            background: #e74c3c; color: #fff;
+            padding: 2px 8px; border-radius: 3px;
+            font-size: 10px; font-weight: 600;
+            opacity: 1;
+            transition: opacity .3s;
+        }
+        .hero-ak.stage-2 .ak-code .danger,
+        .hero-ak.stage-3 .ak-code .danger { opacity: 0; }
+        .ak-arrow {
+            align-self: center;
+            font-family: var(--font-mono); font-size: 18px; color: var(--ink-mute);
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-ak.stage-2 .ak-arrow,
+        .hero-ak.stage-3 .ak-arrow { opacity: 1; }
+        .ak-env {
+            font-family: var(--font-mono); font-size: 13px;
+            background: var(--bg-warm); color: var(--ink-warm);
+            padding: 14px 18px; border-radius: 6px;
+            border: 2px dashed var(--ink-mute);
+            align-self: flex-start;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-ak.stage-3 .ak-env { opacity: 1; transform: translateY(0); border-color: var(--ink); }
+        .ak-env .hide { color: var(--mark); background: var(--ink); padding: 1px 4px; border-radius: 2px; }
+        .ak-env .safe {
+            display: inline-block; font-size: 10px; margin-left: 8px;
+            background: var(--mark); color: var(--ink); padding: 1px 6px; border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -59,11 +111,38 @@
         </header>
 
         <section class="anim-stage">
-            <div class="hero-ak">
-                <div class="key"></div>
-                <div class="env">.env</div>
+            <div class="hero-ak" id="hero-ak">
+                <div class="ak-code">
+                    <div class="danger">公開NG</div>
+                    const key = <span class="key-val">"sk-abc123..."</span>
+                    <span class="env-ref">const key = process.env.API_KEY</span>
+                </div>
+                <span class="ak-arrow">↓ 隔離</span>
+                <div class="ak-env">
+                    .env → API_KEY=<span class="hide">sk-abc123...</span>
+                    <span class="safe">git除外</span>
+                </div>
             </div>
         </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-ak');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // キーが丸見え（公開NG）
+                await wait(1100);
+                hero.classList.add('stage-2');  // 隔離開始
+                await wait(900);
+                hero.classList.add('stage-3');  // .envに保管
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">APIキー / .envってそもそも何？</h2>

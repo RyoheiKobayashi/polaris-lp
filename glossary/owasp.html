@@ -34,15 +34,39 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-ow { display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 13px; min-width: 300px; }
-        .hero-ow .row { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: center; background: #fff; border: 1.5px solid var(--line); padding: 8px 14px; border-radius: 6px; animation: ow-appear 3.5s ease-in-out infinite; opacity: 0; }
-        .hero-ow .row:nth-child(1) { animation-delay: 0s; }
-        .hero-ow .row:nth-child(2) { animation-delay: 0.3s; }
-        .hero-ow .row:nth-child(3) { animation-delay: 0.6s; }
-        .hero-ow .rank { color: var(--ink-mute); text-align: center; font-weight: 600; }
-        .hero-ow .row.top .rank { color: var(--ink); background: var(--mark); border-radius: 3px; padding: 2px 0; }
-        .hero-ow .name { color: var(--ink-warm); }
-        @keyframes ow-appear { 0%, 15% { opacity: 0; transform: translateX(-6px); } 35%, 85% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(-6px); } }
+        /* OWASP Top 10: ランキング順に項目が積み上がる */
+        .hero-ow { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 12px; width: 340px; }
+        .ow-header {
+            text-align: center; padding-bottom: 6px;
+            font-size: 10px; color: var(--ink-soft); letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--line); margin-bottom: 4px;
+        }
+        .ow-row {
+            display: grid; grid-template-columns: 28px 1fr;
+            gap: 10px; align-items: center;
+            background: #fff; border: 1.5px solid var(--line);
+            padding: 7px 12px; border-radius: 6px;
+            opacity: 0; transform: translateY(4px);
+            transition: opacity .3s, transform .3s, border-color .3s, background .3s;
+        }
+        .ow-row .rank {
+            text-align: center; color: var(--ink-soft); font-weight: 600;
+            background: var(--bg-warm); padding: 2px 0; border-radius: 3px;
+            font-size: 11px;
+        }
+        .ow-row .name { color: var(--ink-warm); }
+        .ow-row.top {
+            border-color: var(--ink); background: var(--mark);
+        }
+        .ow-row.top .rank { background: var(--ink); color: var(--mark); }
+        .hero-ow.stage-1 .ow-row.r1,
+        .hero-ow.stage-2 .ow-row.r1,
+        .hero-ow.stage-2 .ow-row.r2,
+        .hero-ow.stage-3 .ow-row { opacity: 1; transform: translateY(0); }
+        .hero-ow .ow-row.r2 { transition-delay: .1s; }
+        .hero-ow .ow-row.r3 { transition-delay: .2s; }
+        .hero-ow .ow-row.r4 { transition-delay: .3s; }
 
     </style>
 </head>
@@ -62,7 +86,34 @@
             <p class="mt-3" style="color: var(--ink-soft);">Web脆弱性の代表10項目</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-ow"><div class="row top"><div class="rank">1</div><div class="name">アクセス制御の不備</div></div><div class="row"><div class="rank">2</div><div class="name">暗号化の失敗</div></div><div class="row"><div class="rank">3</div><div class="name">インジェクション</div></div></div></section>
+        <section class="anim-stage">
+            <div class="hero-ow" id="hero-ow">
+                <div class="ow-header">OWASP Top 10 (2025)</div>
+                <div class="ow-row r1 top"><div class="rank">1</div><div class="name">アクセス制御の不備</div></div>
+                <div class="ow-row r2"><div class="rank">2</div><div class="name">暗号化の失敗</div></div>
+                <div class="ow-row r3"><div class="rank">3</div><div class="name">インジェクション</div></div>
+                <div class="ow-row r4"><div class="rank">…</div><div class="name">〜 他 7 項目</div></div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-ow');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 1位
+                await wait(600);
+                hero.classList.add('stage-2');  // 2位
+                await wait(700);
+                hero.classList.add('stage-3');  // 全部
+                await wait(2200);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">OWASP Top 10ってそもそも何？</h2>

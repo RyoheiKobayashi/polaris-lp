@@ -34,11 +34,41 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
         
-        .hero-cv { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 2px; background: var(--ink-mute); border: 2px solid var(--ink-mute); width: 280px; height: 180px; border-radius: 6px; overflow: hidden; }
-        .hero-cv .cell { background: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; color: var(--ink); }
-        .hero-cv .cell.header { background: var(--bg-warm); font-weight: 600; }
-        .hero-cv .cell.highlight { background: var(--mark); animation: cv-blink 2.2s ease-in-out infinite; }
-        @keyframes cv-blink { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        /* CSV: テキスト形式 → 表形式に変換 */
+        .hero-cv { display: flex; flex-direction: column; gap: 10px; width: 340px; }
+        .cv-text {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 8px; padding: 14px 18px;
+            font-family: var(--font-mono); font-size: 12px; line-height: 1.8;
+        }
+        .cv-text .row {
+            opacity: 0; transform: translateX(-4px);
+            transition: opacity .3s, transform .3s;
+        }
+        .hero-cv.stage-1 .cv-text .row.h,
+        .hero-cv.stage-2 .cv-text .row,
+        .hero-cv.stage-3 .cv-text .row { opacity: 1; transform: translateX(0); }
+        .cv-text .row:nth-child(2) { transition-delay: .05s; }
+        .cv-text .row:nth-child(3) { transition-delay: .1s; }
+        .cv-text .comma { color: var(--mark); }
+        .cv-arrow {
+            text-align: center; color: var(--ink-mute); font-size: 14px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-cv.stage-3 .cv-arrow { opacity: 1; }
+        .cv-table {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            background: var(--line); gap: 1px;
+            border: 1.5px solid var(--line); border-radius: 6px; overflow: hidden;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-cv.stage-3 .cv-table { opacity: 1; transform: translateY(0); }
+        .cv-table .cell {
+            background: #fff; padding: 8px 10px;
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-warm);
+        }
+        .cv-table .cell.h { background: var(--bg-warm); font-weight: 600; color: var(--ink); }
         
     </style>
 </head>
@@ -58,7 +88,46 @@
             <p class="mt-3" style="color: var(--ink-soft);">カンマで区切った表データ</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-cv"><div class="cell header">name</div><div class="cell header">age</div><div class="cell header">city</div><div class="cell">koba</div><div class="cell highlight">36</div><div class="cell">tokyo</div><div class="cell">ai</div><div class="cell">5</div><div class="cell highlight">osaka</div></div></section>
+        <section class="anim-stage">
+            <div class="hero-cv" id="hero-cv">
+                <div class="cv-text">
+                    <div class="row h">name<span class="comma">,</span>age<span class="comma">,</span>city</div>
+                    <div class="row">koba<span class="comma">,</span>36<span class="comma">,</span>tokyo</div>
+                    <div class="row">ai<span class="comma">,</span>5<span class="comma">,</span>osaka</div>
+                </div>
+                <div class="cv-arrow">↓ parse</div>
+                <div class="cv-table">
+                    <div class="cell h">name</div>
+                    <div class="cell h">age</div>
+                    <div class="cell h">city</div>
+                    <div class="cell">koba</div>
+                    <div class="cell">36</div>
+                    <div class="cell">tokyo</div>
+                    <div class="cell">ai</div>
+                    <div class="cell">5</div>
+                    <div class="cell">osaka</div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-cv');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // ヘッダだけ
+                await wait(600);
+                hero.classList.add('stage-2');  // データ追加
+                await wait(800);
+                hero.classList.add('stage-3');  // 表に変換
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">CSVってそもそも何？</h2>

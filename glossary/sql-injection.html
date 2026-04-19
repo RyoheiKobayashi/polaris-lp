@@ -34,11 +34,45 @@
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
 
-        .hero-sqli { background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 340px; }
-        .hero-sqli .kw { color: var(--mark); }
-        .hero-sqli .str { color: #fff; }
-        .hero-sqli .evil { background: var(--mark); color: var(--ink); padding: 2px 6px; border-radius: 3px; display: inline-block; animation: sqli-inj 3s ease-in-out infinite; }
-        @keyframes sqli-inj { 0%, 20% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+        /* SQLインジェクション: 入力欄 → SQL組立 → 全件漏洩 */
+        .hero-sqli { display: flex; flex-direction: column; gap: 10px; width: 360px; font-family: var(--font-mono); font-size: 12px; }
+        .sqli-input {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px;
+            padding: 10px 14px;
+        }
+        .sqli-input .label { font-size: 10px; color: var(--ink-soft); margin-bottom: 4px; }
+        .sqli-input .val {
+            font-family: var(--font-mono); color: var(--ink-warm);
+        }
+        .sqli-input .val .evil {
+            background: var(--mark); color: var(--ink); padding: 2px 5px;
+            border-radius: 3px; border-left: 3px solid #e74c3c;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-sqli.stage-2 .sqli-input .val .evil,
+        .hero-sqli.stage-3 .sqli-input .val .evil { opacity: 1; }
+        .sqli-query {
+            background: var(--ink-warm); color: #fff;
+            border-radius: 8px; padding: 12px 14px;
+            line-height: 1.7;
+        }
+        .sqli-query .kw { color: var(--mark); }
+        .sqli-query .bad {
+            background: rgba(253,236,200,0.2); color: var(--mark);
+            padding: 0 4px; border-radius: 2px;
+            opacity: 0; transition: opacity .3s;
+        }
+        .hero-sqli.stage-2 .sqli-query .bad,
+        .hero-sqli.stage-3 .sqli-query .bad { opacity: 1; }
+        .sqli-result {
+            background: var(--mark); color: var(--ink);
+            border-radius: 8px; padding: 12px 14px;
+            text-align: center;
+            opacity: 0; transform: translateY(6px);
+            transition: opacity .4s, transform .4s;
+        }
+        .hero-sqli.stage-3 .sqli-result { opacity: 1; transform: translateY(0); }
+        .sqli-result .label { font-size: 10px; font-weight: 600; margin-bottom: 3px; }
 
     </style>
 </head>
@@ -58,7 +92,41 @@
             <p class="mt-3" style="color: var(--ink-soft);">DBに悪意のクエリを混入させる</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-sqli"><div><span class="kw">SELECT</span> * <span class="kw">FROM</span> users</div><div><span class="kw">WHERE</span> id = <span class="evil">' OR 1=1 --</span></div></div></section>
+        <section class="anim-stage">
+            <div class="hero-sqli" id="hero-sqli">
+                <div class="sqli-input">
+                    <div class="label">ログインフォーム (user id)</div>
+                    <div class="val">admin<span class="evil">' OR 1=1 --</span></div>
+                </div>
+                <div class="sqli-query">
+                    <span class="kw">SELECT</span> * <span class="kw">FROM</span> users<br>
+                    <span class="kw">WHERE</span> id = 'admin<span class="bad">' OR 1=1 --</span>'
+                </div>
+                <div class="sqli-result">
+                    <div class="label">⚠ 全件取得</div>
+                    users全レコード流出
+                </div>
+            </div>
+        </section>
+
+        <script>
+        (function() {
+            const hero = document.getElementById('hero-sqli');
+            async function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+            async function play() {
+                hero.classList.remove('stage-1','stage-2','stage-3');
+                await wait(100);
+                hero.classList.add('stage-1');  // 正常入力
+                await wait(700);
+                hero.classList.add('stage-2');  // 悪意混入
+                await wait(1100);
+                hero.classList.add('stage-3');  // 結果流出
+                await wait(2000);
+            }
+            async function autoLoop(){ await play(); setTimeout(autoLoop,500);}
+            setTimeout(autoLoop,500);
+        })();
+        </script>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-4">SQLインジェクションってそもそも何？</h2>
