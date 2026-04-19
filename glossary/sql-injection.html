@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>SQLインジェクションとは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="DBに悪意のクエリを混入させる攻撃「SQLインジェクション」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,13 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-sqli { background: var(--ink-warm); color: #fff; border-radius: 10px; padding: 24px 30px; font-family: var(--font-mono); font-size: 16px; line-height: 1.8; min-width: 340px; }
+        .hero-sqli .kw { color: var(--mark); }
+        .hero-sqli .str { color: #fff; }
+        .hero-sqli .evil { background: var(--mark); color: var(--ink); padding: 2px 6px; border-radius: 3px; display: inline-block; animation: sqli-inj 3s ease-in-out infinite; }
+        @keyframes sqli-inj { 0%, 20% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+
     </style>
 </head>
 <body>
@@ -53,29 +52,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">91 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">SQL Injection</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">SQLインジェクション</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">DBに悪意のクエリを混入させる</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-sqli"><div><span class="kw">SELECT</span> * <span class="kw">FROM</span> users</div><div><span class="kw">WHERE</span> id = <span class="evil">' OR 1=1 --</span></div></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">SQLインジェクションってそもそも何？</h2>
+            <p><span class="mark">データベースへの問い合わせ文に、悪意のコマンドを混入させる攻撃</span>です。例えばログインフォームに<code class="mono text-sm">' OR 1=1 --</code>と入力すると、SQL文が<span class="mark">「条件が常に真」になってパスワードなしで全ユーザー情報が抜ける</span>ことがある。大規模流出事件の原因として今もトップクラスの攻撃。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① 「全部ちょうだい」と言わせる魔法の呪文</h3>
+                    <p>本来「IDがこれの人だけ」という絞り込みが、<span class="mark">「ID何でもOK」に書き換わる</span>。DBに直接話しかける言語（SQL）を、ユーザー入力で操れてしまうのが原因。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② 対策は「プレースホルダ」</h3>
+                    <p>SQLを組み立てる時に<code class="mono text-sm">?</code>などのプレースホルダを使って、<span class="mark">ユーザー入力を「値」として渡す</span>と、SQLコマンドとしては解釈されない。ORM（O/Rマッパー）を使えば基本自動で対策されます。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +83,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>SQLインジェクションは、<span class="mark">DBへの問い合わせ文を乗っ取る古典攻撃</span>。AIにDB周りを書かせる時は「プレースホルダ使って」と必ず添える。</p>
             </div>
         </div>
 
@@ -99,8 +98,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="xss.html" class="nav-link">← XSS</a>
+            <a href="phishing.html" class="nav-link">次：フィッシング →</a>
         </nav>
     </main>
 

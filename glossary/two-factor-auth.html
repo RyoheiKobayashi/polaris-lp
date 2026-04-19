@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>2段階認証 / MFA（Two-Factor Authentication）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="認証強度を上げる「2段階認証 / MFA」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,13 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-2fa { display: flex; flex-direction: column; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 18px; }
+        .hero-2fa .pw { background: #fff; border: 2px solid var(--line); padding: 14px 28px; border-radius: 8px; color: var(--ink-warm); letter-spacing: 0.3em; }
+        .hero-2fa .plus { color: var(--ink-mute); font-size: 20px; }
+        .hero-2fa .code { background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 8px; letter-spacing: 0.2em; font-weight: 600; animation: fa-recv 2.5s ease-in-out infinite; }
+        @keyframes fa-recv { 0%, 40% { opacity: 0; transform: translateY(-6px); } 60%, 95% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-6px); } }
+
     </style>
 </head>
 <body>
@@ -53,29 +52,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">93 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Two-Factor Authentication / MFA</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">2段階認証 / MFA</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">パスワード + もう1つの鍵</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-2fa"><div class="pw">••••••••</div><span class="plus">+</span><div class="code">492 837</div></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">2段階認証 / MFAってそもそも何？</h2>
+            <p><span class="mark">パスワードに加えて「もう1つの要素」で本人確認する認証方式</span>です。もう1つとは、スマホに届く6桁コード、認証アプリ（Google Authenticator等）、指紋、セキュリティキーなど。パスワードが漏れても<span class="mark">もう1つの要素がないと入れない</span>ので、セキュリティが飛躍的に向上します。MFA（多要素認証）は、要素が2つ以上のもの全般を指す、より広い言葉。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① 家の鍵とカードキーの二重ロック</h3>
+                    <p>オートロックのマンションで、外の扉はカードキー、部屋の扉は鍵。<span class="mark">片方だけ盗られても入れない</span>のが2段階の意味。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② 講座運営者は今すぐオンにすべき</h3>
+                    <p>Gmail・X・ChatGPT・UTAGE・LINE公式…重要アカウントが1つ乗っ取られるだけで事業停止です。<span class="mark">2段階認証は「保険」ではなく「必須設備」</span>。コストゼロでリスクを激減できる、やらない理由がない対策。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +83,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>2段階認証 / MFAは、<span class="mark">「パスワードだけじゃ入れない」状態を作る守り</span>。全ての主要アカウントで今すぐオンに。これだけで事故の半分は防げます。</p>
             </div>
         </div>
 
@@ -99,8 +98,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="phishing.html" class="nav-link">← フィッシング</a>
+            <a href="password-hashing.html" class="nav-link">次：パスワードハッシュ化 →</a>
         </nav>
     </main>
 

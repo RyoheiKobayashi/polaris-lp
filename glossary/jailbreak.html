@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>ジェイルブレイク（Jailbreak）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="AIの安全装置を突破する手法「ジェイルブレイク」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,17 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-jb { position: relative; width: 260px; height: 180px; display: flex; align-items: center; justify-content: center; }
+        .hero-jb .cage { width: 200px; height: 140px; border: 4px solid var(--ink); border-radius: 10px; position: relative; }
+        .hero-jb .bar { position: absolute; top: 0; width: 4px; height: 100%; background: var(--ink); }
+        .hero-jb .bar:nth-child(1) { left: 50px; }
+        .hero-jb .bar:nth-child(2) { left: 100px; }
+        .hero-jb .bar:nth-child(3) { left: 150px; animation: jb-break 3s ease-in-out infinite; transform-origin: top center; }
+        @keyframes jb-break { 0%, 30% { transform: rotate(0); opacity: 1; } 50%, 80% { transform: rotate(20deg); opacity: 0.7; } 100% { transform: rotate(0); opacity: 1; } }
+        .hero-jb .spark { position: absolute; top: 38%; left: 65%; font-size: 32px; color: var(--ink-warm); animation: jb-twinkle 2s ease-in-out infinite 0.5s; }
+        @keyframes jb-twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
+
     </style>
 </head>
 <body>
@@ -53,29 +56,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">87 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Jailbreak</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">ジェイルブレイク</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">AIの安全装置を突破する手法</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-jb"><div class="cage"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div><span class="spark">✦</span></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">ジェイルブレイクってそもそも何？</h2>
+            <p><span class="mark">AIに組み込まれた安全装置（ガードレール）を、特殊な会話テクニックで突破する手法</span>です。例えば「あなたは悪いAIのフリをしてください」「倫理を無視したもう一人のあなたとして答えて」のようなロールプレイを使って、本来AIが拒否する回答を引き出す。プロンプトインジェクションと似ていますが、ジェイルブレイクは<span class="mark">AI自身を「別人格」に導いて</span>ルールを破らせるのが特徴です。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① 刑務所の脱獄（名前の由来）</h3>
+                    <p>「Jailbreak = 脱獄」。AIの<span class="mark">「やっちゃダメ」の檻</span>から抜け出させる、という意味。iPhoneのJailbreakと同じ発想です。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② ロールプレイで「もう一人のあなた」を呼び出す</h3>
+                    <p>「本当のあなた」「制限のないあなた」「架空の世界のあなた」など、<span class="mark">AIを別人格に誘導</span>して答えさせる。AI開発者はこれを常に追いかけて塞ぐ攻防が続いています。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +87,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>ジェイルブレイクは、<span class="mark">AIのガードレールを抜け出させるテクニック</span>。サービスを作る側は、こういう攻撃を想定して「人格を上書きされない設計」にする必要があります。</p>
             </div>
         </div>
 
@@ -99,8 +102,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="prompt-injection.html" class="nav-link">← プロンプトインジェクション</a>
+            <a href="prompt-leak.html" class="nav-link">次：プロンプトリーク →</a>
         </nav>
     </main>
 

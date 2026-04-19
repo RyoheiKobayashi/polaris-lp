@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>ブルートフォース攻撃（Brute Force）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="総当たり攻撃「ブルートフォース」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,17 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-bf { display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 16px; }
+        .hero-bf .try { background: #fff; border: 1.5px solid var(--line); padding: 10px 24px; border-radius: 6px; min-width: 180px; text-align: center; color: var(--ink-warm); }
+        .hero-bf .cycle { opacity: 0; animation: bf-cyc 3s ease-in-out infinite; }
+        .hero-bf .cycle:nth-child(1) { animation-delay: 0s; }
+        .hero-bf .cycle:nth-child(2) { animation-delay: 0.8s; }
+        .hero-bf .cycle:nth-child(3) { animation-delay: 1.6s; }
+        @keyframes bf-cyc { 0%, 5% { opacity: 0; } 15%, 25% { opacity: 1; } 35%, 100% { opacity: 0; } }
+        .hero-bf .hit { background: var(--mark); border-color: var(--ink); opacity: 0; animation: bf-got 3s ease-in-out infinite; font-weight: 600; }
+        @keyframes bf-got { 0%, 60% { opacity: 0; transform: scale(0.9); } 75%, 95% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; } }
+
     </style>
 </head>
 <body>
@@ -53,29 +56,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">89 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Brute Force Attack</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">ブルートフォース攻撃</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">総当たりで鍵を破る古典的攻撃</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-bf"><div class="try cycle">0000</div><div class="try cycle">1234</div><div class="try cycle">pass</div><div class="try hit">hunter2 ✓</div></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">ブルートフォース攻撃ってそもそも何？</h2>
+            <p><span class="mark">可能なパスワードを全て試す「総当たり攻撃」</span>です。4桁の暗証番号なら0000〜9999まで全部試す、英数字8文字なら膨大な組み合わせを機械的に試行する。コンピュータの高速化で、弱いパスワードなら<span class="mark">数分〜数時間で破られる</span>。最も古典的な攻撃だが、今もあらゆるログイン画面に飛んでくる最も多い攻撃でもあります。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① ダイヤル錠を全部試す</h3>
+                    <p>3桁のダイヤル錠なら000から999まで、1000通り試せば必ず開く。<span class="mark">時間さえあれば必ず破れる</span>のがブルートフォース。守る側は「試行回数を制限する」「強いパスワードを使う」で対抗します。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② 「hunter2」は有名な弱いパスワード</h3>
+                    <p>「password」「123456」「qwerty」は毎年世界ワースト1位を争う定番。<span class="mark">辞書攻撃</span>（よく使われるパスワード集を優先的に試す）と組み合わせると、弱いパスワードは数秒で破られます。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +87,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>ブルートフォース攻撃は、<span class="mark">総当たりで機械的に鍵を破る古典的攻撃</span>。対策は「長い&ランダムなパスワード」「2段階認証」「レート制限」のセット。</p>
             </div>
         </div>
 
@@ -99,8 +102,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="prompt-leak.html" class="nav-link">← プロンプトリーク</a>
+            <a href="xss.html" class="nav-link">次：XSS →</a>
         </nav>
     </main>
 

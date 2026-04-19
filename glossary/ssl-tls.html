@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>SSL/TLS（HTTPS）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="通信を暗号化する標準技術「SSL/TLS」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,13 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-ssl { display: flex; align-items: center; gap: 14px; background: #fff; border: 2px solid var(--line); border-radius: 30px; padding: 14px 28px; font-family: var(--font-mono); font-size: 18px; color: var(--ink-warm); min-width: 340px; }
+        .hero-ssl .lock { width: 22px; height: 22px; border: 3px solid var(--ink); border-radius: 4px; position: relative; animation: sl-lock 2.5s ease-in-out infinite; }
+        .hero-ssl .lock::before { content: ''; position: absolute; top: -10px; left: 50%; width: 14px; height: 12px; border: 3px solid var(--ink); border-bottom: none; border-radius: 7px 7px 0 0; transform: translateX(-50%); }
+        @keyframes sl-lock { 0%, 100% { background: transparent; } 50% { background: var(--mark); } }
+        .hero-ssl .prefix { color: var(--ink); font-weight: 600; }
+
     </style>
 </head>
 <body>
@@ -53,29 +52,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">95 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">SSL / TLS</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">SSL / TLS</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">通信を暗号化する標準技術</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-ssl"><div class="lock"></div><span><span class="prefix">https://</span>polaris-app.jp</span></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">SSL/TLSってそもそも何？</h2>
+            <p><span class="mark">Webの通信を暗号化する標準技術</span>です。URLが「http://」ではなく「https://」になっているサイトは全てこれを使っている。ブラウザの鍵マーク🔒は、この技術が有効な証。通信内容（パスワード・クレジットカード番号・個人情報）が<span class="mark">第三者に盗聴されても読めない形</span>で伝わります。今どきHTTPS化していないサイトは、Googleに「安全ではない」と表示されて信頼性もSEOも下がる、と知っておけばOK。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① 普通郵便 vs 書留</h3>
+                    <p>普通郵便は封筒を開ければ誰でも読める（= HTTP）。書留は鍵付きで宛先しか開けられない（= HTTPS）。<span class="mark">個人情報を扱うなら書留一択</span>、という話です。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② Let's Encrypt で無料化した</h3>
+                    <p>昔はHTTPS化に年数万円かかりましたが、Let's Encryptなどで<span class="mark">今はほぼ無料</span>。GitHub Pages・Vercel・Netlifyなどの静的ホスティングは自動でHTTPS化されるので、利用者が何もしなくてOK。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +83,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>SSL/TLSは、<span class="mark">Webの通信を暗号化する標準技術</span>。今はほぼ無料で使えるので、サイトを公開するなら必ずHTTPSにする。これ無しは事故・信頼失墜・SEO減の三重苦。</p>
             </div>
         </div>
 
@@ -99,8 +98,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="password-hashing.html" class="nav-link">← パスワードハッシュ化</a>
+            <a href="rate-limit.html" class="nav-link">次：レート制限 →</a>
         </nav>
     </main>
 

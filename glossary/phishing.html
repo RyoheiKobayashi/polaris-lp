@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAS（Google Apps Script）とは｜アニメーションでわかるAI用語集</title>
-    <meta name="description" content="Googleサービス自動化の「GAS」を、アニメーションで3秒で理解。">
+    <title>フィッシング（Phishing）とは｜アニメーションでわかるAI用語集</title>
+    <meta name="description" content="偽サイトで情報を釣る詐欺「フィッシング」を、アニメーションで3秒で理解。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
@@ -33,14 +33,13 @@
         .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
         .nav-link:hover { color: var(--ink); text-decoration: underline; }
         .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
-        
-        .hero-gs { display: flex; align-items: center; gap: 20px; }
-        .hero-gs .icon { width: 80px; height: 80px; border-radius: 16px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
-        .hero-gs .code { font-family: var(--font-mono); font-size: 16px; color: var(--ink-warm); line-height: 1.7; }
-        .hero-gs .kw { color: var(--ink); font-weight: 500; }
-        .hero-gs .gear { animation: gs-rotate 4s linear infinite; display: inline-block; font-size: 20px; }
-        @keyframes gs-rotate { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-        
+
+        .hero-phish { display: flex; flex-direction: column; gap: 14px; font-family: var(--font-mono); font-size: 18px; }
+        .hero-phish .url { background: #fff; border: 2px solid var(--line); padding: 14px 26px; border-radius: 6px; color: var(--ink-warm); min-width: 280px; }
+        .hero-phish .url.fake { animation: ph-alert 2.4s ease-in-out infinite; }
+        @keyframes ph-alert { 0%, 100% { border-color: var(--line); background: #fff; } 50% { border-color: var(--ink); background: var(--mark); } }
+        .hero-phish .diff { color: var(--ink); font-weight: 600; }
+
     </style>
 </head>
 <body>
@@ -53,29 +52,29 @@
 
     <main class="container mx-auto px-6 py-16 max-w-3xl">
         <header class="mb-14">
-            <div class="cat-label mb-3">85 · G. エンジニアリング</div>
-            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Google Apps Script</div>
-            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">GAS</h1>
-            <p class="mt-3" style="color: var(--ink-soft);">Googleを自動化する無料の魔法</p>
+            <div class="cat-label mb-3">92 · H. セキュリティ</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">Phishing</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">フィッシング</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">偽サイトで情報を釣る詐欺</p>
         </header>
 
-        <section class="anim-stage"><div class="hero-gs"><div class="icon">G</div><div class="code"><span class="kw">function</span> <span class="gear">⚙</span><br>autoReply()</div></div></section>
+        <section class="anim-stage"><div class="hero-phish"><div class="url">https://apple.com</div><div class="url fake">https://app<span class="diff">ⅼ</span>e.com</div></div></section>
 
         <section class="mb-12">
-            <h2 class="text-2xl mb-4">GASってそもそも何？</h2>
-            <p><span class="mark">Googleサービスを自動化するためのスクリプト環境</span>です。スプレッドシートの自動集計、Gmailの自動返信、カレンダーの予定自動作成、定期実行タスク…<span class="mark">Googleに関連する繰り返し作業を、コードで丸ごと自動化</span>できます。無料・サーバー不要・すぐ使える、の三拍子。AIに「GASで書いて」と頼めばコードが出てきて、そのままスプレッドシートに貼り付けて動かせます。</p>
+            <h2 class="text-2xl mb-4">フィッシングってそもそも何？</h2>
+            <p><span class="mark">本物そっくりの偽サイト・偽メールで、ユーザーから情報を釣る詐欺手法</span>です。「Appleからパスワード確認のお知らせ」「銀行からの重要連絡」といった偽メールに騙されて、パスワードやクレジットカード情報を入力してしまう。<span class="mark">URL文字列のわずかな違い</span>（小文字のLとIなど）で気付きにくい手口が多い。個人でも企業でも、最も身近で最も多い攻撃。</p>
         </section>
 
         <section class="mb-12">
             <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
             <div class="space-y-4">
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例① Googleの中で働く自動ロボット</h3>
-                    <p>Gmailを1日中開いて返信を待つ代わりに、<span class="mark">GASが「特定の件名が来たら自動返信」</span>してくれる。あなたが寝ている間にも、GASは働き続けます。</p>
+                    <h3 class="text-lg mb-2">例① 悪徳訪問販売の「本物そっくり版」</h3>
+                    <p>「お客様のアカウントが停止されました。こちらから再認証を」のような<span class="mark">不安を煽るメール</span>が届く。冷静なら気付くが、忙しい朝や慌てた時に騙される。</p>
                 </div>
                 <div class="card p-6">
-                    <h3 class="text-lg mb-2">例② AIとの相性が抜群</h3>
-                    <p>AIが「このコード貼るだけで動くよ」と言える環境として、GASは群を抜いて使いやすい。<span class="mark">Googleアカウントだけで始まる</span>、初心者の自動化第一歩に最適。</p>
+                    <h3 class="text-lg mb-2">例② 守りは「送信元を疑う癖」</h3>
+                    <p>メール内のリンクは<span class="mark">絶対にクリックせず、公式サイトに自分でアクセス</span>。2段階認証をオンにしておけば、たとえ騙されてもパスワードだけでは侵入されない。</p>
                 </div>
             </div>
         </section>
@@ -84,7 +83,7 @@
             <span class="callout-icon">📝</span>
             <div>
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
-                <p>GASは、<span class="mark">Googleサービスを無料で自動化するスクリプト環境</span>。AI×GASで、日常作業の多くを手放せます。</p>
+                <p>フィッシングは、<span class="mark">偽の皮をかぶった情報釣り詐欺</span>。技術対策より「URLを疑う癖」の方が効く。講座運営では受講生にもこれを教えると喜ばれます。</p>
             </div>
         </div>
 
@@ -99,8 +98,8 @@
         </section>
 
         <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
-            <a href="csv.html" class="nav-link">← CSV</a>
-            <a href="prompt-injection.html" class="nav-link">次：プロンプトインジェクション →</a>
+            <a href="sql-injection.html" class="nav-link">← SQLインジェクション</a>
+            <a href="two-factor-auth.html" class="nav-link">次：2段階認証 →</a>
         </nav>
     </main>
 
