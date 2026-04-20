@@ -184,7 +184,8 @@
                 <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
                 <p>
                     APIキーは<span class="mark">サービスの合鍵</span>、.envは<span class="mark">その金庫</span>。
-                    必ず.envに入れて、.gitignoreで除外する — これがセキュリティの最低限ルールです。
+                    .envに入れて、.gitignoreで除外する — これがセキュリティの<span class="mark">基本の入口</span>。
+                    運用規模が大きくなったらシークレット管理サービス（AWS Secrets Manager、Cloudflare Wrangler Secret 等）の利用も検討してください。
                 </p>
             </div>
         </div>
