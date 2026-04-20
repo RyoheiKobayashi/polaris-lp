@@ -1,0 +1,158 @@
+<!--
+  glossary 詳細ページ テンプレート
+  プレースホルダを `{{TOKEN}}` 形式で記述。scripts/README.md の使い方参照。
+  利用時は `.format()` ではなく `.replace()` を使うこと（CSS波括弧とバッティングしないため）。
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH（SSH）とは｜知ってる言葉でわかるAIの単語</title>
+    <meta name="description" content="SSHを3秒で理解。遠隔のサーバーに安全に接続して操作するための暗号化通信プロトコル。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQR100H021"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'G-EQR100H021');</script>
+    <style>
+        :root { --bg: #ffffff; --bg-warm: #f7f6f3; --surface: #ffffff; --ink: #191919; --ink-warm: #37352f; --ink-soft: #787774; --ink-mute: #9b9a97; --line: #e9e9e7; --accent: #2383e2; --mark: #fdecc8; --callout-yellow: #fdecc8; --font-serif: "Noto Serif JP", ui-serif, Georgia, serif; --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Noto Sans JP", sans-serif; --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+        * { -webkit-font-smoothing: antialiased; }
+        html { font-feature-settings: "palt" 1; }
+        body { font-family: var(--font-sans); color: var(--ink); background: var(--bg); font-size: 17px; line-height: 1.75; }
+        h1, h2, h3 { font-family: var(--font-serif); color: var(--ink-warm); line-height: 1.25; font-weight: 500; }
+        p { color: var(--ink-warm); }
+        a { color: var(--accent); }
+        .cat-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+        .mono { font-family: var(--font-mono); }
+        .mark { background: linear-gradient(transparent 60%, var(--mark) 60%); padding: 0 2px; }
+        .hairline { border-top: 1px solid var(--line); }
+        .callout { display: flex; gap: 14px; padding: 18px 22px; border-radius: 6px; line-height: 1.7; }
+        .callout-yellow { background: var(--callout-yellow); }
+        .callout-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+        .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+        .nav-link { color: var(--ink-soft); text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: var(--ink); text-decoration: underline; }
+        .anim-stage { background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 60px 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 48px; }
+
+        /* ヒーローアニメ: 用語固有のCSS。DESIGN.md の世界観（ink / mark / ink-warm / line）だけで組むこと */
+
+        .hero-ssh { display: flex; align-items: center; gap: 10px; }
+        .hero-ssh .ssh-pc { width: 54px; height: 42px; background: #fff; border: 1.5px solid var(--ink); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; color: var(--ink); }
+        .hero-ssh .ssh-tunnel { flex: 1; min-width: 70px; height: 22px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 11px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .hero-ssh .ssh-lock { font-size: 13px; }
+        .hero-ssh .ssh-dash { position: absolute; top: 50%; left: 10px; right: 10px; height: 2px; background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 8px); transform: translateY(-50%); animation: ssh-flow 1.6s linear infinite; }
+        .hero-ssh .ssh-server { width: 46px; height: 56px; background: #fff; border: 2px solid var(--ink); border-radius: 5px; display: flex; flex-direction: column; gap: 3px; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 9px; color: var(--ink); }
+        .hero-ssh .ssh-server .ssh-layer { width: 30px; height: 3px; background: var(--ink); opacity: 0.5; border-radius: 1px; }
+        @keyframes ssh-flow { 0% { background-position: 0 0; } 100% { background-position: 12px 0; } }
+        
+    </style>
+</head>
+<body>
+    <!-- 上部ナビ -->
+    <div class="border-b sticky top-0 z-40" style="border-color: var(--line); background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between text-sm max-w-3xl">
+            <a href="index.html" class="nav-link">← 一覧に戻る</a>
+            <span class="cat-label">AI · Visual Glossary</span>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-6 py-16 max-w-3xl">
+
+        <!-- ヘッダー -->
+        <header class="mb-14">
+            <div class="cat-label mb-3">116 · G. エンジニアリング</div>
+            <div class="mono text-sm mb-3" style="color: var(--ink-soft);">SSH</div>
+            <h1 class="text-5xl md:text-6xl" style="letter-spacing: -0.01em;">SSH</h1>
+            <p class="mt-3" style="color: var(--ink-soft);">遠くのサーバーに安全につなぐ</p>
+        </header>
+
+        <!-- ヒーローアニメ -->
+        <section class="anim-stage">
+
+            <div class="hero-ssh">
+                <div class="ssh-pc">PC</div>
+                <div class="ssh-tunnel">
+                    <span class="ssh-dash"></span>
+                    <span class="ssh-lock">🔒</span>
+                </div>
+                <div class="ssh-server">
+                    <div class="ssh-layer"></div>
+                    <div class="ssh-layer"></div>
+                    <div class="ssh-layer"></div>
+                </div>
+            </div>
+        
+        </section>
+
+        <!-- 解説 -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-4">SSHってそもそも何？</h2>
+            <p>遠くにあるサーバーに<span class="mark">安全につないで操作</span>するための仕組み。通信は<span class="mark">暗号化されている</span>ので、途中で盗み見られても中身は分かりません。ターミナルから `ssh user@server.com` で入る、あの操作です。サーバー運用や、リモートのマシンにアクセスする時の定番手段。</p>
+        </section>
+
+        <!-- 身近な例え -->
+        <section class="mb-12">
+            <h2 class="text-2xl mb-5">身近な例えで理解する</h2>
+            <div class="space-y-4">
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例① 金庫専用の鍵で開ける貸金庫</h3>
+                    <p>銀行の貸金庫は<span class="mark">自分専用の鍵を持つ人しか開けられない</span>。出し入れの間、銀行側も中身は見ません。SSHも「自分専用の鍵で安全に遠隔のサーバーを触る」仕組みです。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-lg mb-2">例② テレワークで会社PCにつなぐ専用トンネル</h3>
+                    <p>家から会社のPCを操作する時、<span class="mark">暗号化された専用トンネル</span>を使って他人に盗み見られないように繋ぎます。SSHもこの「暗号化トンネル」そのもの。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- まとめ -->
+        <div class="callout callout-yellow mb-14">
+            <span class="callout-icon">📝</span>
+            <div>
+                <div class="text-sm mb-1 mono" style="color: var(--ink-soft);">まとめ</div>
+                <p>SSHは<span class="mark">遠隔操作の安全な接続方法</span>。サーバー作業では避けて通れない基礎です。</p>
+            </div>
+        </div>
+
+        <!-- CTA（全ページ統一） -->
+        <section class="mb-12">
+            <div style="background: var(--bg-warm); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; text-align: center;">
+                <div class="mono text-sm mb-3" style="color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase;">More · Next Step</div>
+                <p class="mb-5" style="color: var(--ink-warm); font-size: 16px; line-height: 1.8;">
+                    AI活用の実例・失敗談を、シェアしている<span class="mark">オープンチャット</span>があります。単語を覚えたあと、実際の使い方に触れたい方へ。
+                </p>
+                <div class="flex justify-center">
+                    <a href="https://line.me/ti/g2/q2VLDd4TUxnM0KNw81_Py7aFXnRgIEghIP0jQg" target="_blank" rel="noopener noreferrer"
+                       style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 26px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;">
+                        オープンチャットを見る →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 前後ナビ -->
+        <nav class="hairline pt-6 flex flex-col sm:flex-row gap-3 justify-between text-sm mt-12">
+            <a href="dns.html" class="nav-link">← DNS</a>
+            <a href="ftp.html" class="nav-link">次：FTP →</a>
+        </nav>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="border-t" style="border-color: var(--line);">
+        <div class="container mx-auto px-6 py-10 max-w-3xl text-sm" style="color: var(--ink-mute);">
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                <a href="disclaimer.html" class="hover:underline" style="color: var(--ink-soft);">免責事項</a>
+                <span>運営: 株式会社レベルアップ</span>
+                <a href="../index.html" class="hover:underline" style="color: var(--ink-soft);">Polaris</a>
+                <span class="ml-auto">© 2025</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -3262,6 +3262,185 @@
             font-size: 11px;
             opacity: 0.6;
         }
+
+        /* ========= G-16. IDE: エディタ風 ========= */
+        .thumb-ide .ti-wrap { font-family: var(--font-mono); font-size: 10px; color: var(--ink-warm); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; line-height: 1.7; }
+        .thumb-ide .ti-kw { color: var(--ink); }
+        .thumb-ide .ti-caret { display: inline-block; width: 1.2px; height: 10px; background: var(--ink); vertical-align: middle; animation: ti-blink 1s step-end infinite; }
+        @keyframes ti-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+        /* ========= G-17. VSCode: タブ付きエディタ ========= */
+        .thumb-vscode .tv-wrap { width: 140px; background: #fff; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+        .thumb-vscode .tv-tab { background: var(--bg-warm); padding: 4px 8px; display: flex; gap: 3px; border-bottom: 1px solid var(--line); }
+        .thumb-vscode .tv-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-mute); }
+        .thumb-vscode .tv-body { padding: 8px 10px; font-family: var(--font-mono); font-size: 9px; color: var(--ink-warm); line-height: 1.7; }
+        .thumb-vscode .tv-str { background: var(--mark); padding: 0 2px; }
+
+        /* ========= G-18. 開発コンテナ: 箱 ========= */
+        .thumb-dvc .tdv-wrap { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9px; }
+        .thumb-dvc .tdv-pc { background: #fff; border: 1px solid var(--line); padding: 5px 8px; border-radius: 4px; color: var(--ink); }
+        .thumb-dvc .tdv-box { width: 48px; height: 36px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 5px; position: relative; }
+        .thumb-dvc .tdv-box::before { content: ""; position: absolute; top: -4px; left: 6px; right: 6px; height: 3px; background: var(--ink); border-radius: 2px 2px 0 0; }
+        .thumb-dvc .tdv-box::after { content: ""; position: absolute; inset: 0; background: var(--mark); opacity: 0; animation: tdv-glow 2.8s ease-in-out infinite; border-radius: 3px; }
+        @keyframes tdv-glow { 0%, 40% { opacity: 0; } 60% { opacity: 0.3; } 100% { opacity: 0; } }
+
+        /* ========= G-19. 環境変数: 矢印 ========= */
+        .thumb-evar .tev-wrap { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9px; }
+        .thumb-evar .tev-code { background: #fff; border: 1px solid var(--line); padding: 5px 8px; border-radius: 4px; color: var(--ink); }
+        .thumb-evar .tev-ref { background: var(--mark); padding: 0 3px; }
+        .thumb-evar .tev-box { background: var(--bg-warm); border: 1px dashed var(--ink); padding: 5px 8px; border-radius: 4px; color: var(--ink-warm); animation: tev-p 2.6s ease-in-out infinite; }
+        @keyframes tev-p { 0%, 100% { border-color: var(--ink); } 50% { border-color: var(--ink-mute); } }
+
+        /* ========= G-20. mkdir: フォルダ生成 ========= */
+        .thumb-mkdir .tmk-wrap { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .thumb-mkdir .tmk-cmd { font-family: var(--font-mono); font-size: 10px; background: var(--ink); color: #fff; padding: 4px 8px; border-radius: 3px; }
+        .thumb-mkdir .tmk-folder { width: 34px; height: 26px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 3px 3px 4px 4px; position: relative; animation: tmk-in 2.8s ease-in-out infinite; }
+        .thumb-mkdir .tmk-folder::before { content: ""; position: absolute; top: -3px; left: 4px; width: 14px; height: 4px; background: var(--ink); border-radius: 2px 2px 0 0; }
+        @keyframes tmk-in { 0%, 30% { opacity: 0; transform: scale(0.7); } 50%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; transform: scale(1.05); } }
+
+        /* ========= G-21. rm: ファイル消滅 ========= */
+        .thumb-rm .trm-wrap { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+        .thumb-rm .trm-cmd { font-family: var(--font-mono); font-size: 10px; background: var(--ink); color: #fff; padding: 4px 8px; border-radius: 3px; }
+        .thumb-rm .trm-file { width: 30px; height: 36px; background: #fff; border: 1.5px solid var(--ink); border-radius: 3px; position: relative; animation: trm-go 2.8s ease-in-out infinite; }
+        .thumb-rm .trm-file::before { content: ""; position: absolute; top: 0; right: 0; border-top: 7px solid var(--line); border-left: 7px solid transparent; }
+        @keyframes trm-go { 0%, 30% { opacity: 1; transform: none; } 70%, 100% { opacity: 0; transform: scale(0.6) rotate(-10deg); filter: blur(3px); } }
+
+        /* ========= G-22. .gitignore: 除外リスト ========= */
+        .thumb-gi .tgi-wrap { font-family: var(--font-mono); font-size: 9px; color: var(--ink-warm); background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; line-height: 1.6; min-width: 100px; }
+        .thumb-gi .tgi-skip { color: var(--ink-mute); text-decoration: line-through; animation: tgi-sk 3s ease-in-out infinite; }
+        @keyframes tgi-sk { 0%, 40% { color: var(--ink-warm); text-decoration: none; } 60%, 100% { color: var(--ink-mute); text-decoration: line-through; } }
+
+        /* ========= G-23. Git: コミットチェーン ========= */
+        .thumb-git .tgit-wrap { display: flex; align-items: center; gap: 3px; }
+        .thumb-git .tgit-node { width: 14px; height: 14px; border-radius: 50%; background: var(--bg-warm); border: 1.5px solid var(--ink); }
+        .thumb-git .tgit-node.hl { background: var(--mark); animation: tgit-b 2.4s ease-in-out infinite; }
+        .thumb-git .tgit-line { width: 10px; height: 1.5px; background: var(--ink); }
+        @keyframes tgit-b { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* ========= G-24. フロントエンド: 画面 ========= */
+        .thumb-fe .tfe-wrap { width: 110px; background: #fff; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+        .thumb-fe .tfe-bar { background: var(--bg-warm); padding: 3px 5px; display: flex; gap: 2px; }
+        .thumb-fe .tfe-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--ink-mute); }
+        .thumb-fe .tfe-body { padding: 6px 8px; }
+        .thumb-fe .tfe-ttl { height: 6px; background: var(--ink); border-radius: 1px; margin-bottom: 3px; }
+        .thumb-fe .tfe-p { height: 2px; background: var(--line); margin-bottom: 2px; }
+        .thumb-fe .tfe-btn { display: inline-block; padding: 3px 8px; background: var(--ink); color: #fff; font-size: 8px; font-family: var(--font-mono); border-radius: 2px; margin-top: 3px; animation: tfe-h 2.6s ease-in-out infinite; }
+        @keyframes tfe-h { 0%, 100% { transform: none; } 50% { transform: translateY(-2px); } }
+
+        /* ========= G-25. バックエンド: サーバー ========= */
+        .thumb-be .tbe-wrap { display: flex; align-items: center; gap: 6px; }
+        .thumb-be .tbe-user { width: 20px; height: 20px; border-radius: 50%; background: var(--bg-warm); border: 1.5px solid var(--ink); }
+        .thumb-be .tbe-arr { font-family: var(--font-mono); color: var(--ink-mute); font-size: 12px; animation: tbe-f 2.8s ease-in-out infinite; }
+        .thumb-be .tbe-srv { width: 26px; height: 38px; background: #fff; border: 1.5px solid var(--ink); border-radius: 3px; display: flex; flex-direction: column; gap: 3px; padding: 5px 0; align-items: center; }
+        .thumb-be .tbe-layer { width: 16px; height: 3px; background: var(--ink); opacity: 0.5; border-radius: 1px; }
+        .thumb-be .tbe-layer.on { animation: tbe-on 2.8s ease-in-out infinite; }
+        @keyframes tbe-f { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+        @keyframes tbe-on { 0%, 40%, 100% { background: var(--ink); opacity: 0.5; } 60% { background: var(--mark); opacity: 1; } }
+
+        /* ========= G-26. フレームワーク: 土台＋パーツ ========= */
+        .thumb-fw .tfw-wrap { display: flex; align-items: center; gap: 6px; }
+        .thumb-fw .tfw-base { width: 40px; height: 30px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 3px; position: relative; }
+        .thumb-fw .tfw-base::before { content: ""; position: absolute; top: 4px; left: 4px; right: 4px; height: 2px; background: var(--ink); opacity: 0.4; border-radius: 1px; }
+        .thumb-fw .tfw-base::after { content: ""; position: absolute; top: 9px; left: 4px; right: 4px; height: 2px; background: var(--ink); opacity: 0.4; border-radius: 1px; }
+        .thumb-fw .tfw-plus { font-family: var(--font-mono); font-size: 12px; color: var(--ink-mute); }
+        .thumb-fw .tfw-chip { width: 24px; height: 7px; background: var(--mark); border: 1px solid var(--ink); border-radius: 2px; margin-bottom: 3px; animation: tfw-in 2.8s ease-in-out infinite; }
+        .thumb-fw .tfw-chip:nth-child(1) { animation-delay: 0.2s; }
+        .thumb-fw .tfw-chip:nth-child(2) { animation-delay: 0.6s; }
+        @keyframes tfw-in { 0%, 10% { opacity: 0; transform: translateX(-4px); } 30%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+        /* ========= G-27. データベース: 行 ========= */
+        .thumb-db .tdb-wrap { width: 100px; font-family: var(--font-mono); font-size: 8px; background: #fff; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+        .thumb-db .tdb-head { background: var(--ink); color: #fff; padding: 3px 6px; }
+        .thumb-db .tdb-row { padding: 3px 6px; color: var(--ink-warm); border-top: 1px solid var(--line); }
+        .thumb-db .tdb-row.hl { background: var(--mark); animation: tdb-s 3s ease-in-out infinite; }
+        @keyframes tdb-s { 0%, 20%, 100% { background: transparent; } 40%, 80% { background: var(--mark); } }
+
+        /* ========= G-28. キャッシュ: バー ========= */
+        .thumb-cache .tch-wrap { display: flex; flex-direction: column; gap: 5px; width: 120px; }
+        .thumb-cache .tch-row { display: flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 8px; }
+        .thumb-cache .tch-lbl { width: 28px; color: var(--ink-soft); }
+        .thumb-cache .tch-bar { flex: 1; height: 7px; background: var(--bg-warm); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; position: relative; }
+        .thumb-cache .tch-fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ink); }
+        .thumb-cache .tch-row.slow .tch-fill { animation: tch-slw 3s ease-out infinite; }
+        .thumb-cache .tch-row.fast .tch-fill { background: var(--mark); animation: tch-fst 3s ease-out infinite; }
+        @keyframes tch-slw { 0% { width: 0; } 80%, 100% { width: 100%; } }
+        @keyframes tch-fst { 0% { width: 0; } 15%, 100% { width: 100%; } }
+
+        /* ========= G-29. ログ: 行流れ ========= */
+        .thumb-log .tlg-wrap { background: #1a1a1a; border-radius: 4px; padding: 6px 8px; font-family: var(--font-mono); font-size: 8px; color: #eee; line-height: 1.6; width: 130px; height: 54px; overflow: hidden; }
+        .thumb-log .tlg-ln { display: block; animation: tlg-r 3.5s linear infinite; opacity: 0; }
+        .thumb-log .tlg-ln:nth-child(1) { animation-delay: 0s; }
+        .thumb-log .tlg-ln:nth-child(2) { animation-delay: 0.6s; }
+        .thumb-log .tlg-ln:nth-child(3) { animation-delay: 1.2s; }
+        .thumb-log .tlg-ok { color: #8de28e; }
+        @keyframes tlg-r { 0% { opacity: 0; transform: translateY(4px); } 10%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-4px); } }
+
+        /* ========= G-30. Cookie: クッキー ========= */
+        .thumb-cookie .tck-wrap { display: flex; align-items: center; gap: 6px; }
+        .thumb-cookie .tck-b { width: 26px; height: 22px; background: #fff; border: 1.5px solid var(--line); border-radius: 3px; display: flex; flex-direction: column; }
+        .thumb-cookie .tck-tab { background: var(--bg-warm); height: 5px; }
+        .thumb-cookie .tck-ck { width: 16px; height: 16px; border-radius: 50%; background: var(--mark); border: 1.5px solid var(--ink); position: relative; animation: tck-m 3s ease-in-out infinite; }
+        .thumb-cookie .tck-ck::before, .thumb-cookie .tck-ck::after { content: ""; position: absolute; background: var(--ink); border-radius: 50%; }
+        .thumb-cookie .tck-ck::before { width: 3px; height: 3px; top: 3px; left: 5px; }
+        .thumb-cookie .tck-ck::after { width: 2.5px; height: 2.5px; bottom: 4px; right: 3px; }
+        .thumb-cookie .tck-srv { width: 22px; height: 28px; background: #fff; border: 1.5px solid var(--ink); border-radius: 3px; }
+        @keyframes tck-m { 0%, 100% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
+
+        /* ========= G-31. IPアドレス: 数字 ========= */
+        .thumb-ip .tip-wrap { font-family: var(--font-mono); font-size: 12px; color: var(--ink); padding: 6px 10px; background: #fff; border: 1.5px solid var(--line); border-radius: 4px; animation: tip-fl 2.8s ease-in-out infinite; }
+        .thumb-ip .tip-n { background: var(--mark); padding: 0 2px; }
+        @keyframes tip-fl { 0%, 100% { border-color: var(--line); } 50% { border-color: var(--ink); } }
+
+        /* ========= G-32. DNS: 変換 ========= */
+        .thumb-dns .tdns-wrap { display: flex; flex-direction: column; gap: 4px; align-items: center; font-family: var(--font-mono); font-size: 9px; }
+        .thumb-dns .tdns-n { padding: 3px 8px; background: #fff; border: 1px solid var(--line); border-radius: 3px; color: var(--ink); }
+        .thumb-dns .tdns-n .tdns-mk { background: var(--mark); padding: 0 2px; }
+        .thumb-dns .tdns-ar { color: var(--ink-mute); animation: tdns-p 2.4s ease-in-out infinite; }
+        .thumb-dns .tdns-ip { padding: 3px 8px; background: var(--bg-warm); border: 1px dashed var(--ink); border-radius: 3px; color: var(--ink-warm); }
+        @keyframes tdns-p { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* ========= G-33. SSH: トンネル ========= */
+        .thumb-ssh .tsh-wrap { display: flex; align-items: center; gap: 4px; }
+        .thumb-ssh .tsh-pc { width: 22px; height: 18px; background: #fff; border: 1.5px solid var(--ink); border-radius: 2px; }
+        .thumb-ssh .tsh-tn { flex: 1; min-width: 30px; height: 12px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 6px; position: relative; display: flex; align-items: center; justify-content: center; font-size: 8px; }
+        .thumb-ssh .tsh-dash { position: absolute; top: 50%; left: 4px; right: 4px; height: 1.5px; background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 6px); transform: translateY(-50%); animation: tsh-f 1.6s linear infinite; }
+        .thumb-ssh .tsh-srv { width: 18px; height: 24px; background: #fff; border: 1.5px solid var(--ink); border-radius: 2px; }
+        @keyframes tsh-f { 0% { background-position: 0 0; } 100% { background-position: 9px 0; } }
+
+        /* ========= G-34. FTP: ファイル送信 ========= */
+        .thumb-ftp .tftp-wrap { display: flex; align-items: center; gap: 6px; }
+        .thumb-ftp .tftp-pc { width: 22px; height: 18px; background: #fff; border: 1.5px solid var(--ink); border-radius: 2px; }
+        .thumb-ftp .tftp-flow { width: 40px; height: 12px; position: relative; }
+        .thumb-ftp .tftp-f { width: 8px; height: 10px; background: var(--mark); border: 1px solid var(--ink); border-radius: 1px; position: absolute; top: 1px; animation: tftp-m 2.4s ease-in-out infinite; }
+        .thumb-ftp .tftp-f:nth-child(1) { animation-delay: 0s; }
+        .thumb-ftp .tftp-f:nth-child(2) { animation-delay: 0.8s; }
+        .thumb-ftp .tftp-srv { width: 18px; height: 24px; background: #fff; border: 1.5px solid var(--ink); border-radius: 2px; }
+        @keyframes tftp-m { 0% { left: -2px; opacity: 0; } 15% { opacity: 1; } 85% { left: calc(100% - 8px); opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+        /* ========= G-35. Docker: コンテナ箱 ========= */
+        .thumb-dk .tdk-wrap { display: flex; flex-direction: column; gap: 4px; }
+        .thumb-dk .tdk-row { display: flex; gap: 4px; }
+        .thumb-dk .tdk-b { width: 22px; height: 16px; background: var(--bg-warm); border: 1.5px solid var(--ink); border-radius: 2px; position: relative; }
+        .thumb-dk .tdk-b::before { content: ""; position: absolute; top: -3px; left: 2px; right: 2px; height: 2px; background: var(--ink); border-radius: 1px 1px 0 0; }
+        .thumb-dk .tdk-b.hl { background: var(--mark); animation: tdk-p 3s ease-in-out infinite; }
+        @keyframes tdk-p { 0%, 20% { transform: translateY(0); } 40% { transform: translateY(-3px); } 60%, 100% { transform: translateY(0); } }
+
+        /* ========= H-14. 暗号化: 変換 ========= */
+        .thumb-enc .ten-wrap { display: flex; flex-direction: column; gap: 4px; align-items: center; font-family: var(--font-mono); font-size: 11px; }
+        .thumb-enc .ten-t { padding: 4px 10px; background: #fff; border: 1px solid var(--line); border-radius: 3px; color: var(--ink); }
+        .thumb-enc .ten-t.cph { background: var(--bg-warm); color: var(--ink-warm); letter-spacing: 0.05em; }
+        .thumb-enc .ten-ar { font-size: 10px; color: var(--ink-mute); }
+        .thumb-enc .ten-t.plain { animation: ten-h 3s ease-in-out infinite; }
+        .thumb-enc .ten-t.cph { animation: ten-s 3s ease-in-out infinite; }
+        @keyframes ten-h { 0%, 40% { opacity: 1; } 60%, 100% { opacity: 0.3; } }
+        @keyframes ten-s { 0%, 40% { opacity: 0.3; } 60%, 100% { opacity: 1; } }
+
+        /* ========= H-15. 秘密鍵: ペア ========= */
+        .thumb-pk .tpk-wrap { display: flex; gap: 10px; align-items: center; }
+        .thumb-pk .tpk-k { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .thumb-pk .tpk-pub { background: var(--bg-warm); border: 1px dashed var(--ink-soft); }
+        .thumb-pk .tpk-priv { background: var(--mark); border: 1.5px solid var(--ink); animation: tpk-g 2.6s ease-in-out infinite; }
+        @keyframes tpk-g { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
     </style>
 </head>
 <body>
@@ -3292,14 +3471,14 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">98</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">120</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
             <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
             <button class="cat-btn" data-filter="D">AIツール<span class="cat-count">17</span></button>
             <button class="cat-btn" data-filter="E">Claude Code<span class="cat-count">10</span></button>
-            <button class="cat-btn" data-filter="G">エンジニアリング<span class="cat-count">15</span></button>
-            <button class="cat-btn" data-filter="H">セキュリティ<span class="cat-count">13</span></button>
+            <button class="cat-btn" data-filter="G">エンジニアリング<span class="cat-count">35</span></button>
+            <button class="cat-btn" data-filter="H">セキュリティ<span class="cat-count">15</span></button>
         </div>
     </div>
 
@@ -4911,6 +5090,369 @@
                     </div>
                 </a>
 
+                <!-- 99. IDE -->
+                <a href="ide.html" class="term-card">
+                    <div class="thumb thumb-ide">
+                        <div class="thumb-inner">
+                            <div class="ti-wrap">
+                                <span class="ti-kw">function</span> hello() {<br>
+                                &nbsp;&nbsp;<span class="ti-kw">return</span> "hi"<span class="ti-caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>IDE</h3>
+                        <p class="desc">コードを書く<span class="mark">作業台</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 100. VSCode -->
+                <a href="vscode.html" class="term-card">
+                    <div class="thumb thumb-vscode">
+                        <div class="thumb-inner">
+                            <div class="tv-wrap">
+                                <div class="tv-tab"><span class="tv-dot"></span><span class="tv-dot"></span><span class="tv-dot"></span></div>
+                                <div class="tv-body">const name = <span class="tv-str">"koba"</span>;</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>VSCode</h3>
+                        <p class="desc">世界標準の<span class="mark">無料エディタ</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 101. 開発コンテナ -->
+                <a href="dev-container.html" class="term-card">
+                    <div class="thumb thumb-dvc">
+                        <div class="thumb-inner">
+                            <div class="tdv-wrap">
+                                <span class="tdv-pc">PC</span>
+                                <span>→</span>
+                                <div class="tdv-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>開発コンテナ</h3>
+                        <p class="desc">プロジェクト専用の<span class="mark">使い捨て部屋</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 102. 環境変数 -->
+                <a href="env-var.html" class="term-card">
+                    <div class="thumb thumb-evar">
+                        <div class="thumb-inner">
+                            <div class="tev-wrap">
+                                <span class="tev-code">use <span class="tev-ref">KEY</span></span>
+                                <span>→</span>
+                                <span class="tev-box">KEY=***</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>環境変数</h3>
+                        <p class="desc">設定値を<span class="mark">外出し</span>する仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 103. mkdir -->
+                <a href="mkdir.html" class="term-card">
+                    <div class="thumb thumb-mkdir">
+                        <div class="thumb-inner">
+                            <div class="tmk-wrap">
+                                <span class="tmk-cmd">$ mkdir app</span>
+                                <div class="tmk-folder"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>mkdir</h3>
+                        <p class="desc"><span class="mark">フォルダを作る</span>コマンド。</p>
+                    </div>
+                </a>
+
+                <!-- 104. rm -->
+                <a href="rm.html" class="term-card">
+                    <div class="thumb thumb-rm">
+                        <div class="thumb-inner">
+                            <div class="trm-wrap">
+                                <span class="trm-cmd">$ rm file</span>
+                                <div class="trm-file"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>rm</h3>
+                        <p class="desc">戻せない<span class="mark">完全削除</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 105. .gitignore -->
+                <a href="gitignore.html" class="term-card">
+                    <div class="thumb thumb-gi">
+                        <div class="thumb-inner">
+                            <div class="tgi-wrap">
+                                app.js<br>
+                                style.css<br>
+                                <span class="tgi-skip">.secret</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>.gitignore</h3>
+                        <p class="desc">Gitに<span class="mark">記録させない</span>除外リスト。</p>
+                    </div>
+                </a>
+
+                <!-- 106. Git -->
+                <a href="git.html" class="term-card">
+                    <div class="thumb thumb-git">
+                        <div class="thumb-inner">
+                            <div class="tgit-wrap">
+                                <div class="tgit-node"></div>
+                                <div class="tgit-line"></div>
+                                <div class="tgit-node"></div>
+                                <div class="tgit-line"></div>
+                                <div class="tgit-node"></div>
+                                <div class="tgit-line"></div>
+                                <div class="tgit-node hl"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Git</h3>
+                        <p class="desc">変更履歴の<span class="mark">タイムマシン</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 107. フロントエンド -->
+                <a href="frontend.html" class="term-card">
+                    <div class="thumb thumb-fe">
+                        <div class="thumb-inner">
+                            <div class="tfe-wrap">
+                                <div class="tfe-bar"><span class="tfe-dot"></span><span class="tfe-dot"></span><span class="tfe-dot"></span></div>
+                                <div class="tfe-body">
+                                    <div class="tfe-ttl"></div>
+                                    <div class="tfe-p"></div>
+                                    <div class="tfe-p" style="width:70%;"></div>
+                                    <span class="tfe-btn">click</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>フロントエンド</h3>
+                        <p class="desc">ユーザーが見る<span class="mark">画面側</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 108. バックエンド -->
+                <a href="backend.html" class="term-card">
+                    <div class="thumb thumb-be">
+                        <div class="thumb-inner">
+                            <div class="tbe-wrap">
+                                <div class="tbe-user"></div>
+                                <span class="tbe-arr">→</span>
+                                <div class="tbe-srv">
+                                    <div class="tbe-layer"></div>
+                                    <div class="tbe-layer on"></div>
+                                    <div class="tbe-layer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>バックエンド</h3>
+                        <p class="desc">裏で動く<span class="mark">サーバー側</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 109. フレームワーク -->
+                <a href="framework.html" class="term-card">
+                    <div class="thumb thumb-fw">
+                        <div class="thumb-inner">
+                            <div class="tfw-wrap">
+                                <div class="tfw-base"></div>
+                                <span class="tfw-plus">+</span>
+                                <div>
+                                    <div class="tfw-chip"></div>
+                                    <div class="tfw-chip"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>フレームワーク</h3>
+                        <p class="desc">開発の<span class="mark">土台</span>になる共通部品。</p>
+                    </div>
+                </a>
+
+                <!-- 110. データベース -->
+                <a href="database.html" class="term-card">
+                    <div class="thumb thumb-db">
+                        <div class="thumb-inner">
+                            <div class="tdb-wrap">
+                                <div class="tdb-head">id | name</div>
+                                <div class="tdb-row">1 &nbsp;| yamada</div>
+                                <div class="tdb-row hl">2 &nbsp;| koba</div>
+                                <div class="tdb-row">3 &nbsp;| tanaka</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>データベース</h3>
+                        <p class="desc">データを整理して<span class="mark">保管する倉庫</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 111. キャッシュ -->
+                <a href="cache.html" class="term-card">
+                    <div class="thumb thumb-cache">
+                        <div class="thumb-inner">
+                            <div class="tch-wrap">
+                                <div class="tch-row slow">
+                                    <span class="tch-lbl">初回</span>
+                                    <div class="tch-bar"><div class="tch-fill"></div></div>
+                                </div>
+                                <div class="tch-row fast">
+                                    <span class="tch-lbl">2回目</span>
+                                    <div class="tch-bar"><div class="tch-fill"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>キャッシュ</h3>
+                        <p class="desc">結果を<span class="mark">一時保存</span>して高速化。</p>
+                    </div>
+                </a>
+
+                <!-- 112. ログ -->
+                <a href="log.html" class="term-card">
+                    <div class="thumb thumb-log">
+                        <div class="thumb-inner">
+                            <div class="tlg-wrap">
+                                <span class="tlg-ln"><span class="tlg-ok">OK</span> login</span>
+                                <span class="tlg-ln"><span class="tlg-ok">OK</span> save</span>
+                                <span class="tlg-ln"><span class="tlg-ok">OK</span> logout</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ログ</h3>
+                        <p class="desc">システムの<span class="mark">作業記録</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 113. Cookie -->
+                <a href="cookie.html" class="term-card">
+                    <div class="thumb thumb-cookie">
+                        <div class="thumb-inner">
+                            <div class="tck-wrap">
+                                <div class="tck-b"><div class="tck-tab"></div></div>
+                                <div class="tck-ck"></div>
+                                <div class="tck-srv"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Cookie</h3>
+                        <p class="desc">ブラウザが覚える<span class="mark">小さなメモ</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 114. IPアドレス -->
+                <a href="ip-address.html" class="term-card">
+                    <div class="thumb thumb-ip">
+                        <div class="thumb-inner">
+                            <div class="tip-wrap"><span class="tip-n">192</span>.<span class="tip-n">168</span>.0.1</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>IPアドレス</h3>
+                        <p class="desc">ネット上の<span class="mark">住所</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 115. DNS -->
+                <a href="dns.html" class="term-card">
+                    <div class="thumb thumb-dns">
+                        <div class="thumb-inner">
+                            <div class="tdns-wrap">
+                                <span class="tdns-n"><span class="tdns-mk">polaris.jp</span></span>
+                                <span class="tdns-ar">↓</span>
+                                <span class="tdns-ip">93.184.x.x</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>DNS</h3>
+                        <p class="desc">ドメインと住所を繋ぐ<span class="mark">電話帳</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 116. SSH -->
+                <a href="ssh.html" class="term-card">
+                    <div class="thumb thumb-ssh">
+                        <div class="thumb-inner">
+                            <div class="tsh-wrap">
+                                <div class="tsh-pc"></div>
+                                <div class="tsh-tn"><span class="tsh-dash"></span>🔒</div>
+                                <div class="tsh-srv"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>SSH</h3>
+                        <p class="desc">遠隔サーバーに<span class="mark">安全につなぐ</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 117. FTP -->
+                <a href="ftp.html" class="term-card">
+                    <div class="thumb thumb-ftp">
+                        <div class="thumb-inner">
+                            <div class="tftp-wrap">
+                                <div class="tftp-pc"></div>
+                                <div class="tftp-flow">
+                                    <div class="tftp-f"></div>
+                                    <div class="tftp-f"></div>
+                                </div>
+                                <div class="tftp-srv"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>FTP</h3>
+                        <p class="desc">古典の<span class="mark">ファイル転送</span>プロトコル。</p>
+                    </div>
+                </a>
+
+                <!-- 118. Docker -->
+                <a href="docker.html" class="term-card">
+                    <div class="thumb thumb-dk">
+                        <div class="thumb-inner">
+                            <div class="tdk-wrap">
+                                <div class="tdk-row">
+                                    <div class="tdk-b"></div>
+                                    <div class="tdk-b hl"></div>
+                                    <div class="tdk-b"></div>
+                                </div>
+                                <div class="tdk-row">
+                                    <div class="tdk-b"></div>
+                                    <div class="tdk-b"></div>
+                                    <div class="tdk-b"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Docker</h3>
+                        <p class="desc">環境を<span class="mark">箱ごと配る</span>仕組み。</p>
+                    </div>
+                </a>
+
             </div>
         </section>
 
@@ -5153,6 +5695,39 @@
                     <div class="card-body">
                         <h3>OWASP Top 10</h3>
                         <p class="desc">Web脆弱性の<span class="mark">代表10項目</span>の定番リスト。</p>
+                    </div>
+                </a>
+
+                <!-- 119. 暗号化 -->
+                <a href="encryption.html" class="term-card">
+                    <div class="thumb thumb-enc">
+                        <div class="thumb-inner">
+                            <div class="ten-wrap">
+                                <span class="ten-t plain">hello</span>
+                                <span class="ten-ar">↓</span>
+                                <span class="ten-t cph">#@$!%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>暗号化</h3>
+                        <p class="desc">鍵がないと<span class="mark">読めなくする</span>技術。</p>
+                    </div>
+                </a>
+
+                <!-- 120. 秘密鍵 -->
+                <a href="private-key.html" class="term-card">
+                    <div class="thumb thumb-pk">
+                        <div class="thumb-inner">
+                            <div class="tpk-wrap">
+                                <div class="tpk-k tpk-pub">📤</div>
+                                <div class="tpk-k tpk-priv">🔐</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>秘密鍵</h3>
+                        <p class="desc">自分だけが持つ<span class="mark">合鍵</span>。</p>
                     </div>
                 </a>
 
