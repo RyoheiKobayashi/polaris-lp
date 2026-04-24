@@ -31,9 +31,13 @@
             gap: 20px;
             max-width: 560px;
             margin: 0 auto;
+            min-height: 260px;
         }
         @media (min-width: 640px) {
             .mem-layout { grid-template-columns: 1.3fr 1fr; }
+        }
+        .mem-layout > div:first-child {
+            min-height: 240px;
         }
         .mem-box {
             background: var(--bg-warm);
