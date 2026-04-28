@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/glossary", "destination": "/glossary/", "permanent": true },
+    { "source": "/contents", "destination": "/contents/", "permanent": true },
+    { "source": "/learning", "destination": "/learning/", "permanent": true }
+  ]
+}
