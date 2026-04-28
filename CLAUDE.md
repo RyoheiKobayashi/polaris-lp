@@ -148,6 +148,17 @@ Support:  ¥2,980/月
 
 ## 🚀 デプロイ
 
+### ホスティング
+- **Vercel**（静的デプロイ）。`main` ブランチへのpushで自動デプロイ
+- 正規ドメイン: `https://www.polaris-app.jp`（apex `polaris-app.jp` → www へ308リダイレクトはVercelダッシュボードで設定）
+- `vercel.json` のリダイレクト: `/glossary` `/contents` `/learning` を末尾スラッシュ付きに301（相対URL事故防止）
+- カスタム404: `404.html` をリポジトリ直下に置けばVercelが自動的に404レスポンスに使う
+
+### SEO / OGP
+- 全ページに `<link rel="canonical">` `og:*` `twitter:*` 注入済み（`scripts/inject-meta-tags.py` が冪等で全HTMLに反映）
+- OGP画像はカテゴリ別3枚: `images/ogp-glossary.png` / `ogp-contents.png` / `ogp-learning.png`
+- 新規ページ追加時は `scripts/README.md` の手順に従い `OG_TITLE` / `CANONICAL_URL` を埋める。漏れた場合 `python3 scripts/inject-meta-tags.py` を再実行で自動補完
+
 ### App Store/Google Play リンク準備
 index.html 27-50行目、300-333行目にコメントアウトされたリンクテンプレートあり。
 リリース時:
