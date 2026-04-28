@@ -6,8 +6,11 @@ glossary 運用用のツール置き場。
 
 | ファイル | 用途 |
 |---|---|
-| `detail-page-template.html` | 詳細ページの雛形（穴埋めプレースホルダ付き） |
+| `detail-page-template.html` | glossary 詳細ページの雛形（穴埋めプレースホルダ付き） |
+| `contents-detail-page-template.html` | contents 詳細ページの雛形 |
 | `audit-examples.py` | 全単語の「身近な例え」を抽出して `examples-audit.md` に出力 |
+| `generate-ogp.py` | OGPデフォルト画像（カテゴリ別3枚）を生成 |
+| `inject-meta-tags.py` | 全HTMLにOGP/canonical/Twitter Cardを一括注入（冪等） |
 
 ---
 
@@ -26,6 +29,8 @@ glossary 運用用のツール置き場。
 | `{{NAME}}` | 日本語名（h1に入る） | `プロンプトインジェクション` |
 | `{{SUB}}` | 1行サブタイトル | `AIへの「悪意ある命令」の混入` |
 | `{{META_DESC}}` | meta description | `AIに悪意の指示を混入させる攻撃を3秒で理解。` |
+| `{{OG_TITLE}}` | OGP用タイトル（通常は`<title>`と同じ） | `プロンプトインジェクション（Prompt Injection）とは｜知ってる言葉でわかるAIの単語` |
+| `{{CANONICAL_URL}}` | canonical URL（`https://www.polaris-app.jp/...`） | `https://www.polaris-app.jp/glossary/prompt-injection.html` |
 | `{{HERO_CSS}}` | アニメのCSS（`.hero-xxx { ... }`） | DESIGN.mdの色だけで組む |
 | `{{HERO_HTML}}` | アニメのHTML | `<div class="hero-xxx">...</div>` |
 | `{{EXPLAIN}}` | 「〇〇ってそもそも何？」の解説 | mark強調つきで1段落 |
@@ -43,12 +48,16 @@ glossary 運用用のツール置き場。
 with open('scripts/detail-page-template.html') as f:
     tpl = f.read()
 
+slug = 'prompt-injection.html'  # 出力ファイル名
 data = {
     'NUM': '86',
     'CAT': 'H',
     'CAT_LABEL': 'セキュリティ',
     'EN': 'Prompt Injection',
     'NAME': 'プロンプトインジェクション',
+    # OGP用（必須）
+    'OG_TITLE': f"プロンプトインジェクション（Prompt Injection）とは｜知ってる言葉でわかるAIの単語",
+    'CANONICAL_URL': f"https://www.polaris-app.jp/glossary/{slug}",
     # ... 以下同じく
 }
 
@@ -61,6 +70,8 @@ with open('glossary/prompt-injection.html', 'w') as f:
 ```
 
 **重要**: `.format()` は使わないこと。CSS波括弧（`{ }`）と干渉する。必ず `.replace()`。
+
+**OGP_TITLE / CANONICAL_URL を埋め忘れた場合**: ページに `{{OG_TITLE}}` の文字列がそのまま残る。発見次第 `python3 scripts/inject-meta-tags.py --force --filter <ファイル名>` で上書き再生成可能（既存の `<meta name="description">` から自動抽出される）。
 
 ### 3. index.html 3箇所を更新
 
