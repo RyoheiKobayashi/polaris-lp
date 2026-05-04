@@ -3245,6 +3245,90 @@
             100%     { opacity: 0; transform: translateX(-4px); }
         }
 
+        /* ========= F. ビジネス系カードアニメ ========= */
+        /* マークアップ: 3バーが順に伸びる */
+        .thumb-markup .mu-wrap { display: flex; flex-direction: column; gap: 10px; width: 80%; }
+        .thumb-markup .mu-bar { height: 8px; background: var(--ink-warm); border-radius: 4px; transform-origin: left center; transform: scaleX(0); animation: mu-grow 4s ease-in-out infinite; }
+        .thumb-markup .mu-bar:nth-child(1) { width: 35%; animation-delay: 0s; }
+        .thumb-markup .mu-bar:nth-child(2) { width: 60%; opacity: 0.75; animation-delay: 0.6s; }
+        .thumb-markup .mu-bar:nth-child(3) { width: 85%; opacity: 0.5; animation-delay: 1.2s; }
+        @keyframes mu-grow { 0% { transform: scaleX(0); } 25%, 100% { transform: scaleX(1); } }
+
+        /* ロックイン: 鎖が回転、矢印が跳ね返る */
+        .thumb-lockin .lk-wrap { position: relative; width: 110px; height: 110px; }
+        .thumb-lockin .lk-circle { position: absolute; inset: 0; border: 2px dashed var(--ink-mute); border-radius: 50%; opacity: 0.6; animation: lk-spin 8s linear infinite; }
+        .thumb-lockin .lk-box { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 56px; height: 40px; background: var(--surface); border: 2px solid var(--ink-warm); border-radius: 4px; }
+        .thumb-lockin .lk-arrow { position: absolute; right: -22px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--ink-warm); animation: lk-bounce 2.4s ease-in-out infinite; }
+        @keyframes lk-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+        @keyframes lk-bounce { 0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.8; } 40% { transform: translateY(-50%) translateX(14px); opacity: 0.2; } 60% { transform: translateY(-50%) translateX(0); opacity: 0.8; } }
+
+        /* プリペイド: 残高ゲージが減る */
+        .thumb-prepaid .pp-wrap { display: flex; flex-direction: column; gap: 12px; width: 70%; align-items: center; }
+        .thumb-prepaid .pp-gauge { width: 100%; height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+        .thumb-prepaid .pp-fill { height: 100%; background: var(--ink-warm); border-radius: 8px; width: 100%; animation: pp-drain 5s ease-in-out infinite; }
+        .thumb-prepaid .pp-amount { font-family: var(--font-mono); font-size: 13px; color: var(--ink-warm); font-weight: 600; }
+        @keyframes pp-drain { 0% { width: 100%; } 25% { width: 65%; } 50% { width: 35%; } 75% { width: 12%; } 100% { width: 100%; } }
+
+        /* マーケットプレイス: 6カードが順に光る */
+        .thumb-marketplace .mp-wrap { display: grid; grid-template-columns: repeat(3, 28px); gap: 6px; }
+        .thumb-marketplace .mp-cell { aspect-ratio: 1/1; background: var(--surface); border: 1px solid var(--line); border-radius: 3px; animation: mp-glow 4.8s ease-in-out infinite; }
+        .thumb-marketplace .mp-cell:nth-child(1) { animation-delay: 0s; }
+        .thumb-marketplace .mp-cell:nth-child(2) { animation-delay: 0.6s; }
+        .thumb-marketplace .mp-cell:nth-child(3) { animation-delay: 1.2s; }
+        .thumb-marketplace .mp-cell:nth-child(4) { animation-delay: 1.8s; }
+        .thumb-marketplace .mp-cell:nth-child(5) { animation-delay: 2.4s; }
+        .thumb-marketplace .mp-cell:nth-child(6) { animation-delay: 3.0s; }
+        @keyframes mp-glow { 0%, 60%, 100% { background: var(--surface); border-color: var(--line); transform: scale(1); } 10%, 25% { background: var(--mark); border-color: var(--ink-warm); transform: scale(1.1); } }
+
+        /* 従量課金: メーターの針が回る */
+        .thumb-payg .py-wrap { position: relative; width: 100px; height: 100px; }
+        .thumb-payg .py-dial { position: absolute; inset: 0; border: 2px solid var(--ink-warm); border-radius: 50%; }
+        .thumb-payg .py-needle { position: absolute; left: 50%; top: 50%; width: 2px; height: 38px; background: var(--ink-warm); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(-90deg); animation: py-spin 3.6s linear infinite; }
+        .thumb-payg .py-pivot { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; background: var(--ink-warm); border-radius: 50%; transform: translate(-50%, -50%); }
+        .thumb-payg .py-mark { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 9px; color: var(--mark); background: var(--ink-warm); padding: 1px 4px; border-radius: 2px; }
+        @keyframes py-spin { from { transform: translate(-50%, -100%) rotate(-90deg); } to { transform: translate(-50%, -100%) rotate(270deg); } }
+
+        /* 定額課金: 毎月$が出現 */
+        .thumb-flatrate .fl-wrap { display: grid; grid-template-columns: repeat(4, 22px); gap: 4px; }
+        .thumb-flatrate .fl-cell { aspect-ratio: 1/1; background: var(--surface); border: 1px solid var(--line); border-radius: 2px; position: relative; }
+        .thumb-flatrate .fl-cell::after { content: "$"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; color: var(--ink-warm); opacity: 0; animation: fl-charge 4s ease-in-out infinite; }
+        .thumb-flatrate .fl-cell:nth-child(1)::after { animation-delay: 0s; }
+        .thumb-flatrate .fl-cell:nth-child(2)::after { animation-delay: 0.3s; }
+        .thumb-flatrate .fl-cell:nth-child(3)::after { animation-delay: 0.6s; }
+        .thumb-flatrate .fl-cell:nth-child(4)::after { animation-delay: 0.9s; }
+        .thumb-flatrate .fl-cell:nth-child(5)::after { animation-delay: 1.2s; }
+        .thumb-flatrate .fl-cell:nth-child(6)::after { animation-delay: 1.5s; }
+        .thumb-flatrate .fl-cell:nth-child(7)::after { animation-delay: 1.8s; }
+        .thumb-flatrate .fl-cell:nth-child(8)::after { animation-delay: 2.1s; }
+        @keyframes fl-charge { 0%, 80%, 100% { opacity: 0; transform: scale(0.7); } 25%, 60% { opacity: 1; transform: scale(1); background: var(--mark); } }
+
+        /* ========= G追加. エンジニアリング系カードアニメ ========= */
+        /* サーバーレス: サーバーが消えてλが残る */
+        .thumb-serverless .sl-wrap { display: flex; align-items: center; gap: 12px; }
+        .thumb-serverless .sl-server { width: 36px; height: 48px; border: 2px solid var(--ink-warm); border-radius: 4px; position: relative; animation: sl-fade 3.6s ease-in-out infinite; }
+        .thumb-serverless .sl-server::before, .thumb-serverless .sl-server::after { content: ""; position: absolute; left: 6px; right: 6px; height: 4px; background: var(--ink-mute); border-radius: 1px; }
+        .thumb-serverless .sl-server::before { top: 6px; }
+        .thumb-serverless .sl-server::after { top: 16px; }
+        .thumb-serverless .sl-arrow { font-size: 16px; color: var(--ink-soft); }
+        .thumb-serverless .sl-fn { width: 36px; height: 48px; background: var(--surface); border: 2px solid var(--ink-warm); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 18px; color: var(--ink-warm); animation: sl-pulse 3.6s ease-in-out infinite; }
+        @keyframes sl-fade { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+        @keyframes sl-pulse { 0%, 40%, 100% { background: var(--surface); transform: scale(1); } 60%, 80% { background: var(--mark); transform: scale(1.1); } }
+
+        /* エンドポイント: パケットがクライアント→サーバーに流れる */
+        .thumb-endpoint .ep-wrap { display: flex; align-items: center; gap: 8px; width: 200px; }
+        .thumb-endpoint .ep-client { width: 32px; height: 32px; background: var(--surface); border: 2px solid var(--ink-warm); border-radius: 6px; flex-shrink: 0; }
+        .thumb-endpoint .ep-line { flex: 1; height: 2px; background: var(--ink-mute); position: relative; }
+        .thumb-endpoint .ep-packet { position: absolute; top: -5px; left: 0; width: 12px; height: 12px; background: var(--mark); border-radius: 50%; animation: ep-flow 2s linear infinite; }
+        .thumb-endpoint .ep-server { width: 32px; height: 32px; background: var(--ink-warm); border-radius: 6px; flex-shrink: 0; }
+        @keyframes ep-flow { 0% { left: 0; } 100% { left: calc(100% - 12px); } }
+
+        /* ストリーミング: 文字が一文字ずつ流れる */
+        .thumb-streaming .st-wrap { width: 80%; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-family: var(--font-mono); font-size: 13px; color: var(--ink-warm); }
+        .thumb-streaming .st-text { display: inline-block; overflow: hidden; white-space: nowrap; max-width: 0; animation: st-type 5s steps(20) infinite; }
+        .thumb-streaming .st-cursor { display: inline-block; width: 6px; height: 14px; background: var(--ink-warm); margin-left: 2px; vertical-align: middle; animation: st-blink 0.7s steps(2) infinite; }
+        @keyframes st-type { 0% { max-width: 0; } 70% { max-width: 100%; } 100% { max-width: 100%; } }
+        @keyframes st-blink { 0% { opacity: 1; } 50% { opacity: 0; } }
+
         /* ========= カテゴリフィルタ ========= */
         .cat-filter {
             display: flex;
@@ -3488,13 +3572,14 @@
     <!-- カテゴリフィルタ -->
     <div class="container mx-auto px-6 pt-10 max-w-6xl">
         <div class="cat-filter" id="cat-filter">
-            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">120</span></button>
+            <button class="cat-btn active" data-filter="all">ALL<span class="cat-count">129</span></button>
             <button class="cat-btn" data-filter="A">AI基礎<span class="cat-count">11</span></button>
             <button class="cat-btn" data-filter="B">プロンプト<span class="cat-count">14</span></button>
             <button class="cat-btn" data-filter="C">ナレッジ活用<span class="cat-count">18</span></button>
             <button class="cat-btn" data-filter="D">AIツール<span class="cat-count">17</span></button>
             <button class="cat-btn" data-filter="E">Claude Code<span class="cat-count">10</span></button>
-            <button class="cat-btn" data-filter="G">エンジニアリング<span class="cat-count">35</span></button>
+            <button class="cat-btn" data-filter="F">ビジネス<span class="cat-count">6</span></button>
+            <button class="cat-btn" data-filter="G">エンジニアリング<span class="cat-count">38</span></button>
             <button class="cat-btn" data-filter="H">セキュリティ<span class="cat-count">15</span></button>
         </div>
     </div>
@@ -4826,6 +4911,129 @@
             </div>
         </section>
 
+        <!-- Category F -->
+        <section class="cat-section" data-cat="F">
+            <header class="cat-head">
+                <div class="cat-tag">F · Business</div>
+                <h2 class="cat-heading">ビジネス</h2>
+                <p class="cat-lead">AIサービスを契約・利用するときに知っておきたいビジネス用語。料金・契約・選び方の落とし穴を「知ってる言葉」で見抜きます。</p>
+            </header>
+
+            <div class="term-grid">
+
+                <!-- 121. マークアップ -->
+                <a href="markup.html" class="term-card">
+                    <div class="thumb thumb-markup">
+                        <div class="thumb-inner">
+                            <div class="mu-wrap">
+                                <div class="mu-bar"></div>
+                                <div class="mu-bar"></div>
+                                <div class="mu-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>マークアップ</h3>
+                        <p class="desc">価格に乗せられる<span class="mark">上乗せ手数料</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 122. ロックイン -->
+                <a href="lock-in.html" class="term-card">
+                    <div class="thumb thumb-lockin">
+                        <div class="thumb-inner">
+                            <div class="lk-wrap">
+                                <div class="lk-circle"></div>
+                                <div class="lk-box"></div>
+                                <div class="lk-arrow">→</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ロックイン</h3>
+                        <p class="desc">特定サービスから<span class="mark">抜けにくくなる</span>状態。</p>
+                    </div>
+                </a>
+
+                <!-- 123. プリペイド -->
+                <a href="prepaid.html" class="term-card">
+                    <div class="thumb thumb-prepaid">
+                        <div class="thumb-inner">
+                            <div class="pp-wrap">
+                                <div class="pp-gauge"><div class="pp-fill"></div></div>
+                                <div class="pp-amount">$10 → $0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>プリペイド</h3>
+                        <p class="desc"><span class="mark">先払いチャージ</span>して使った分だけ減る。</p>
+                    </div>
+                </a>
+
+                <!-- 124. マーケットプレイス -->
+                <a href="marketplace.html" class="term-card">
+                    <div class="thumb thumb-marketplace">
+                        <div class="thumb-inner">
+                            <div class="mp-wrap">
+                                <div class="mp-cell"></div>
+                                <div class="mp-cell"></div>
+                                <div class="mp-cell"></div>
+                                <div class="mp-cell"></div>
+                                <div class="mp-cell"></div>
+                                <div class="mp-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>マーケットプレイス</h3>
+                        <p class="desc">複数サービスを<span class="mark">並べて選べる</span>市場。</p>
+                    </div>
+                </a>
+
+                <!-- 125. 従量課金 -->
+                <a href="pay-as-you-go.html" class="term-card">
+                    <div class="thumb thumb-payg">
+                        <div class="thumb-inner">
+                            <div class="py-wrap">
+                                <div class="py-dial"></div>
+                                <div class="py-needle"></div>
+                                <div class="py-pivot"></div>
+                                <div class="py-mark">USE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>従量課金</h3>
+                        <p class="desc"><span class="mark">使った分だけ</span>支払う方式。</p>
+                    </div>
+                </a>
+
+                <!-- 126. 定額課金 -->
+                <a href="flat-rate.html" class="term-card">
+                    <div class="thumb thumb-flatrate">
+                        <div class="thumb-inner">
+                            <div class="fl-wrap">
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                                <div class="fl-cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>定額課金</h3>
+                        <p class="desc">毎月<span class="mark">同じ金額</span>を支払うサブスク方式。</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
         <!-- Category G -->
         <section class="cat-section" data-cat="G">
             <header class="cat-head">
@@ -5467,6 +5675,55 @@
                     <div class="card-body">
                         <h3>Docker</h3>
                         <p class="desc">環境を<span class="mark">箱ごと配る</span>仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 127. サーバーレス -->
+                <a href="serverless.html" class="term-card">
+                    <div class="thumb thumb-serverless">
+                        <div class="thumb-inner">
+                            <div class="sl-wrap">
+                                <div class="sl-server"></div>
+                                <div class="sl-arrow">→</div>
+                                <div class="sl-fn">λ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>サーバーレス</h3>
+                        <p class="desc">サーバー管理せず<span class="mark">必要な時だけ起動</span>する仕組み。</p>
+                    </div>
+                </a>
+
+                <!-- 128. エンドポイント -->
+                <a href="endpoint.html" class="term-card">
+                    <div class="thumb thumb-endpoint">
+                        <div class="thumb-inner">
+                            <div class="ep-wrap">
+                                <div class="ep-client"></div>
+                                <div class="ep-line"><div class="ep-packet"></div></div>
+                                <div class="ep-server"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>エンドポイント</h3>
+                        <p class="desc">APIを呼び出す<span class="mark">入口のURL</span>。</p>
+                    </div>
+                </a>
+
+                <!-- 129. ストリーミング -->
+                <a href="streaming.html" class="term-card">
+                    <div class="thumb thumb-streaming">
+                        <div class="thumb-inner">
+                            <div class="st-wrap">
+                                <span class="st-text">こんにちは。AIが文字を流して</span><span class="st-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>ストリーミング</h3>
+                        <p class="desc">結果が<span class="mark">少しずつ流れて</span>くる方式。</p>
                     </div>
                 </a>
 
